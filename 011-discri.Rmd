@@ -1,0 +1,12 @@
+# Análisis Discriminante {#discri}
+Hola esto es una prueba y no es necesario compilar todo el libro, solo este capitulo.
+
+```{r}
+x <- rnorm(n=100)
+```
+
+```{r myplot01}
+plot(density(x))
+```
+
+
