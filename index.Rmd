@@ -1,5 +1,5 @@
 --- 
-title: "A Minimal Book Example"
+title: "Modelos Predictivos"
 author: "Yihui Xie"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
