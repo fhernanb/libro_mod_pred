@@ -32,7 +32,7 @@ Este libro está destinado para estudiantes de ingeniería y estadística que de
 
 ## Estructura del libro {-}
 
-En el capítulo \@ref(rls) se presenta el .
+En el capítulo \@ref(intro) se presenta el .
 
 ## Software y convenciones {-}
 
