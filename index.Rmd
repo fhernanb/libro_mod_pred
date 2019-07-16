@@ -1,6 +1,6 @@
 --- 
 title: "Modelos Predictivos"
-author: ["fulanito", "sutanito", "perencejo"]
+author: ["Freddy Hernández", "Olga Usuga", "Carmen Patiño"]
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
