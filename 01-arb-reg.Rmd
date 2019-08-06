@@ -1,4 +1,4 @@
-# Árboles de regresión
+# Árboles de regresión {#arb-de-regre}
 Los árboles de regresión son árboles de decisión para asignar un valor de $\hat{y}$ dependiendo de los valores de las covariables. Para conocer más sobre el tema se recomienda ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk).
 
 El paquete **rpart** [@R-rpart] es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es `rpart`, a continuación la estructura de la función.

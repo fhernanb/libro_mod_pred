@@ -35,7 +35,7 @@
   
   
 <link rel="prev" href="arb-de-regre.html">
-<link rel="next" href="discri.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -140,12 +140,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="regarb.html"><a href="regarb.html"><i class="fa fa-check"></i><b>2</b> Regresión lineal versus árboles de regresión</a><ul>
-<li class="chapter" data-level="2.1" data-path="regarb.html"><a href="regarb.html#regresion-lineal"><i class="fa fa-check"></i><b>2.1</b> Regresión lineal</a></li>
-<li class="chapter" data-level="2.2" data-path="regarb.html"><a href="regarb.html#arboles-de-regresion"><i class="fa fa-check"></i><b>2.2</b> Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="regarb.html"><a href="regarb.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>2</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="2.1" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i><b>2.1</b> Regresión lineal</a></li>
+<li class="chapter" data-level="2.2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i><b>2.2</b> Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="discri.html"><a href="discri.html"><i class="fa fa-check"></i><b>3</b> Análisis Discriminante</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -167,8 +166,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regarb" class="section level1">
+<div id="reg-versus-arb" class="section level1">
 <h1><span class="header-section-number">2</span> Regresión lineal versus árboles de regresión</h1>
+<p>En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.</p>
 <div id="regresion-lineal" class="section level2">
 <h2><span class="header-section-number">2.1</span> Regresión lineal</h2>
 <p>El modelo de regresión lineal simple es uno de los más populares en modelación. Este modelo se puede resumir a continuación.</p>
@@ -238,8 +238,8 @@ arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <spa
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.114596 0.2415592
-## 2 0.0100000      1 0.2519381 1.114596 0.2415592
+## 1 0.7480619      0 1.0000000 1.111323 0.2383114
+## 2 0.0100000      1 0.2519381 1.111323 0.2383114
 ## 
 ## Variable importance
 ## Edad 
@@ -306,7 +306,7 @@ pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span cla
         </div>
       </div>
 <a href="arb-de-regre.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="discri.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -336,7 +336,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/01-reg-arb.Rmd",
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/91-reg-versus-arb.Rmd",
 "text": "Edit"
 },
 "history": {

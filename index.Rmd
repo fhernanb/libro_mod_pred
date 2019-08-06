@@ -21,7 +21,7 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rpart', 'rpart.plot', 'MPV'), 'packages.bib')
 ```
 
-```{r echo=FALSE, out.width="33%", fig.align='center'}
+```{r echo=FALSE, out.width="50%", fig.align='center'}
 knitr::include_graphics("images/cover.jpg")
 ```
 

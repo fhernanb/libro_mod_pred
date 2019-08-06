@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>3 Análisis Discriminante | Modelos Predictivos</title>
+  <title>2 Análisis Discriminante | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos fue .">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="3 Análisis Discriminante | Modelos Predictivos" />
+  <meta property="og:title" content="2 Análisis Discriminante | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Análisis Discriminante | Modelos Predictivos" />
+  <meta name="twitter:title" content="2 Análisis Discriminante | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos fue ." />
   <meta name="twitter:image" content="images/cover.png" />
@@ -34,8 +34,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="regarb.html">
-<link rel="next" href="references.html">
+<link rel="prev" href="arb-de-regre.html">
+<link rel="next" href="reg-versus-arb.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -137,15 +137,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="arboles-de-regresion.html"><a href="arboles-de-regresion.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
-<li class="chapter" data-level="" data-path="arboles-de-regresion.html"><a href="arboles-de-regresion.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="regarb.html"><a href="regarb.html"><i class="fa fa-check"></i><b>2</b> Regresión lineal versus árboles de regresión</a><ul>
-<li class="chapter" data-level="2.1" data-path="regarb.html"><a href="regarb.html#regresion-lineal"><i class="fa fa-check"></i><b>2.1</b> Regresión lineal</a></li>
-<li class="chapter" data-level="2.2" data-path="regarb.html"><a href="regarb.html#arboles-de-regresion-1"><i class="fa fa-check"></i><b>2.2</b> Arboles de regresión</a></li>
-<li class="chapter" data-level="2.3" data-path="regarb.html"><a href="regarb.html#ejemplo-1"><i class="fa fa-check"></i><b>2.3</b> Ejemplo 1</a></li>
+<li class="chapter" data-level="2" data-path="discri.html"><a href="discri.html"><i class="fa fa-check"></i><b>2</b> Análisis Discriminante</a></li>
+<li class="chapter" data-level="3" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="3.1" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i><b>3.1</b> Regresión lineal</a></li>
+<li class="chapter" data-level="3.2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i><b>3.2</b> Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="discri.html"><a href="discri.html"><i class="fa fa-check"></i><b>3</b> Análisis Discriminante</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="discri" class="section level1">
-<h1><span class="header-section-number">3</span> Análisis Discriminante</h1>
+<h1><span class="header-section-number">2</span> Análisis Discriminante</h1>
 <p>Hola esto es una prueba y no es necesario compilar todo el libro, solo este capitulo.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(x))</code></pre>
@@ -180,8 +180,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="regarb.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="arb-de-regre.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

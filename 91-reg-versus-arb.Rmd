@@ -1,4 +1,5 @@
-# Regresión lineal versus árboles de regresión {#regarb}
+# Regresión lineal versus árboles de regresión {#reg-versus-arb}
+En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.
 
 ## Regresión lineal
 El modelo de regresión lineal simple es uno de los más populares en modelación. Este modelo se puede resumir a continuación.
@@ -10,7 +11,7 @@ y_i &\sim N(\mu_i, \sigma^2), \\
 \end{align}
 
 ## Arboles de regresión
-Un árbol de regresión es un árbol de decisión. Para conocer más sobre el tema se recomienda ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk).
+Una explicación de los árboles de regresión puede ser consultada en el capítulo \@ref(arb-de-regre).
 
 Las librerías en R para implementar árboles de regresión son:
 
@@ -19,7 +20,7 @@ library(rpart)
 library(rpart.plot)
 ```
 
-## Ejemplo 1
+## Ejemplo {-}
 Como ilustración vamos a usar los datos del ejemplo 2.1 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). En el ejemplo 2.1 los autores ajustaron un modelo de regresión lineal simple para explicar la Resistencia de una soldadura en función de la Edad de la misma. 
 
 A continuación el código para cargar los datos y una muestra de las 6 primeras observaciones de la base de datos, en total tenemos 20 observaciones.
@@ -104,7 +105,6 @@ abline(a=0, b=1, lty="dashed", col="blue")
 plot(x=pred_arb, y=datos$Resistencia, main="Arbol")
 abline(a=0, b=1, lty="dashed", col="blue")
 ```
-
 
 Vamos a calcular $Cor(y_i, \hat{y}_i)$.
 
