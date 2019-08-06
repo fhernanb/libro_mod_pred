@@ -18,7 +18,7 @@ description: "Libro de Modelos Predictivos fue ."
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rpart', 'rpart.plot', 'MPV'), 'packages.bib')
 ```
 
 ```{r echo=FALSE, out.width="33%", fig.align='center'}
@@ -33,7 +33,7 @@ Este libro está destinado para estudiantes de ingeniería y estadística que de
 
 ## Estructura del libro {-}
 
-En el capítulo \@ref(intro) se presenta el .
+En el capítulo \@ref(regarb) se presenta el .
 
 ## Software y convenciones {-}
 
