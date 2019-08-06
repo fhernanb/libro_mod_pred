@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Árboles de regresión | Modelos Predictivos</title>
-  <meta name="description" content="Libro de Modelos Predictivos fue .">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -22,16 +21,16 @@
   <meta name="twitter:description" content="Libro de Modelos Predictivos fue ." />
   <meta name="twitter:image" content="images/cover.png" />
 
-<meta name="author" content="Freddy Hernández">
-<meta name="author" content="Olga Usuga">
-<meta name="author" content="Carmen Patiño">
+<meta name="author" content="Freddy Hernández" />
+<meta name="author" content="Olga Usuga" />
+<meta name="author" content="Carmen Patiño" />
 
 
-<meta name="date" content="2019-08-05">
+<meta name="date" content="2019-08-06" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="index.html">
@@ -58,7 +57,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -138,12 +136,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
+<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>2</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="2.1" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i><b>2.1</b> Regresión lineal</a></li>
 <li class="chapter" data-level="2.2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i><b>2.2</b> Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="2.3" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i><b>2.3</b> Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="2.4" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i><b>2.4</b> Retos</a></li>
 </ul></li>
@@ -170,54 +169,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="arb-de-regre" class="section level1">
 <h1><span class="header-section-number">1</span> Árboles de regresión</h1>
-<p>Los árboles de regresión son árboles de decisión para asignar un valor de <span class="math inline">\(\hat{y}\)</span> dependiendo de los valores de las covariables. Para conocer más sobre el tema se recomienda ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a>.</p>
-<p>El paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2018</a>)</span> es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es <code>rpart</code>, a continuación la estructura de la función.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpart</span>(formula, data, weights, subset, <span class="dt">na.action =</span> na.rpart, method,
-      <span class="dt">model =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="ot">FALSE</span>, <span class="dt">y =</span> <span class="ot">TRUE</span>, parms, control, cost, ...)</code></pre>
-<div id="ejemplo" class="section level2 unnumbered">
-<h2>Ejemplo</h2>
-<p>En este ejemplo se busca encontrar un modelo de regresion lineal que explique la variable respuesta <span class="math inline">\(y\)</span> en función de las covariables <span class="math inline">\(x_1\)</span> a <span class="math inline">\(x_{11}\)</span>, los datos provienen del ejercicio 9.5 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. El paquete <strong>MPV</strong> <span class="citation">(Braun <a href="#ref-R-MPV" role="doc-biblioref">2018</a>)</span> contiene todos los datos que acompañan al libro.</p>
+<p>Los árboles de regresión son árboles de decisión para asignar un valor de <span class="math inline">\(\hat{y}\)</span> dependiendo de los valores de las covariables. Para conocer más sobre el tema se recomienda ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a> y también leer este <a href="https://rafalab.github.io/pages/649/">documento</a>.</p>
+<p>El paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span> es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es <code>rpart</code>, a continuación la estructura de la función.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">rpart</span>(formula, data, weights, subset, <span class="dt">na.action =</span> na.rpart, method,</a>
+<a class="sourceLine" id="cb1-2" title="2">      <span class="dt">model =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="ot">FALSE</span>, <span class="dt">y =</span> <span class="ot">TRUE</span>, parms, control, cost, ...)</a></code></pre></div>
+<p>Otro paquete útil para árboles de regresión es <strong>tree</strong> <span class="citation">(Ripley <a href="#ref-R-tree" role="doc-biblioref">2019</a>)</span>. La función para crear un árbol de regresión es <code>tree</code>, a continuación la estructura de la función.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">tree</span>(formula, data, weights, subset,</a>
+<a class="sourceLine" id="cb2-2" title="2">     <span class="dt">na.action =</span> na.pass, <span class="dt">control =</span> <span class="kw">tree.control</span>(nobs, ...),</a>
+<a class="sourceLine" id="cb2-3" title="3">     <span class="dt">method =</span> <span class="st">&quot;recursive.partition&quot;</span>,</a>
+<a class="sourceLine" id="cb2-4" title="4">     <span class="dt">split =</span> <span class="kw">c</span>(<span class="st">&quot;deviance&quot;</span>, <span class="st">&quot;gini&quot;</span>),</a>
+<a class="sourceLine" id="cb2-5" title="5">     <span class="dt">model =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="ot">FALSE</span>, <span class="dt">y =</span> <span class="ot">TRUE</span>, <span class="dt">wts =</span> <span class="ot">TRUE</span>, ...)</a></code></pre></div>
+<div id="ejemplo-con-el-paquete-rpart" class="section level2 unnumbered">
+<h2>Ejemplo con el paquete <strong>rpart</strong></h2>
+<p>En este ejemplo se busca encontrar un modelo de regresion lineal que explique la variable respuesta <span class="math inline">\(y\)</span> en función de las covariables <span class="math inline">\(x_1\)</span> a <span class="math inline">\(x_{11}\)</span>, los datos provienen del ejercicio 9.5 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. El paquete <strong>MPV</strong> <span class="citation">(Braun <a href="#ref-R-MPV" role="doc-biblioref">2019</a>)</span> contiene todos los datos que acompañan al libro.</p>
 <p>A continuación se muestra el encabezado de la base de datos y la definición de las variables.</p>
 <div class="figure" style="text-align: center"><span id="fig:selection02"></span>
-<img src="images/tableb3.PNG" alt="Ilustración de los métodos Forward y Backward." width="786" />
+<img src="images/tableb3.PNG" alt="Ilustración de los métodos Forward y Backward."  />
 <p class="caption">
 Figure 1.1: Ilustración de los métodos Forward y Backward.
 </p>
 </div>
 <p><strong>Nota</strong>: Type of transmission (1=automatic, 0=manual).</p>
 <p>Antes de iniciar es necesario revisar si hay <code>NA's</code> y eliminarlos.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MPV)  <span class="co"># Aqui estan los datos</span>
-table.b3[<span class="dv">22</span><span class="op">:</span><span class="dv">26</span>, ] <span class="co"># Can you see the missing values?</span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(MPV)  <span class="co"># Aqui estan los datos</span></a>
+<a class="sourceLine" id="cb3-2" title="2">table.b3[<span class="dv">22</span><span class="op">:</span><span class="dv">26</span>, ] <span class="co"># Can you see the missing values?</span></a></code></pre></div>
 <pre><code>##        y    x1  x2  x3  x4   x5 x6 x7    x8   x9  x10 x11
 ## 22 21.47 360.0 180 290 8.4 2.45  2  3 214.2 76.3 4250   1
 ## 23 16.59 400.0 185  NA 7.6 3.08  4  3 196.0 73.0 3850   1
 ## 24 31.90  96.9  75  83 9.0 4.30  2  5 165.2 61.8 2275   0
 ## 25 29.40 140.0  86  NA 8.0 2.92  2  4 176.4 65.4 2150   0
 ## 26 13.27 460.0 223 366 8.0 3.00  4  3 228.0 79.8 5430   1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">datos &lt;-<span class="st"> </span>table.b3[<span class="op">-</span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">25</span>), ]</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">datos &lt;-<span class="st"> </span>table.b3[<span class="op">-</span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">25</span>), ]</a></code></pre></div>
 <p>El objeto <code>datos</code> tiene la base de datos sin las líneas con <code>NA</code>, lo mismo se hubiese podido realizar usando la función <code>na.omit</code>. La base de datos tiene 30 filas y 12 columnas.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
-<span class="kw">library</span>(rpart.plot)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x3 <span class="op">+</span><span class="st"> </span>x4 <span class="op">+</span><span class="st"> </span>x5 <span class="op">+</span><span class="st"> </span>x6 <span class="op">+</span><span class="st"> </span>x7 <span class="op">+</span><span class="st"> </span>x8 <span class="op">+</span><span class="st"> </span>x9 <span class="op">+</span><span class="st"> </span>x10 <span class="op">+</span><span class="st"> </span>x11,
-             <span class="dt">data=</span>datos)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">library</span>(rpart.plot)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>datos)</a></code></pre></div>
 <p>Dibjuemos el árbol con <code>prp</code> que es una función del paquete <strong>rpart.plot</strong> <span class="citation">(Milborrow <a href="#ref-R-rpart.plot" role="doc-biblioref">2019</a>)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(mod)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">prp</span>(mod1)</a></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/arbol01-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Construyamos nuevamente el árbol pero explorando todas las opciones de la función <code>prp</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prp</span>(mod, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,
-    <span class="dt">nn =</span> <span class="ot">TRUE</span>,             <span class="co"># display the node numbers</span>
-    <span class="dt">fallen.leaves =</span> <span class="ot">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span>
-    <span class="dt">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span>
-    <span class="dt">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span>
-    <span class="dt">branch =</span> <span class="fl">.5</span>,           <span class="co"># change angle of branch lines</span>
-    <span class="dt">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span>
-    <span class="dt">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span>
-    <span class="dt">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span>
-    <span class="dt">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span>
-    <span class="dt">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span>
-    <span class="dt">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span>
-    <span class="dt">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span>
-    <span class="dt">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">prp</span>(mod1, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="dt">nn =</span> <span class="ot">TRUE</span>,             <span class="co"># display the node numbers</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="dt">fallen.leaves =</span> <span class="ot">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="dt">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">branch =</span> <span class="fl">.5</span>,           <span class="co"># change angle of branch lines</span></a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="dt">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="dt">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="dt">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="dt">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="dt">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span></a>
+<a class="sourceLine" id="cb9-12" title="12">    <span class="dt">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span></a>
+<a class="sourceLine" id="cb9-13" title="13">    <span class="dt">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span></a>
+<a class="sourceLine" id="cb9-14" title="14">    <span class="dt">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></a></code></pre></div>
 <pre><code>## cex 1   xlim c(0, 1)   ylim c(0, 1)</code></pre>
 <p><img src="libro_mod_pred_files/figure-html/arbol02-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Usando la información del árbol anterior es posible predecir el valor de <span class="math inline">\(y\)</span>. Por ejemplo:</p>
@@ -226,35 +230,60 @@ table.b3[<span class="dv">22</span><span class="op">:</span><span class="dv">26<
 <li>Si otra observación tiene <span class="math inline">\(x_9=60\)</span> y <span class="math inline">\(x_2=150\)</span>, entonces <span class="math inline">\(\hat{y}=28\)</span>.</li>
 </ol>
 <p>Como en el árbol anterior solo aparecen las variables <span class="math inline">\(x_2\)</span> y <span class="math inline">\(x_9\)</span> se recomienda volver a construir el árbol sólo con ellas.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x9, <span class="dt">data=</span>datos)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span>x9, <span class="dt">data=</span>datos)</a></code></pre></div>
+<p>Este árbol por tener solo dos covariables se puede representar de la siguiente forma:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">with</span>(datos, <span class="kw">plot</span>(<span class="dt">x=</span>x2, <span class="dt">y=</span>x9))</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">abline</span>(<span class="dt">h=</span><span class="dv">66</span>, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw">segments</span>(<span class="dt">x0=</span><span class="dv">144</span>, <span class="dt">y0=</span><span class="dv">66</span>, <span class="dt">x1=</span><span class="dv">144</span>, <span class="dt">y1=</span><span class="dv">82</span>, <span class="dt">lty=</span><span class="st">&#39;dashed&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">120</span>, <span class="dt">y=</span><span class="dv">63</span>, <span class="dt">labels=</span><span class="st">&#39;y=28&#39;</span>, <span class="dt">col=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">90</span>, <span class="dt">y=</span><span class="dv">73</span>, <span class="dt">labels=</span><span class="st">&#39;y=16&#39;</span>, <span class="dt">col=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">190</span>, <span class="dt">y=</span><span class="dv">73</span>, <span class="dt">labels=</span><span class="st">&#39;y=20&#39;</span>, <span class="dt">col=</span><span class="dv">4</span>)</a></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/arbol03-1.png" width="384" style="display: block; margin: auto;" /></p>
 <p>Para predecir los valores de <span class="math inline">\(y\)</span> se puede usar la función <code>predict</code>. A continuación el código para predecir la respuesta en los dos casos anteriores.</p>
-<pre class="sourceCode r"><code class="sourceCode r">nuevos_datos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x2=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">150</span>), <span class="dt">x9=</span><span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">60</span>))
-<span class="kw">predict</span>(<span class="dt">object=</span>mod, <span class="dt">newdata=</span>nuevos_datos)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">nuevos_datos &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x2=</span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">150</span>), <span class="dt">x9=</span><span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">60</span>))</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">predict</span>(<span class="dt">object=</span>mod1, <span class="dt">newdata=</span>nuevos_datos)</a></code></pre></div>
 <pre><code>##        1        2 
 ## 19.66875 28.06625</code></pre>
 <p>En este ejemplo los datos originales se usaron como conjunto de entrenamiento y prueba debido a que solo se cuentan con 30 observaciones.</p>
 <p>Entre más cerca estén las <span class="math inline">\(\hat{y}\)</span> de los <span class="math inline">\(y\)</span> observados se puede decir que el modelo es mejor. A continuación la correlación entre <span class="math inline">\(\hat{y}\)</span> y <span class="math inline">\(y\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>mod, <span class="dt">newdata=</span>datos)
-<span class="kw">cor</span>(y_hat, datos<span class="op">$</span>y)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>mod1, <span class="dt">newdata=</span>datos)</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">cor</span>(y_hat, datos<span class="op">$</span>y)</a></code></pre></div>
 <pre><code>## [1] 0.8300304</code></pre>
 <p>¿Qué opina de este valor?</p>
 <p>A continuación un diagrama de dispersión entre <span class="math inline">\(\hat{y}\)</span> y <span class="math inline">\(y\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dt">x=</span>datos<span class="op">$</span>y, <span class="dt">y=</span>y_hat, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">xlab=</span><span class="st">&#39;y&#39;</span>, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">hat</span>(y)))
-<span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
-<p><img src="libro_mod_pred_files/figure-html/arbol03-1.png" width="384" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>datos<span class="op">$</span>y, <span class="dt">y=</span>y_hat, <span class="dt">pch=</span><span class="dv">20</span>, <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">xlab=</span><span class="st">&#39;y&#39;</span>, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">hat</span>(y)))</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/arbol04-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ejemplo-con-el-paquete-tree" class="section level2 unnumbered">
+<h2>Ejemplo con el paquete <strong>tree</strong></h2>
+<p>Aquí vamos a repetir el ejemplo anterior con otro paquete.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">library</span>(tree)</a>
+<a class="sourceLine" id="cb18-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">tree</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>datos)</a></code></pre></div>
+<p>Para dibujar el árbol se puede usar las siguientes instrucciones.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">plot</span>(mod2)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">text</span>(mod2)</a></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/tree01-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>Entre más cerca estén las <span class="math inline">\(\hat{y}\)</span> de los <span class="math inline">\(y\)</span> observados se puede decir que el modelo es mejor. A continuación la correlación entre <span class="math inline">\(\hat{y}\)</span> y <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>mod2, <span class="dt">newdata=</span>datos)</a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">cor</span>(y_hat, datos<span class="op">$</span>y)</a></code></pre></div>
+<pre><code>## [1] 0.9265051</code></pre>
 
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-R-rpart">
-<p>Therneau, Terry, and Beth Atkinson. 2018. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.</p>
-</div>
 <div id="ref-R-MPV">
-<p>Braun, W. J. 2018. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.</p>
+<p>Braun, W. J. 2019. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.</p>
 </div>
 <div id="ref-R-rpart.plot">
 <p>Milborrow, Stephen. 2019. <em>Rpart.plot: Plot ’Rpart’ Models: An Enhanced Version of ’Plot.rpart’</em>. <a href="https://CRAN.R-project.org/package=rpart.plot">https://CRAN.R-project.org/package=rpart.plot</a>.</p>
+</div>
+<div id="ref-R-tree">
+<p>Ripley, Brian. 2019. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.</p>
+</div>
+<div id="ref-R-rpart">
+<p>Therneau, Terry, and Beth Atkinson. 2019. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.</p>
 </div>
 </div>
             </section>
