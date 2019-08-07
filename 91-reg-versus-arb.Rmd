@@ -1,7 +1,7 @@
 # Regresión lineal versus árboles de regresión {#reg-versus-arb}
 En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.
 
-## Regresión lineal
+## Regresión lineal  {-}
 El modelo de regresión lineal simple es uno de los más populares en modelación. Este modelo se puede resumir a continuación.
 
 \begin{align}
@@ -10,7 +10,7 @@ y_i &\sim N(\mu_i, \sigma^2), \\
 \sigma^2 &= \text{constante}
 \end{align}
 
-## Arboles de regresión
+## Arboles de regresión  {-}
 Una explicación de los árboles de regresión puede ser consultada en el capítulo \@ref(arb-de-regre).
 
 Las librerías en R para implementar árboles de regresión son:
@@ -157,8 +157,6 @@ cor(datos_test$y, pred_arb)
 mean((datos_test$y - pred_rls)^2)
 mean((datos_test$y - pred_arb)^2)
 ```
-
-Ahhhhhh, ¿que está sucediendo? Ahora el modelo de regresión lineal simple se comporta mejor, ¿cómo se explica eso?
 
 Ahora vamos a realizar el estudio de simulación, vamos a explorar el efecto de $n = 10, 20, 40$ sobre el $ECM$ usando 5 réplicas para cada $n$, un estudio de simulación "naive" pero ilustrativo.
 
