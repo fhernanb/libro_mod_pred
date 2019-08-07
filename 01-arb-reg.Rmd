@@ -29,9 +29,8 @@ Algunas de las ventajas de los árboles de regresión son:
 - Las covariables pueden ser cualitativas o cuantitativas.
 - No exige supuestos distribucionales.
 
-```{block2, type='rmdtip'}
-Para conocer más sobre el tema se recomienda ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) y también leer este [documento](https://www.stat.cmu.edu/~cshalizi/350/lectures/22/lecture-22.pdf).
-```
+Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013]. Se recomienda también ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) con una explicación sencilla sobre árboles.
+
 
 ## Paquetes {-}
 En esta sección se mencionan algunos de los paquetes más comunes para implementar árboles de regresión.
