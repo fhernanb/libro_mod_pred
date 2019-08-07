@@ -1,0 +1,9 @@
+# Árboles de clasificación {#arb-de-clasif}
+Los árboles de regresión/clasificación fueron propuestos par [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo asignar un valor de $\hat{y}$ dependiendo de los valores de las covariables.
+
+Los árboles se pueden clasificar en dos tipos que son:
+
+1. Árboles de regresión en los cuales la variable respuesta $y$ es cuantitativa.
+2. Árboles de clasificación en los cuales la variable respuesta $y$ es cualitativa.
+
+El presente capítulo está destinado a árboles de clasificación, los árboles de clasificación se explican en el capítulo \@ref(arb-de-regre).

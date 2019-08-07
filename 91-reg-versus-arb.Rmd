@@ -1,7 +1,7 @@
 # Regresión lineal versus árboles de regresión {#reg-versus-arb}
 En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.
 
-## Regresión lineal  {-}
+## Regresión lineal {-}
 El modelo de regresión lineal simple es uno de los más populares en modelación. Este modelo se puede resumir a continuación.
 
 \begin{align}
@@ -113,7 +113,7 @@ mean((datos$Resistencia - pred_arb)^2)
 
 ¿Cuál método prefiere usted?
 
-## Estudio de simulación para comparar ambos métodos
+## Estudio de simulación para comparar ambos métodos  {-}
 El objetivo es comparar ambos modelos repetidas veces, para esto vamos a simular conjuntos de datos que tengan un comportamiento lineal y parecido a los datos del ejemplo. El modelo que vamos a considerar es el siguiente:
 
 \begin{align}
@@ -134,9 +134,10 @@ gen_dat <- function(n) {
 ```
 
 Generemos unos datos de prueba y graficamos los datos.
-```{r}
+```{r reg_arb03, fig.height=3, fig.width=5, fig.align='center', message=FALSE}
 datos_train <- gen_dat(n=20)
-with(datos_train, plot(x=x, y=y, pch=20))
+ggplot(datos_train, aes(x=x, y=y)) + 
+  geom_point() + theme_light()
 ```
 
 Usando los datos de prueba vamos a ajustar los modelos y luego calcularemos los indicadores.
@@ -158,14 +159,17 @@ mean((datos_test$y - pred_rls)^2)
 mean((datos_test$y - pred_arb)^2)
 ```
 
-Ahora vamos a realizar el estudio de simulación, vamos a explorar el efecto de $n = 10, 20, 40$ sobre el $ECM$ usando 5 réplicas para cada $n$, un estudio de simulación "naive" pero ilustrativo.
+```{block2, type='rmdwarning'}
+Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
+```
+
+Ahora vamos a realizar el estudio de simulación para explorar el efecto de $n = 10, 20, 40$ sobre el $ECM$ usando 5 réplicas para cada $n$, este es un estudio de simulación "naive" pero ilustrativo.
 
 ```{r}
 n <- c(10, 20, 40)
 nrep <- 5
 
 result <- numeric()
-
 for (i in n) {
   for(k in 1:nrep) {
     datos_train <- gen_dat(n=i)  # Para entrenar
@@ -189,17 +193,18 @@ El objeto `result` tiene los resultados de la simulación, vamos a calcular el $
 
 ```{r message=FALSE}
 library(dplyr)
-result %>% group_by(n) %>% summarise(ecm_lrs=mean(ecm_lrs),
-                                     ecm_arb=mean(ecm_arb))
+result %>% group_by(n) %>% summarise(ecm_medio_lrs=mean(ecm_lrs),
+                                     ecm_medio_arb=mean(ecm_arb))
 ```
 
-## Retos
+## Retos {-}
 A continuación los retos que usted debe aceptar.
 
-1. Extienda el estudio de simulación para otros valores de $n$.
-2. Con el estudio de simulación extendido haga un gráfico de $ECM$ promedio versus $n$ para rls y árboles en la misma figura.
-3. ¿Cuál $ECM$ es menor?
-3. Mirando la figura anterior, ¿se consigue un $ECM$ de cero para un $n$ suficientemente grande?
+1. Extienda el estudio de simulación para otros valores de $n$ y aumentando el número de repeticiones `nrep`, decida usted los valores.
+2. Con los resultados anteriores haga un gráfico de $ECM$ promedio versus $n$ para rls y árboles en la misma figura.
+3. ¿Se iguala $ECM$ promedio del árbol con el de regresión para algún valor de $n$?
+3. ¿Cuál técnica presenta el $ECM$ menor?
+3. ¿Es posible encontrar un $ECM=0$ para algún valor de $n$?
 4. ¿Para qué sirve el paquete `dplyr`?
 5. ¿Qué es un `tibble`?
 

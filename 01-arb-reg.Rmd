@@ -1,26 +1,36 @@
 # Árboles de regresión {#arb-de-regre}
-Los árboles de regresión fueron propuestos par [Leo Breiman](https://machinelearningmastery.com/classification-and-regression-trees-for-machine-learning/) y son árboles de decisión que tienen como objetivo asignar un valor de $\hat{y}$ dependiendo de los valores de las covariables.
+Los árboles de regresión/clasificación fueron propuestos par [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo asignar un valor de $\hat{y}$ dependiendo de los valores de las covariables.
 
-Un árbol de regresión consiste en hacer preguntas como ¿$x_k \leq c$? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor $\hat{y}$.
+Los árboles se pueden clasificar en dos tipos que son:
+
+1. Árboles de regresión en los cuales la variable respuesta $y$ es cuantitativa.
+2. Árboles de clasificación en los cuales la variable respuesta $y$ es cualitativa.
+
+El presente capítulo está destinado a árboles de regresión, los árboles de clasificación se explican en el capítulo \@ref(arb-de-clasif).
+
+Un árbol de regresión consiste en hacer preguntas de tipo ¿$x_k \leq c$? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor estimado $\hat{y}$.
 
 En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte $c$ de tal manera que se minimice la función de costos $\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2$.
 
-```{r ilustra_arbol_reg01, echo=F, fig.cap='Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio.', dpi=60, fig.align='center'}
+```{r ilustra-arbol-reg01, echo=F, fig.cap='Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio.', dpi=40, fig.align='center'}
 knitr::include_graphics("images/ilustracion_arb_regresion.png")
 ```
 
+Los pasos para realizar la partición del espacio son:
+
+1. Dado un conjunto de covariables (características), encontrar la covariable que permita predecir mejor la variable respuesta.
+2. Encontrar el punto de corte $c$ sobre esa covariable que permita predecir mejor la variable respuesta.
+3. Repetir los pasos anteriores hasta que se alcance el criterio de parada.
+
 Algunas de las ventajas de los árboles de regresión son:
 
-- Simple to understand and interpret. White box.
-- Requires little data preparation. (No need for normalization or dummy vars, works with NAs)
-- Works with both numerical and categorical data.
-- Handles nonlinearity (in constrast to logistic regression)
-- Possible to validate a model using statistical tests. Gives you confidence it will work on new data sets.
-Robust.
-- Performs well even if you deviate from assumptions Scales to big data
+- Fácil de entender e intrepretar.
+- Requiere poca preparación de los datos.
+- Las covariables pueden ser cualitativas o cuantitativas.
+- No exige supuestos distribucionales.
 
 ```{block2, type='rmdtip'}
-Para conocer más sobre el tema se recomienda ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) y también leer este [documento](https://rafalab.github.io/pages/649/).
+Para conocer más sobre el tema se recomienda ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) y también leer este [documento](https://www.stat.cmu.edu/~cshalizi/350/lectures/22/lecture-22.pdf).
 ```
 
 ## Paquetes {-}
@@ -160,7 +170,7 @@ mod2 <- tree(y ~ ., data=datos)
 
 Para dibujar el árbol se puede usar las siguientes instrucciones.
 
-```{r tree01, fig.align='center', fig.height=4, fig.width=4}
+```{r tree01, fig.align='center', fig.height=4, fig.width=6}
 plot(mod2)
 text(mod2, pretty=0)
 ```

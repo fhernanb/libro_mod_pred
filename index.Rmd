@@ -29,7 +29,7 @@ Este libro está destinado para estudiantes de ingeniería y estadística que de
 
 [Freddy Hernández](https://fhernanb.github.io/)  
 [Olga Usuga](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001417591)  
-[Carmen Patiño](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0001417591)
+[Carmen Patiño](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000756008)
 
 ## Estructura del libro {-}
 

@@ -26,7 +26,7 @@
 <meta name="author" content="Carmen Patiño" />
 
 
-<meta name="date" content="2019-08-06" />
+<meta name="date" content="2019-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="index.html">
-<link rel="next" href="reg-versus-arb.html">
+<link rel="next" href="arb-de-clasif.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -140,12 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>2</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="3" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="2.1" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i><b>2.1</b> Estudio de simulación para comparar ambos métodos</a></li>
-<li class="chapter" data-level="2.2" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i><b>2.2</b> Retos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -170,28 +171,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="arb-de-regre" class="section level1">
 <h1><span class="header-section-number">1</span> Árboles de regresión</h1>
-<p>Los árboles de regresión fueron propuestos par <a href="https://machinelearningmastery.com/classification-and-regression-trees-for-machine-learning/">Leo Breiman</a> y son árboles de decisión que tienen como objetivo asignar un valor de <span class="math inline">\(\hat{y}\)</span> dependiendo de los valores de las covariables.</p>
-<p>Un árbol de regresión consiste en hacer preguntas como ¿<span class="math inline">\(x_k \leq c\)</span>? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor <span class="math inline">\(\hat{y}\)</span>.</p>
+<p>Los árboles de regresión/clasificación fueron propuestos par <a href="https://en.wikipedia.org/wiki/Leo_Breiman">Leo Breiman</a> en el libro <span class="citation">(Breiman et al. <a href="#ref-Breiman1984" role="doc-biblioref">1984</a>)</span> y son árboles de decisión que tienen como objetivo asignar un valor de <span class="math inline">\(\hat{y}\)</span> dependiendo de los valores de las covariables.</p>
+<p>Los árboles se pueden clasificar en dos tipos que son:</p>
+<ol style="list-style-type: decimal">
+<li>Árboles de regresión en los cuales la variable respuesta <span class="math inline">\(y\)</span> es cuantitativa.</li>
+<li>Árboles de clasificación en los cuales la variable respuesta <span class="math inline">\(y\)</span> es cualitativa.</li>
+</ol>
+<p>El presente capítulo está destinado a árboles de regresión, los árboles de clasificación se explican en el capítulo <a href="arb-de-clasif.html#arb-de-clasif">2</a>.</p>
+<p>Un árbol de regresión consiste en hacer preguntas de tipo ¿<span class="math inline">\(x_k \leq c\)</span>? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor estimado <span class="math inline">\(\hat{y}\)</span>.</p>
 <p>En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte <span class="math inline">\(c\)</span> de tal manera que se minimice la función de costos <span class="math inline">\(\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2\)</span>.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span id="fig:ilustra-arbol-reg01"></span>
 <img src="images/ilustracion_arb_regresion.png" alt="Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio."  />
 <p class="caption">
-(#fig:ilustra_arbol_reg01)Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio.
+Figure 1.1: Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio.
 </p>
 </div>
+<p>Los pasos para realizar la partición del espacio son:</p>
+<ol style="list-style-type: decimal">
+<li>Dado un conjunto de covariables (características), encontrar la covariable que permita predecir mejor la variable respuesta.</li>
+<li>Encontrar el punto de corte <span class="math inline">\(c\)</span> sobre esa covariable que permita predecir mejor la variable respuesta.</li>
+<li>Repetir los pasos anteriores hasta que se alcance el criterio de parada.</li>
+</ol>
 <p>Algunas de las ventajas de los árboles de regresión son:</p>
 <ul>
-<li>Simple to understand and interpret. White box.</li>
-<li>Requires little data preparation. (No need for normalization or dummy vars, works with NAs)</li>
-<li>Works with both numerical and categorical data.</li>
-<li>Handles nonlinearity (in constrast to logistic regression)</li>
-<li>Possible to validate a model using statistical tests. Gives you confidence it will work on new data sets.
-Robust.</li>
-<li>Performs well even if you deviate from assumptions Scales to big data</li>
+<li>Fácil de entender e intrepretar.</li>
+<li>Requiere poca preparación de los datos.</li>
+<li>Las covariables pueden ser cualitativas o cuantitativas.</li>
+<li>No exige supuestos distribucionales.</li>
 </ul>
 
 <div class="rmdtip">
-Para conocer más sobre el tema se recomienda ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a> y también leer este <a href="https://rafalab.github.io/pages/649/">documento</a>.
+Para conocer más sobre el tema se recomienda ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a> y también leer este <a href="https://www.stat.cmu.edu/~cshalizi/350/lectures/22/lecture-22.pdf">documento</a>.
 </div>
 
 <div id="paquetes" class="section level2 unnumbered">
@@ -219,7 +229,7 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 <div class="figure" style="text-align: center"><span id="fig:selection02"></span>
 <img src="images/tableb3.PNG" alt="Ilustración de los métodos Forward y Backward."  />
 <p class="caption">
-Figure 1.1: Ilustración de los métodos Forward y Backward.
+Figure 1.2: Ilustración de los métodos Forward y Backward.
 </p>
 </div>
 <p><strong>Nota</strong>: Type of transmission (1=automatic, 0=manual).</p>
@@ -296,7 +306,7 @@ Figure 1.1: Ilustración de los métodos Forward y Backward.
 <p>Para dibujar el árbol se puede usar las siguientes instrucciones.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">plot</span>(mod2)</a>
 <a class="sourceLine" id="cb23-2" title="2"><span class="kw">text</span>(mod2, <span class="dt">pretty=</span><span class="dv">0</span>)</a></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/tree01-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="libro_mod_pred_files/figure-html/tree01-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Entre más cerca estén las <span class="math inline">\(\hat{y}\)</span> de los <span class="math inline">\(y\)</span> observados se puede decir que el modelo es mejor. A continuación la correlación entre <span class="math inline">\(\hat{y}\)</span> y <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>mod2, <span class="dt">newdata=</span>datos)</a>
 <a class="sourceLine" id="cb24-2" title="2"><span class="kw">cor</span>(y_hat, datos<span class="op">$</span>y)</a></code></pre></div>
@@ -308,6 +318,9 @@ Figure 1.1: Ilustración de los métodos Forward y Backward.
 <div id="refs" class="references">
 <div id="ref-R-MPV">
 <p>Braun, W. J. 2019. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.</p>
+</div>
+<div id="ref-Breiman1984">
+<p>Breiman, L., J. H. Friedman, R. A. Olshen, and C. J. Stone. 1984. <em>Classification and Regression Trees</em>. 1nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418">https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418</a>.</p>
 </div>
 <div id="ref-R-rpart.plot">
 <p>Milborrow, Stephen. 2019. <em>Rpart.plot: Plot ’Rpart’ Models: An Enhanced Version of ’Plot.rpart’</em>. <a href="https://CRAN.R-project.org/package=rpart.plot">https://CRAN.R-project.org/package=rpart.plot</a>.</p>
@@ -325,7 +338,7 @@ Figure 1.1: Ilustración de los métodos Forward y Backward.
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="arb-de-clasif.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
