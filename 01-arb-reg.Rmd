@@ -91,8 +91,8 @@ with(datos, plot(x=x2, y=x9))
 abline(h=66, lty='dashed', col='blue')
 segments(x0=144, y0=66, x1=144, y1=82, lty='dashed', col='blue')
 text(x=120, y=63, labels='y=28', col=4)
-text(x=90, y=73, labels='y=16', col=4)
-text(x=190, y=73, labels='y=20', col=4)
+text(x=90, y=73, labels='y=20', col=4)
+text(x=190, y=73, labels='y=16', col=4)
 ```
 
 
