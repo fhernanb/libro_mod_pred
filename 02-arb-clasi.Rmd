@@ -6,4 +6,4 @@ Los árboles se pueden clasificar en dos tipos que son:
 1. Árboles de regresión en los cuales la variable respuesta $y$ es cuantitativa.
 2. Árboles de clasificación en los cuales la variable respuesta $y$ es cualitativa.
 
-El presente capítulo está destinado a árboles de clasificación, los árboles de clasificación se explican en el capítulo \@ref(arb-de-regre).
+El presente capítulo está destinado a árboles de clasificación, los árboles de regresión se explican en el capítulo \@ref(arb-de-regre).
