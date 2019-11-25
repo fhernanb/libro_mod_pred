@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Modelos Predictivos</title>
+  <title>3 Support Vector Machines | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos fue ." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Modelos Predictivos" />
+  <meta property="og:title" content="3 Support Vector Machines | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Modelos Predictivos" />
+  <meta name="twitter:title" content="3 Support Vector Machines | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos fue ." />
   <meta name="twitter:image" content="images/cover.png" />
@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reg-versus-arb.html">
-
+<link rel="prev" href="arb-de-clasif.html">
+<link rel="next" href="reg-versus-arb.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -141,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a></li>
-<li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="3" data-path="svm-regre.html"><a href="svm-regre.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines</a></li>
 <li class="chapter" data-level="4" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
@@ -170,46 +170,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="svm-regre" class="section level1">
+<h1><span class="header-section-number">3</span> Support Vector Machines</h1>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="Cortes1995"><strong>???</strong></span>)</span> propusieron las máquinas de soporte vectorial para el problema de clasificación.</p>
+<div class="figure" style="text-align: center">
+<img src="images/svm_1.png" alt="espacio1." width="437" />
+<p class="caption">
+(#fig:svm_1)espacio1.
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="images/svm_2.png" alt="espacio2." width="446" />
+<p class="caption">
+(#fig:svm_2)espacio2.
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="images/svm_3.png" alt="espacio3." width="449" />
+<p class="caption">
+(#fig:svm_3)espacio3.
+</p>
+</div>
+<div class="figure" style="text-align: center">
+<img src="images/svm_5.png" alt="espacio4."  />
+<p class="caption">
+(#fig:svm_4)espacio4.
+</p>
+</div>
 
-<div id="refs" class="references">
-<div>
-<p>Braun, W. J. 2019. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.</p>
-</div>
-<div>
-<p>Breiman, L., J. H. Friedman, R. A. Olshen, and C. J. Stone. 1984. <em>Classification and Regression Trees</em>. 1nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418">https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418</a>.</p>
-</div>
-<div>
-<p>Cortes, Corinna, and Vladimir Vapnik. 1995. “Support-Vector Networks.” <em>Machine Learning</em> 20 (3): 273–97. <a href="https://doi.org/10.1023/A:1022627411411">https://doi.org/10.1023/A:1022627411411</a>.</p>
-</div>
-<div>
-<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning – with Applications in R</em>. Vol. 103. Springer Texts in Statistics. New York: Springer. <a href="https://doi.org/10.1007/DOI">https://doi.org/10.1007/DOI</a>.</p>
-</div>
-<div>
-<p>Milborrow, Stephen. 2019. <em>Rpart.plot: Plot ’Rpart’ Models: An Enhanced Version of ’Plot.rpart’</em>. <a href="https://CRAN.R-project.org/package=rpart.plot">https://CRAN.R-project.org/package=rpart.plot</a>.</p>
-</div>
-<div>
-<p>Ripley, Brian. 2019. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.</p>
-</div>
-<div>
-<p>Therneau, Terry, and Beth Atkinson. 2019. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.</p>
-</div>
-<div>
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
-</div>
-<div>
-<p>———. 2019. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reg-versus-arb.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="arb-de-clasif.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -239,7 +235,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/999-references.Rmd",
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/03-svm-reg.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -61,7 +61,7 @@ En este ejemplo se busca encontrar un modelo de regresion lineal que explique la
 
 A continuación se muestra el encabezado de la base de datos y la definición de las variables.
 
-```{r selection02, echo=F, fig.cap='Ilustración de los métodos Forward y Backward.', dpi=60, fig.align='center'}
+```{r selection02, echo=F, fig.cap='Ilustración de la base de datos.', dpi=40, fig.align='center'}
 knitr::include_graphics("images/tableb3.png")
 ```
 
@@ -180,5 +180,3 @@ Entre más cerca estén las $\hat{y}$ de los $y$ observados se puede decir que e
 y_hat <- predict(object=mod2, newdata=datos)
 cor(y_hat, datos$y)
 ```
-
-

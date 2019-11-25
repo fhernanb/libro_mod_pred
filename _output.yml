@@ -9,7 +9,9 @@ bookdown::gitbook:
     edit: https://github.com/fhernanb/libro_mod_pred/edit/master/%s
 bookdown::pdf_book:
   includes:
-    in_header: preamble.tex
+    in_header: latex/preamble.tex
+    before_body: latex/before_body.tex
+    after_body: latex/after_body.tex
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
