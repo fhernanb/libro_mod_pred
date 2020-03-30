@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos fue ." />
-  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -26,15 +26,15 @@
 <meta name="author" content="Carmen Patiño" />
 
 
-<meta name="date" content="2019-11-25" />
+<meta name="date" content="2020-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="svm-clas.html">
-<link rel="next" href="references.html">
+<link rel="prev" href="svm-clas.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -42,6 +42,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -239,9 +242,9 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## rpart(formula = Resistencia ~ Edad, data = datos, method = &quot;anova&quot;)
 ##   n= 20 
 ## 
-##          CP nsplit rel error  xerror     xstd
-## 1 0.7480619      0 1.0000000 1.08636 0.228721
-## 2 0.0100000      1 0.2519381 1.08636 0.228721
+##          CP nsplit rel error   xerror      xstd
+## 1 0.7480619      0 1.0000000 1.125582 0.2394697
+## 2 0.0100000      1 0.2519381 1.125582 0.2394697
 ## 
 ## Variable importance
 ## Edad 
@@ -326,13 +329,13 @@ x &amp;\sim U(2, 25)
 <a class="sourceLine" id="cb50-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb50-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb50-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
-<pre><code>## [1] 0.8965187</code></pre>
+<pre><code>## [1] 0.9126196</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
-<pre><code>## [1] 0.8204261</code></pre>
+<pre><code>## [1] 0.733728</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 15785.05</code></pre>
+<pre><code>## [1] 9606.246</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 20256.62</code></pre>
+<pre><code>## [1] 39067.83</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
@@ -359,21 +362,21 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <a class="sourceLine" id="cb58-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
 <a class="sourceLine" id="cb58-19" title="19">result</a></code></pre></div>
 <pre><code>##     n   ecm_lrs  ecm_arb
-## 1  10 11520.284 76447.27
-## 2  10 13233.652 90803.07
-## 3  10 14604.424 44971.06
-## 4  10  4885.934 55736.52
-## 5  10 10717.332 56275.64
-## 6  20  4148.941 17029.02
-## 7  20  9299.008 31914.83
-## 8  20 11968.504 32882.82
-## 9  20  8088.805 38190.24
-## 10 20  7593.917 24579.64
-## 11 40  8317.779 26609.87
-## 12 40 15164.494 24101.76
-## 13 40 11083.865 20603.90
-## 14 40  8747.902 15593.27
-## 15 40 11692.381 15752.09</code></pre>
+## 1  10  3752.916 58526.01
+## 2  10 19728.004 71498.42
+## 3  10  6177.943 64245.76
+## 4  10 13345.467 75439.02
+## 5  10 33327.831 22862.22
+## 6  20 16611.647 24594.77
+## 7  20  8302.279 18004.77
+## 8  20  7823.842 20682.96
+## 9  20 12790.296 33667.25
+## 10 20 11585.383 45165.20
+## 11 40 12058.679 25606.78
+## 12 40  8482.114 20113.84
+## 13 40 10868.593 23941.79
+## 14 40 11502.052 29218.52
+## 15 40  9148.306 16403.53</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb60-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
@@ -381,9 +384,9 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10        10992.        64847.
-## 2    20         8220.        28919.
-## 3    40        11001.        20532.</code></pre>
+## 1    10        15266.        58514.
+## 2    20        11423.        28423.
+## 3    40        10412.        23057.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>
@@ -411,11 +414,13 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -458,8 +463,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

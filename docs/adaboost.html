@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 AdaBoost | Modelos Predictivos</title>
+  <meta name="description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 AdaBoost | Modelos Predictivos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="github-repo" content="fhernanb/libro_mod_pred" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 AdaBoost | Modelos Predictivos" />
+  
+  <meta name="twitter:description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Freddy Hernández" />
+<meta name="author" content="Olga Usuga" />
+<meta name="author" content="Carmen Patiño" />
+
+
+<meta name="date" content="2020-03-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="svm-clas.html"/>
+<link rel="next" href="reg-versus-arb.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modelos Predictivos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes"><i class="fa fa-check"></i>Paquetes</a></li>
+<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
+<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a></li>
+<li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines</a></li>
+<li class="chapter" data-level="4" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>4</b> AdaBoost</a><ul>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicacion-sencilla-para-aplicar-adaboost"><i class="fa fa-check"></i>Explicación sencilla para aplicar AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicacion-detallada-para-aplicar-adaboost"><i class="fa fa-check"></i>Explicación detallada para aplicar AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Predictivos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="adaboost" class="section level1">
+<h1><span class="header-section-number">4</span> AdaBoost</h1>
+<p>AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert Schapire.</p>
+<div id="explicacion-sencilla-para-aplicar-adaboost" class="section level2 unnumbered">
+<h2>Explicación sencilla para aplicar AdaBoost</h2>
+<ol style="list-style-type: decimal">
+<li>Entrene un clasificador.</li>
+<li>Use el clasificador.</li>
+<li>Identifique los casos que fueron mal clasificados.</li>
+<li>Construya un nuevo clasificador que clasifique mejor los casos mal clasificados del punto anterior.</li>
+<li>Repita los pasos 2 a 4 varias veces.</li>
+<li>Asígnele un peso a cada clasificador y júntelos para obtener un clasificador con mejor desempeño.</li>
+</ol>
+</div>
+<div id="explicacion-detallada-para-aplicar-adaboost" class="section level2 unnumbered">
+<h2>Explicación detallada para aplicar AdaBoost</h2>
+<ol style="list-style-type: decimal">
+<li>Inicie con un conjunto de entrenamiento <span class="math inline">\((X, Y)\)</span> con <span class="math inline">\(m\)</span> observaciones denotadas como <span class="math inline">\((x_1, y_1), \ldots, (x_m, y_m)\)</span> de tal manera que <span class="math inline">\(x_i \in R^p\)</span>. Los valores de <span class="math inline">\(y\)</span> deben ser -1 o 1 para aplicar el método.</li>
+<li>Inicie con la distribución discreta <span class="math inline">\(D_1(i)=1/m\)</span> que indica el peso de la observación <span class="math inline">\(i\)</span> en la iteración <span class="math inline">\(1\)</span>.</li>
+<li>Para <span class="math inline">\(t=1, \ldots, T\)</span>.</li>
+</ol>
+<ul>
+<li>Construya un clasificador <span class="math inline">\(h_t\)</span> definido así: <span class="math inline">\(h_t : X \rightarrow \{-1, 1 \}\)</span>.</li>
+<li>Calcule el error asociado <span class="math inline">\(\epsilon_t\)</span> al clasificador <span class="math inline">\(\epsilon_t= \sum_{i=1}^m D_t(i) \times \delta_i\)</span>, donde <span class="math inline">\(\delta_i=0\)</span> si <span class="math inline">\(h_t(x_i)=y_i\)</span>, es decir, si fue correcta la clasificación; caso contrario es <span class="math inline">\(\delta_i=1\)</span>.</li>
+<li>Calcule la nueva distribución <span class="math inline">\(D_{t+1}(i)=D_{t}(i) \times F_i / Z_t\)</span>, donde:
+<ul>
+<li><span class="math inline">\(F_i=\exp(-\alpha_t)\)</span> si la clasificación fue correcta, es decir si <span class="math inline">\(h_t(x_i) = y_i\)</span>.</li>
+<li><span class="math inline">\(F_i=\exp(\alpha_t)\)</span> si la clasificación fue incorrecta, es decir si <span class="math inline">\(h_t(x_i) \neq y_i\)</span>.</li>
+<li><span class="math inline">\(\alpha_t=\frac{1}{2} \log \left( \frac{1-\epsilon_t}{\epsilon_t} \right)\)</span>.</li>
+<li><span class="math inline">\(Z_t\)</span> es una constante de normalización de tal manera que <span class="math inline">\(\sum_{i=1}^m D_t(i)=1\)</span>. Usualmente es <span class="math inline">\(\sum D_{t}(i) \times F_i\)</span>.</li>
+</ul></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Construya el clasificador final <span class="math inline">\(H_{final}\)</span> como el promedio ponderado de los <span class="math inline">\(t\)</span> clasificadores <span class="math inline">\(h_t\)</span>, usando <span class="math inline">\(H_{final}=sign(\sum_t \alpha_t h_t(x))\)</span>.</li>
+</ol>
+</div>
+<div id="ejemplo" class="section level2 unnumbered">
+<h2>Ejemplo</h2>
+<p>En este ejemplo se ilustra la forma de</p>
+<div class="figure" style="text-align: center"><span id="fig:adaboost01"></span>
+<img src="images/adaboost01.png" alt="Datos originales." width="220" />
+<p class="caption">
+Figure 4.1: Datos originales.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:adaboost02"></span>
+<img src="images/adaboost02.png" alt="Clasificadores." width="1216" />
+<p class="caption">
+Figure 4.2: Clasificadores.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:adaboost03"></span>
+<img src="images/adaboost03.png" alt="Obtención clasificador final." width="1850" />
+<p class="caption">
+Figure 4.3: Obtención clasificador final.
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:adaboost04"></span>
+<img src="images/adaboost04.png" alt="Clasificador final." width="327" />
+<p class="caption">
+Figure 4.4: Clasificador final.
+</p>
+</div>
+</div>
+<div id="ejemplo-1" class="section level2 unnumbered">
+<h2>Ejemplo</h2>
+<p>La base de datos que vamos a usar en este ejemplo está disponible en el <a href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease">UCI Repository</a>.</p>
+<p>La variable respuesta es <code>Target</code> codificada como 0 = si el paciente no sufrió un ataque cardiaco y como 1, 2, 3 o 4 si el paciente sufrió un ataque cardiaco. La variable se re-codificará con los valores de -1 y 1 así:</p>
+<p><span class="math display">\[
+Y=\left\{\begin{matrix}
+1 \quad \text{si paciente SI sufre una enfermedad cardíaca} \\ 
+-1 \quad \text{si paciente NO sufre una enfermedad cardíaca}
+\end{matrix}\right.
+\]</span></p>
+<p>El objetivo es crear un árbol de clasificación para predecir la variable <span class="math inline">\(Y\)</span> (<code>target</code>).</p>
+<p>Primero vamos a cargar los datos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-2" title="2">url &lt;-<span class="st"> &#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">datos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   X2 = col_double(),
+##   X3 = col_double(),
+##   X4 = col_double(),
+##   X5 = col_double(),
+##   X6 = col_double(),
+##   X7 = col_double(),
+##   X8 = col_double(),
+##   X9 = col_double(),
+##   X10 = col_double(),
+##   X11 = col_double(),
+##   X12 = col_double(),
+##   X13 = col_double(),
+##   X14 = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">colnames</span>(datos) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</a>
+<a class="sourceLine" id="cb3-2" title="2">                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </a>
+<a class="sourceLine" id="cb3-3" title="3">                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4">datos<span class="op">$</span>yy &lt;-<span class="st"> </span><span class="kw">ifelse</span>(datos<span class="op">$</span>target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<p>Ahora vamos a aplicar el algoritmo descrito arriba con <span class="math inline">\(T=3\)</span>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb4-2" title="2">m &lt;-<span class="st"> </span><span class="kw">nrow</span>(datos)</a>
+<a class="sourceLine" id="cb4-3" title="3">Dt &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span>m, m) <span class="co"># D1</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># Primer clasificador</span></a>
+<a class="sourceLine" id="cb4-6" title="6">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb4-10" title="10">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb4-11" title="11">alpha1 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb4-12" title="12">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb4-13" title="13">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb4-14" title="14">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co"># Segundo clasificador</span></a>
+<a class="sourceLine" id="cb4-17" title="17">mod2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-18" title="18">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-19" title="19">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-20" title="20">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb4-21" title="21">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb4-22" title="22">alpha2 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb4-23" title="23">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb4-24" title="24">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb4-25" title="25">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
+<a class="sourceLine" id="cb4-26" title="26"></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co"># Tercer clasificador</span></a>
+<a class="sourceLine" id="cb4-28" title="28">mod3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-29" title="29">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod3, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb4-30" title="30">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-31" title="31">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb4-32" title="32">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb4-33" title="33">alpha3 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb4-34" title="34">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb4-35" title="35">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb4-36" title="36">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a></code></pre></div>
+<p>El clasificador final está definido como <span class="math inline">\(H_{final}=sign(\sum_t \alpha_t h_t(x))\)</span> y para obtenerlo en R usamos las siguientes instrucciones.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">y_hat1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">y_hat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">y_hat3 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4">y_final &lt;-<span class="st"> </span><span class="kw">sign</span>(alpha1 <span class="op">*</span><span class="st"> </span>y_hat1 <span class="op">+</span><span class="st"> </span>alpha2 <span class="op">*</span><span class="st"> </span>y_hat2 <span class="op">+</span><span class="st"> </span>alpha3 <span class="op">*</span><span class="st"> </span>y_hat3)</a></code></pre></div>
+<p>Para ver las primeras clasificaciones usarmos</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">head</span>(y_final)</a></code></pre></div>
+<pre><code>## [1]  1 -1 -1 -1 -1  1</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="svm-clas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/91-AdaBoost.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["libro_mod_pred.pdf", "libro_mod_pred.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

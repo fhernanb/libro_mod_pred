@@ -1,0 +1,131 @@
+# AdaBoost {#adaboost}
+
+AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert  Schapire.
+
+
+## Explicación sencilla para aplicar AdaBoost {-}
+
+1. Entrene un clasificador.
+2. Use el clasificador.
+3. Identifique los casos que fueron mal clasificados.
+4. Construya un nuevo clasificador que clasifique mejor los casos mal clasificados del punto anterior.
+5. Repita los pasos 2 a 4 varias veces.
+6. Asígnele un peso a cada clasificador y júntelos para obtener un clasificador con mejor desempeño.
+
+## Explicación detallada para aplicar AdaBoost {-}
+
+1. Inicie con un conjunto de entrenamiento $(X, Y)$ con $m$ observaciones denotadas como $(x_1, y_1), \ldots, (x_m, y_m)$ de tal manera que $x_i \in R^p$. Los valores de $y$ deben ser -1 o 1 para aplicar el método.
+2. Inicie con la distribución discreta $D_1(i)=1/m$ que indica el peso de la observación $i$ en la iteración $1$.
+3. Para $t=1, \ldots, T$.
+  - Construya un clasificador $h_t$ definido así: $h_t : X \rightarrow \{-1, 1 \}$.
+  - Calcule el error asociado $\epsilon_t$ al clasificador $\epsilon_t= \sum_{i=1}^m D_t(i) \times \delta_i$, donde $\delta_i=0$ si $h_t(x_i)=y_i$, es decir, si fue correcta la clasificación; caso contrario es $\delta_i=1$.
+  - Calcule la nueva distribución $D_{t+1}(i)=D_{t}(i) \times F_i / Z_t$, donde:   
+    - $F_i=\exp(-\alpha_t)$ si la clasificación fue correcta, es decir si $h_t(x_i) = y_i$.
+    - $F_i=\exp(\alpha_t)$ si la clasificación fue incorrecta, es decir si $h_t(x_i) \neq y_i$.
+    - $\alpha_t=\frac{1}{2} \log \left( \frac{1-\epsilon_t}{\epsilon_t} \right)$.
+    - $Z_t$ es una constante de normalización de tal manera que $\sum_{i=1}^m D_t(i)=1$. Usualmente es $\sum D_{t}(i) \times F_i$.
+3. Construya el clasificador final $H_{final}$ como el promedio ponderado de los $t$ clasificadores $h_t$, usando $H_{final}=sign(\sum_t \alpha_t h_t(x))$.
+
+## Ejemplo {-}
+En este ejemplo se ilustra la forma de 
+
+```{r adaboost01, echo=F, fig.cap='Datos originales.', dpi=60, fig.align='center'}
+knitr::include_graphics("images/adaboost01.png")
+```
+
+```{r adaboost02, echo=F, fig.cap='Clasificadores.', dpi=40, fig.align='center'}
+knitr::include_graphics("images/adaboost02.png")
+```
+
+```{r adaboost03, echo=F, fig.cap='Obtención clasificador final.', dpi=40, fig.align='center'}
+knitr::include_graphics("images/adaboost03.png")
+```
+
+```{r adaboost04, echo=F, fig.cap='Clasificador final.', dpi=70, fig.align='center'}
+knitr::include_graphics("images/adaboost04.png")
+```
+
+
+## Ejemplo {-}
+La base de datos que vamos a usar en este ejemplo está disponible en el [UCI Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease). 
+
+La variable respuesta es `Target` codificada como 0 = si el paciente no sufrió un ataque cardiaco y como 1, 2, 3 o 4 si el paciente sufrió un ataque cardiaco. La variable se re-codificará con los valores de -1 y 1 así:
+
+$$
+Y=\left\{\begin{matrix}
+1 \quad \text{si paciente SI sufre una enfermedad cardíaca} \\ 
+-1 \quad \text{si paciente NO sufre una enfermedad cardíaca}
+\end{matrix}\right.
+$$
+
+El objetivo es crear un árbol de clasificación para predecir la variable $Y$ (`target`).
+
+Primero vamos a cargar los datos.
+
+```{r}
+library(readr)
+url <- 'https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv'
+datos <- read_csv(url, col_names = FALSE)
+colnames(datos) <- c('age', 'sex', 'cp', 'trestbps', 'chol',
+                     'fbs', 'restecg', 'thalach', 'exang', 
+                     'oldpeak', 'slope', 'ca', 'thal', 'target')
+datos$yy <- ifelse(datos$target == 0, -1, 1)
+```
+
+Ahora vamos a aplicar el algoritmo descrito arriba con $T=3$.
+
+```{r}
+library(rpart)
+m <- nrow(datos)
+Dt <- rep(1/m, m) # D1
+
+# Primer clasificador
+mod1 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+y_hat <- predict(mod1, type='class')
+error <- ifelse(y_hat == datos$yy, 0, 1)
+epsilon_t <- sum(error * Dt)
+alpha_t <- 0.5 * log((1-epsilon_t)/epsilon_t)
+alpha1 <- alpha_t
+Fi <- ifelse(y_hat == datos$yy, exp(-alpha_t), exp(alpha_t))
+Dt <- Dt * Fi
+Dt <- Dt / sum(Dt)
+
+# Segundo clasificador
+mod2 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+y_hat <- predict(mod2, type='class')
+error <- ifelse(y_hat == datos$yy, 0, 1)
+epsilon_t <- sum(error * Dt)
+alpha_t <- 0.5 * log((1-epsilon_t)/epsilon_t)
+alpha2 <- alpha_t
+Fi <- ifelse(y_hat == datos$yy, exp(-alpha_t), exp(alpha_t))
+Dt <- Dt * Fi
+Dt <- Dt / sum(Dt)
+
+# Tercer clasificador
+mod3 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+y_hat <- predict(mod3, type='class')
+error <- ifelse(y_hat == datos$yy, 0, 1)
+epsilon_t <- sum(error * Dt)
+alpha_t <- 0.5 * log((1-epsilon_t)/epsilon_t)
+alpha3 <- alpha_t
+Fi <- ifelse(y_hat == datos$yy, exp(-alpha_t), exp(alpha_t))
+Dt <- Dt * Fi
+Dt <- Dt / sum(Dt)
+```
+
+El clasificador final está definido como $H_{final}=sign(\sum_t \alpha_t h_t(x))$ y para obtenerlo en R usamos las siguientes instrucciones.
+
+```{r}
+y_hat1 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
+y_hat2 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
+y_hat3 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
+y_final <- sign(alpha1 * y_hat1 + alpha2 * y_hat2 + alpha3 * y_hat3)
+```
+
+Para ver las primeras clasificaciones usarmos
+
+```{r}
+head(y_final)
+```
+
+
