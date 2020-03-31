@@ -1,6 +1,6 @@
 # AdaBoost {#adaboost}
 
-AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert  Schapire.
+AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert  Schapire (1997).
 
 
 ## Explicación sencilla para aplicar AdaBoost {-}
@@ -80,7 +80,8 @@ m <- nrow(datos)
 Dt <- rep(1/m, m) # D1
 
 # Primer clasificador
-mod1 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+mod1 <- rpart(yy ~ age + chol, weights=Dt, data=datos, 
+              method='class', control=rpart.control(maxdepth = 1))
 y_hat <- predict(mod1, type='class')
 error <- ifelse(y_hat == datos$yy, 0, 1)
 epsilon_t <- sum(error * Dt)
@@ -91,7 +92,8 @@ Dt <- Dt * Fi
 Dt <- Dt / sum(Dt)
 
 # Segundo clasificador
-mod2 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+mod2 <- rpart(yy ~ age + chol, weights=Dt, data=datos, 
+              method='class', control=rpart.control(maxdepth = 1))
 y_hat <- predict(mod2, type='class')
 error <- ifelse(y_hat == datos$yy, 0, 1)
 epsilon_t <- sum(error * Dt)
@@ -102,7 +104,8 @@ Dt <- Dt * Fi
 Dt <- Dt / sum(Dt)
 
 # Tercer clasificador
-mod3 <- rpart(yy ~ age + chol, weights=Dt, data=datos, method='class')
+mod3 <- rpart(yy ~ age + chol, weights=Dt, data=datos, 
+              method='class', control=rpart.control(maxdepth = 1))
 y_hat <- predict(mod3, type='class')
 error <- ifelse(y_hat == datos$yy, 0, 1)
 epsilon_t <- sum(error * Dt)
@@ -117,8 +120,8 @@ El clasificador final está definido como $H_{final}=sign(\sum_t \alpha_t h_t(x)
 
 ```{r}
 y_hat1 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
-y_hat2 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
-y_hat3 <- ifelse(predict(mod1, type='class') == '-1', -1, 1)
+y_hat2 <- ifelse(predict(mod2, type='class') == '-1', -1, 1)
+y_hat3 <- ifelse(predict(mod3, type='class') == '-1', -1, 1)
 y_final <- sign(alpha1 * y_hat1 + alpha2 * y_hat2 + alpha3 * y_hat3)
 ```
 
@@ -126,6 +129,18 @@ Para ver las primeras clasificaciones usarmos
 
 ```{r}
 head(y_final)
+```
+
+```{r}
+tabla1 <- table(y_hat1, datos$yy)
+tabla2 <- table(y_hat2, datos$yy)
+tabla3 <- table(y_hat3, datos$yy)
+tabla_final <- table(y_final, datos$yy)
+
+sum(diag(tabla1)) / nrow(datos)
+sum(diag(tabla2)) / nrow(datos)
+sum(diag(tabla3)) / nrow(datos)
+sum(diag(tabla_final)) / nrow(datos)
 ```
 
 

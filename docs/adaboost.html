@@ -26,7 +26,7 @@
 <meta name="author" content="Carmen Patiño" />
 
 
-<meta name="date" content="2020-03-30" />
+<meta name="date" content="2020-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="adaboost" class="section level1">
 <h1><span class="header-section-number">4</span> AdaBoost</h1>
-<p>AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert Schapire.</p>
+<p>AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert Schapire (1997).</p>
 <div id="explicacion-sencilla-para-aplicar-adaboost" class="section level2 unnumbered">
 <h2>Explicación sencilla para aplicar AdaBoost</h2>
 <ol style="list-style-type: decimal">
@@ -255,9 +255,9 @@ Y=\left\{\begin{matrix}
 \]</span></p>
 <p>El objetivo es crear un árbol de clasificación para predecir la variable <span class="math inline">\(Y\)</span> (<code>target</code>).</p>
 <p>Primero vamos a cargar los datos.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb1-2" title="2">url &lt;-<span class="st"> &#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></a>
-<a class="sourceLine" id="cb1-3" title="3">datos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb26-2" title="2">url &lt;-<span class="st"> &#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></a>
+<a class="sourceLine" id="cb26-3" title="3">datos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   X1 = col_double(),
@@ -275,55 +275,71 @@ Y=\left\{\begin{matrix}
 ##   X13 = col_double(),
 ##   X14 = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">colnames</span>(datos) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</a>
-<a class="sourceLine" id="cb3-2" title="2">                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </a>
-<a class="sourceLine" id="cb3-3" title="3">                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</a>
-<a class="sourceLine" id="cb3-4" title="4">datos<span class="op">$</span>yy &lt;-<span class="st"> </span><span class="kw">ifelse</span>(datos<span class="op">$</span>target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">colnames</span>(datos) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</a>
+<a class="sourceLine" id="cb28-2" title="2">                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </a>
+<a class="sourceLine" id="cb28-3" title="3">                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</a>
+<a class="sourceLine" id="cb28-4" title="4">datos<span class="op">$</span>yy &lt;-<span class="st"> </span><span class="kw">ifelse</span>(datos<span class="op">$</span>target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>Ahora vamos a aplicar el algoritmo descrito arriba con <span class="math inline">\(T=3\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb4-2" title="2">m &lt;-<span class="st"> </span><span class="kw">nrow</span>(datos)</a>
-<a class="sourceLine" id="cb4-3" title="3">Dt &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span>m, m) <span class="co"># D1</span></a>
-<a class="sourceLine" id="cb4-4" title="4"></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># Primer clasificador</span></a>
-<a class="sourceLine" id="cb4-6" title="6">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-7" title="7">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-8" title="8">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb4-9" title="9">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
-<a class="sourceLine" id="cb4-10" title="10">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
-<a class="sourceLine" id="cb4-11" title="11">alpha1 &lt;-<span class="st"> </span>alpha_t</a>
-<a class="sourceLine" id="cb4-12" title="12">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
-<a class="sourceLine" id="cb4-13" title="13">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
-<a class="sourceLine" id="cb4-14" title="14">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
-<a class="sourceLine" id="cb4-15" title="15"></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co"># Segundo clasificador</span></a>
-<a class="sourceLine" id="cb4-17" title="17">mod2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-18" title="18">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-19" title="19">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb4-20" title="20">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
-<a class="sourceLine" id="cb4-21" title="21">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
-<a class="sourceLine" id="cb4-22" title="22">alpha2 &lt;-<span class="st"> </span>alpha_t</a>
-<a class="sourceLine" id="cb4-23" title="23">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
-<a class="sourceLine" id="cb4-24" title="24">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
-<a class="sourceLine" id="cb4-25" title="25">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
-<a class="sourceLine" id="cb4-26" title="26"></a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co"># Tercer clasificador</span></a>
-<a class="sourceLine" id="cb4-28" title="28">mod3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-29" title="29">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod3, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-30" title="30">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb4-31" title="31">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
-<a class="sourceLine" id="cb4-32" title="32">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
-<a class="sourceLine" id="cb4-33" title="33">alpha3 &lt;-<span class="st"> </span>alpha_t</a>
-<a class="sourceLine" id="cb4-34" title="34">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
-<a class="sourceLine" id="cb4-35" title="35">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
-<a class="sourceLine" id="cb4-36" title="36">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb29-2" title="2">m &lt;-<span class="st"> </span><span class="kw">nrow</span>(datos)</a>
+<a class="sourceLine" id="cb29-3" title="3">Dt &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span>m, m) <span class="co"># D1</span></a>
+<a class="sourceLine" id="cb29-4" title="4"></a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Primer clasificador</span></a>
+<a class="sourceLine" id="cb29-6" title="6">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, </a>
+<a class="sourceLine" id="cb29-7" title="7">              <span class="dt">method=</span><span class="st">&#39;class&#39;</span>, <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">maxdepth =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb29-8" title="8">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb29-9" title="9">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb29-10" title="10">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb29-11" title="11">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb29-12" title="12">alpha1 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb29-13" title="13">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb29-14" title="14">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb29-15" title="15">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
+<a class="sourceLine" id="cb29-16" title="16"></a>
+<a class="sourceLine" id="cb29-17" title="17"><span class="co"># Segundo clasificador</span></a>
+<a class="sourceLine" id="cb29-18" title="18">mod2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, </a>
+<a class="sourceLine" id="cb29-19" title="19">              <span class="dt">method=</span><span class="st">&#39;class&#39;</span>, <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">maxdepth =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb29-20" title="20">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb29-21" title="21">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb29-22" title="22">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb29-23" title="23">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb29-24" title="24">alpha2 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb29-25" title="25">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb29-26" title="26">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb29-27" title="27">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
+<a class="sourceLine" id="cb29-28" title="28"></a>
+<a class="sourceLine" id="cb29-29" title="29"><span class="co"># Tercer clasificador</span></a>
+<a class="sourceLine" id="cb29-30" title="30">mod3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(yy <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>chol, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>datos, </a>
+<a class="sourceLine" id="cb29-31" title="31">              <span class="dt">method=</span><span class="st">&#39;class&#39;</span>, <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">maxdepth =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb29-32" title="32">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod3, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb29-33" title="33">error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb29-34" title="34">epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb29-35" title="35">alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb29-36" title="36">alpha3 &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb29-37" title="37">Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>datos<span class="op">$</span>yy, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb29-38" title="38">Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb29-39" title="39">Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a></code></pre></div>
 <p>El clasificador final está definido como <span class="math inline">\(H_{final}=sign(\sum_t \alpha_t h_t(x))\)</span> y para obtenerlo en R usamos las siguientes instrucciones.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">y_hat1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-2" title="2">y_hat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">y_hat3 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4">y_final &lt;-<span class="st"> </span><span class="kw">sign</span>(alpha1 <span class="op">*</span><span class="st"> </span>y_hat1 <span class="op">+</span><span class="st"> </span>alpha2 <span class="op">*</span><span class="st"> </span>y_hat2 <span class="op">+</span><span class="st"> </span>alpha3 <span class="op">*</span><span class="st"> </span>y_hat3)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">y_hat1 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-2" title="2">y_hat2 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod2, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-3" title="3">y_hat3 &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(mod3, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>) <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-4" title="4">y_final &lt;-<span class="st"> </span><span class="kw">sign</span>(alpha1 <span class="op">*</span><span class="st"> </span>y_hat1 <span class="op">+</span><span class="st"> </span>alpha2 <span class="op">*</span><span class="st"> </span>y_hat2 <span class="op">+</span><span class="st"> </span>alpha3 <span class="op">*</span><span class="st"> </span>y_hat3)</a></code></pre></div>
 <p>Para ver las primeras clasificaciones usarmos</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">head</span>(y_final)</a></code></pre></div>
-<pre><code>## [1]  1 -1 -1 -1 -1  1</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">head</span>(y_final)</a></code></pre></div>
+<pre><code>## [1]  1  1  1 -1 -1  1</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">tabla1 &lt;-<span class="st"> </span><span class="kw">table</span>(y_hat1, datos<span class="op">$</span>yy)</a>
+<a class="sourceLine" id="cb33-2" title="2">tabla2 &lt;-<span class="st"> </span><span class="kw">table</span>(y_hat2, datos<span class="op">$</span>yy)</a>
+<a class="sourceLine" id="cb33-3" title="3">tabla3 &lt;-<span class="st"> </span><span class="kw">table</span>(y_hat3, datos<span class="op">$</span>yy)</a>
+<a class="sourceLine" id="cb33-4" title="4">tabla_final &lt;-<span class="st"> </span><span class="kw">table</span>(y_final, datos<span class="op">$</span>yy)</a>
+<a class="sourceLine" id="cb33-5" title="5"></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla1)) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(datos)</a></code></pre></div>
+<pre><code>## [1] 0.640264</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla2)) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(datos)</a></code></pre></div>
+<pre><code>## [1] 0.5874587</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla3)) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(datos)</a></code></pre></div>
+<pre><code>## [1] 0.5412541</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(datos)</a></code></pre></div>
+<pre><code>## [1] 0.640264</code></pre>
 
 </div>
 </div>
