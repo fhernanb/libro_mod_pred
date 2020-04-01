@@ -1,6 +1,6 @@
 # AdaBoost {#adaboost}
 
-AdaBoost (adaptive boosting) fue propuesto por Yoav Freund y Robert  Schapire (1997).
+AdaBoost (adaptive boosting) fue propuesto por [@freund_1995].
 
 
 ## Explicación sencilla para aplicar AdaBoost {-}
@@ -45,6 +45,48 @@ knitr::include_graphics("images/adaboost03.png")
 knitr::include_graphics("images/adaboost04.png")
 ```
 
+## Ejemplo {-}
+En este ejemplo vamos a mostrar como usar el paquete **adabag** [@R-adabag] para aplicar AdaBoost.
+
+Como ejemplo vamos a usar la base de datos `iris` en la cual se tienen 4 variables que ayudarán a clasificar nuevas flores en una de tres especies. En la figura de abajo se muestran las tres especies y las cuatro variables.
+
+```{r iris, echo=F, fig.cap='Tipos de especies y variables en la base de datos iris.', dpi=90, fig.align='center'}
+knitr::include_graphics("images/iris.png")
+```
+
+Primero vamos a crear un árbol de clasificación usando el paquete **rpart** [@R-rpart], este modelo servirá como referencia.
+
+```{r}
+library(rpart)
+mod1 <- rpart(Species ~ ., data=iris)
+yhat1 <- predict(mod1, type='class')
+```
+
+Ahora vamos a aplicar AdaBoost.
+
+```{r message=FALSE}
+library(adabag)
+mod2 <- bagging(Species ~ ., data=iris, mfinal=20)
+yhat2 <- predict(mod2, newdata=iris)$class
+```
+
+En los objetos `yhat1` y `yhat2` están las predicciones y con ellas vamos a formar las tablas de confusión para cada modelo.
+
+```{r}
+t1 <- table(real=iris$Species, prediccion=yhat1)
+t1
+t2 <- table(real=iris$Species, prediccion=yhat2)
+t2
+```
+
+Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.
+
+```{r}
+sum(diag(t1)) / sum(t1)
+sum(diag(t2)) / sum(t2)
+```
+
+De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es `r sum(diag(t1)) / sum(t1) * 100`% mientras que con AdaBoost es `r sum(diag(t2)) / sum(t2) * 100`%.
 
 ## Ejemplo {-}
 La base de datos que vamos a usar en este ejemplo está disponible en el [UCI Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease). 
