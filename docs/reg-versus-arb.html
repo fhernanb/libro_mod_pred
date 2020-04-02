@@ -250,8 +250,8 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.110905 0.2350246
-## 2 0.0100000      1 0.2519381 1.110905 0.2350246
+## 1 0.7480619      0 1.0000000 1.077718 0.2262142
+## 2 0.0100000      1 0.2519381 1.077718 0.2262142
 ## 
 ## Variable importance
 ## Edad 
@@ -336,13 +336,13 @@ x &amp;\sim U(2, 25)
 <a class="sourceLine" id="cb75-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb75-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb75-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
-<pre><code>## [1] 0.9091864</code></pre>
+<pre><code>## [1] 0.8819225</code></pre>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
-<pre><code>## [1] 0.7731289</code></pre>
+<pre><code>## [1] 0.7490103</code></pre>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 14475.4</code></pre>
+<pre><code>## [1] 10042.03</code></pre>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 38548.91</code></pre>
+<pre><code>## [1] 18945.15</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
@@ -368,22 +368,22 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <a class="sourceLine" id="cb83-17" title="17"><span class="kw">colnames</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</a>
 <a class="sourceLine" id="cb83-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
 <a class="sourceLine" id="cb83-19" title="19">result</a></code></pre></div>
-<pre><code>##     n   ecm_lrs   ecm_arb
-## 1  10 11264.691  61931.00
-## 2  10 10987.869  36075.11
-## 3  10 11131.832  68599.69
-## 4  10 15875.263  86406.65
-## 5  10  7066.541 127931.35
-## 6  20 13976.524  24905.73
-## 7  20 10724.407  23705.07
-## 8  20  8082.058  21379.74
-## 9  20  8299.629  22709.25
-## 10 20 16462.412  48264.07
-## 11 40 11471.224  18427.46
-## 12 40  7303.726  15189.23
-## 13 40  8821.243  15180.78
-## 14 40  8615.453  18960.11
-## 15 40 13785.912  23539.74</code></pre>
+<pre><code>##     n   ecm_lrs  ecm_arb
+## 1  10 17855.955 56759.11
+## 2  10 12981.785 72724.45
+## 3  10 20621.270 49682.73
+## 4  10 18633.461 60869.35
+## 5  10  7118.762 25391.33
+## 6  20 13748.396 26323.13
+## 7  20 11934.382 33038.04
+## 8  20  8009.989 42060.85
+## 9  20 10942.837 39050.63
+## 10 20  8112.688 18955.37
+## 11 40 12343.087 21266.46
+## 12 40  8444.650 23705.91
+## 13 40  8904.783 18090.84
+## 14 40 13372.112 20054.63
+## 15 40  9534.843 12624.54</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb85-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
@@ -391,9 +391,9 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10        11265.        76189.
-## 2    20        11509.        28193.
-## 3    40        10000.        18259.</code></pre>
+## 1    10        15442.        53085.
+## 2    20        10550.        31886.
+## 3    40        10520.        19148.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>

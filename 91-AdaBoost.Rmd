@@ -54,11 +54,11 @@ Como ejemplo vamos a usar la base de datos `iris` en la cual se tienen 4 variabl
 knitr::include_graphics("images/iris.png")
 ```
 
-Primero vamos a crear un árbol de clasificación usando el paquete **rpart** [@R-rpart], este modelo servirá como referencia.
-
+Primero vamos a crear un árbol de clasificación usando el paquete **rpart** [@R-rpart], este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
+.
 ```{r}
 library(rpart)
-mod1 <- rpart(Species ~ ., data=iris)
+mod1 <- rpart(Species ~ Sepal.Length + Sepal.Width, data=iris)
 yhat1 <- predict(mod1, type='class')
 ```
 
@@ -66,7 +66,8 @@ Ahora vamos a aplicar AdaBoost.
 
 ```{r message=FALSE}
 library(adabag)
-mod2 <- bagging(Species ~ ., data=iris, mfinal=20)
+mod2 <- bagging(Species ~ Sepal.Length + Sepal.Width, 
+                data=iris, mfinal=10)
 yhat2 <- predict(mod2, newdata=iris)$class
 ```
 

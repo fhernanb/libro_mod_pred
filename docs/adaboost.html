@@ -254,35 +254,37 @@ Figure 4.4: Clasificador final.
 Figure 4.5: Tipos de especies y variables en la base de datos iris.
 </p>
 </div>
-<p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span>, este modelo servirá como referencia.</p>
+<p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span>, este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
+.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb26-2" title="2">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb26-2" title="2">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data=</span>iris)</a>
 <a class="sourceLine" id="cb26-3" title="3">yhat1 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a></code></pre></div>
 <p>Ahora vamos a aplicar AdaBoost.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">library</span>(adabag)</a>
-<a class="sourceLine" id="cb27-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">bagging</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">mfinal=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb27-3" title="3">yhat2 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>iris)<span class="op">$</span>class</a></code></pre></div>
+<a class="sourceLine" id="cb27-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">bagging</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, </a>
+<a class="sourceLine" id="cb27-3" title="3">                <span class="dt">data=</span>iris, <span class="dt">mfinal=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb27-4" title="4">yhat2 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>iris)<span class="op">$</span>class</a></code></pre></div>
 <p>En los objetos <code>yhat1</code> y <code>yhat2</code> están las predicciones y con ellas vamos a formar las tablas de confusión para cada modelo.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">t1 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat1)</a>
 <a class="sourceLine" id="cb28-2" title="2">t1</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         50          0         0
-##   versicolor      0         49         1
-##   virginica       0          5        45</code></pre>
+##   setosa         49          1         0
+##   versicolor      3         31        16
+##   virginica       0         11        39</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">t2 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat2)</a>
 <a class="sourceLine" id="cb30-2" title="2">t2</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         50          0         0
-##   versicolor      0         47         3
-##   virginica       0          3        47</code></pre>
+##   setosa         48          2         0
+##   versicolor      2         37        11
+##   virginica       0         13        37</code></pre>
 <p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
-<pre><code>## [1] 0.96</code></pre>
+<pre><code>## [1] 0.7933333</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
-<pre><code>## [1] 0.96</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 96% mientras que con AdaBoost es 96%.</p>
+<pre><code>## [1] 0.8133333</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 81.3333333%.</p>
 </div>
 <div id="ejemplo-2" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
