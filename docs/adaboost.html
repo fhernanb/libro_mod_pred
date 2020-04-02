@@ -250,8 +250,8 @@ Figure 4.4: Obtención clasificador final.
 <div id="ejemplo-1" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
 <p>En este ejemplo vamos a usar la base de datos <code>kyphosis</code> del paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span>. A continuación las primeras líneas de la base de datos.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">head</span>(kyphosis)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">head</span>(kyphosis)</a></code></pre></div>
 <pre><code>##   Kyphosis Age Number Start
 ## 1   absent  71      3     5
 ## 2   absent 158      3    14
@@ -260,61 +260,54 @@ Figure 4.4: Obtención clasificador final.
 ## 5   absent   1      4    15
 ## 6   absent   1      2    16</code></pre>
 <p>El objetivo es crear un clasificador que use la información de Age, Number y Start para predecir el tipo de deformación kyphosis (absent or present). Como vamos a aplicar el AdaBoost manual debemos crear la variable respuesta en -1 y 1 así:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">kyphosis<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">ifelse</span>(kyphosis<span class="op">$</span>Kyphosis <span class="op">==</span><span class="st"> &#39;absent&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">kyphosis<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">ifelse</span>(kyphosis<span class="op">$</span>Kyphosis <span class="op">==</span><span class="st"> &#39;absent&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>Vamos a crear primero un modelo de referencia <code>mod0</code> que será un árbol tradicional.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">mod0 &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">data=</span>kyphosis, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2">y0 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod0, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3">tabla0 &lt;-<span class="st"> </span><span class="kw">table</span>(y0, kyphosis<span class="op">$</span>y)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">mod0 &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">data=</span>kyphosis, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb29-2" title="2">y0 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod0, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb29-3" title="3">tabla0 &lt;-<span class="st"> </span><span class="kw">table</span>(y0, kyphosis<span class="op">$</span>y)</a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
 <pre><code>## [1] 0.8395062</code></pre>
 <p>En el siguiente código se usarán 20 iteraciones del AdaBoost en forma manual para crear 20 tocones (stumps) que unidos nos permitirán clasificar.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">T &lt;-<span class="st"> </span><span class="dv">20</span> <span class="co"># numero de iteraciones</span></a>
-<a class="sourceLine" id="cb6-2" title="2">m &lt;-<span class="st"> </span><span class="kw">nrow</span>(kyphosis)</a>
-<a class="sourceLine" id="cb6-3" title="3">Dt &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span>m, m) <span class="co"># D1</span></a>
-<a class="sourceLine" id="cb6-4" title="4">alphas &lt;-<span class="st"> </span><span class="kw">numeric</span>(T) <span class="co"># Para almacenar alpha</span></a>
-<a class="sourceLine" id="cb6-5" title="5">y_hats &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol=</span>T, <span class="dt">nrow=</span>m) <span class="co"># Para almacenar la predicciones</span></a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>T) {</a>
-<a class="sourceLine" id="cb6-8" title="8">  mod &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>kyphosis, </a>
-<a class="sourceLine" id="cb6-9" title="9">               <span class="dt">method=</span><span class="st">&#39;class&#39;</span>, <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">maxdepth =</span> <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb6-10" title="10">  y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
-<a class="sourceLine" id="cb6-11" title="11">  error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>kyphosis<span class="op">$</span>y, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># 1=error, 0=ok</span></a>
-<a class="sourceLine" id="cb6-12" title="12">  epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
-<a class="sourceLine" id="cb6-13" title="13">  alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
-<a class="sourceLine" id="cb6-14" title="14">  Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>kyphosis<span class="op">$</span>y, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
-<a class="sourceLine" id="cb6-15" title="15">  Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
-<a class="sourceLine" id="cb6-16" title="16">  Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
-<a class="sourceLine" id="cb6-17" title="17">  alphas[i] &lt;-<span class="st"> </span>alpha_t</a>
-<a class="sourceLine" id="cb6-18" title="18">  y_hats[, i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb6-19" title="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">T &lt;-<span class="st"> </span><span class="dv">20</span> <span class="co"># numero de iteraciones</span></a>
+<a class="sourceLine" id="cb31-2" title="2">m &lt;-<span class="st"> </span><span class="kw">nrow</span>(kyphosis)</a>
+<a class="sourceLine" id="cb31-3" title="3">Dt &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span>m, m) <span class="co"># D1</span></a>
+<a class="sourceLine" id="cb31-4" title="4">alphas &lt;-<span class="st"> </span><span class="kw">numeric</span>(T) <span class="co"># Para almacenar alpha</span></a>
+<a class="sourceLine" id="cb31-5" title="5">y_hats &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">ncol=</span>T, <span class="dt">nrow=</span>m) <span class="co"># Para almacenar la predicciones</span></a>
+<a class="sourceLine" id="cb31-6" title="6"></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>T) {</a>
+<a class="sourceLine" id="cb31-8" title="8">  mod &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">weights=</span>Dt, <span class="dt">data=</span>kyphosis, </a>
+<a class="sourceLine" id="cb31-9" title="9">               <span class="dt">method=</span><span class="st">&#39;class&#39;</span>, <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">maxdepth =</span> <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb31-10" title="10">  y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a>
+<a class="sourceLine" id="cb31-11" title="11">  error &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>kyphosis<span class="op">$</span>y, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># 1=error, 0=ok</span></a>
+<a class="sourceLine" id="cb31-12" title="12">  epsilon_t &lt;-<span class="st"> </span><span class="kw">sum</span>(error <span class="op">*</span><span class="st"> </span>Dt)</a>
+<a class="sourceLine" id="cb31-13" title="13">  alpha_t &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">log</span>((<span class="dv">1</span><span class="op">-</span>epsilon_t)<span class="op">/</span>epsilon_t)</a>
+<a class="sourceLine" id="cb31-14" title="14">  Fi &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> </span>kyphosis<span class="op">$</span>y, <span class="kw">exp</span>(<span class="op">-</span>alpha_t), <span class="kw">exp</span>(alpha_t))</a>
+<a class="sourceLine" id="cb31-15" title="15">  Dt &lt;-<span class="st"> </span>Dt <span class="op">*</span><span class="st"> </span>Fi</a>
+<a class="sourceLine" id="cb31-16" title="16">  Dt &lt;-<span class="st"> </span>Dt <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Dt)</a>
+<a class="sourceLine" id="cb31-17" title="17">  alphas[i] &lt;-<span class="st"> </span>alpha_t</a>
+<a class="sourceLine" id="cb31-18" title="18">  y_hats[, i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_hat <span class="op">==</span><span class="st"> &#39;-1&#39;</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb31-19" title="19">}</a></code></pre></div>
 <p>Para obtener las estimaciones con los 20 tocones se usa el siguiente código.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">y_final &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">sign</span>(y_hats <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(alphas, <span class="dt">ncol=</span><span class="dv">1</span>)))</a>
-<a class="sourceLine" id="cb7-2" title="2">tabla_final &lt;-<span class="st"> </span><span class="kw">table</span>(y_final, kyphosis<span class="op">$</span>y)</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">y_final &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">sign</span>(y_hats <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(alphas, <span class="dt">ncol=</span><span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb32-2" title="2">tabla_final &lt;-<span class="st"> </span><span class="kw">table</span>(y_final, kyphosis<span class="op">$</span>y)</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
 <p>Por último vamos a usar la función <code>boosting</code> del paquete <strong>adabag</strong> <span class="citation">(Alfaro et al. <a href="#ref-R-adabag" role="doc-biblioref">2018</a>)</span> para aplicar AdaBoost de forma automática.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(adabag)</a></code></pre></div>
-<pre><code>## Loading required package: caret</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## Loading required package: foreach</code></pre>
-<pre><code>## Loading required package: doParallel</code></pre>
-<pre><code>## Loading required package: iterators</code></pre>
-<pre><code>## Loading required package: parallel</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">adaboost &lt;-<span class="st"> </span><span class="kw">bagging</span>(Kyphosis <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start,</a>
-<a class="sourceLine" id="cb17-2" title="2">                    <span class="dt">coeflearn=</span><span class="st">&#39;Freund&#39;</span>,</a>
-<a class="sourceLine" id="cb17-3" title="3">                    <span class="dt">data=</span>kyphosis, <span class="dt">mfinal=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb17-4" title="4">yhat_adaboost &lt;-<span class="st"> </span><span class="kw">predict</span>(adaboost, <span class="dt">newdata=</span>kyphosis)<span class="op">$</span>class</a>
-<a class="sourceLine" id="cb17-5" title="5">tabla_adaboost &lt;-<span class="st"> </span><span class="kw">table</span>(yhat_adaboost, kyphosis<span class="op">$</span>Kyphosis)</a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8641975</code></pre>
-<p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
-<pre><code>## [1] 0.8395062</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">library</span>(adabag)</a>
+<a class="sourceLine" id="cb34-2" title="2">adaboost &lt;-<span class="st"> </span><span class="kw">bagging</span>(Kyphosis <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start,</a>
+<a class="sourceLine" id="cb34-3" title="3">                    <span class="dt">coeflearn=</span><span class="st">&#39;Freund&#39;</span>,</a>
+<a class="sourceLine" id="cb34-4" title="4">                    <span class="dt">data=</span>kyphosis, <span class="dt">mfinal=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb34-5" title="5">yhat_adaboost &lt;-<span class="st"> </span><span class="kw">predict</span>(adaboost, <span class="dt">newdata=</span>kyphosis)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb34-6" title="6">tabla_adaboost &lt;-<span class="st"> </span><span class="kw">table</span>(yhat_adaboost, kyphosis<span class="op">$</span>Kyphosis)</a>
+<a class="sourceLine" id="cb34-7" title="7"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8641975</code></pre>
+<p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
+<pre><code>## [1] 0.8395062</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
+<pre><code>## [1] 0.8888889</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
+<pre><code>## [1] 0.8888889</code></pre>
 <p>De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.</p>
 </div>
 <div id="ejemplo-2" class="section level2 unnumbered">
@@ -329,35 +322,35 @@ Figure 4.5: Tipos de especies y variables en la base de datos iris.
 </div>
 <p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span>, este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
 .</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb25-2" title="2">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data=</span>iris)</a>
-<a class="sourceLine" id="cb25-3" title="3">yhat1 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb42-2" title="2">mod1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb42-3" title="3">yhat1 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a></code></pre></div>
 <p>Ahora vamos a aplicar AdaBoost.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(adabag)</a>
-<a class="sourceLine" id="cb26-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">bagging</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, </a>
-<a class="sourceLine" id="cb26-3" title="3">                <span class="dt">data=</span>iris, <span class="dt">mfinal=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb26-4" title="4">yhat2 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>iris)<span class="op">$</span>class</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">library</span>(adabag)</a>
+<a class="sourceLine" id="cb43-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">bagging</span>(Species <span class="op">~</span><span class="st"> </span>Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width, </a>
+<a class="sourceLine" id="cb43-3" title="3">                <span class="dt">data=</span>iris, <span class="dt">mfinal=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb43-4" title="4">yhat2 &lt;-<span class="st"> </span><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>iris)<span class="op">$</span>class</a></code></pre></div>
 <p>En los objetos <code>yhat1</code> y <code>yhat2</code> están las predicciones y con ellas vamos a formar las tablas de confusión para cada modelo.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">t1 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat1)</a>
-<a class="sourceLine" id="cb27-2" title="2">t1</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">t1 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat1)</a>
+<a class="sourceLine" id="cb44-2" title="2">t1</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
 ##   setosa         49          1         0
 ##   versicolor      3         31        16
 ##   virginica       0         11        39</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">t2 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat2)</a>
-<a class="sourceLine" id="cb29-2" title="2">t2</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">t2 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">real=</span>iris<span class="op">$</span>Species, <span class="dt">prediccion=</span>yhat2)</a>
+<a class="sourceLine" id="cb46-2" title="2">t2</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         46          4         0
-##   versicolor      1         43         6
-##   virginica       0         21        29</code></pre>
+##   setosa         45          5         0
+##   versicolor      6         29        15
+##   virginica       1         10        39</code></pre>
 <p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
 <pre><code>## [1] 0.7933333</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
-<pre><code>## [1] 0.7866667</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 78.6666667%.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
+<pre><code>## [1] 0.7533333</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 75.3333333%.</p>
 
 </div>
 </div>

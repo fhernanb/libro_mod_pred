@@ -108,7 +108,7 @@ sum(diag(tabla_final)) / sum(tabla_final)
 
 Por último vamos a usar la función `boosting` del paquete **adabag** [@R-adabag] para aplicar AdaBoost de forma automática.
 
-```{r}
+```{r message=FALSE}
 library(adabag)
 adaboost <- bagging(Kyphosis ~ Age + Number + Start,
                     coeflearn='Freund',
