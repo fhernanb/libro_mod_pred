@@ -26,7 +26,7 @@
 <meta name="author" content="Carmen Patiño" />
 
 
-<meta name="date" content="2020-04-01" />
+<meta name="date" content="2020-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -151,11 +151,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -199,7 +200,7 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">library</span>(rpart)</a>
 <a class="sourceLine" id="cb52-2" title="2"><span class="kw">library</span>(rpart.plot)</a></code></pre></div>
 </div>
-<div id="ejemplo-3" class="section level2 unnumbered">
+<div id="ejemplo-4" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
 <p>Como ilustración vamos a usar los datos del ejemplo 2.1 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. En el ejemplo 2.1 los autores ajustaron un modelo de regresión lineal simple para explicar la Resistencia de una soldadura en función de la Edad de la misma.</p>
 <p>A continuación el código para cargar los datos y una muestra de las 6 primeras observaciones de la base de datos, en total tenemos 20 observaciones.</p>
@@ -250,8 +251,8 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.168805 0.2404186
-## 2 0.0100000      1 0.2519381 1.168805 0.2404186
+## 1 0.7480619      0 1.0000000 1.104413 0.2356347
+## 2 0.0100000      1 0.2519381 1.104413 0.2356347
 ## 
 ## Variable importance
 ## Edad 
@@ -336,13 +337,13 @@ x &amp;\sim U(2, 25)
 <a class="sourceLine" id="cb76-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb76-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb76-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
-<pre><code>## [1] 0.8342352</code></pre>
+<pre><code>## [1] 0.9506575</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
-<pre><code>## [1] 0.6765309</code></pre>
+<pre><code>## [1] 0.7929817</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 11764.76</code></pre>
+<pre><code>## [1] 9803.482</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 33796.43</code></pre>
+<pre><code>## [1] 36046.29</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
@@ -369,21 +370,21 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <a class="sourceLine" id="cb84-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
 <a class="sourceLine" id="cb84-19" title="19">result</a></code></pre></div>
 <pre><code>##     n   ecm_lrs   ecm_arb
-## 1  10 16005.174  55414.57
-## 2  10 19289.623  92210.38
-## 3  10 10681.876 107628.85
-## 4  10 15178.740  59352.99
-## 5  10  6170.424  57317.52
-## 6  20 12575.244  30542.17
-## 7  20 19797.090  42562.79
-## 8  20  8177.238  26282.47
-## 9  20 11142.297  28422.53
-## 10 20  6825.856  19226.80
-## 11 40  8961.486  16743.46
-## 12 40 10152.340  27604.77
-## 13 40  9217.338  22092.89
-## 14 40  9174.149  15015.75
-## 15 40  6199.703  12975.83</code></pre>
+## 1  10 22139.750 162663.46
+## 2  10 10688.617  56151.71
+## 3  10 14784.190  49304.91
+## 4  10 25543.837  80598.92
+## 5  10 13063.881  96912.58
+## 6  20 11079.216  40479.43
+## 7  20  8716.806  11417.15
+## 8  20 10852.397  43751.54
+## 9  20 11486.964  24423.40
+## 10 20 12637.765  32080.62
+## 11 40 16185.293  30109.38
+## 12 40 11645.237  17688.07
+## 13 40  7956.167  24138.52
+## 14 40 13445.208  25605.58
+## 15 40 12123.475  22909.75</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb86-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
@@ -391,9 +392,9 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10        13465.        74385.
-## 2    20        11704.        29407.
-## 3    40         8741.        18887.</code></pre>
+## 1    10        17244.        89126.
+## 2    20        10955.        30430.
+## 3    40        12271.        24090.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>

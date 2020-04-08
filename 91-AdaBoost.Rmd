@@ -31,6 +31,11 @@ knitr::include_graphics("images/adaboost_illustration.png")
 3. Construya el clasificador final $H_{final}$ como el promedio ponderado de los $t$ clasificadores $h_t$, usando $H_{final}=sign(\sum_t \alpha_t h_t(x))$.
 
 ## Ejemplo {-}
+Abajo se presenta un video con una explicación detallada de lo que es AdaBoost.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LsK-xG1cLYA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Ejemplo {-}
 En este ejemplo se ilustra la forma de aplicar AdaBoost a un conjunto de datos bivariados para clasificar en dos clases: -1 y +1.
 
 ```{r adaboost01, echo=F, fig.cap='Datos originales.', dpi=60, fig.align='center'}
