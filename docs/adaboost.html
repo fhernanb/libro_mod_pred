@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="svm-clas.html"/>
-<link rel="next" href="reg-versus-arb.html"/>
+<link rel="next" href="gradboost.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -165,10 +165,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -196,12 +200,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adaboost" class="section level1">
 <h1><span class="header-section-number">4</span> AdaBoost</h1>
 <p>AdaBoost (adaptive boosting) fue propuesto por <span class="citation">(Freund and Schapire <a href="#ref-freund_1995" role="doc-biblioref">1995</a>)</span> y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste un poco mejor lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.</p>
-<div class="figure" style="text-align: center"><span id="fig:adaboost00"></span>
-<img src="images/adaboost_illustration.png" alt="Ilustracion de AdaBoost." width="3105" />
-<p class="caption">
-Figure 4.1: Ilustracion de AdaBoost.
+<p align="center">
+<img src="images/adaboost_illustration.png" width="700">
 </p>
-</div>
 <div id="explicacion-sencilla-de-adaboost" class="section level2 unnumbered">
 <h2>Explicación sencilla de AdaBoost</h2>
 <ol style="list-style-type: decimal">
@@ -247,21 +248,21 @@ Figure 4.1: Ilustracion de AdaBoost.
 <div class="figure" style="text-align: center"><span id="fig:adaboost01"></span>
 <img src="images/adaboost01.png" alt="Datos originales." width="220" />
 <p class="caption">
-Figure 4.2: Datos originales.
+Figure 4.1: Datos originales.
 </p>
 </div>
 <p>En la siguiente figura se muestran 3 clasificadores (<span class="math inline">\(h_1\)</span>, <span class="math inline">\(h_2\)</span> y <span class="math inline">\(h_3\)</span>) sencillos o árboles de profundidad uno (tocones), que fueron creados de forma secuencial. Al observar <span class="math inline">\(h1\)</span>, se nota que él clasificó mal los + encerrados en círculos. Por esa razón, en la siguiente iteración esas observaciones mal clasificadas tuvieron un mayor peso o importancia en el nuevo clasificador <span class="math inline">\(h_2\)</span>, por eso es que esos símbolos + aparecen más grandes en la segunda figura. Al mirar el clasificador <span class="math inline">\(h_2\)</span> se observa que logró clasificar bien esos + grandes, sin embargo, él clasificó mal los - que están encerrados en círculos. Por esa razón, en la siguiente iteración esas observaciones mal clasificadas tuvieron un mayor peso o importancia en el nuevo clasificador <span class="math inline">\(h_3\)</span>, por eso es que esos símbolos - aparecen más grandes en la tercera figura. El clasificador <span class="math inline">\(h_3\)</span> logra clasificar mejor esos -.</p>
 <div class="figure" style="text-align: center"><span id="fig:adaboost02"></span>
 <img src="images/adaboost02.png" alt="Clasificadores." width="1216" />
 <p class="caption">
-Figure 4.3: Clasificadores.
+Figure 4.2: Clasificadores.
 </p>
 </div>
 <p>El clasificador final (<span class="math inline">\(h_{final}\)</span>) se construye como una ponderación de los clasificadores sencillos (<span class="math inline">\(h_1\)</span>, <span class="math inline">\(h_2\)</span> y <span class="math inline">\(h_3\)</span>) como se muestra a continuación.</p>
 <div class="figure" style="text-align: center"><span id="fig:adaboost03"></span>
 <img src="images/adaboost03.png" alt="Obtención clasificador final." width="1850" />
 <p class="caption">
-Figure 4.4: Obtención clasificador final.
+Figure 4.3: Obtención clasificador final.
 </p>
 </div>
 <p>Los valores de <span class="math inline">\(\alpha_t\)</span> son las ponderaciones que aparecen en la explicación detallada del método.</p>
@@ -319,14 +320,14 @@ Figure 4.4: Obtención clasificador final.
 <a class="sourceLine" id="cb68-5" title="5">yhat_adaboost &lt;-<span class="st"> </span><span class="kw">predict</span>(adaboost, <span class="dt">newdata=</span>kyphosis)<span class="op">$</span>class</a>
 <a class="sourceLine" id="cb68-6" title="6">tabla_adaboost &lt;-<span class="st"> </span><span class="kw">table</span>(yhat_adaboost, kyphosis<span class="op">$</span>Kyphosis)</a>
 <a class="sourceLine" id="cb68-7" title="7"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8888889</code></pre>
+<pre><code>## [1] 0.8765432</code></pre>
 <p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
 <pre><code>## [1] 0.8395062</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8888889</code></pre>
+<pre><code>## [1] 0.8765432</code></pre>
 <p>De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.</p>
 </div>
 <div id="ejemplo-4" class="section level2 unnumbered">
@@ -336,7 +337,7 @@ Figure 4.4: Obtención clasificador final.
 <div class="figure" style="text-align: center"><span id="fig:iris"></span>
 <img src="images/iris.png" alt="Tipos de especies y variables en la base de datos iris." width="437" />
 <p class="caption">
-Figure 4.5: Tipos de especies y variables en la base de datos iris.
+Figure 4.4: Tipos de especies y variables en la base de datos iris.
 </p>
 </div>
 <p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span>, este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
@@ -361,15 +362,15 @@ Figure 4.5: Tipos de especies y variables en la base de datos iris.
 <a class="sourceLine" id="cb80-2" title="2">t2</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         46          4         0
-##   versicolor      1         35        14
-##   virginica       0         12        38</code></pre>
+##   setosa         47          3         0
+##   versicolor      1         41         8
+##   virginica       0         16        34</code></pre>
 <p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
 <pre><code>## [1] 0.7933333</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
-<pre><code>## [1] 0.7933333</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 79.3333333%.</p>
+<pre><code>## [1] 0.8133333</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 81.3333333%.</p>
 
 </div>
 </div>
@@ -391,7 +392,7 @@ Figure 4.5: Tipos de especies y variables en la base de datos iris.
         </div>
       </div>
 <a href="svm-clas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="gradboost.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -423,7 +424,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/91-AdaBoost.Rmd",
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/81-AdaBoost.Rmd",
 "text": "Edit"
 },
 "history": {

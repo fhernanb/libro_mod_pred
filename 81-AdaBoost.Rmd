@@ -2,10 +2,9 @@
 
 AdaBoost (adaptive boosting) fue propuesto por [@freund_1995] y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste un poco mejor lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.
 
-```{r adaboost00, echo=F, fig.cap='Ilustracion de AdaBoost.', dpi=70, fig.align='center'}
-knitr::include_graphics("images/adaboost_illustration.png")
-```
-
+<p align="center">
+  <img src="images/adaboost_illustration.png" width="700">
+</p>
 
 ## Explicación sencilla de AdaBoost {-}
 

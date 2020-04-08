@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
+  <title>6 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
+  <meta property="og:title" content="6 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
+  <meta name="twitter:title" content="6 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="adaboost.html"/>
+<link rel="prev" href="gradboost.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -165,10 +165,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>5</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -194,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="reg-versus-arb" class="section level1">
-<h1><span class="header-section-number">5</span> Regresión lineal versus árboles de regresión</h1>
+<h1><span class="header-section-number">6</span> Regresión lineal versus árboles de regresión</h1>
 <p>En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.</p>
 <div id="regresion-lineal" class="section level2 unnumbered">
 <h2>Regresión lineal</h2>
@@ -209,16 +213,16 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 <h2>Arboles de regresión</h2>
 <p>Una explicación de los árboles de regresión puede ser consultada en el capítulo <a href="arb-de-regre.html#arb-de-regre">1</a>.</p>
 <p>Las librerías en R para implementar árboles de regresión son:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="kw">library</span>(rpart.plot)</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">library</span>(rpart)</a>
+<a class="sourceLine" id="cb93-2" title="2"><span class="kw">library</span>(rpart.plot)</a></code></pre></div>
 </div>
-<div id="ejemplo-5" class="section level2 unnumbered">
+<div id="ejemplo-7" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
 <p>Como ilustración vamos a usar los datos del ejemplo 2.1 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. En el ejemplo 2.1 los autores ajustaron un modelo de regresión lineal simple para explicar la Resistencia de una soldadura en función de la Edad de la misma.</p>
 <p>A continuación el código para cargar los datos y una muestra de las 6 primeras observaciones de la base de datos, en total tenemos 20 observaciones.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">file &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/fhernanb/datos/master/propelente&quot;</span></a>
-<a class="sourceLine" id="cb87-2" title="2">datos &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file=</span>file, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb87-3" title="3"><span class="kw">head</span>(datos) <span class="co"># shows the first 6 rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1">file &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/fhernanb/datos/master/propelente&quot;</span></a>
+<a class="sourceLine" id="cb94-2" title="2">datos &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file=</span>file, <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb94-3" title="3"><span class="kw">head</span>(datos) <span class="co"># shows the first 6 rows</span></a></code></pre></div>
 <pre><code>##   Resistencia  Edad
 ## 1     2158.70 15.50
 ## 2     1678.15 23.75
@@ -227,17 +231,17 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## 5     2207.50  5.50
 ## 6     1708.30 19.00</code></pre>
 <p>Para crear un diagrama de dispersión que nos muestre la relación entre las dos variables usamos las siguientes instrucciones.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb89-2" title="2"><span class="kw">ggplot</span>(datos, <span class="kw">aes</span>(<span class="dt">x=</span>Edad, <span class="dt">y=</span>Resistencia)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb89-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb96-2" title="2"><span class="kw">ggplot</span>(datos, <span class="kw">aes</span>(<span class="dt">x=</span>Edad, <span class="dt">y=</span>Resistencia)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb96-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/soldadura1-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>De la figura anterior se ve claramente que a medida que aumenta la edad de la soldadura, la resistencia que ella ofrece disminuye. Adicionalmente, se observa que la relación entre las variables es lineal con una dispersión que parece constante.</p>
 <p>¿Quién estima mejor? ¿un modelo de regresión lineal simple o un árbol?</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1">rls &lt;-<span class="st"> </span><span class="kw">lm</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</a>
-<a class="sourceLine" id="cb90-2" title="2">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</a></code></pre></div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&quot;anova&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">rls &lt;-<span class="st"> </span><span class="kw">lm</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</a>
+<a class="sourceLine" id="cb97-2" title="2">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&quot;anova&quot;</span>)</a></code></pre></div>
 <p>¿Qué hay dentro de modelo de regresión lineal simple?</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">summary</span>(rls)</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">summary</span>(rls)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Resistencia ~ Edad, data = datos)
@@ -257,14 +261,14 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## Multiple R-squared:  0.9018, Adjusted R-squared:  0.8964 
 ## F-statistic: 165.4 on 1 and 18 DF,  p-value: 1.643e-10</code></pre>
 <p>¿Qué hay dentro de modelo del arbol?</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">summary</span>(arb)</a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">summary</span>(arb)</a></code></pre></div>
 <pre><code>## Call:
 ## rpart(formula = Resistencia ~ Edad, data = datos, method = &quot;anova&quot;)
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.132145 0.2311264
-## 2 0.0100000      1 0.2519381 1.132145 0.2311264
+## 1 0.7480619      0 1.0000000 1.165366 0.2409892
+## 2 0.0100000      1 0.2519381 1.165366 0.2409892
 ## 
 ## Variable importance
 ## Edad 
@@ -282,41 +286,41 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## Node number 3: 12 observations
 ##   mean=2336.867, MSE=22599.79</code></pre>
 <p>Construyamos nuevamente el árbol pero explorando todas las opciones de la función <code>prp</code>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">prp</span>(arb, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb96-2" title="2">    <span class="dt">nn =</span> <span class="ot">TRUE</span>,             <span class="co"># display the node numbers</span></a>
-<a class="sourceLine" id="cb96-3" title="3">    <span class="dt">fallen.leaves =</span> <span class="ot">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span></a>
-<a class="sourceLine" id="cb96-4" title="4">    <span class="dt">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span></a>
-<a class="sourceLine" id="cb96-5" title="5">    <span class="dt">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span></a>
-<a class="sourceLine" id="cb96-6" title="6">    <span class="dt">branch =</span> <span class="fl">.5</span>,           <span class="co"># change angle of branch lines</span></a>
-<a class="sourceLine" id="cb96-7" title="7">    <span class="dt">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span></a>
-<a class="sourceLine" id="cb96-8" title="8">    <span class="dt">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span></a>
-<a class="sourceLine" id="cb96-9" title="9">    <span class="dt">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span></a>
-<a class="sourceLine" id="cb96-10" title="10">    <span class="dt">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span></a>
-<a class="sourceLine" id="cb96-11" title="11">    <span class="dt">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span></a>
-<a class="sourceLine" id="cb96-12" title="12">    <span class="dt">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span></a>
-<a class="sourceLine" id="cb96-13" title="13">    <span class="dt">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span></a>
-<a class="sourceLine" id="cb96-14" title="14">    <span class="dt">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">prp</span>(arb, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb103-2" title="2">    <span class="dt">nn =</span> <span class="ot">TRUE</span>,             <span class="co"># display the node numbers</span></a>
+<a class="sourceLine" id="cb103-3" title="3">    <span class="dt">fallen.leaves =</span> <span class="ot">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span></a>
+<a class="sourceLine" id="cb103-4" title="4">    <span class="dt">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span></a>
+<a class="sourceLine" id="cb103-5" title="5">    <span class="dt">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span></a>
+<a class="sourceLine" id="cb103-6" title="6">    <span class="dt">branch =</span> <span class="fl">.5</span>,           <span class="co"># change angle of branch lines</span></a>
+<a class="sourceLine" id="cb103-7" title="7">    <span class="dt">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span></a>
+<a class="sourceLine" id="cb103-8" title="8">    <span class="dt">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span></a>
+<a class="sourceLine" id="cb103-9" title="9">    <span class="dt">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span></a>
+<a class="sourceLine" id="cb103-10" title="10">    <span class="dt">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span></a>
+<a class="sourceLine" id="cb103-11" title="11">    <span class="dt">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span></a>
+<a class="sourceLine" id="cb103-12" title="12">    <span class="dt">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span></a>
+<a class="sourceLine" id="cb103-13" title="13">    <span class="dt">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span></a>
+<a class="sourceLine" id="cb103-14" title="14">    <span class="dt">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></a></code></pre></div>
 <pre><code>## cex 1   xlim c(-0.65, 1.65)   ylim c(-0.15, 1.15)</code></pre>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb01-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>A continuación las predicciones con ambos modelos.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos)</a>
-<a class="sourceLine" id="cb98-2" title="2">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos)</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos)</a>
+<a class="sourceLine" id="cb105-2" title="2">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos)</a></code></pre></div>
 <p>Dibujemos <span class="math inline">\(y_i\)</span> versus <span class="math inline">\(\hat{y}_i\)</span>.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb99-2" title="2"><span class="kw">plot</span>(<span class="dt">x=</span>pred_rls, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;RLS&quot;</span>)</a>
-<a class="sourceLine" id="cb99-3" title="3"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb99-4" title="4"><span class="kw">plot</span>(<span class="dt">x=</span>pred_arb, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;Arbol&quot;</span>)</a>
-<a class="sourceLine" id="cb99-5" title="5"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb106-2" title="2"><span class="kw">plot</span>(<span class="dt">x=</span>pred_rls, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;RLS&quot;</span>)</a>
+<a class="sourceLine" id="cb106-3" title="3"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb106-4" title="4"><span class="kw">plot</span>(<span class="dt">x=</span>pred_arb, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;Arbol&quot;</span>)</a>
+<a class="sourceLine" id="cb106-5" title="5"><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb02-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Vamos a calcular <span class="math inline">\(Cor(y_i, \hat{y}_i)\)</span>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_rls)</a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_rls)</a></code></pre></div>
 <pre><code>## [1] 0.9496533</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_arb)</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_arb)</a></code></pre></div>
 <pre><code>## [1] 0.8649057</code></pre>
 <p>Calculemos ahora el Error Cuadrático Medio <span class="math inline">\(ECM=\frac{1}{n}\sum(y_i-\hat{y}_i)^2\)</span>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 8312.743</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1"><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 21335.85</code></pre>
 <p>¿Cuál método prefiere usted?</p>
 </div>
@@ -330,83 +334,83 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 x &amp;\sim U(2, 25)
 \end{align}\]</span></p>
 <p>Vamos a crear una función generadora de datos.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1">gen_dat &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
-<a class="sourceLine" id="cb108-2" title="2">  x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span>n, <span class="dt">min=</span><span class="dv">2</span>, <span class="dt">max=</span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb108-3" title="3">  media &lt;-<span class="st"> </span><span class="dv">2627</span> <span class="op">-</span><span class="st"> </span><span class="dv">37</span> <span class="op">*</span><span class="st"> </span>x</a>
-<a class="sourceLine" id="cb108-4" title="4">  y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>n, <span class="dt">mean=</span>media, <span class="dt">sd=</span><span class="dv">96</span>)</a>
-<a class="sourceLine" id="cb108-5" title="5">  <span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)</a>
-<a class="sourceLine" id="cb108-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1">gen_dat &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</a>
+<a class="sourceLine" id="cb115-2" title="2">  x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span>n, <span class="dt">min=</span><span class="dv">2</span>, <span class="dt">max=</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb115-3" title="3">  media &lt;-<span class="st"> </span><span class="dv">2627</span> <span class="op">-</span><span class="st"> </span><span class="dv">37</span> <span class="op">*</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb115-4" title="4">  y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>n, <span class="dt">mean=</span>media, <span class="dt">sd=</span><span class="dv">96</span>)</a>
+<a class="sourceLine" id="cb115-5" title="5">  <span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)</a>
+<a class="sourceLine" id="cb115-6" title="6">}</a></code></pre></div>
 <p>Generemos unos datos de prueba y graficamos los datos.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb109-2" title="2"><span class="kw">ggplot</span>(datos_train, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb109-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1">datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="kw">ggplot</span>(datos_train, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb116-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb03-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Usando los datos de prueba vamos a ajustar los modelos y luego calcularemos los indicadores.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1">datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para entrenar</span></a>
-<a class="sourceLine" id="cb110-2" title="2">datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para validar</span></a>
-<a class="sourceLine" id="cb110-3" title="3">rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
-<a class="sourceLine" id="cb110-4" title="4">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
-<a class="sourceLine" id="cb110-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
-<a class="sourceLine" id="cb110-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
-<a class="sourceLine" id="cb110-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
-<pre><code>## [1] 0.9435621</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
-<pre><code>## [1] 0.8532777</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 6315.509</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 18797.32</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1">datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para entrenar</span></a>
+<a class="sourceLine" id="cb117-2" title="2">datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para validar</span></a>
+<a class="sourceLine" id="cb117-3" title="3">rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
+<a class="sourceLine" id="cb117-4" title="4">arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
+<a class="sourceLine" id="cb117-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
+<a class="sourceLine" id="cb117-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
+<a class="sourceLine" id="cb117-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
+<pre><code>## [1] 0.8739531</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
+<pre><code>## [1] 0.5939874</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 11674.36</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 30120.04</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
 </div>
 
 <p>Ahora vamos a realizar el estudio de simulación para explorar el efecto de <span class="math inline">\(n = 10, 20, 40\)</span> sobre el <span class="math inline">\(ECM\)</span> usando 5 réplicas para cada <span class="math inline">\(n\)</span>, este es un estudio de simulación “naive” pero ilustrativo.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)</a>
-<a class="sourceLine" id="cb118-2" title="2">nrep &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb118-3" title="3">result &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
-<a class="sourceLine" id="cb118-4" title="4"><span class="cf">for</span> (i <span class="cf">in</span> n) {</a>
-<a class="sourceLine" id="cb118-5" title="5">  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrep) {</a>
-<a class="sourceLine" id="cb118-6" title="6">    datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para entrenar</span></a>
-<a class="sourceLine" id="cb118-7" title="7">    datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para validar</span></a>
-<a class="sourceLine" id="cb118-8" title="8">    rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
-<a class="sourceLine" id="cb118-9" title="9">    arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
-<a class="sourceLine" id="cb118-10" title="10">    pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
-<a class="sourceLine" id="cb118-11" title="11">    pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
-<a class="sourceLine" id="cb118-12" title="12">    ecm1 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb118-13" title="13">    ecm2 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb118-14" title="14">    result &lt;-<span class="st"> </span><span class="kw">rbind</span>(result, <span class="kw">c</span>(i, ecm1, ecm2)) <span class="co"># No eficiente pero sirve</span></a>
-<a class="sourceLine" id="cb118-15" title="15">  }</a>
-<a class="sourceLine" id="cb118-16" title="16">}</a>
-<a class="sourceLine" id="cb118-17" title="17"><span class="kw">colnames</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</a>
-<a class="sourceLine" id="cb118-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
-<a class="sourceLine" id="cb118-19" title="19">result</a></code></pre></div>
-<pre><code>##     n   ecm_lrs   ecm_arb
-## 1  10  8597.165 104417.12
-## 2  10 15695.320 112232.48
-## 3  10  4556.974  48443.91
-## 4  10 13483.776  68809.01
-## 5  10  6460.402 103225.49
-## 6  20  9538.586  19163.75
-## 7  20  9858.634  22379.97
-## 8  20 11382.912  29909.28
-## 9  20 10469.388  40075.03
-## 10 20  7794.022  21096.72
-## 11 40  6523.026  17283.41
-## 12 40 10410.161  15706.15
-## 13 40 11755.858  20179.47
-## 14 40 15439.888  22498.47
-## 15 40 11813.328  19401.37</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" title="1">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb125-2" title="2">nrep &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb125-3" title="3">result &lt;-<span class="st"> </span><span class="kw">numeric</span>()</a>
+<a class="sourceLine" id="cb125-4" title="4"><span class="cf">for</span> (i <span class="cf">in</span> n) {</a>
+<a class="sourceLine" id="cb125-5" title="5">  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrep) {</a>
+<a class="sourceLine" id="cb125-6" title="6">    datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para entrenar</span></a>
+<a class="sourceLine" id="cb125-7" title="7">    datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para validar</span></a>
+<a class="sourceLine" id="cb125-8" title="8">    rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
+<a class="sourceLine" id="cb125-9" title="9">    arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</a>
+<a class="sourceLine" id="cb125-10" title="10">    pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
+<a class="sourceLine" id="cb125-11" title="11">    pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
+<a class="sourceLine" id="cb125-12" title="12">    ecm1 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb125-13" title="13">    ecm2 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb125-14" title="14">    result &lt;-<span class="st"> </span><span class="kw">rbind</span>(result, <span class="kw">c</span>(i, ecm1, ecm2)) <span class="co"># No eficiente pero sirve</span></a>
+<a class="sourceLine" id="cb125-15" title="15">  }</a>
+<a class="sourceLine" id="cb125-16" title="16">}</a>
+<a class="sourceLine" id="cb125-17" title="17"><span class="kw">colnames</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</a>
+<a class="sourceLine" id="cb125-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
+<a class="sourceLine" id="cb125-19" title="19">result</a></code></pre></div>
+<pre><code>##     n   ecm_lrs  ecm_arb
+## 1  10 14957.855 81683.07
+## 2  10  7366.315 44965.93
+## 3  10 11042.547 59174.57
+## 4  10 12145.258 68548.70
+## 5  10  6215.029 57457.29
+## 6  20  8429.829 28019.74
+## 7  20 10678.573 30180.68
+## 8  20  9837.455 25752.96
+## 9  20 12603.181 42589.18
+## 10 20  7794.116 16259.80
+## 11 40  9770.553 17774.70
+## 12 40 11439.354 23530.43
+## 13 40  9542.095 15766.26
+## 14 40 12563.446 23447.97
+## 15 40 10114.449 18626.07</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb120-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
-<a class="sourceLine" id="cb120-3" title="3">                                     <span class="dt">ecm_medio_arb=</span><span class="kw">mean</span>(ecm_arb))</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb127-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
+<a class="sourceLine" id="cb127-3" title="3">                                     <span class="dt">ecm_medio_arb=</span><span class="kw">mean</span>(ecm_arb))</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10         9759.        87426.
-## 2    20         9809.        26525.
-## 3    40        11188.        19014.</code></pre>
+## 1    10        10345.        62366.
+## 2    20         9869.        28560.
+## 3    40        10686.        19829.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>
@@ -428,7 +432,7 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
           </div>
         </div>
       </div>
-<a href="adaboost.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gradboost.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
