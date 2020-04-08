@@ -1,20 +1,48 @@
 # Árboles de regresión {#arb-de-regre}
-Los árboles de regresión/clasificación fueron propuestos par [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo asignar un valor de $\hat{y}$ dependiendo de los valores de las covariables.
+Los árboles de regresión/clasificación fueron propuestos por [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo predecir la variable respuesta $Y$ en función de covariables.
 
+## Árboles {-}
+A continuación la imagen de un árbol común.
+
+<p align="center">
+  <img src="images/arbol.jpg" width="300">
+</p>
+
+A continuación la imagen de un árbol seco e invertido.
+
+<p align="center">
+  <img src="images/dry_tree.png" width="300">
+</p>
+
+Esta forma invertida es la forma de los árboles de regresión y clasificación.
+
+## Árbol de decisión {-}
+Conjunto de reglas sucesivas que ayudan a tomar una decisión.
+
+<p align="center">
+  <img src="images/fit_unfit.png" width="500">
+</p>
+
+## Tipos de árboles {-}
 Los árboles se pueden clasificar en dos tipos que son:
 
 1. Árboles de regresión en los cuales la variable respuesta $y$ es cuantitativa.
 2. Árboles de clasificación en los cuales la variable respuesta $y$ es cualitativa.
 
-El presente capítulo está destinado a árboles de regresión, los árboles de clasificación se explican en el capítulo \@ref(arb-de-clasif).
+<p align="center">
+  <img src="images/tipos_arboles.png" width="1000">
+</p>
 
+El presente capítulo está destinado a árboles de clasificación, los árboles de regresión se explican en el capítulo \@ref(arb-de-clasif).
+
+## Árbol de regresión {-}
 Un árbol de regresión consiste en hacer preguntas de tipo ¿$x_k \leq c$? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor estimado $\hat{y}$.
 
 En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte $c$ de tal manera que se minimice la función de costos $\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2$.
 
-```{r ilustra-arbol-reg01, echo=F, fig.cap='Ilustración de la técnica Árboles de Regresión. A la izquierda el árbol y a la derecha la partición del espacio.', dpi=40, fig.align='center'}
-knitr::include_graphics("images/ilustracion_arb_regresion.png")
-```
+<p align="center">
+  <img src="images/ilustracion_arb_regresion.png" width="1000">
+</p>
 
 Los pasos para realizar la partición del espacio son:
 
@@ -31,8 +59,16 @@ Algunas de las ventajas de los árboles de regresión son:
 
 Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013]. Se recomienda también ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) con una explicación sencilla sobre árboles.
 
+## Paquetes de R para construir árboles {-}
+Los paquetes más conocidos para construir árboles son:
 
-## Paquetes {-}
+- [tree](https://cran.r-project.org/web/packages/tree/index.html).
+- [rpart](https://cran.r-project.org/web/packages/rpart/index.html).
+- [party](https://cran.r-project.org/web/packages/party/index.html)
+
+Existen otros paquetes relacionados con la construcción de árboles y el lector los puede consultar en la sección Recursive Partitioning de [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
+
+## Paquete **rpart** {-}
 En esta sección se mencionan algunos de los paquetes más comunes para implementar árboles de regresión.
 
 El paquete **rpart** [@R-rpart] es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es `rpart`, a continuación la estructura de la función.
@@ -61,9 +97,9 @@ En este ejemplo se busca encontrar un modelo de regresion lineal que explique la
 
 A continuación se muestra el encabezado de la base de datos y la definición de las variables.
 
-```{r selection02, echo=F, fig.cap='Ilustración de la base de datos.', dpi=40, fig.align='center'}
-knitr::include_graphics("images/tableb3.png")
-```
+<p align="center">
+  <img src="images/tableb3.png" width="500">
+</p>
 
 __Nota__: Type of transmission (1=automatic, 0=manual).
 
@@ -132,7 +168,6 @@ text(x=120, y=63, labels='y=28', col=4)
 text(x=90, y=73, labels='y=20', col=4)
 text(x=190, y=73, labels='y=16', col=4)
 ```
-
 
 Para predecir los valores de $y$ se puede usar la función `predict`. A continuación el código para predecir la respuesta en los dos casos anteriores.
 

@@ -1,6 +1,6 @@
 --- 
 title: "Modelos Predictivos"
-author: ["Freddy Hernández", "Olga Usuga", "Carmen Patiño"]
+author: ["Freddy Hernández"]
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -25,11 +25,9 @@ knitr::write_bib(c(
 knitr::include_graphics("images/cover.jpg")
 ```
 
-Este libro está destinado para estudiantes de ingeniería y estadística que deseen aprender sobre modelos de regresión y la forma de aplicarlos por medio del lenguaje de programación R.
+Este libro está destinado para quienes deseen construir modelos de predección y la forma de aplicarlos por medio del lenguaje de programación R.
 
 [Freddy Hernández](https://fhernanb.github.io/)  
-[Olga Usuga](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000942065)  
-[Carmen Patiño](http://scienti.colciencias.gov.co:8081/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000756008)
 
 ## Estructura del libro {-}
 
