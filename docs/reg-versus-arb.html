@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
-  <meta name="description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="description" content="Libro de Modelos Predictivos" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
-  <meta property="og:description" content="Libro de Modelos Predictivos fue ." />
+  <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="5 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   
-  <meta name="twitter:description" content="Libro de Modelos Predictivos fue ." />
+  <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="images/cover.png" />
 
 <meta name="author" content="Freddy Hernández" />
@@ -251,8 +251,8 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.104413 0.2356347
-## 2 0.0100000      1 0.2519381 1.104413 0.2356347
+## 1 0.7480619      0 1.0000000 1.144419 0.2487104
+## 2 0.0100000      1 0.2519381 1.144419 0.2487104
 ## 
 ## Variable importance
 ## Edad 
@@ -337,13 +337,13 @@ x &amp;\sim U(2, 25)
 <a class="sourceLine" id="cb76-5" title="5">pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb76-6" title="6">pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</a>
 <a class="sourceLine" id="cb76-7" title="7"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</a></code></pre></div>
-<pre><code>## [1] 0.9506575</code></pre>
+<pre><code>## [1] 0.8561097</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</a></code></pre></div>
-<pre><code>## [1] 0.7929817</code></pre>
+<pre><code>## [1] 0.5370869</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 9803.482</code></pre>
+<pre><code>## [1] 11403.48</code></pre>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 36046.29</code></pre>
+<pre><code>## [1] 28785.46</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
@@ -370,21 +370,21 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <a class="sourceLine" id="cb84-18" title="18">result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</a>
 <a class="sourceLine" id="cb84-19" title="19">result</a></code></pre></div>
 <pre><code>##     n   ecm_lrs   ecm_arb
-## 1  10 22139.750 162663.46
-## 2  10 10688.617  56151.71
-## 3  10 14784.190  49304.91
-## 4  10 25543.837  80598.92
-## 5  10 13063.881  96912.58
-## 6  20 11079.216  40479.43
-## 7  20  8716.806  11417.15
-## 8  20 10852.397  43751.54
-## 9  20 11486.964  24423.40
-## 10 20 12637.765  32080.62
-## 11 40 16185.293  30109.38
-## 12 40 11645.237  17688.07
-## 13 40  7956.167  24138.52
-## 14 40 13445.208  25605.58
-## 15 40 12123.475  22909.75</code></pre>
+## 1  10  7077.872  19199.75
+## 2  10 16137.214 124206.04
+## 3  10 11269.598  75553.93
+## 4  10  7539.099  84661.95
+## 5  10  8649.797  62403.21
+## 6  20  4575.554  21256.05
+## 7  20  9035.254  25348.94
+## 8  20  7161.831  33641.65
+## 9  20  7667.274  27244.47
+## 10 20 12236.608  33858.99
+## 11 40  9132.972  15342.16
+## 12 40 12539.737  23309.47
+## 13 40  9765.063  12223.93
+## 14 40  8829.791  18040.92
+## 15 40  6740.835  16046.43</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb86-2" title="2">result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</a>
@@ -392,9 +392,9 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10        17244.        89126.
-## 2    20        10955.        30430.
-## 3    40        12271.        24090.</code></pre>
+## 1    10        10135.        73205.
+## 2    20         8135.        28270.
+## 3    40         9402.        16993.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>
