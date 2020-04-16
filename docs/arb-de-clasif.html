@@ -24,7 +24,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,11 +168,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -306,7 +307,7 @@ else : 0 (false).</li>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb33-2" title="2"><span class="kw">ggplot</span>(datos, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>chol, <span class="dt">col=</span>y)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&#39;Edad&#39;</span>, <span class="dt">y=</span><span class="st">&#39;Nivel colesterol&#39;</span>)</a></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Para crear el árbol de clasificación usaremos la función <code>rpart</code> del paquete <strong>rpart</strong>. Para obtener más detalles de este paquete se recomienda consultar las viñetas del paquete disponibles <a href="https://cran.r-project.org/web/packages/rpart/index.html">en este enlace</a>.</p>
 <p>El código para crear el árbol es el siguiente.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">library</span>(rpart)</a>
@@ -315,7 +316,7 @@ else : 0 (false).</li>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">library</span>(rpart.plot)</a>
 <a class="sourceLine" id="cb35-2" title="2"><span class="kw">rpart.plot</span>(mod1, <span class="dt">type=</span><span class="dv">0</span>, <span class="dt">extra=</span><span class="dv">0</span>,  </a>
 <a class="sourceLine" id="cb35-3" title="3">           <span class="dt">box.palette =</span> <span class="kw">c</span>(<span class="st">&quot;lightgreen&quot;</span>, <span class="st">&quot;pink&quot;</span>))</a></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Si nos cuesta trabajo entender el árbol anterior podemos generar las reglas de clasificación en un lenguaje sencillo así:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">rpart.rules</span>(mod1)</a></code></pre></div>
 <pre><code>##     y                                          
@@ -377,7 +378,7 @@ else : 0 (false).</li>
 <p>Para dibujar el árbol.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">plot</span>(mod2, <span class="dt">type=</span><span class="st">&#39;uniform&#39;</span>)</a>
 <a class="sourceLine" id="cb51-2" title="2"><span class="kw">text</span>(mod2)</a></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>Supongamos que nos llegaron 3 pacientes, el primero un hombre de 45 años con nivel de colesterol 300, el segundo una mujer de 60 años con nivel de colesterol de 450 y el tercero otro hombre de 65 años con nivel de colesterol de 200. ¿A qué grupo se debe asignar cada paciente?</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">nuevo_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">age=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">65</span>),</a>
 <a class="sourceLine" id="cb52-2" title="2">                       <span class="dt">chol=</span><span class="kw">c</span>(<span class="dv">300</span>, <span class="dv">450</span>, <span class="dv">200</span>))</a>
@@ -388,7 +389,7 @@ else : 0 (false).</li>
 ## 2 0.7000000 0.3000000
 ## 3 0.4567901 0.5432099</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>nuevo_df, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a></code></pre></div>
-<pre><code>## [1] presence absence  presence
+<pre><code>## [1] absence  absence  presence
 ## Levels: absence presence</code></pre>
 </div>
 <div id="ejemplo" class="section level2 unnumbered">
@@ -405,8 +406,8 @@ else : 0 (false).</li>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">table</span>(datos<span class="op">$</span>y, y_tree)</a></code></pre></div>
 <pre><code>##           y_tree
 ##            absence presence
-##   absence      116       48
-##   presence      48       91</code></pre>
+##   absence      114       50
+##   presence      45       94</code></pre>
 
 </div>
 </div>

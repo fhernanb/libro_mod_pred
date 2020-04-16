@@ -18,7 +18,17 @@ description: "Libro de Modelos Predictivos"
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rpart', 'rpart.plot', 'MPV', 'tree', 'adabag'), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rpart', 'rpart.plot', 'MPV', 'tree', 'adabag', 'gbm', 'MASS'), 'packages.bib')
+```
+
+```{r echo=FALSE, message=FALSE}
+# lista de paquetes necesarios para compilar el libro
+list.of.packages <- c('rpart', 'rpart.plot', 'tree', 'adabag',
+                      'gbm')
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) 
+  install.packages(new.packages,
+                   repos="https://cloud.r-project.org")
 ```
 
 ```{r echo=FALSE, out.width="50%", fig.align='center'}

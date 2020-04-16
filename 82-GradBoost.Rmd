@@ -55,10 +55,207 @@ cbind(res1, res2, res3)
 Para predecir el valor de weigth cuando height=1.7, color="green" y gender="male" se usa el siguiente código.
 
 ```{r}
-new_data <- data.frame(height=1.7, 
-                       color="green", 
-                       gender="male")
-
+new_data <- data.frame(height=1.7, color="green", gender="female")
 mean(weigth) + a * predict(mod2, new_data) + a * predict(mod3, new_data)
 ```
 
+## Ejemplo {-}
+En este ejemplo se van a usar los datos `Boston` del paquete [@R-MASS] para predecir la variable `medv` en función de las otras covariables.
+
+Para explorar la base de datos usamos el siguiente código.
+
+```{r message=FALSE}
+library(MASS)
+str(Boston)
+```
+
+Vamos a crear dos conjuntos de datos, uno de entrenamiento y otro de validación de la siguiente manera.
+
+```{r message=FALSE}
+library(caret)
+set.seed(123)
+indexes <- createDataPartition(Boston$medv, p = .90, list = F)
+train <- Boston[indexes, ]
+test <- Boston[-indexes, ]
+```
+
+El primer modelo predictivo será un árbol sencillo que nos servirá como elemento de comparación.
+
+```{r}
+library(rpart)
+model_tree <- rpart(medv ~ ., data=train)
+```
+
+Ahora vamos a calcular el $RMSE$ (root mean square error) y la correlación entre $y$ y $\hat{y}$.
+
+```{r}
+y_hat <- predict(model_tree)
+sqrt(sum((train$medv - y_hat)^2))
+cor(train$medv, y_hat)
+```
+
+Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre $y$ y $\hat{y}$.
+
+```{r gradboost1}
+plot(x=train$medv, y=y_hat, xlab='Valor observado', ylab='Predicción')
+abline(a=0, b=1, lty='dashed')
+```
+
+Ahora vamos a usar la función `gbm` del paquete [@R-gbm] para aplicar el algoritmo Gradient Boost con $\alpha=0.01$, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).
+
+```{r message=FALSE}
+library(gbm)
+set.seed(123) # for reproducibility
+model_gbm1 <- gbm(medv ~., data = train,
+                  distribution="gaussian", cv.folds=5, 
+                  shrinkage=0.01, n.minobsinnode=10,
+                  n.trees=5000, interaction.depth=1)
+print(model_gbm1)
+```
+
+Ahora vamos a calcular el $RMSE$ (root mean square error) y la correlación entre $y$ y $\hat{y}$.
+
+```{r}
+sqrt(min(model_gbm1$cv.error))
+y_hat <- predict(model_gbm1)
+cor(train$medv, y_hat)
+```
+
+Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre $y$ y $\hat{y}$.
+
+```{r gradboost2}
+plot(x=train$medv, y=y_hat, xlab='Valor observado', ylab='Predicción')
+abline(a=0, b=1, lty='dashed')
+```
+
+Al comparar la correlación y los diagramas de dispersión se observa una mejora considerable con el modelo Gradient Boost.
+
+Podemos construir una figura para observar la evolución del $RMSE$ en función del número de árboles (iteraciones).
+
+```{r gradboost3}
+gbm.perf(model_gbm1, method = "cv")
+```
+
+De la figura anterior se observa que en la iteración `r which.min(model_gbm1$cv.error)` (linea azul a trazos) fue donde se obtuvo el menor $RMSE$.
+
+Vamos a crear otro modelo de predicción pero cambiando algunos de los hiper-parámetros, $\alpha=0.15$ y una profundidad de 3 en cada árbol.
+
+```{r}
+set.seed(123)
+model_gbm2 <- gbm(medv ~., data = train,
+                  distribution="gaussian", cv.folds=5, 
+                  shrinkage=0.15, n.minobsinnode=10,
+                  n.trees=5000, interaction.depth=3)
+```
+
+Ahora vamos a calcular el $RMSE$ (root mean square error) y la correlación entre $y$ y $\hat{y}$.
+
+```{r}
+sqrt(min(model_gbm2$cv.error))
+y_hat <- predict(model_gbm2)
+cor(train$medv, y_hat)
+```
+
+Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre $y$ y $\hat{y}$.
+
+```{r gradboost4}
+plot(x=train$medv, y=y_hat, xlab='Valor observado', ylab='Predicción')
+abline(a=0, b=1, lty='dashed')
+```
+
+Podemos construir una figura para observar la evolución del $RMSE$ en función del número de árboles (iteraciones).
+
+```{r gradboost5}
+gbm.perf(model_gbm2, method = "cv")
+```
+
+En lugar de buscar esos hiper-parámetros a manualmente, podemos hacer una búsqueda automática creando un conjunto de posibles valores de los hiper-parámetros así.
+
+```{r}
+# create hyperparameter grid
+hyper_grid <- expand.grid(
+  shrinkage = c(0.01, 0.1, 0.3),
+  interaction.depth = c(1, 3, 5),
+  n.minobsinnode = c(5, 10, 15),
+  bag.fraction = c(0.65, 0.8, 1), 
+  optimal_trees = 0,               # a place to dump results
+  min_RMSE = 0,                    # a place to dump results
+  min_cor = 0
+)
+
+nrow(hyper_grid) # total number of combinations
+```
+
+Para hacer la búsqueda usamos el siguiente código.
+
+```{r eval=FALSE}
+# randomize data
+random_index <- sample(1:nrow(train), nrow(train))
+random_train <- train[random_index, ]
+
+for(i in 1:nrow(hyper_grid)) {
+  set.seed(123)
+  gbm.tune <- gbm(
+    formula = medv ~ .,
+    distribution = "gaussian",
+    data = random_train,
+    n.trees = 5000,
+    interaction.depth = hyper_grid$interaction.depth[i],
+    shrinkage = hyper_grid$shrinkage[i],
+    n.minobsinnode = hyper_grid$n.minobsinnode[i],
+    bag.fraction = hyper_grid$bag.fraction[i],
+    train.fraction = 0.75,
+    n.cores = NULL, # will use all cores by default
+    verbose = FALSE
+  )
+  
+  # agregando la inf que nos interesa
+  hyper_grid$optimal_trees[i] <- which.min(gbm.tune$valid.error)
+  hyper_grid$min_RMSE[i] <- sqrt(min(gbm.tune$valid.error))
+  hyper_grid$min_cor[i] <- cor(random_train$medv, predict(gbm.tune))
+}
+```
+
+```{r echo=FALSE}
+hyper_grid <- read.table('objetos/hyper_grid_gradient_boost.txt')
+colnames(hyper_grid) <- c('shrinkage', 'interaction.depth', 
+                          'n.minobsinnode', 'bag.fraction', 
+                          'optimal_trees', 'min_RMSE', 'min_cor')
+```
+
+Organizamos los resultados en relación al menor $RMSE$.
+
+```{r message=FALSE}
+library(dplyr)
+hyper_grid %>% 
+  dplyr::arrange(min_RMSE) %>%
+  head(10)
+```
+
+
+```{r}
+# for reproducibility
+set.seed(123)
+
+# train GBM model
+gbm.fit.final <- gbm(
+  formula = medv ~ .,
+  distribution = "gaussian",
+  data = train,
+  n.trees = 88,
+  interaction.depth = 5,
+  shrinkage = 0.3,
+  n.minobsinnode = 5,
+  bag.fraction = 0.80, 
+  train.fraction = 1,
+  n.cores = NULL, # will use all cores by default
+  verbose = FALSE
+  ) 
+```
+
+```{r gradboost6}
+summary(gbm.fit.final, cBars = 10,
+        method = relative.influence, las = 2)
+```
+
+http://uc-r.github.io/gbm_regression

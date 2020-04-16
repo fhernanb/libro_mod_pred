@@ -24,7 +24,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,11 +168,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -320,14 +321,14 @@ Figure 4.3: Obtención clasificador final.
 <a class="sourceLine" id="cb68-5" title="5">yhat_adaboost &lt;-<span class="st"> </span><span class="kw">predict</span>(adaboost, <span class="dt">newdata=</span>kyphosis)<span class="op">$</span>class</a>
 <a class="sourceLine" id="cb68-6" title="6">tabla_adaboost &lt;-<span class="st"> </span><span class="kw">table</span>(yhat_adaboost, kyphosis<span class="op">$</span>Kyphosis)</a>
 <a class="sourceLine" id="cb68-7" title="7"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8765432</code></pre>
+<pre><code>## [1] 0.8888889</code></pre>
 <p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
 <pre><code>## [1] 0.8395062</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8765432</code></pre>
+<pre><code>## [1] 0.8888889</code></pre>
 <p>De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.</p>
 </div>
 <div id="ejemplo-4" class="section level2 unnumbered">
@@ -362,15 +363,15 @@ Figure 4.4: Tipos de especies y variables en la base de datos iris.
 <a class="sourceLine" id="cb80-2" title="2">t2</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         47          3         0
-##   versicolor      1         41         8
-##   virginica       0         16        34</code></pre>
+##   setosa         46          4         0
+##   versicolor      2         35        13
+##   virginica       0         13        37</code></pre>
 <p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
 <pre><code>## [1] 0.7933333</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
-<pre><code>## [1] 0.8133333</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 81.3333333%.</p>
+<pre><code>## [1] 0.7866667</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 78.6666667%.</p>
 
 </div>
 </div>

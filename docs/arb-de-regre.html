@@ -24,7 +24,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-04-08" />
+<meta name="date" content="2020-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,11 +168,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -269,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El paquete <strong>rpart</strong> <span class="citation">(Therneau and Atkinson <a href="#ref-R-rpart" role="doc-biblioref">2019</a>)</span> es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es <code>rpart</code>, a continuación la estructura de la función.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">rpart</span>(formula, data, weights, subset, <span class="dt">na.action =</span> na.rpart, method,</a>
 <a class="sourceLine" id="cb5-2" title="2">      <span class="dt">model =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> <span class="ot">FALSE</span>, <span class="dt">y =</span> <span class="ot">TRUE</span>, parms, control, cost, ...)</a></code></pre></div>
-<p>Otro paquete útil para árboles de regresión es <strong>tree</strong> <span class="citation">(Ripley <a href="#ref-R-tree" role="doc-biblioref">2019</a>)</span>. La función para crear un árbol de regresión es <code>tree</code>, a continuación la estructura de la función.</p>
+<p>Otro paquete útil para árboles de regresión es <strong>tree</strong> <span class="citation">(Ripley <a href="#ref-R-tree" role="doc-biblioref">2019</a><a href="#ref-R-tree" role="doc-biblioref">b</a>)</span>. La función para crear un árbol de regresión es <code>tree</code>, a continuación la estructura de la función.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">tree</span>(formula, data, weights, subset,</a>
 <a class="sourceLine" id="cb6-2" title="2">     <span class="dt">na.action =</span> na.pass, <span class="dt">control =</span> <span class="kw">tree.control</span>(nobs, ...),</a>
 <a class="sourceLine" id="cb6-3" title="3">     <span class="dt">method =</span> <span class="st">&quot;recursive.partition&quot;</span>,</a>
@@ -385,7 +386,7 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 <p>Milborrow, Stephen. 2019. <em>Rpart.plot: Plot ’Rpart’ Models: An Enhanced Version of ’Plot.rpart’</em>. <a href="https://CRAN.R-project.org/package=rpart.plot">https://CRAN.R-project.org/package=rpart.plot</a>.</p>
 </div>
 <div id="ref-R-tree">
-<p>Ripley, Brian. 2019. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.</p>
+<p>Ripley, Brian. 2019b. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.</p>
 </div>
 <div id="ref-R-rpart">
 <p>Therneau, Terry, and Beth Atkinson. 2019. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.</p>
