@@ -321,14 +321,14 @@ Figure 4.3: Obtención clasificador final.
 <a class="sourceLine" id="cb68-5" title="5">yhat_adaboost &lt;-<span class="st"> </span><span class="kw">predict</span>(adaboost, <span class="dt">newdata=</span>kyphosis)<span class="op">$</span>class</a>
 <a class="sourceLine" id="cb68-6" title="6">tabla_adaboost &lt;-<span class="st"> </span><span class="kw">table</span>(yhat_adaboost, kyphosis<span class="op">$</span>Kyphosis)</a>
 <a class="sourceLine" id="cb68-7" title="7"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8888889</code></pre>
+<pre><code>## [1] 0.8765432</code></pre>
 <p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla0)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla0)</a></code></pre></div>
 <pre><code>## [1] 0.8395062</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_final)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_final)</a></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(tabla_adaboost)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tabla_adaboost)</a></code></pre></div>
-<pre><code>## [1] 0.8888889</code></pre>
+<pre><code>## [1] 0.8765432</code></pre>
 <p>De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.</p>
 </div>
 <div id="ejemplo-4" class="section level2 unnumbered">
@@ -363,15 +363,15 @@ Figure 4.4: Tipos de especies y variables en la base de datos iris.
 <a class="sourceLine" id="cb80-2" title="2">t2</a></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         46          4         0
-##   versicolor      2         35        13
-##   virginica       0         13        37</code></pre>
+##   setosa         50          0         0
+##   versicolor      2         41         7
+##   virginica       1         17        32</code></pre>
 <p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t1)</a></code></pre></div>
 <pre><code>## [1] 0.7933333</code></pre>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">sum</span>(<span class="kw">diag</span>(t2)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t2)</a></code></pre></div>
-<pre><code>## [1] 0.7866667</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 78.6666667%.</p>
+<pre><code>## [1] 0.82</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 82%.</p>
 
 </div>
 </div>

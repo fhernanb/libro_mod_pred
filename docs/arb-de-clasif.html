@@ -389,7 +389,7 @@ else : 0 (false).</li>
 ## 2 0.7000000 0.3000000
 ## 3 0.4567901 0.5432099</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>nuevo_df, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</a></code></pre></div>
-<pre><code>## [1] absence  absence  presence
+<pre><code>## [1] presence absence  presence
 ## Levels: absence presence</code></pre>
 </div>
 <div id="ejemplo" class="section level2 unnumbered">
@@ -406,7 +406,7 @@ else : 0 (false).</li>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">table</span>(datos<span class="op">$</span>y, y_tree)</a></code></pre></div>
 <pre><code>##           y_tree
 ##            absence presence
-##   absence      114       50
+##   absence      115       49
 ##   presence      45       94</code></pre>
 
 </div>

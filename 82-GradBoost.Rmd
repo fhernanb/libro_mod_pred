@@ -259,3 +259,14 @@ summary(gbm.fit.final, cBars = 10,
 ```
 
 http://uc-r.github.io/gbm_regression
+
+```{r}
+y_hat <- predict(object=gbm.fit.final, 
+                 newdata=test, n.trees = 88)
+cor(test$medv, y_hat)
+```
+
+```{r gradboost7}
+plot(x=test$medv, y=y_hat, xlab='Valor observado', ylab='Predicción')
+abline(a=0, b=1, lty='dashed')
+```
