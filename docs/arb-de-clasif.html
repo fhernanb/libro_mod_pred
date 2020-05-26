@@ -279,7 +279,7 @@ else : 0 (false).</li>
 <li>ST depression induced by exercise relative to rest: displays the value which is an integer or float.</li>
 <li>Peak exercise ST segment: 1 = upsloping, 2 = flat, 3 = downsloping.</li>
 <li>Number of major vessels (0–3) colored by flourosopy : displays the value as integer or float.</li>
-<li>Thal: displays the thalassemia: 3 = normal, 6 = fixed defect, 7 = reversible defect.</li>
+<li>Thal: displays result of thallium scintigraphy: 3 = normal, 6 = fixed defect, 7 = reversible defect.</li>
 <li>Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.</li>
 </ol>
 <p>La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.</p>
@@ -288,7 +288,8 @@ else : 0 (false).</li>
 <a class="sourceLine" id="cb26-3" title="3">datos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Como la base de datos viene sin los nombres se deben colocar manualmente así:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">colnames</span>(datos) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</a>
-<a class="sourceLine" id="cb27-2" title="2">                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </a>
+<a class="sourceLine" id="cb27-2" title="2">                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;
+ach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </a>
 <a class="sourceLine" id="cb27-3" title="3">                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</a></code></pre></div>
 <p>La variable respuesta es <code>target</code> que tiene cuatro números así: 0 = absence, 1, 2, 3, 4 = present. Por esa razón vamos a crear la nueva variable <code>y</code> que agregaremos a la base de datos usando el siguiente código.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">datos<span class="op">$</span>y &lt;-<span class="st"> </span><span class="kw">ifelse</span>(datos<span class="op">$</span>target <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;absence&#39;</span>, <span class="st">&#39;presence&#39;</span>)</a>
