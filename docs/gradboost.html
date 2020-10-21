@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Gradient Boost | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Gradient Boost | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-04-16" />
+<meta name="date" content="2020-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,9 +53,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,29 +139,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#arboles"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#arbol-de-decision"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-arboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#arbol-de-regresion"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-construir-arboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-decisión"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-regresión"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li><a href="arb-de-regre.html#paquete-rpart">Paquete <strong>rpart</strong></a></li>
+<li><a href="arb-de-regre.html#paquete-tree">Paquete <strong>tree</strong></a></li>
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a><ul>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#arboles-1"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#arbol-de-decision-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-arboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#arbol-de-clasificacion"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-arboles-1"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-decisión-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-clasificación"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles-1"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li><a href="arb-de-clasif.html#ejemplo-con-rpart">Ejemplo con <strong>rpart</strong></a></li>
 <li><a href="arb-de-clasif.html#ejemplo-con-tree">Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines</a></li>
 <li class="chapter" data-level="4" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>4</b> AdaBoost</a><ul>
-<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicacion-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
-<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicacion-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -171,10 +174,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresion-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresion"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulacion-para-comparar-ambos-metodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulación-para-comparar-ambos-métodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -213,29 +216,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ejemplo-6" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
 <p>En este ejemplo se muestra como aplicar Gradient Boost de forma manual usando los datos del video anterior.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.6</span>, <span class="fl">1.6</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">1.4</span>)</a>
-<a class="sourceLine" id="cb86-2" title="2">color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)</a>
-<a class="sourceLine" id="cb86-3" title="3">gender &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</a>
-<a class="sourceLine" id="cb86-4" title="4">weigth &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">88</span>, <span class="dv">76</span>, <span class="dv">56</span>, <span class="dv">73</span>, <span class="dv">77</span>, <span class="dv">57</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="gradboost.html#cb86-1"></a>height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.6</span>, <span class="fl">1.6</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">1.4</span>)</span>
+<span id="cb86-2"><a href="gradboost.html#cb86-2"></a>color &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb86-3"><a href="gradboost.html#cb86-3"></a>gender &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb86-4"><a href="gradboost.html#cb86-4"></a>weigth &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">88</span>, <span class="dv">76</span>, <span class="dv">56</span>, <span class="dv">73</span>, <span class="dv">77</span>, <span class="dv">57</span>)</span></code></pre></div>
 <p>La librería para crear los árboles será <strong>rpart</strong>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">library</span>(rpart)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="gradboost.html#cb87-1"></a><span class="kw">library</span>(rpart)</span></code></pre></div>
 <p>El valor learning rate en el ejemplo será <span class="math inline">\(\alpha=0.10\)</span>. A continuación el código para crear el modelo inicial y los modelos siguientes del video anterior.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1">a &lt;-<span class="st"> </span><span class="fl">0.1</span> <span class="co"># Learning rate</span></a>
-<a class="sourceLine" id="cb88-2" title="2"></a>
-<a class="sourceLine" id="cb88-3" title="3"><span class="co"># Modelo inicial</span></a>
-<a class="sourceLine" id="cb88-4" title="4">res1 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(weigth)</a>
-<a class="sourceLine" id="cb88-5" title="5"></a>
-<a class="sourceLine" id="cb88-6" title="6"><span class="co"># Modelo 2</span></a>
-<a class="sourceLine" id="cb88-7" title="7">mod2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(res1 <span class="op">~</span><span class="st"> </span>height <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>gender,</a>
-<a class="sourceLine" id="cb88-8" title="8">              <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">minsplit =</span> <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb88-9" title="9">res2 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2))</a>
-<a class="sourceLine" id="cb88-10" title="10"></a>
-<a class="sourceLine" id="cb88-11" title="11"><span class="co"># Modelo 3</span></a>
-<a class="sourceLine" id="cb88-12" title="12">mod3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(res2 <span class="op">~</span><span class="st"> </span>height <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>gender,</a>
-<a class="sourceLine" id="cb88-13" title="13">              <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">minsplit =</span> <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb88-14" title="14">res3 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod3))</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="gradboost.html#cb88-1"></a>a &lt;-<span class="st"> </span><span class="fl">0.1</span> <span class="co"># Learning rate</span></span>
+<span id="cb88-2"><a href="gradboost.html#cb88-2"></a></span>
+<span id="cb88-3"><a href="gradboost.html#cb88-3"></a><span class="co"># Modelo inicial</span></span>
+<span id="cb88-4"><a href="gradboost.html#cb88-4"></a>res1 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(weigth)</span>
+<span id="cb88-5"><a href="gradboost.html#cb88-5"></a></span>
+<span id="cb88-6"><a href="gradboost.html#cb88-6"></a><span class="co"># Modelo 2</span></span>
+<span id="cb88-7"><a href="gradboost.html#cb88-7"></a>mod2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(res1 <span class="op">~</span><span class="st"> </span>height <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>gender,</span>
+<span id="cb88-8"><a href="gradboost.html#cb88-8"></a>              <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">minsplit =</span> <span class="dv">3</span>))</span>
+<span id="cb88-9"><a href="gradboost.html#cb88-9"></a>res2 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2))</span>
+<span id="cb88-10"><a href="gradboost.html#cb88-10"></a></span>
+<span id="cb88-11"><a href="gradboost.html#cb88-11"></a><span class="co"># Modelo 3</span></span>
+<span id="cb88-12"><a href="gradboost.html#cb88-12"></a>mod3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(res2 <span class="op">~</span><span class="st"> </span>height <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>gender,</span>
+<span id="cb88-13"><a href="gradboost.html#cb88-13"></a>              <span class="dt">control=</span><span class="kw">rpart.control</span>(<span class="dt">minsplit =</span> <span class="dv">3</span>))</span>
+<span id="cb88-14"><a href="gradboost.html#cb88-14"></a>res3 &lt;-<span class="st"> </span>weigth <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod3))</span></code></pre></div>
 <p>A continuación una tabla con los residuales de los modelos.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">cbind</span>(res1, res2, res3)</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="gradboost.html#cb89-1"></a><span class="kw">cbind</span>(res1, res2, res3)</span></code></pre></div>
 <pre><code>##         res1   res2    res3
 ## 1  16.833333  15.15  13.635
 ## 2   4.833333   4.35   3.915
@@ -244,17 +247,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5   5.833333   5.45   5.105
 ## 6 -14.166667 -12.70 -11.380</code></pre>
 <p>Para predecir el valor de weigth cuando height=1.7, color=“green” y gender=“male” se usa el siguiente código.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">new_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">height=</span><span class="fl">1.7</span>, <span class="dt">color=</span><span class="st">&quot;green&quot;</span>, <span class="dt">gender=</span><span class="st">&quot;female&quot;</span>)</a>
-<a class="sourceLine" id="cb91-2" title="2"><span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2, new_data) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod3, new_data)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="gradboost.html#cb91-1"></a>new_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">height=</span><span class="fl">1.7</span>, <span class="dt">color=</span><span class="st">&quot;green&quot;</span>, <span class="dt">gender=</span><span class="st">&quot;female&quot;</span>)</span>
+<span id="cb91-2"><a href="gradboost.html#cb91-2"></a><span class="kw">mean</span>(weigth) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod2, new_data) <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span><span class="kw">predict</span>(mod3, new_data)</span></code></pre></div>
 <pre><code>##      1 
 ## 72.085</code></pre>
 </div>
 <div id="ejemplo-7" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
-<p>En este ejemplo se van a usar los datos <code>Boston</code> del paquete <span class="citation">(Ripley <a href="#ref-R-MASS" role="doc-biblioref">2019</a><a href="#ref-R-MASS" role="doc-biblioref">a</a>)</span> para predecir la variable <code>medv</code> en función de las otras covariables.</p>
+<p>En este ejemplo se van a usar los datos <code>Boston</code> del paquete <span class="citation">(Ripley <a href="#ref-R-MASS" role="doc-biblioref">2020</a>)</span> para predecir la variable <code>medv</code> en función de las otras covariables.</p>
 <p>Para explorar la base de datos usamos el siguiente código.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb93-2" title="2"><span class="kw">str</span>(Boston)</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="gradboost.html#cb93-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb93-2"><a href="gradboost.html#cb93-2"></a><span class="kw">str</span>(Boston)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    506 obs. of  14 variables:
 ##  $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
 ##  $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
@@ -271,32 +274,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ lstat  : num  4.98 9.14 4.03 2.94 5.33 ...
 ##  $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...</code></pre>
 <p>Vamos a crear dos conjuntos de datos, uno de entrenamiento y otro de validación de la siguiente manera.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">library</span>(caret)</a>
-<a class="sourceLine" id="cb95-2" title="2"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb95-3" title="3">indexes &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(Boston<span class="op">$</span>medv, <span class="dt">p =</span> <span class="fl">.90</span>, <span class="dt">list =</span> F)</a>
-<a class="sourceLine" id="cb95-4" title="4">train &lt;-<span class="st"> </span>Boston[indexes, ]</a>
-<a class="sourceLine" id="cb95-5" title="5">test &lt;-<span class="st"> </span>Boston[<span class="op">-</span>indexes, ]</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="gradboost.html#cb95-1"></a><span class="kw">library</span>(caret)</span>
+<span id="cb95-2"><a href="gradboost.html#cb95-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb95-3"><a href="gradboost.html#cb95-3"></a>indexes &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(Boston<span class="op">$</span>medv, <span class="dt">p =</span> <span class="fl">.90</span>, <span class="dt">list =</span> F)</span>
+<span id="cb95-4"><a href="gradboost.html#cb95-4"></a>train &lt;-<span class="st"> </span>Boston[indexes, ]</span>
+<span id="cb95-5"><a href="gradboost.html#cb95-5"></a>test &lt;-<span class="st"> </span>Boston[<span class="op">-</span>indexes, ]</span></code></pre></div>
 <p>El primer modelo predictivo será un árbol sencillo que nos servirá como elemento de comparación.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1"><span class="kw">library</span>(rpart)</a>
-<a class="sourceLine" id="cb96-2" title="2">model_tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>train)</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="gradboost.html#cb96-1"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb96-2"><a href="gradboost.html#cb96-2"></a>model_tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>train)</span></code></pre></div>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_tree)</a>
-<a class="sourceLine" id="cb97-2" title="2"><span class="kw">sqrt</span>(<span class="kw">sum</span>((train<span class="op">$</span>medv <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="gradboost.html#cb97-1"></a>y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_tree)</span>
+<span id="cb97-2"><a href="gradboost.html#cb97-2"></a><span class="kw">sqrt</span>(<span class="kw">sum</span>((train<span class="op">$</span>medv <span class="op">-</span><span class="st"> </span>y_hat)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 83.63843</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="gradboost.html#cb99-1"></a><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9070587</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></a>
-<a class="sourceLine" id="cb101-2" title="2"><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="gradboost.html#cb101-1"></a><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></span>
+<span id="cb101-2"><a href="gradboost.html#cb101-2"></a><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost1-1.png" width="672" /></p>
-<p>Ahora vamos a usar la función <code>gbm</code> del paquete <span class="citation">(Greenwell et al. <a href="#ref-R-gbm" role="doc-biblioref">2019</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1"><span class="kw">library</span>(gbm)</a>
-<a class="sourceLine" id="cb102-2" title="2"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></a>
-<a class="sourceLine" id="cb102-3" title="3">model_gbm1 &lt;-<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span>., <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb102-4" title="4">                  <span class="dt">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="dt">cv.folds=</span><span class="dv">5</span>, </a>
-<a class="sourceLine" id="cb102-5" title="5">                  <span class="dt">shrinkage=</span><span class="fl">0.01</span>, <span class="dt">n.minobsinnode=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb102-6" title="6">                  <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb102-7" title="7"><span class="kw">print</span>(model_gbm1)</a></code></pre></div>
+<p>Ahora vamos a usar la función <code>gbm</code> del paquete <span class="citation">(Greenwell et al. <a href="#ref-R-gbm" role="doc-biblioref">2020</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="gradboost.html#cb102-1"></a><span class="kw">library</span>(gbm)</span>
+<span id="cb102-2"><a href="gradboost.html#cb102-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb102-3"><a href="gradboost.html#cb102-3"></a>model_gbm1 &lt;-<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span>., <span class="dt">data =</span> train,</span>
+<span id="cb102-4"><a href="gradboost.html#cb102-4"></a>                  <span class="dt">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="dt">cv.folds=</span><span class="dv">5</span>, </span>
+<span id="cb102-5"><a href="gradboost.html#cb102-5"></a>                  <span class="dt">shrinkage=</span><span class="fl">0.01</span>, <span class="dt">n.minobsinnode=</span><span class="dv">10</span>,</span>
+<span id="cb102-6"><a href="gradboost.html#cb102-6"></a>                  <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth=</span><span class="dv">1</span>)</span>
+<span id="cb102-7"><a href="gradboost.html#cb102-7"></a><span class="kw">print</span>(model_gbm1)</span></code></pre></div>
 <pre><code>## gbm(formula = medv ~ ., distribution = &quot;gaussian&quot;, data = train, 
 ##     n.trees = 5000, interaction.depth = 1, n.minobsinnode = 10, 
 ##     shrinkage = 0.01, cv.folds = 5)
@@ -305,88 +308,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## The best cross-validation iteration was 4404.
 ## There were 13 predictors of which 13 had non-zero influence.</code></pre>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">sqrt</span>(<span class="kw">min</span>(model_gbm1<span class="op">$</span>cv.error))</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="gradboost.html#cb104-1"></a><span class="kw">sqrt</span>(<span class="kw">min</span>(model_gbm1<span class="op">$</span>cv.error))</span></code></pre></div>
 <pre><code>## [1] 3.636371</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_gbm1)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="gradboost.html#cb106-1"></a>y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_gbm1)</span></code></pre></div>
 <pre><code>## Using 4404 trees...</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="gradboost.html#cb108-1"></a><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9542746</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></a>
-<a class="sourceLine" id="cb110-2" title="2"><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="gradboost.html#cb110-1"></a><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></span>
+<span id="cb110-2"><a href="gradboost.html#cb110-2"></a><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost2-1.png" width="672" /></p>
 <p>Al comparar la correlación y los diagramas de dispersión se observa una mejora considerable con el modelo Gradient Boost.</p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="kw">gbm.perf</span>(model_gbm1, <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="gradboost.html#cb111-1"></a><span class="kw">gbm.perf</span>(model_gbm1, <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost3-1.png" width="672" /></p>
 <pre><code>## [1] 4404</code></pre>
 <p>De la figura anterior se observa que en la iteración 4404 (linea azul a trazos) fue donde se obtuvo el menor <span class="math inline">\(RMSE\)</span>.</p>
 <p>Vamos a crear otro modelo de predicción pero cambiando algunos de los hiper-parámetros, <span class="math inline">\(\alpha=0.15\)</span> y una profundidad de 3 en cada árbol.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb113-2" title="2">model_gbm2 &lt;-<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span>., <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb113-3" title="3">                  <span class="dt">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="dt">cv.folds=</span><span class="dv">5</span>, </a>
-<a class="sourceLine" id="cb113-4" title="4">                  <span class="dt">shrinkage=</span><span class="fl">0.15</span>, <span class="dt">n.minobsinnode=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb113-5" title="5">                  <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="gradboost.html#cb113-1"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb113-2"><a href="gradboost.html#cb113-2"></a>model_gbm2 &lt;-<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span>., <span class="dt">data =</span> train,</span>
+<span id="cb113-3"><a href="gradboost.html#cb113-3"></a>                  <span class="dt">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="dt">cv.folds=</span><span class="dv">5</span>, </span>
+<span id="cb113-4"><a href="gradboost.html#cb113-4"></a>                  <span class="dt">shrinkage=</span><span class="fl">0.15</span>, <span class="dt">n.minobsinnode=</span><span class="dv">10</span>,</span>
+<span id="cb113-5"><a href="gradboost.html#cb113-5"></a>                  <span class="dt">n.trees=</span><span class="dv">5000</span>, <span class="dt">interaction.depth=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" title="1"><span class="kw">sqrt</span>(<span class="kw">min</span>(model_gbm2<span class="op">$</span>cv.error))</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="gradboost.html#cb114-1"></a><span class="kw">sqrt</span>(<span class="kw">min</span>(model_gbm2<span class="op">$</span>cv.error))</span></code></pre></div>
 <pre><code>## [1] 3.370139</code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_gbm2)</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="gradboost.html#cb116-1"></a>y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(model_gbm2)</span></code></pre></div>
 <pre><code>## Using 241 trees...</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1"><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="gradboost.html#cb118-1"></a><span class="kw">cor</span>(train<span class="op">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9852213</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></a>
-<a class="sourceLine" id="cb120-2" title="2"><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="gradboost.html#cb120-1"></a><span class="kw">plot</span>(<span class="dt">x=</span>train<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></span>
+<span id="cb120-2"><a href="gradboost.html#cb120-2"></a><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost4-1.png" width="672" /></p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" title="1"><span class="kw">gbm.perf</span>(model_gbm2, <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="gradboost.html#cb121-1"></a><span class="kw">gbm.perf</span>(model_gbm2, <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost5-1.png" width="672" /></p>
 <pre><code>## [1] 241</code></pre>
 <p>En lugar de buscar esos hiper-parámetros a manualmente, podemos hacer una búsqueda automática creando un conjunto de posibles valores de los hiper-parámetros así.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" title="1"><span class="co"># create hyperparameter grid</span></a>
-<a class="sourceLine" id="cb123-2" title="2">hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</a>
-<a class="sourceLine" id="cb123-3" title="3">  <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</a>
-<a class="sourceLine" id="cb123-4" title="4">  <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb123-5" title="5">  <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>),</a>
-<a class="sourceLine" id="cb123-6" title="6">  <span class="dt">bag.fraction =</span> <span class="kw">c</span>(<span class="fl">0.65</span>, <span class="fl">0.8</span>, <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb123-7" title="7">  <span class="dt">optimal_trees =</span> <span class="dv">0</span>,               <span class="co"># a place to dump results</span></a>
-<a class="sourceLine" id="cb123-8" title="8">  <span class="dt">min_RMSE =</span> <span class="dv">0</span>,                    <span class="co"># a place to dump results</span></a>
-<a class="sourceLine" id="cb123-9" title="9">  <span class="dt">min_cor =</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb123-10" title="10">)</a>
-<a class="sourceLine" id="cb123-11" title="11"></a>
-<a class="sourceLine" id="cb123-12" title="12"><span class="kw">nrow</span>(hyper_grid) <span class="co"># total number of combinations</span></a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="gradboost.html#cb123-1"></a><span class="co"># create hyperparameter grid</span></span>
+<span id="cb123-2"><a href="gradboost.html#cb123-2"></a>hyper_grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(</span>
+<span id="cb123-3"><a href="gradboost.html#cb123-3"></a>  <span class="dt">shrinkage =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</span>
+<span id="cb123-4"><a href="gradboost.html#cb123-4"></a>  <span class="dt">interaction.depth =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>),</span>
+<span id="cb123-5"><a href="gradboost.html#cb123-5"></a>  <span class="dt">n.minobsinnode =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>),</span>
+<span id="cb123-6"><a href="gradboost.html#cb123-6"></a>  <span class="dt">bag.fraction =</span> <span class="kw">c</span>(<span class="fl">0.65</span>, <span class="fl">0.8</span>, <span class="dv">1</span>), </span>
+<span id="cb123-7"><a href="gradboost.html#cb123-7"></a>  <span class="dt">optimal_trees =</span> <span class="dv">0</span>,               <span class="co"># a place to dump results</span></span>
+<span id="cb123-8"><a href="gradboost.html#cb123-8"></a>  <span class="dt">min_RMSE =</span> <span class="dv">0</span>,                    <span class="co"># a place to dump results</span></span>
+<span id="cb123-9"><a href="gradboost.html#cb123-9"></a>  <span class="dt">min_cor =</span> <span class="dv">0</span></span>
+<span id="cb123-10"><a href="gradboost.html#cb123-10"></a>)</span>
+<span id="cb123-11"><a href="gradboost.html#cb123-11"></a></span>
+<span id="cb123-12"><a href="gradboost.html#cb123-12"></a><span class="kw">nrow</span>(hyper_grid) <span class="co"># total number of combinations</span></span></code></pre></div>
 <pre><code>## [1] 81</code></pre>
 <p>Para hacer la búsqueda usamos el siguiente código.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" title="1"><span class="co"># randomize data</span></a>
-<a class="sourceLine" id="cb125-2" title="2">random_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(train), <span class="kw">nrow</span>(train))</a>
-<a class="sourceLine" id="cb125-3" title="3">random_train &lt;-<span class="st"> </span>train[random_index, ]</a>
-<a class="sourceLine" id="cb125-4" title="4"></a>
-<a class="sourceLine" id="cb125-5" title="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hyper_grid)) {</a>
-<a class="sourceLine" id="cb125-6" title="6">  <span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb125-7" title="7">  gbm.tune &lt;-<span class="st"> </span><span class="kw">gbm</span>(</a>
-<a class="sourceLine" id="cb125-8" title="8">    <span class="dt">formula =</span> medv <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb125-9" title="9">    <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</a>
-<a class="sourceLine" id="cb125-10" title="10">    <span class="dt">data =</span> random_train,</a>
-<a class="sourceLine" id="cb125-11" title="11">    <span class="dt">n.trees =</span> <span class="dv">5000</span>,</a>
-<a class="sourceLine" id="cb125-12" title="12">    <span class="dt">interaction.depth =</span> hyper_grid<span class="op">$</span>interaction.depth[i],</a>
-<a class="sourceLine" id="cb125-13" title="13">    <span class="dt">shrinkage =</span> hyper_grid<span class="op">$</span>shrinkage[i],</a>
-<a class="sourceLine" id="cb125-14" title="14">    <span class="dt">n.minobsinnode =</span> hyper_grid<span class="op">$</span>n.minobsinnode[i],</a>
-<a class="sourceLine" id="cb125-15" title="15">    <span class="dt">bag.fraction =</span> hyper_grid<span class="op">$</span>bag.fraction[i],</a>
-<a class="sourceLine" id="cb125-16" title="16">    <span class="dt">train.fraction =</span> <span class="fl">0.75</span>,</a>
-<a class="sourceLine" id="cb125-17" title="17">    <span class="dt">n.cores =</span> <span class="ot">NULL</span>, <span class="co"># will use all cores by default</span></a>
-<a class="sourceLine" id="cb125-18" title="18">    <span class="dt">verbose =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb125-19" title="19">  )</a>
-<a class="sourceLine" id="cb125-20" title="20">  </a>
-<a class="sourceLine" id="cb125-21" title="21">  <span class="co"># agregando la inf que nos interesa</span></a>
-<a class="sourceLine" id="cb125-22" title="22">  hyper_grid<span class="op">$</span>optimal_trees[i] &lt;-<span class="st"> </span><span class="kw">which.min</span>(gbm.tune<span class="op">$</span>valid.error)</a>
-<a class="sourceLine" id="cb125-23" title="23">  hyper_grid<span class="op">$</span>min_RMSE[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">min</span>(gbm.tune<span class="op">$</span>valid.error))</a>
-<a class="sourceLine" id="cb125-24" title="24">  hyper_grid<span class="op">$</span>min_cor[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(random_train<span class="op">$</span>medv, <span class="kw">predict</span>(gbm.tune))</a>
-<a class="sourceLine" id="cb125-25" title="25">}</a></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="gradboost.html#cb125-1"></a><span class="co"># randomize data</span></span>
+<span id="cb125-2"><a href="gradboost.html#cb125-2"></a>random_index &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(train), <span class="kw">nrow</span>(train))</span>
+<span id="cb125-3"><a href="gradboost.html#cb125-3"></a>random_train &lt;-<span class="st"> </span>train[random_index, ]</span>
+<span id="cb125-4"><a href="gradboost.html#cb125-4"></a></span>
+<span id="cb125-5"><a href="gradboost.html#cb125-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(hyper_grid)) {</span>
+<span id="cb125-6"><a href="gradboost.html#cb125-6"></a>  <span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb125-7"><a href="gradboost.html#cb125-7"></a>  gbm.tune &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
+<span id="cb125-8"><a href="gradboost.html#cb125-8"></a>    <span class="dt">formula =</span> medv <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb125-9"><a href="gradboost.html#cb125-9"></a>    <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb125-10"><a href="gradboost.html#cb125-10"></a>    <span class="dt">data =</span> random_train,</span>
+<span id="cb125-11"><a href="gradboost.html#cb125-11"></a>    <span class="dt">n.trees =</span> <span class="dv">5000</span>,</span>
+<span id="cb125-12"><a href="gradboost.html#cb125-12"></a>    <span class="dt">interaction.depth =</span> hyper_grid<span class="op">$</span>interaction.depth[i],</span>
+<span id="cb125-13"><a href="gradboost.html#cb125-13"></a>    <span class="dt">shrinkage =</span> hyper_grid<span class="op">$</span>shrinkage[i],</span>
+<span id="cb125-14"><a href="gradboost.html#cb125-14"></a>    <span class="dt">n.minobsinnode =</span> hyper_grid<span class="op">$</span>n.minobsinnode[i],</span>
+<span id="cb125-15"><a href="gradboost.html#cb125-15"></a>    <span class="dt">bag.fraction =</span> hyper_grid<span class="op">$</span>bag.fraction[i],</span>
+<span id="cb125-16"><a href="gradboost.html#cb125-16"></a>    <span class="dt">train.fraction =</span> <span class="fl">0.75</span>,</span>
+<span id="cb125-17"><a href="gradboost.html#cb125-17"></a>    <span class="dt">n.cores =</span> <span class="ot">NULL</span>, <span class="co"># will use all cores by default</span></span>
+<span id="cb125-18"><a href="gradboost.html#cb125-18"></a>    <span class="dt">verbose =</span> <span class="ot">FALSE</span></span>
+<span id="cb125-19"><a href="gradboost.html#cb125-19"></a>  )</span>
+<span id="cb125-20"><a href="gradboost.html#cb125-20"></a>  </span>
+<span id="cb125-21"><a href="gradboost.html#cb125-21"></a>  <span class="co"># agregando la inf que nos interesa</span></span>
+<span id="cb125-22"><a href="gradboost.html#cb125-22"></a>  hyper_grid<span class="op">$</span>optimal_trees[i] &lt;-<span class="st"> </span><span class="kw">which.min</span>(gbm.tune<span class="op">$</span>valid.error)</span>
+<span id="cb125-23"><a href="gradboost.html#cb125-23"></a>  hyper_grid<span class="op">$</span>min_RMSE[i] &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">min</span>(gbm.tune<span class="op">$</span>valid.error))</span>
+<span id="cb125-24"><a href="gradboost.html#cb125-24"></a>  hyper_grid<span class="op">$</span>min_cor[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(random_train<span class="op">$</span>medv, <span class="kw">predict</span>(gbm.tune))</span>
+<span id="cb125-25"><a href="gradboost.html#cb125-25"></a>}</span></code></pre></div>
 <p>Organizamos los resultados en relación al menor <span class="math inline">\(RMSE\)</span>.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb126-2" title="2">hyper_grid <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb126-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(min_RMSE) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb126-4" title="4"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="gradboost.html#cb126-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb126-2"><a href="gradboost.html#cb126-2"></a>hyper_grid <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb126-3"><a href="gradboost.html#cb126-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(min_RMSE) <span class="op">%&gt;%</span></span>
+<span id="cb126-4"><a href="gradboost.html#cb126-4"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    shrinkage interaction.depth n.minobsinnode bag.fraction optimal_trees
 ## 1       0.30                 5              5         0.80            88
 ## 2       0.30                 5              5         0.65           127
@@ -409,25 +412,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8  2.837520 0.9855254
 ## 9  2.860405 0.9838807
 ## 10 2.870885 0.9860587</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="co"># for reproducibility</span></a>
-<a class="sourceLine" id="cb128-2" title="2"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb128-3" title="3"></a>
-<a class="sourceLine" id="cb128-4" title="4"><span class="co"># train GBM model</span></a>
-<a class="sourceLine" id="cb128-5" title="5">gbm.fit.final &lt;-<span class="st"> </span><span class="kw">gbm</span>(</a>
-<a class="sourceLine" id="cb128-6" title="6">  <span class="dt">formula =</span> medv <span class="op">~</span><span class="st"> </span>.,</a>
-<a class="sourceLine" id="cb128-7" title="7">  <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</a>
-<a class="sourceLine" id="cb128-8" title="8">  <span class="dt">data =</span> train,</a>
-<a class="sourceLine" id="cb128-9" title="9">  <span class="dt">n.trees =</span> <span class="dv">88</span>,</a>
-<a class="sourceLine" id="cb128-10" title="10">  <span class="dt">interaction.depth =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb128-11" title="11">  <span class="dt">shrinkage =</span> <span class="fl">0.3</span>,</a>
-<a class="sourceLine" id="cb128-12" title="12">  <span class="dt">n.minobsinnode =</span> <span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb128-13" title="13">  <span class="dt">bag.fraction =</span> <span class="fl">0.80</span>, </a>
-<a class="sourceLine" id="cb128-14" title="14">  <span class="dt">train.fraction =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb128-15" title="15">  <span class="dt">n.cores =</span> <span class="ot">NULL</span>, <span class="co"># will use all cores by default</span></a>
-<a class="sourceLine" id="cb128-16" title="16">  <span class="dt">verbose =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb128-17" title="17">  ) </a></code></pre></div>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" title="1"><span class="kw">summary</span>(gbm.fit.final, <span class="dt">cBars =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb129-2" title="2">        <span class="dt">method =</span> relative.influence, <span class="dt">las =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="gradboost.html#cb128-1"></a><span class="co"># for reproducibility</span></span>
+<span id="cb128-2"><a href="gradboost.html#cb128-2"></a><span class="kw">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb128-3"><a href="gradboost.html#cb128-3"></a></span>
+<span id="cb128-4"><a href="gradboost.html#cb128-4"></a><span class="co"># train GBM model</span></span>
+<span id="cb128-5"><a href="gradboost.html#cb128-5"></a>gbm.fit.final &lt;-<span class="st"> </span><span class="kw">gbm</span>(</span>
+<span id="cb128-6"><a href="gradboost.html#cb128-6"></a>  <span class="dt">formula =</span> medv <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb128-7"><a href="gradboost.html#cb128-7"></a>  <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb128-8"><a href="gradboost.html#cb128-8"></a>  <span class="dt">data =</span> train,</span>
+<span id="cb128-9"><a href="gradboost.html#cb128-9"></a>  <span class="dt">n.trees =</span> <span class="dv">88</span>,</span>
+<span id="cb128-10"><a href="gradboost.html#cb128-10"></a>  <span class="dt">interaction.depth =</span> <span class="dv">5</span>,</span>
+<span id="cb128-11"><a href="gradboost.html#cb128-11"></a>  <span class="dt">shrinkage =</span> <span class="fl">0.3</span>,</span>
+<span id="cb128-12"><a href="gradboost.html#cb128-12"></a>  <span class="dt">n.minobsinnode =</span> <span class="dv">5</span>,</span>
+<span id="cb128-13"><a href="gradboost.html#cb128-13"></a>  <span class="dt">bag.fraction =</span> <span class="fl">0.80</span>, </span>
+<span id="cb128-14"><a href="gradboost.html#cb128-14"></a>  <span class="dt">train.fraction =</span> <span class="dv">1</span>,</span>
+<span id="cb128-15"><a href="gradboost.html#cb128-15"></a>  <span class="dt">n.cores =</span> <span class="ot">NULL</span>, <span class="co"># will use all cores by default</span></span>
+<span id="cb128-16"><a href="gradboost.html#cb128-16"></a>  <span class="dt">verbose =</span> <span class="ot">FALSE</span></span>
+<span id="cb128-17"><a href="gradboost.html#cb128-17"></a>  ) </span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="gradboost.html#cb129-1"></a><span class="kw">summary</span>(gbm.fit.final, <span class="dt">cBars =</span> <span class="dv">10</span>,</span>
+<span id="cb129-2"><a href="gradboost.html#cb129-2"></a>        <span class="dt">method =</span> relative.influence, <span class="dt">las =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost6-1.png" width="672" /></p>
 <pre><code>##             var     rel.inf
 ## rm           rm 40.70059606
@@ -444,12 +447,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## zn           zn  0.07111692
 ## chas       chas  0.04200211</code></pre>
 <p><a href="http://uc-r.github.io/gbm_regression" class="uri">http://uc-r.github.io/gbm_regression</a></p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" title="1">y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>gbm.fit.final, </a>
-<a class="sourceLine" id="cb131-2" title="2">                 <span class="dt">newdata=</span>test, <span class="dt">n.trees =</span> <span class="dv">88</span>)</a>
-<a class="sourceLine" id="cb131-3" title="3"><span class="kw">cor</span>(test<span class="op">$</span>medv, y_hat)</a></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="gradboost.html#cb131-1"></a>y_hat &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>gbm.fit.final, </span>
+<span id="cb131-2"><a href="gradboost.html#cb131-2"></a>                 <span class="dt">newdata=</span>test, <span class="dt">n.trees =</span> <span class="dv">88</span>)</span>
+<span id="cb131-3"><a href="gradboost.html#cb131-3"></a><span class="kw">cor</span>(test<span class="op">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.934735</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="kw">plot</span>(<span class="dt">x=</span>test<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></a>
-<a class="sourceLine" id="cb133-2" title="2"><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="gradboost.html#cb133-1"></a><span class="kw">plot</span>(<span class="dt">x=</span>test<span class="op">$</span>medv, <span class="dt">y=</span>y_hat, <span class="dt">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicción&#39;)</span></span>
+<span id="cb133-2"><a href="gradboost.html#cb133-2"></a><span class="st">abline(a=0, b=1, lty=&#39;</span>dashed<span class="st">&#39;)</span></span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost7-1.png" width="672" /></p>
 
 </div>
@@ -463,10 +466,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Friedman, J. 1999b. “Stochastic Gradient Boosting.” Stanford University.</p>
 </div>
 <div id="ref-R-gbm">
-<p>Greenwell, Brandon, Bradley Boehmke, Jay Cunningham, and GBM Developers. 2019. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://CRAN.R-project.org/package=gbm">https://CRAN.R-project.org/package=gbm</a>.</p>
+<p>Greenwell, Brandon, Bradley Boehmke, Jay Cunningham, and GBM Developers. 2020. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://CRAN.R-project.org/package=gbm">https://CRAN.R-project.org/package=gbm</a>.</p>
 </div>
 <div id="ref-R-MASS">
-<p>Ripley, Brian. 2019a. <em>MASS: Support Functions and Datasets for Venables and Ripley’s Mass</em>. <a href="https://CRAN.R-project.org/package=MASS">https://CRAN.R-project.org/package=MASS</a>.</p>
+<p>Ripley, Brian. 2020. <em>MASS: Support Functions and Datasets for Venables and Ripley’s Mass</em>. <a href="https://CRAN.R-project.org/package=MASS">https://CRAN.R-project.org/package=MASS</a>.</p>
 </div>
 </div>
             </section>
@@ -494,12 +497,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -511,6 +513,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

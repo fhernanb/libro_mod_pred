@@ -78,6 +78,7 @@ rpart(formula, data, weights, subset, na.action = na.rpart, method,
       model = FALSE, x = FALSE, y = TRUE, parms, control, cost, ...)
 ```
 
+## Paquete **tree** {-}
 Otro paquete útil para árboles de regresión es **tree** [@R-tree]. La función para crear un árbol de regresión es `tree`, a continuación la estructura de la función.
 
 ```{r, eval=FALSE}
