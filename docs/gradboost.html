@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Gradient Boost | Modelos Predictivos</title>
+  <title>6 Gradient Boost | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Gradient Boost | Modelos Predictivos" />
+  <meta property="og:title" content="6 Gradient Boost | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Gradient Boost | Modelos Predictivos" />
+  <meta name="twitter:title" content="6 Gradient Boost | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-10-21" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -159,8 +159,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="arb-de-clasif.html#ejemplo-con-tree">Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines</a></li>
-<li class="chapter" data-level="4" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>4</b> AdaBoost</a><ul>
+<li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines para clasificación</a></li>
+<li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a></li>
+<li class="chapter" data-level="5" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>5</b> AdaBoost</a><ul>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -168,12 +169,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>5</b> Gradient Boost</a><ul>
+<li class="chapter" data-level="6" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>6</b> Gradient Boost</a><ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>6</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="7" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal versus árboles de regresión</a><ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -202,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="gradboost" class="section level1">
-<h1><span class="header-section-number">5</span> Gradient Boost</h1>
+<h1><span class="header-section-number">6</span> Gradient Boost</h1>
 <p>Gradient Boost fue propuesto por <span class="citation">(Friedman <a href="#ref-Friedman1999a" role="doc-biblioref">1999</a><a href="#ref-Friedman1999a" role="doc-biblioref">a</a>)</span> y <span class="citation">(Friedman <a href="#ref-Friedman1999b" role="doc-biblioref">1999</a><a href="#ref-Friedman1999b" role="doc-biblioref">b</a>)</span> y consiste en crear varios predictores en secuencia. El primer predictor usa la media de la variable <span class="math inline">\(Y\)</span> para predecir, luego el segundo predictor explica los errores del primer predictor, el tercer predictor explicar los erroes del segundo predictor y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es Gradient Boost.</p>
 <p align="center">
 <img src="images/gradboost_illustration.png" width="700">

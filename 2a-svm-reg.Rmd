@@ -1,4 +1,16 @@
 # Support Vector Machines para regresión {#svm-reg}
-@Cortes1995 propusieron las máquinas de soporte vectorial para el problema de clasificación.
+@Drucker97 en el artículo titulado "Support Vector Regression Machines" propusieron las máquinas de soporte vectorial para el problema de regresión.
 
+En la siguiente figura se ilustra la idea intuitiva para el caso de predecir $y$ usando una sola variable $x$.
 
+<p align="center">
+  <img src="images/svm_reg.png" width="500">
+</p>
+
+El objetivo es construir un margen de tolerancia ($\varepsilon$) con el cual se tendrán observaciones dentro de los márgenes y fuera de los márgenes. Usando sólo las observaciones fuera de los márgenes, se calculan los errores $\xi$ o $\xi^\star$ y con ellos se construye la función de objetivo $FO$ a minimizar
+
+$$
+FO = \frac{1}{2} \| \boldsymbol{w} \|^2 + C \sum_{i=1}^{N} (\xi_i + \xi^\star),
+$$
+
+donde $\boldsymbol{w}$ es el vector con las pendientes asociadas a cada una de las variables (sin incluir intercepto), $C$ es un valor de penalización para los errores y $m$ el número de observaciones que están fuera de los márgenes del total de $n$ observaciones.
