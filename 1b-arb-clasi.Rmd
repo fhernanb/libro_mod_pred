@@ -51,7 +51,7 @@ Los paquetes más conocidos para construir árboles son:
 - [rpart](https://cran.r-project.org/web/packages/rpart/index.html).
 - [party](https://cran.r-project.org/web/packages/party/index.html)
 
-Existen otros paquetes relacionados con la construcción de árboles y el lector los puede consultar en la sección Recursive Partitioning de [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
+Existen otros paquetes que el lector puede consultar en la sección *Recursive Partitioning* de [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
 
 ## Ejemplo con **rpart** {-}
 

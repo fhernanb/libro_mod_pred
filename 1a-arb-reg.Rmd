@@ -59,14 +59,14 @@ Algunas de las ventajas de los árboles de regresión son:
 
 Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013]. Se recomienda también ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) con una explicación sencilla sobre árboles.
 
-## Paquetes de R para construir árboles {-}
+## Paquetes de R para árboles {-}
 Los paquetes más conocidos para construir árboles son:
 
 - [tree](https://cran.r-project.org/web/packages/tree/index.html).
 - [rpart](https://cran.r-project.org/web/packages/rpart/index.html).
 - [party](https://cran.r-project.org/web/packages/party/index.html)
 
-Existen otros paquetes relacionados con la construcción de árboles y el lector los puede consultar en la sección Recursive Partitioning de [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
+Existen otros paquetes que el lector puede consultar en la sección *Recursive Partitioning* de [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
 
 ## Paquete **rpart** {-}
 En esta sección se mencionan algunos de los paquetes más comunes para implementar árboles de regresión.

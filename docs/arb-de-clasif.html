@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="arb-de-regre.html"/>
-<link rel="next" href="svm-clas.html"/>
+<link rel="next" href="svm-reg.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -143,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-decisión"><i class="fa fa-check"></i>Árbol de decisión</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-regresión"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-árboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
 <li><a href="arb-de-regre.html#paquete-rpart">Paquete <strong>rpart</strong></a></li>
 <li><a href="arb-de-regre.html#paquete-tree">Paquete <strong>tree</strong></a></li>
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
@@ -154,13 +154,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-decisión-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-clasificación"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles-1"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li><a href="arb-de-clasif.html#ejemplo-con-rpart">Ejemplo con <strong>rpart</strong></a></li>
 <li><a href="arb-de-clasif.html#ejemplo-con-tree">Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines para clasificación</a></li>
-<li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a></li>
+<li class="chapter" data-level="3" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>3</b> Support Vector Machines para regresión</a><ul>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para clasificación</a><ul>
+<li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>5</b> AdaBoost</a><ul>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
@@ -244,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="images/ilustracion_arb_clasi.png" width="800">
 </p>
 </div>
-<div id="paquetes-de-r-para-construir-árboles-1" class="section level2 unnumbered">
+<div id="paquetes-de-r-para-construir-árboles" class="section level2 unnumbered">
 <h2>Paquetes de R para construir árboles</h2>
 <p>Los paquetes más conocidos para construir árboles son:</p>
 <ul>
@@ -252,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://cran.r-project.org/web/packages/rpart/index.html">rpart</a>.</li>
 <li><a href="https://cran.r-project.org/web/packages/party/index.html">party</a></li>
 </ul>
-<p>Existen otros paquetes relacionados con la construcción de árboles y el lector los puede consultar en la sección Recursive Partitioning de <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN Task View: Machine Learning &amp; Statistical Learning</a>.</p>
+<p>Existen otros paquetes que el lector puede consultar en la sección <em>Recursive Partitioning</em> de <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN Task View: Machine Learning &amp; Statistical Learning</a>.</p>
 </div>
 <div id="ejemplo-con-rpart" class="section level2 unnumbered">
 <h2>Ejemplo con <strong>rpart</strong></h2>
@@ -393,7 +398,7 @@ else : 0 (false).</li>
 ## 2 0.7000000 0.3000000
 ## 3 0.4567901 0.5432099</code></pre>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="arb-de-clasif.html#cb54-1"></a><span class="kw">predict</span>(mod2, <span class="dt">newdata=</span>nuevo_df, <span class="dt">type=</span><span class="st">&#39;class&#39;</span>)</span></code></pre></div>
-<pre><code>## [1] presence absence  presence
+<pre><code>## [1] absence  absence  presence
 ## Levels: absence presence</code></pre>
 </div>
 <div id="ejemplo" class="section level2 unnumbered">
@@ -410,8 +415,8 @@ else : 0 (false).</li>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="arb-de-clasif.html#cb58-1"></a><span class="kw">table</span>(datos<span class="op">$</span>y, y_tree)</span></code></pre></div>
 <pre><code>##           y_tree
 ##            absence presence
-##   absence      117       47
-##   presence      47       92</code></pre>
+##   absence      113       51
+##   presence      43       96</code></pre>
 
 </div>
 </div>
@@ -427,7 +432,7 @@ else : 0 (false).</li>
         </div>
       </div>
 <a href="arb-de-regre.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="svm-clas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svm-reg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
