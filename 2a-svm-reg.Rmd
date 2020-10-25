@@ -1,0 +1,4 @@
+# Support Vector Machines para regresión {#svm-reg}
+@Cortes1995 propusieron las máquinas de soporte vectorial para el problema de clasificación.
+
+
