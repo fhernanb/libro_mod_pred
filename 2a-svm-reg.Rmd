@@ -1,7 +1,7 @@
 # Support Vector Machines para regresión {#svm-reg}
 @Drucker97 en el artículo titulado "Support Vector Regression Machines" propusieron las máquinas de soporte vectorial (svm) para el problema de regresión.
 
-En la siguiente figura se ilustra la idea intuitiva para el caso de predecir $y$ usando una sola variable $x$.
+En la siguiente figura (tomada de [link](https://www.saedsayad.com/support_vector_machine_reg.htm)) se ilustra la idea intuitiva para el caso de predecir $y$ usando una sola variable $x$.
 
 <p align="center">
   <img src="images/svm_reg.png" width="500">
@@ -23,6 +23,17 @@ Los paquetes más conocidos para svm son:
 - [klaR](https://cran.r-project.org/web/packages/klaR/index.html)
 
 Existen otros paquetes que el lector puede consultar en la sección *Support Vector Machines and Kernel Methods* [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
+
+## Ventajas {-}
+
+Algunas de las ventajas de SVM según @shivaswamy2007 son:
+
+- superior generalization capacity, 
+- globally optimal solution from a convex optimization problem, 
+- ability to handle non-linear problems using the so-called “kernel trick”, 
+- sparseness of the solution which makes it possible to have specialized fast algorithms such as the sequential minimal optimization.
+
+
 
 ## Ejemplos {-}
 A continuación se presentan los _scripts_ de varios ejemplos de svm. Se le recomienda al lector que descargue y experimente con los ejemplos.

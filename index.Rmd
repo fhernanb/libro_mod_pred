@@ -35,7 +35,7 @@ if(length(new.packages))
 knitr::include_graphics("images/cover.jpg")
 ```
 
-Este libro está destinado para quienes deseen construir modelos de predección y la forma de aplicarlos por medio del lenguaje de programación R.
+En este libro se presentan explicaciones sencillas de algunos modelos de predección y la forma de aplicarlos por medio del lenguaje de programación R.
 
 [Freddy Hernández](https://fhernanb.github.io/)  
 
