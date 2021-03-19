@@ -1,0 +1,13 @@
+fig:adaboost01
+fig:adaboost02
+fig:adaboost03
+fig:iris
+arb-de-regre
+arb-de-clasif
+knn-reg
+svm-reg
+svm-clas
+adaboost
+gradboost
+rand_forests
+reg-versus-arb

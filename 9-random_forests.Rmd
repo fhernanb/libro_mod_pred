@@ -1,0 +1,141 @@
+# Random Forest {#rand_forests}
+
+Random Forest o Bosques Aleatorios fue propuesto por [@Ho1995] y consiste en crear muchos árboles para luego usarlos en la predicción de la variable de interés. A continuación se muestra una ilustración de la técnica.
+
+[![Figura tomada de https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8](images/rand_forest_illustration.png "Ilustración de Random Forests")](https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8)
+
+## Explicación sencilla de Random Forests {.unnumbered}
+
+Se inicia con un conjunto de entrenamiento que tiene $n$ observaciones, la variable interés $Y$ y las variables predictoras $X_1, X_2, \ldots, X_p$. Luego se aplican los siguientes pasos.
+
+1.  Se construye un nuevo conjunto de entrenamiento del mismo tamaño del original usando la técnica Bootstrap. Esto se hace generando un muestreo con reemplazo y de esta forma es posible que algunas observaciones aparezcan varias veces y mientras que otras observaciones no aparezcan.
+2.  Se construye un árbol (de regresión o clasificación) usando en cada partición un subconjunto con $k$ variables predictoras de las $X_1, X_2, \ldots, X_p$ disponibles.
+3.  Se repiten los pasos anteriores $B$ veces, por lo general $B=500$ o $B=1000$. De esta forma tendrám muchos árboles que luego se pueden usar para hacer predicciones de $Y$.
+
+Si queremos predecir la variable $Y$ para un caso en el cual se tienen la información $(x_1, x_2, \ldots, x_p)^\top$, se toman cada uno de los $B$ árboles creados y se predice la variable $Y$, de esta manera se trendrán las predicciones $\hat{Y}_1, \hat{Y}_2, \ldots, \hat{Y}_B$. Luego usando estas $B$ predicciones, se puede obtener una predicción unificada dependiendo de si el problema es de clasificación o de regresión. A continuación una figura ilustrativa de cómo se unifican las $B$ predicciones.
+
+[![Figura adaptada de https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f](images/rand_forest_clas_reg.png "Forma de unir las B predicciones")](https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f)
+
+## Ejemplo {-}
+Abajo se presenta un video con una explicación detallada de cómo aplicar random forest para un caso sencillo de clasificación con $n=4$ observaciones y $p=4$ variables predictoras.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Ejemplo {-}
+
+<p align="center">
+  <img src="images/heart_attack.gif" width="200">
+</p>
+
+La base de datos que vamos a usar en este ejemplo está disponible en el [UCI Repository](https://archive.ics.uci.edu/ml/datasets/Heart+Disease). El objetivo es crear un árbol de clasificación para predecir la variable $Y$ (`target`) definida como:
+
+$$
+Y=\left\{\begin{matrix}
+1 \quad \text{si paciente SI sufre una enfermedad cardíaca} \\ 
+0 \quad \text{si paciente NO sufre una enfermedad cardíaca}
+\end{matrix}\right.
+$$
+
+en función de las variables `age` y `chol`.
+
+Las variables en la base de datos son las siguientes:
+
+1. Age: displays the age of the individual. 
+2. Sex: displays the gender of the individual using the following format: 1 = male, 0 = female. 
+3. Chest-pain type: displays the type of chest-pain experienced by the individual using the following format: 1 = typical angina, 2 = atypical angina, 3 = non — anginal pain, 4 = asymptotic.
+4. Resting Blood Pressure: displays the resting blood pressure value of an individual in mmHg (unit)
+5. Chol: displays the serum cholesterol in mg/dl (unit)
+6. Fasting Blood Sugar: compares the fasting blood sugar value of an individual with 120mg/dl. If fasting blood sugar > 120mg/dl then : 1 (true)
+else : 0 (false).
+7. Resting ECG : displays resting electrocardiographic results: 0 = normal
+1 = having ST-T wave abnormality, 2 = left ventricular hyperthrophy.
+8. Max heart rate achieved: displays the max heart rate achieved by an individual.
+9. Exercise induced angina: 1 = yes, 0 = no. 
+10. ST depression induced by exercise relative to rest: displays the value which is an integer or float.
+11. Peak exercise ST segment: 1 = upsloping, 2 = flat, 3 = downsloping. 
+12. Number of major vessels (0–3) colored by flourosopy : displays the value as integer or float.
+13. Thal: displays the thalassemia: 3 = normal, 6 = fixed defect, 7 = reversible defect.
+14. Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.
+
+La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.
+
+```{r message=FALSE}
+library(readr)
+url <- 'https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv'
+datos <- read_csv(url, col_names = FALSE)
+```
+
+Como la base de datos viene sin los nombres se deben colocar manualmente así:
+
+```{r}
+colnames(datos) <- c('age', 'sex', 'cp', 'trestbps', 'chol',
+                     'fbs', 'restecg', 'thalach', 'exang', 
+                     'oldpeak', 'slope', 'ca', 'thal', 'target')
+```
+
+La variable respuesta es `target` que tiene cuatro números así: 0 = absence, 1, 2, 3, 4 = present. Por esa razón vamos a crear la nueva variable `y` que agregaremos a la base de datos usando el siguiente código.
+
+```{r}
+datos$y <- ifelse(datos$target == 0, 'absence', 'presence')
+datos$y <- as.factor(datos$y)
+```
+
+Nota: en orden lexicográfico la etiqueta `absence` está primero que `presence` porque inicia con la letra `a`. Eso significa que el árbol va a tomar la etiqueta `absence` como 0 mientras que `presence` la va a tomar como 1. 
+
+Nota: se pudo haber creado la variable `y` usando `ifelse(datos$target == 0, 0, 1)` pero decidimos usar los nombres `absence` y `presence` en lugar del 0 y 1 para facilitar su interpretación.
+
+Para crear el modelo random forest se debe cargar la librería *randomForest* así:
+
+```{r message=FALSE}
+library(randomForest)
+```
+
+Vamos a crear un random forest con $B=400$ árboles y $k=1$ variables en cada partición, para esto podemos usar la siguiente instrucción:
+
+```{r}
+set.seed(12345)
+model <- randomForest(y ~ age + chol, data=datos, 
+                      ntree=400, mtry=1,
+                      proximity=TRUE)
+```
+
+En el código anterior se fijó la semilla en el valor 12345 para que usted pueda replicar el ejemplo y obtener los mismos resultados.
+
+Para explorar el modelo ajustado podemos hacer lo siguiente:
+
+```{r}
+model
+```
+
+De la salida anterior podemos destacar los siguientes resultados:
+
+- El número de árboles utilizados fue de `r model$ntree`, valor que coincide con el indicado en la creación del modelo.
+- El número de variables usadas en cada partición de los árboles fue `r model$mtry`.
+- El error OOB (Out-Of-Bag) fue de 45.54%, error obtenido al clasificar las observaciones OOB que no fueron incluidas en el conjunto de datos de entrenamiento Boostrap.
+- La tasa de clasificación correcta de las observaciones OOB fue de 54.46%, y se obtiene del complemento del error OOB.
+- 97 pacientes que NO sufren una enfermedad cardíaca, fueron clasificados correctamente en el grupo __absence__.
+- 68 pacientes que SI sufren una enfermedad cardíaca, fueron clasificados correctamente en el grupo __presence__.
+- La tasa de clasificación correcta en este caso es
+$$
+tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
+$$
+
+Supongamos que nos llegaron 3 pacientes, el primero un hombre de 45 años con nivel de colesterol 300, el segundo una mujer de 60 años con nivel de colesterol de 450 y el tercero otro hombre de 65 años con nivel de colesterol de 200. ¿A qué grupo se debe asignar cada paciente?
+
+```{r}
+nuevo_df <- data.frame(age=c(45, 60, 65),
+                       chol=c(300, 450, 200))
+
+predict(model, newdata=nuevo_df, type='response')
+```
+
+De la salida anterior tenemos que los tres pacientes son clasificados en el grupo __absence__.
+
+## Ejemplo {-}
+
+En el siguiente video se muestra como se puede crear un modelo random forest usando la totalidad de las variables de la base de datos del ejemplo anterior.
+
+Mire el video y replique el ejemplo en su computador.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6EXPYzbfLCE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+

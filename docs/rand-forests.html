@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Modelos Predictivos</title>
+  <title>8 Random Forest | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Modelos Predictivos" />
+  <meta property="og:title" content="8 Random Forest | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Modelos Predictivos" />
+  <meta name="twitter:title" content="8 Random Forest | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reg-versus-arb.html"/>
-
+<link rel="prev" href="gradboost.html"/>
+<link rel="next" href="reg-versus-arb.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -230,64 +230,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="rand_forests" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Random Forest</h1>
+<p>Random Forest o Bosques Aleatorios fue propuesto por <span class="citation">(<a href="references.html#ref-Ho1995" role="doc-biblioref">Ho 1995</a>)</span> y consiste en crear muchos árboles para luego usarlos en la predicción de la variable de interés. A continuación se muestra una ilustración de la técnica.</p>
+<p><a href="https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8"><img src="images/rand_forest_illustration.png" title="Ilustración de Random Forests" alt="Figura tomada de https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8" /></a></p>
+<div id="explicación-sencilla-de-random-forests" class="section level2 unnumbered">
+<h2>Explicación sencilla de Random Forests</h2>
+<p>Se inicia con un conjunto de entrenamiento que tiene <span class="math inline">\(n\)</span> observaciones, la variable interés <span class="math inline">\(Y\)</span> y las variables predictoras <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. Luego se aplican los siguientes pasos.</p>
+<ol style="list-style-type: decimal">
+<li>Se construye un nuevo conjunto de entrenamiento del mismo tamaño del original usando la técnica Bootstrap. Esto se hace generando un muestreo con reemplazo y de esta forma es posible que algunas observaciones aparezcan varias veces y mientras que otras observaciones no aparezcan.</li>
+<li>Se construye un árbol (de regresión o clasificación) usando en cada partición un subconjunto con <span class="math inline">\(k\)</span> variables predictoras de las <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span> disponibles.</li>
+<li>Se repiten los pasos anteriores <span class="math inline">\(B\)</span> veces, por lo general <span class="math inline">\(B=500\)</span> o <span class="math inline">\(B=1000\)</span>. De esta forma tendrám muchos árboles que luego se pueden usar para hacer predicciones de <span class="math inline">\(Y\)</span>.</li>
+</ol>
+<p>Si queremos predecir la variable <span class="math inline">\(Y\)</span> para un caso en el cual se tienen la información <span class="math inline">\((x_1, x_2, \ldots, x_p)^\top\)</span>, se toman cada uno de los <span class="math inline">\(B\)</span> árboles creados y se predice la variable <span class="math inline">\(Y\)</span>, de esta manera se trendrán las predicciones <span class="math inline">\(\hat{Y}_1, \hat{Y}_2, \ldots, \hat{Y}_B\)</span>. Luego usando estas <span class="math inline">\(B\)</span> predicciones, se puede obtener una predicción unificada dependiendo de si el problema es de clasificación o de regresión. A continuación una figura ilustrativa de cómo se unifican las <span class="math inline">\(B\)</span> predicciones.</p>
+<p><a href="https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f"><img src="images/rand_forest_clas_reg.png" title="Forma de unir las B predicciones" alt="Figura adaptada de https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f" /></a></p>
+</div>
+<div id="ejemplo-8" class="section level2 unnumbered">
+<h2>Ejemplo</h2>
+<p>Abajo se presenta un video con una explicación detallada de cómo aplicar random forest para un caso sencillo de clasificación con <span class="math inline">\(n=4\)</span> observaciones y <span class="math inline">\(p=4\)</span> variables predictoras.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="ejemplo-9" class="section level2 unnumbered">
+<h2>Ejemplo</h2>
+<p align="center">
+<img src="images/heart_attack.gif" width="200">
+</p>
+<p>La base de datos que vamos a usar en este ejemplo está disponible en el <a href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease">UCI Repository</a>. El objetivo es crear un árbol de clasificación para predecir la variable <span class="math inline">\(Y\)</span> (<code>target</code>) definida como:</p>
+<p><span class="math display">\[
+Y=\left\{\begin{matrix}
+1 \quad \text{si paciente SI sufre una enfermedad cardíaca} \\ 
+0 \quad \text{si paciente NO sufre una enfermedad cardíaca}
+\end{matrix}\right.
+\]</span></p>
+<p>en función de las variables <code>age</code> y <code>chol</code>.</p>
+<p>Las variables en la base de datos son las siguientes:</p>
+<ol style="list-style-type: decimal">
+<li>Age: displays the age of the individual.</li>
+<li>Sex: displays the gender of the individual using the following format: 1 = male, 0 = female.</li>
+<li>Chest-pain type: displays the type of chest-pain experienced by the individual using the following format: 1 = typical angina, 2 = atypical angina, 3 = non — anginal pain, 4 = asymptotic.</li>
+<li>Resting Blood Pressure: displays the resting blood pressure value of an individual in mmHg (unit)</li>
+<li>Chol: displays the serum cholesterol in mg/dl (unit)</li>
+<li>Fasting Blood Sugar: compares the fasting blood sugar value of an individual with 120mg/dl. If fasting blood sugar &gt; 120mg/dl then : 1 (true)
+else : 0 (false).</li>
+<li>Resting ECG : displays resting electrocardiographic results: 0 = normal
+1 = having ST-T wave abnormality, 2 = left ventricular hyperthrophy.</li>
+<li>Max heart rate achieved: displays the max heart rate achieved by an individual.</li>
+<li>Exercise induced angina: 1 = yes, 0 = no.</li>
+<li>ST depression induced by exercise relative to rest: displays the value which is an integer or float.</li>
+<li>Peak exercise ST segment: 1 = upsloping, 2 = flat, 3 = downsloping.</li>
+<li>Number of major vessels (0–3) colored by flourosopy : displays the value as integer or float.</li>
+<li>Thal: displays the thalassemia: 3 = normal, 6 = fixed defect, 7 = reversible defect.</li>
+<li>Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.</li>
+</ol>
+<p>La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="rand-forests.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb134-2"><a href="rand-forests.html#cb134-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></span>
+<span id="cb134-3"><a href="rand-forests.html#cb134-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Como la base de datos viene sin los nombres se deben colocar manualmente así:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="rand-forests.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(datos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</span>
+<span id="cb135-2"><a href="rand-forests.html#cb135-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </span>
+<span id="cb135-3"><a href="rand-forests.html#cb135-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</span></code></pre></div>
+<p>La variable respuesta es <code>target</code> que tiene cuatro números así: 0 = absence, 1, 2, 3, 4 = present. Por esa razón vamos a crear la nueva variable <code>y</code> que agregaremos a la base de datos usando el siguiente código.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="rand-forests.html#cb136-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(datos<span class="sc">$</span>target <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&#39;absence&#39;</span>, <span class="st">&#39;presence&#39;</span>)</span>
+<span id="cb136-2"><a href="rand-forests.html#cb136-2" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(datos<span class="sc">$</span>y)</span></code></pre></div>
+<p>Nota: en orden lexicográfico la etiqueta <code>absence</code> está primero que <code>presence</code> porque inicia con la letra <code>a</code>. Eso significa que el árbol va a tomar la etiqueta <code>absence</code> como 0 mientras que <code>presence</code> la va a tomar como 1.</p>
+<p>Nota: se pudo haber creado la variable <code>y</code> usando <code>ifelse(datos$target == 0, 0, 1)</code> pero decidimos usar los nombres <code>absence</code> y <code>presence</code> en lugar del 0 y 1 para facilitar su interpretación.</p>
+<p>Para crear el modelo random forest se debe cargar la librería <em>randomForest</em> así:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="rand-forests.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code></pre></div>
+<p>Vamos a crear un random forest con <span class="math inline">\(B=400\)</span> árboles y <span class="math inline">\(k=1\)</span> variables en cada partición, para esto podemos usar la siguiente instrucción:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="rand-forests.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb138-2"><a href="rand-forests.html#cb138-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(y <span class="sc">~</span> age <span class="sc">+</span> chol, <span class="at">data=</span>datos, </span>
+<span id="cb138-3"><a href="rand-forests.html#cb138-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ntree=</span><span class="dv">400</span>, <span class="at">mtry=</span><span class="dv">1</span>,</span>
+<span id="cb138-4"><a href="rand-forests.html#cb138-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">proximity=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>En el código anterior se fijó la semilla en el valor 12345 para que usted pueda replicar el ejemplo y obtener los mismos resultados.</p>
+<p>Para explorar el modelo ajustado podemos hacer lo siguiente:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="rand-forests.html#cb139-1" aria-hidden="true" tabindex="-1"></a>model</span></code></pre></div>
+<pre><code>## 
+## Call:
+##  randomForest(formula = y ~ age + chol, data = datos, ntree = 400,      mtry = 1, proximity = TRUE) 
+##                Type of random forest: classification
+##                      Number of trees: 400
+## No. of variables tried at each split: 1
+## 
+##         OOB estimate of  error rate: 45.54%
+## Confusion matrix:
+##          absence presence class.error
+## absence       97       67   0.4085366
+## presence      71       68   0.5107914</code></pre>
+<p>De la salida anterior podemos destacar los siguientes resultados:</p>
+<ul>
+<li>El número de árboles utilizados fue de 400, valor que coincide con el indicado en la creación del modelo.</li>
+<li>El número de variables usadas en cada partición de los árboles fue 1.</li>
+<li>El error OOB (Out-Of-Bag) fue de 45.54%, error obtenido al clasificar las observaciones OOB que no fueron incluidas en el conjunto de datos de entrenamiento Boostrap.</li>
+<li>La tasa de clasificación correcta de las observaciones OOB fue de 54.46%, y se obtiene del complemento del error OOB.</li>
+<li>97 pacientes que NO sufren una enfermedad cardíaca, fueron clasificados correctamente en el grupo <strong>absence</strong>.</li>
+<li>68 pacientes que SI sufren una enfermedad cardíaca, fueron clasificados correctamente en el grupo <strong>presence</strong>.</li>
+<li>La tasa de clasificación correcta en este caso es
+<span class="math display">\[
+tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
+\]</span></li>
+</ul>
+<p>Supongamos que nos llegaron 3 pacientes, el primero un hombre de 45 años con nivel de colesterol 300, el segundo una mujer de 60 años con nivel de colesterol de 450 y el tercero otro hombre de 65 años con nivel de colesterol de 200. ¿A qué grupo se debe asignar cada paciente?</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="rand-forests.html#cb141-1" aria-hidden="true" tabindex="-1"></a>nuevo_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">65</span>),</span>
+<span id="cb141-2"><a href="rand-forests.html#cb141-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">chol=</span><span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">450</span>, <span class="dv">200</span>))</span>
+<span id="cb141-3"><a href="rand-forests.html#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="rand-forests.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model, <span class="at">newdata=</span>nuevo_df, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<pre><code>##       1       2       3 
+## absence absence absence 
+## Levels: absence presence</code></pre>
+<p>De la salida anterior tenemos que los tres pacientes son clasificados en el grupo <strong>absence</strong>.</p>
+</div>
+<div id="ejemplo-10" class="section level2 unnumbered">
+<h2>Ejemplo</h2>
+<p>En el siguiente video se muestra como se puede crear un modelo random forest usando la totalidad de las variables de la base de datos del ejemplo anterior.</p>
+<p>Mire el video y replique el ejemplo en su computador.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6EXPYzbfLCE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-adabag" class="csl-entry">
-Alfaro, Esteban; Gamez, Matias, Garcia, and Noelia; with contributions from Li Guo. 2018. <em>Adabag: Applies Multiclass AdaBoost.M1, SAMME and Bagging</em>. <a href="https://CRAN.R-project.org/package=adabag">https://CRAN.R-project.org/package=adabag</a>.
-</div>
-<div id="ref-R-MPV" class="csl-entry">
-Braun, W. J. 2019. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.
-</div>
-<div id="ref-Breiman1984" class="csl-entry">
-Breiman, L., J. H. Friedman, R. A. Olshen, and C. J. Stone. 1984. <em>Classification and Regression Trees</em>. 1nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418">https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418</a>.
-</div>
-<div id="ref-Cortes1995" class="csl-entry">
-Cortes, Corinna, and Vladimir Vapnik. 1995. <span>“Support-Vector Networks.”</span> <em>Machine Learning</em> 20 (3): 273–97. <a href="https://doi.org/10.1023/A:1022627411411">https://doi.org/10.1023/A:1022627411411</a>.
-</div>
-<div id="ref-Drucker97" class="csl-entry">
-Drucker, Harris, Chris J. C. Burges, Linda Kaufman, Alex Smola, and Vladimir Vapnik. 1997. <span>“Support Vector Regression Machines.”</span> In <em>ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 9</em>, 155–61. MIT Press.
-</div>
-<div id="ref-freund_1995" class="csl-entry">
-Freund, Yoav, and Robert E. Schapire. 1995. <em>A Desicion-Theoretic Generalization of on-Line Learning and an Application to Boosting</em>. Vol. 904. Springer, Berlin, Heidelberg.
-</div>
-<div id="ref-Friedman1999a" class="csl-entry">
-Friedman, J. H. 1999a. <span>“Greedy Function Approximation: A Gradient Boosting Machine.”</span> Stanford University.
-</div>
-<div id="ref-Friedman1999b" class="csl-entry">
-———. 1999b. <span>“Stochastic Gradient Boosting.”</span> Stanford University.
-</div>
-<div id="ref-R-gbm" class="csl-entry">
-Greenwell, Brandon, Bradley Boehmke, Jay Cunningham, and GBM Developers. 2020. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://github.com/gbm-developers/gbm">https://github.com/gbm-developers/gbm</a>.
-</div>
-<div id="ref-Ho1995" class="csl-entry">
-Ho, Tin Kam. 1995. <span>“<span class="nocase">Random decision forests</span>.”</span> In <em>Proceedings of the International Conference on Document Analysis and Recognition, ICDAR</em>. Vol. 1. <a href="https://doi.org/10.1109/ICDAR.1995.598994">https://doi.org/10.1109/ICDAR.1995.598994</a>.
-</div>
-<div id="ref-james2013" class="csl-entry">
-James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning – with Applications in r</em>. Vol. 103. Springer Texts in Statistics. New York: Springer. <a href="https://doi.org/10.1007/DOI">https://doi.org/10.1007/DOI</a>.
-</div>
-<div id="ref-R-rpart.plot" class="csl-entry">
-Milborrow, Stephen. 2020. <em>Rpart.plot: Plot Rpart Models: An Enhanced Version of Plot.rpart</em>. <a href="http://www.milbo.org/rpart-plot/index.html">http://www.milbo.org/rpart-plot/index.html</a>.
-</div>
-<div id="ref-R-tree" class="csl-entry">
-Ripley, Brian. 2019. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.
-</div>
-<div id="ref-R-MASS" class="csl-entry">
-———. 2020. <em>MASS: Support Functions and Datasets for Venables and Ripley’s MASS</em>. <a href="http://www.stats.ox.ac.uk/pub/MASS4/">http://www.stats.ox.ac.uk/pub/MASS4/</a>.
-</div>
-<div id="ref-shivaswamy2007" class="csl-entry">
-Shivaswamy, Pannagadatta K, Wei Chu, and Martin Jansche. 2007. <span>“A Support Vector Approach to Censored Targets.”</span> In <em>Seventh IEEE International Conference on Data Mining (ICDM 2007)</em>, 655–60. IEEE.
-</div>
-<div id="ref-R-rpart" class="csl-entry">
-Therneau, Terry, and Beth Atkinson. 2019. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.
-</div>
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
-</div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2020. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
-</div>
 </div>
 </div>
             </section>
@@ -295,8 +355,8 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
           </div>
         </div>
       </div>
-<a href="reg-versus-arb.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="gradboost.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reg-versus-arb.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -327,7 +387,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/999-references.Rmd",
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/9-random_forests.Rmd",
 "text": "Edit"
 },
 "history": {

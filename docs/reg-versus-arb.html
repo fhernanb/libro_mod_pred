@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
+  <title>9 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
+  <meta property="og:title" content="9 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="images/cover.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
+  <meta name="twitter:title" content="9 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="images/cover.png" />
@@ -24,15 +24,16 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2020-10-30" />
+<meta name="date" content="2021-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gradboost.html"/>
+<link rel="prev" href="rand-forests.html"/>
 <link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,21 +51,23 @@
 
 
 
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,12 +136,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Modelos Predictivos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a><ul>
+<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
+<ul>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árboles"><i class="fa fa-check"></i>Árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-decisión"><i class="fa fa-check"></i>Árbol de decisión</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
@@ -149,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a><ul>
+<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
+<ul>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árboles-1"><i class="fa fa-check"></i>Árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-decisión-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
@@ -159,18 +165,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="arb-de-clasif.html#ejemplo-con-tree">Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>3</b> knn</a><ul>
+<li class="chapter" data-level="3" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>3</b> knn</a>
+<ul>
 <li class="chapter" data-level="" data-path="knn-reg.html"><a href="knn-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a><ul>
+<li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a>
+<ul>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para clasificación</a><ul>
+<li class="chapter" data-level="5" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para clasificación</a>
+<ul>
 <li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-2"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>6</b> AdaBoost</a><ul>
+<li class="chapter" data-level="6" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>6</b> AdaBoost</a>
+<ul>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -178,15 +188,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>7</b> Gradient Boost</a><ul>
+<li class="chapter" data-level="7" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>7</b> Gradient Boost</a>
+<ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>8</b> Regresión lineal versus árboles de regresión</a><ul>
+<li class="chapter" data-level="8" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>8</b> Random Forest</a>
+<ul>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>9</b> Regresión lineal versus árboles de regresión</a>
+<ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulación-para-comparar-ambos-métodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
@@ -211,8 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reg-versus-arb" class="section level1">
-<h1><span class="header-section-number">8</span> Regresión lineal versus árboles de regresión</h1>
+<div id="reg-versus-arb" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Regresión lineal versus árboles de regresión</h1>
 <p>En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.</p>
 <div id="regresión-lineal" class="section level2 unnumbered">
 <h2>Regresión lineal</h2>
@@ -227,16 +246,16 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 <h2>Arboles de regresión</h2>
 <p>Una explicación de los árboles de regresión puede ser consultada en el capítulo <a href="arb-de-regre.html#arb-de-regre">1</a>.</p>
 <p>Las librerías en R para implementar árboles de regresión son:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="reg-versus-arb.html#cb134-1"></a><span class="kw">library</span>(rpart)</span>
-<span id="cb134-2"><a href="reg-versus-arb.html#cb134-2"></a><span class="kw">library</span>(rpart.plot)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="reg-versus-arb.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb143-2"><a href="reg-versus-arb.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code></pre></div>
 </div>
-<div id="ejemplo-8" class="section level2 unnumbered">
+<div id="ejemplo-11" class="section level2 unnumbered">
 <h2>Ejemplo</h2>
 <p>Como ilustración vamos a usar los datos del ejemplo 2.1 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. En el ejemplo 2.1 los autores ajustaron un modelo de regresión lineal simple para explicar la Resistencia de una soldadura en función de la Edad de la misma.</p>
 <p>A continuación el código para cargar los datos y una muestra de las 6 primeras observaciones de la base de datos, en total tenemos 20 observaciones.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="reg-versus-arb.html#cb135-1"></a>file &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/fhernanb/datos/master/propelente&quot;</span></span>
-<span id="cb135-2"><a href="reg-versus-arb.html#cb135-2"></a>datos &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file=</span>file, <span class="dt">header=</span><span class="ot">TRUE</span>)</span>
-<span id="cb135-3"><a href="reg-versus-arb.html#cb135-3"></a><span class="kw">head</span>(datos) <span class="co"># shows the first 6 rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="reg-versus-arb.html#cb144-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;https://raw.githubusercontent.com/fhernanb/datos/master/propelente&quot;</span></span>
+<span id="cb144-2"><a href="reg-versus-arb.html#cb144-2" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="at">file=</span>file, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb144-3"><a href="reg-versus-arb.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos) <span class="co"># shows the first 6 rows</span></span></code></pre></div>
 <pre><code>##   Resistencia  Edad
 ## 1     2158.70 15.50
 ## 2     1678.15 23.75
@@ -245,17 +264,17 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## 5     2207.50  5.50
 ## 6     1708.30 19.00</code></pre>
 <p>Para crear un diagrama de dispersión que nos muestre la relación entre las dos variables usamos las siguientes instrucciones.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="reg-versus-arb.html#cb137-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb137-2"><a href="reg-versus-arb.html#cb137-2"></a><span class="kw">ggplot</span>(datos, <span class="kw">aes</span>(<span class="dt">x=</span>Edad, <span class="dt">y=</span>Resistencia)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb137-3"><a href="reg-versus-arb.html#cb137-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="reg-versus-arb.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb146-2"><a href="reg-versus-arb.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos, <span class="fu">aes</span>(<span class="at">x=</span>Edad, <span class="at">y=</span>Resistencia)) <span class="sc">+</span> </span>
+<span id="cb146-3"><a href="reg-versus-arb.html#cb146-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/soldadura1-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>De la figura anterior se ve claramente que a medida que aumenta la edad de la soldadura, la resistencia que ella ofrece disminuye. Adicionalmente, se observa que la relación entre las variables es lineal con una dispersión que parece constante.</p>
 <p>¿Quién estima mejor? ¿un modelo de regresión lineal simple o un árbol?</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="reg-versus-arb.html#cb138-1"></a>rls &lt;-<span class="st"> </span><span class="kw">lm</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</span>
-<span id="cb138-2"><a href="reg-versus-arb.html#cb138-2"></a>arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos)</span></code></pre></div>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="reg-versus-arb.html#cb139-1"></a>arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(Resistencia <span class="op">~</span><span class="st"> </span>Edad, <span class="dt">data=</span>datos, <span class="dt">method=</span><span class="st">&quot;anova&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="reg-versus-arb.html#cb147-1" aria-hidden="true" tabindex="-1"></a>rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(Resistencia <span class="sc">~</span> Edad, <span class="at">data=</span>datos)</span>
+<span id="cb147-2"><a href="reg-versus-arb.html#cb147-2" aria-hidden="true" tabindex="-1"></a>arb <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Resistencia <span class="sc">~</span> Edad, <span class="at">data=</span>datos)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="reg-versus-arb.html#cb148-1" aria-hidden="true" tabindex="-1"></a>arb <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Resistencia <span class="sc">~</span> Edad, <span class="at">data=</span>datos, <span class="at">method=</span><span class="st">&quot;anova&quot;</span>)</span></code></pre></div>
 <p>¿Qué hay dentro de modelo de regresión lineal simple?</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="reg-versus-arb.html#cb140-1"></a><span class="kw">summary</span>(rls)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="reg-versus-arb.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rls)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Resistencia ~ Edad, data = datos)
@@ -275,14 +294,14 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## Multiple R-squared:  0.9018, Adjusted R-squared:  0.8964 
 ## F-statistic: 165.4 on 1 and 18 DF,  p-value: 1.643e-10</code></pre>
 <p>¿Qué hay dentro de modelo del arbol?</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="reg-versus-arb.html#cb142-1"></a><span class="kw">summary</span>(arb)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="reg-versus-arb.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(arb)</span></code></pre></div>
 <pre><code>## Call:
 ## rpart(formula = Resistencia ~ Edad, data = datos, method = &quot;anova&quot;)
 ##   n= 20 
 ## 
-##          CP nsplit rel error   xerror     xstd
-## 1 0.7480619      0 1.0000000 1.184195 0.250625
-## 2 0.0100000      1 0.2519381 1.184195 0.250625
+##          CP nsplit rel error   xerror      xstd
+## 1 0.7480619      0 1.0000000 1.046977 0.2268375
+## 2 0.0100000      1 0.2519381 1.046977 0.2268375
 ## 
 ## Variable importance
 ## Edad 
@@ -300,41 +319,41 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ## Node number 3: 12 observations
 ##   mean=2336.867, MSE=22599.79</code></pre>
 <p>Construyamos nuevamente el árbol pero explorando todas las opciones de la función <code>prp</code>.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="reg-versus-arb.html#cb144-1"></a><span class="kw">prp</span>(arb, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb144-2"><a href="reg-versus-arb.html#cb144-2"></a>    <span class="dt">nn =</span> <span class="ot">TRUE</span>,             <span class="co"># display the node numbers</span></span>
-<span id="cb144-3"><a href="reg-versus-arb.html#cb144-3"></a>    <span class="dt">fallen.leaves =</span> <span class="ot">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span></span>
-<span id="cb144-4"><a href="reg-versus-arb.html#cb144-4"></a>    <span class="dt">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span></span>
-<span id="cb144-5"><a href="reg-versus-arb.html#cb144-5"></a>    <span class="dt">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span></span>
-<span id="cb144-6"><a href="reg-versus-arb.html#cb144-6"></a>    <span class="dt">branch =</span> <span class="fl">.5</span>,           <span class="co"># change angle of branch lines</span></span>
-<span id="cb144-7"><a href="reg-versus-arb.html#cb144-7"></a>    <span class="dt">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span></span>
-<span id="cb144-8"><a href="reg-versus-arb.html#cb144-8"></a>    <span class="dt">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span></span>
-<span id="cb144-9"><a href="reg-versus-arb.html#cb144-9"></a>    <span class="dt">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span></span>
-<span id="cb144-10"><a href="reg-versus-arb.html#cb144-10"></a>    <span class="dt">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span></span>
-<span id="cb144-11"><a href="reg-versus-arb.html#cb144-11"></a>    <span class="dt">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span></span>
-<span id="cb144-12"><a href="reg-versus-arb.html#cb144-12"></a>    <span class="dt">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span></span>
-<span id="cb144-13"><a href="reg-versus-arb.html#cb144-13"></a>    <span class="dt">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span></span>
-<span id="cb144-14"><a href="reg-versus-arb.html#cb144-14"></a>    <span class="dt">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="reg-versus-arb.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(arb, <span class="at">main =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb153-2"><a href="reg-versus-arb.html#cb153-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">nn =</span> <span class="cn">TRUE</span>,             <span class="co"># display the node numbers</span></span>
+<span id="cb153-3"><a href="reg-versus-arb.html#cb153-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fallen.leaves =</span> <span class="cn">TRUE</span>,  <span class="co"># put the leaves on the bottom of the page</span></span>
+<span id="cb153-4"><a href="reg-versus-arb.html#cb153-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">shadow.col =</span> <span class="st">&quot;gray&quot;</span>,   <span class="co"># shadows under the leaves</span></span>
+<span id="cb153-5"><a href="reg-versus-arb.html#cb153-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">branch.lty =</span> <span class="dv">3</span>,        <span class="co"># draw branches using dotted lines</span></span>
+<span id="cb153-6"><a href="reg-versus-arb.html#cb153-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">branch =</span> .<span class="dv">5</span>,           <span class="co"># change angle of branch lines</span></span>
+<span id="cb153-7"><a href="reg-versus-arb.html#cb153-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">faclen =</span> <span class="dv">0</span>,            <span class="co"># faclen = 0 to print full factor names</span></span>
+<span id="cb153-8"><a href="reg-versus-arb.html#cb153-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">trace =</span> <span class="dv">1</span>,             <span class="co"># print the auto calculated cex, xlim, ylim</span></span>
+<span id="cb153-9"><a href="reg-versus-arb.html#cb153-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.cex =</span> <span class="fl">1.2</span>,       <span class="co"># make the split text larger than the node text</span></span>
+<span id="cb153-10"><a href="reg-versus-arb.html#cb153-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.prefix =</span> <span class="st">&quot;is &quot;</span>,  <span class="co"># put &quot;is &quot; before split text</span></span>
+<span id="cb153-11"><a href="reg-versus-arb.html#cb153-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.suffix =</span> <span class="st">&quot;?&quot;</span>,    <span class="co"># put &quot;?&quot; after split text</span></span>
+<span id="cb153-12"><a href="reg-versus-arb.html#cb153-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.box.col =</span> <span class="st">&quot;lightblue&quot;</span>,   <span class="co"># lightgray split boxes (default is white)</span></span>
+<span id="cb153-13"><a href="reg-versus-arb.html#cb153-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.border.col =</span> <span class="st">&quot;darkgray&quot;</span>, <span class="co"># darkgray border on split boxes</span></span>
+<span id="cb153-14"><a href="reg-versus-arb.html#cb153-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">split.round =</span> <span class="fl">0.5</span>)             <span class="co"># round the split box corners a tad</span></span></code></pre></div>
 <pre><code>## cex 1   xlim c(-0.65, 1.65)   ylim c(-0.15, 1.15)</code></pre>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb01-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>A continuación las predicciones con ambos modelos.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="reg-versus-arb.html#cb146-1"></a>pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos)</span>
-<span id="cb146-2"><a href="reg-versus-arb.html#cb146-2"></a>pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="reg-versus-arb.html#cb155-1" aria-hidden="true" tabindex="-1"></a>pred_rls <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>rls, <span class="at">newdata=</span>datos)</span>
+<span id="cb155-2"><a href="reg-versus-arb.html#cb155-2" aria-hidden="true" tabindex="-1"></a>pred_arb <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>arb, <span class="at">newdata=</span>datos)</span></code></pre></div>
 <p>Dibujemos <span class="math inline">\(y_i\)</span> versus <span class="math inline">\(\hat{y}_i\)</span>.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="reg-versus-arb.html#cb147-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb147-2"><a href="reg-versus-arb.html#cb147-2"></a><span class="kw">plot</span>(<span class="dt">x=</span>pred_rls, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;RLS&quot;</span>)</span>
-<span id="cb147-3"><a href="reg-versus-arb.html#cb147-3"></a><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb147-4"><a href="reg-versus-arb.html#cb147-4"></a><span class="kw">plot</span>(<span class="dt">x=</span>pred_arb, <span class="dt">y=</span>datos<span class="op">$</span>Resistencia, <span class="dt">main=</span><span class="st">&quot;Arbol&quot;</span>)</span>
-<span id="cb147-5"><a href="reg-versus-arb.html#cb147-5"></a><span class="kw">abline</span>(<span class="dt">a=</span><span class="dv">0</span>, <span class="dt">b=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="reg-versus-arb.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb156-2"><a href="reg-versus-arb.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>pred_rls, <span class="at">y=</span>datos<span class="sc">$</span>Resistencia, <span class="at">main=</span><span class="st">&quot;RLS&quot;</span>)</span>
+<span id="cb156-3"><a href="reg-versus-arb.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb156-4"><a href="reg-versus-arb.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>pred_arb, <span class="at">y=</span>datos<span class="sc">$</span>Resistencia, <span class="at">main=</span><span class="st">&quot;Arbol&quot;</span>)</span>
+<span id="cb156-5"><a href="reg-versus-arb.html#cb156-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb02-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Vamos a calcular <span class="math inline">\(Cor(y_i, \hat{y}_i)\)</span>.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="reg-versus-arb.html#cb148-1"></a><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_rls)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="reg-versus-arb.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos<span class="sc">$</span>Resistencia, pred_rls)</span></code></pre></div>
 <pre><code>## [1] 0.9496533</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="reg-versus-arb.html#cb150-1"></a><span class="kw">cor</span>(datos<span class="op">$</span>Resistencia, pred_arb)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="reg-versus-arb.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos<span class="sc">$</span>Resistencia, pred_arb)</span></code></pre></div>
 <pre><code>## [1] 0.8649057</code></pre>
 <p>Calculemos ahora el Error Cuadrático Medio <span class="math inline">\(ECM=\frac{1}{n}\sum(y_i-\hat{y}_i)^2\)</span>.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="reg-versus-arb.html#cb152-1"></a><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="reg-versus-arb.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((datos<span class="sc">$</span>Resistencia <span class="sc">-</span> pred_rls)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 8312.743</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="reg-versus-arb.html#cb154-1"></a><span class="kw">mean</span>((datos<span class="op">$</span>Resistencia <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="reg-versus-arb.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((datos<span class="sc">$</span>Resistencia <span class="sc">-</span> pred_arb)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 21335.85</code></pre>
 <p>¿Cuál método prefiere usted?</p>
 </div>
@@ -348,83 +367,82 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 x &amp;\sim U(2, 25)
 \end{align}\]</span></p>
 <p>Vamos a crear una función generadora de datos.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="reg-versus-arb.html#cb156-1"></a>gen_dat &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</span>
-<span id="cb156-2"><a href="reg-versus-arb.html#cb156-2"></a>  x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span>n, <span class="dt">min=</span><span class="dv">2</span>, <span class="dt">max=</span><span class="dv">25</span>)</span>
-<span id="cb156-3"><a href="reg-versus-arb.html#cb156-3"></a>  media &lt;-<span class="st"> </span><span class="dv">2627</span> <span class="op">-</span><span class="st"> </span><span class="dv">37</span> <span class="op">*</span><span class="st"> </span>x</span>
-<span id="cb156-4"><a href="reg-versus-arb.html#cb156-4"></a>  y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span>n, <span class="dt">mean=</span>media, <span class="dt">sd=</span><span class="dv">96</span>)</span>
-<span id="cb156-5"><a href="reg-versus-arb.html#cb156-5"></a>  <span class="kw">data.frame</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)</span>
-<span id="cb156-6"><a href="reg-versus-arb.html#cb156-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="reg-versus-arb.html#cb165-1" aria-hidden="true" tabindex="-1"></a>gen_dat <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb165-2"><a href="reg-versus-arb.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n, <span class="at">min=</span><span class="dv">2</span>, <span class="at">max=</span><span class="dv">25</span>)</span>
+<span id="cb165-3"><a href="reg-versus-arb.html#cb165-3" aria-hidden="true" tabindex="-1"></a>  media <span class="ot">&lt;-</span> <span class="dv">2627</span> <span class="sc">-</span> <span class="dv">37</span> <span class="sc">*</span> x</span>
+<span id="cb165-4"><a href="reg-versus-arb.html#cb165-4" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span>n, <span class="at">mean=</span>media, <span class="at">sd=</span><span class="dv">96</span>)</span>
+<span id="cb165-5"><a href="reg-versus-arb.html#cb165-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span>
+<span id="cb165-6"><a href="reg-versus-arb.html#cb165-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Generemos unos datos de prueba y graficamos los datos.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="reg-versus-arb.html#cb157-1"></a>datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)</span>
-<span id="cb157-2"><a href="reg-versus-arb.html#cb157-2"></a><span class="kw">ggplot</span>(datos_train, <span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb157-3"><a href="reg-versus-arb.html#cb157-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="reg-versus-arb.html#cb166-1" aria-hidden="true" tabindex="-1"></a>datos_train <span class="ot">&lt;-</span> <span class="fu">gen_dat</span>(<span class="at">n=</span><span class="dv">20</span>)</span>
+<span id="cb166-2"><a href="reg-versus-arb.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos_train, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span> </span>
+<span id="cb166-3"><a href="reg-versus-arb.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_light</span>()</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/reg_arb03-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>Usando los datos de prueba vamos a ajustar los modelos y luego calcularemos los indicadores.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="reg-versus-arb.html#cb158-1"></a>datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para entrenar</span></span>
-<span id="cb158-2"><a href="reg-versus-arb.html#cb158-2"></a>datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span><span class="dv">20</span>)  <span class="co"># Para validar</span></span>
-<span id="cb158-3"><a href="reg-versus-arb.html#cb158-3"></a>rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</span>
-<span id="cb158-4"><a href="reg-versus-arb.html#cb158-4"></a>arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</span>
-<span id="cb158-5"><a href="reg-versus-arb.html#cb158-5"></a>pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</span>
-<span id="cb158-6"><a href="reg-versus-arb.html#cb158-6"></a>pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</span>
-<span id="cb158-7"><a href="reg-versus-arb.html#cb158-7"></a><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_rls)</span></code></pre></div>
-<pre><code>## [1] 0.9531806</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="reg-versus-arb.html#cb160-1"></a><span class="kw">cor</span>(datos_test<span class="op">$</span>y, pred_arb)</span></code></pre></div>
-<pre><code>## [1] 0.8176202</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="reg-versus-arb.html#cb162-1"></a><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 7951.993</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="reg-versus-arb.html#cb164-1"></a><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 32835.24</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="reg-versus-arb.html#cb167-1" aria-hidden="true" tabindex="-1"></a>datos_train <span class="ot">&lt;-</span> <span class="fu">gen_dat</span>(<span class="at">n=</span><span class="dv">20</span>)  <span class="co"># Para entrenar</span></span>
+<span id="cb167-2"><a href="reg-versus-arb.html#cb167-2" aria-hidden="true" tabindex="-1"></a>datos_test  <span class="ot">&lt;-</span> <span class="fu">gen_dat</span>(<span class="at">n=</span><span class="dv">20</span>)  <span class="co"># Para validar</span></span>
+<span id="cb167-3"><a href="reg-versus-arb.html#cb167-3" aria-hidden="true" tabindex="-1"></a>rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos_train)</span>
+<span id="cb167-4"><a href="reg-versus-arb.html#cb167-4" aria-hidden="true" tabindex="-1"></a>arb <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos_train)</span>
+<span id="cb167-5"><a href="reg-versus-arb.html#cb167-5" aria-hidden="true" tabindex="-1"></a>pred_rls <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>rls, <span class="at">newdata=</span>datos_test)</span>
+<span id="cb167-6"><a href="reg-versus-arb.html#cb167-6" aria-hidden="true" tabindex="-1"></a>pred_arb <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>arb, <span class="at">newdata=</span>datos_test)</span>
+<span id="cb167-7"><a href="reg-versus-arb.html#cb167-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos_test<span class="sc">$</span>y, pred_rls)</span></code></pre></div>
+<pre><code>## [1] 0.9455845</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="reg-versus-arb.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(datos_test<span class="sc">$</span>y, pred_arb)</span></code></pre></div>
+<pre><code>## [1] 0.7932216</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="reg-versus-arb.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_rls)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 7545.366</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="reg-versus-arb.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_arb)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 22376</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
 </div>
-
 <p>Ahora vamos a realizar el estudio de simulación para explorar el efecto de <span class="math inline">\(n = 10, 20, 40\)</span> sobre el <span class="math inline">\(ECM\)</span> usando 5 réplicas para cada <span class="math inline">\(n\)</span>, este es un estudio de simulación “naive” pero ilustrativo.</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="reg-versus-arb.html#cb166-1"></a>n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)</span>
-<span id="cb166-2"><a href="reg-versus-arb.html#cb166-2"></a>nrep &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb166-3"><a href="reg-versus-arb.html#cb166-3"></a>result &lt;-<span class="st"> </span><span class="kw">numeric</span>()</span>
-<span id="cb166-4"><a href="reg-versus-arb.html#cb166-4"></a><span class="cf">for</span> (i <span class="cf">in</span> n) {</span>
-<span id="cb166-5"><a href="reg-versus-arb.html#cb166-5"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrep) {</span>
-<span id="cb166-6"><a href="reg-versus-arb.html#cb166-6"></a>    datos_train &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para entrenar</span></span>
-<span id="cb166-7"><a href="reg-versus-arb.html#cb166-7"></a>    datos_test  &lt;-<span class="st"> </span><span class="kw">gen_dat</span>(<span class="dt">n=</span>i)  <span class="co"># Para validar</span></span>
-<span id="cb166-8"><a href="reg-versus-arb.html#cb166-8"></a>    rls &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</span>
-<span id="cb166-9"><a href="reg-versus-arb.html#cb166-9"></a>    arb &lt;-<span class="st"> </span><span class="kw">rpart</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>datos_train)</span>
-<span id="cb166-10"><a href="reg-versus-arb.html#cb166-10"></a>    pred_rls &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>rls, <span class="dt">newdata=</span>datos_test)</span>
-<span id="cb166-11"><a href="reg-versus-arb.html#cb166-11"></a>    pred_arb &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>arb, <span class="dt">newdata=</span>datos_test)</span>
-<span id="cb166-12"><a href="reg-versus-arb.html#cb166-12"></a>    ecm1 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_rls)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb166-13"><a href="reg-versus-arb.html#cb166-13"></a>    ecm2 &lt;-<span class="st"> </span><span class="kw">mean</span>((datos_test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>pred_arb)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb166-14"><a href="reg-versus-arb.html#cb166-14"></a>    result &lt;-<span class="st"> </span><span class="kw">rbind</span>(result, <span class="kw">c</span>(i, ecm1, ecm2)) <span class="co"># No eficiente pero sirve</span></span>
-<span id="cb166-15"><a href="reg-versus-arb.html#cb166-15"></a>  }</span>
-<span id="cb166-16"><a href="reg-versus-arb.html#cb166-16"></a>}</span>
-<span id="cb166-17"><a href="reg-versus-arb.html#cb166-17"></a><span class="kw">colnames</span>(result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</span>
-<span id="cb166-18"><a href="reg-versus-arb.html#cb166-18"></a>result &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(result)</span>
-<span id="cb166-19"><a href="reg-versus-arb.html#cb166-19"></a>result</span></code></pre></div>
-<pre><code>##     n   ecm_lrs   ecm_arb
-## 1  10 11561.409  45829.58
-## 2  10  5941.793  43297.25
-## 3  10 25397.007 111663.54
-## 4  10 12409.682  71720.23
-## 5  10 15095.712  44398.16
-## 6  20 10160.895  22593.85
-## 7  20  7179.949  28906.90
-## 8  20  6170.543  39031.82
-## 9  20 11935.307  28125.38
-## 10 20 11718.410  22418.01
-## 11 40  9400.226  19430.35
-## 12 40  6962.714  23450.19
-## 13 40 10313.839  20534.37
-## 14 40  8308.219  11837.12
-## 15 40  7127.208  19337.81</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="reg-versus-arb.html#cb175-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">40</span>)</span>
+<span id="cb175-2"><a href="reg-versus-arb.html#cb175-2" aria-hidden="true" tabindex="-1"></a>nrep <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb175-3"><a href="reg-versus-arb.html#cb175-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">numeric</span>()</span>
+<span id="cb175-4"><a href="reg-versus-arb.html#cb175-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> n) {</span>
+<span id="cb175-5"><a href="reg-versus-arb.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nrep) {</span>
+<span id="cb175-6"><a href="reg-versus-arb.html#cb175-6" aria-hidden="true" tabindex="-1"></a>    datos_train <span class="ot">&lt;-</span> <span class="fu">gen_dat</span>(<span class="at">n=</span>i)  <span class="co"># Para entrenar</span></span>
+<span id="cb175-7"><a href="reg-versus-arb.html#cb175-7" aria-hidden="true" tabindex="-1"></a>    datos_test  <span class="ot">&lt;-</span> <span class="fu">gen_dat</span>(<span class="at">n=</span>i)  <span class="co"># Para validar</span></span>
+<span id="cb175-8"><a href="reg-versus-arb.html#cb175-8" aria-hidden="true" tabindex="-1"></a>    rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos_train)</span>
+<span id="cb175-9"><a href="reg-versus-arb.html#cb175-9" aria-hidden="true" tabindex="-1"></a>    arb <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos_train)</span>
+<span id="cb175-10"><a href="reg-versus-arb.html#cb175-10" aria-hidden="true" tabindex="-1"></a>    pred_rls <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>rls, <span class="at">newdata=</span>datos_test)</span>
+<span id="cb175-11"><a href="reg-versus-arb.html#cb175-11" aria-hidden="true" tabindex="-1"></a>    pred_arb <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>arb, <span class="at">newdata=</span>datos_test)</span>
+<span id="cb175-12"><a href="reg-versus-arb.html#cb175-12" aria-hidden="true" tabindex="-1"></a>    ecm1 <span class="ot">&lt;-</span> <span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_rls)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb175-13"><a href="reg-versus-arb.html#cb175-13" aria-hidden="true" tabindex="-1"></a>    ecm2 <span class="ot">&lt;-</span> <span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_arb)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb175-14"><a href="reg-versus-arb.html#cb175-14" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> <span class="fu">rbind</span>(result, <span class="fu">c</span>(i, ecm1, ecm2)) <span class="co"># No eficiente pero sirve</span></span>
+<span id="cb175-15"><a href="reg-versus-arb.html#cb175-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb175-16"><a href="reg-versus-arb.html#cb175-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb175-17"><a href="reg-versus-arb.html#cb175-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(result) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</span>
+<span id="cb175-18"><a href="reg-versus-arb.html#cb175-18" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(result)</span>
+<span id="cb175-19"><a href="reg-versus-arb.html#cb175-19" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<pre><code>##     n   ecm_lrs  ecm_arb
+## 1  10  4635.406 34371.31
+## 2  10  9447.104 58068.68
+## 3  10  7607.883 54697.96
+## 4  10  7459.546 68398.70
+## 5  10 14472.528 70102.64
+## 6  20  9800.251 30655.52
+## 7  20 14369.682 31023.90
+## 8  20 14584.506 47430.43
+## 9  20  9199.218 19176.55
+## 10 20  7214.653 18850.07
+## 11 40 11481.891 16546.73
+## 12 40  5542.358 16131.44
+## 13 40 14211.091 25754.11
+## 14 40  7271.396 12046.13
+## 15 40  5129.326 10192.78</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="reg-versus-arb.html#cb168-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb168-2"><a href="reg-versus-arb.html#cb168-2"></a>result <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(n) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">ecm_medio_lrs=</span><span class="kw">mean</span>(ecm_lrs),</span>
-<span id="cb168-3"><a href="reg-versus-arb.html#cb168-3"></a>                                     <span class="dt">ecm_medio_arb=</span><span class="kw">mean</span>(ecm_arb))</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="reg-versus-arb.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb177-2"><a href="reg-versus-arb.html#cb177-2" aria-hidden="true" tabindex="-1"></a>result <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(n) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">ecm_medio_lrs=</span><span class="fu">mean</span>(ecm_lrs),</span>
+<span id="cb177-3"><a href="reg-versus-arb.html#cb177-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">ecm_medio_arb=</span><span class="fu">mean</span>(ecm_arb))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10        14081.        63382.
-## 2    20         9433.        28215.
-## 3    40         8422.        18918.</code></pre>
+## 1    10         8724.        57128.
+## 2    20        11034.        29427.
+## 3    40         8727.        16134.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered">
 <h2>Retos</h2>
@@ -446,7 +464,7 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
           </div>
         </div>
       </div>
-<a href="gradboost.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rand-forests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
