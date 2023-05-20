@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Árboles de regresión distribucionales | Modelos Predictivos</title>
+  <meta name="description" content="Libro de Modelos Predictivos" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Árboles de regresión distribucionales | Modelos Predictivos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/cover.png" />
+  <meta property="og:description" content="Libro de Modelos Predictivos" />
+  <meta name="github-repo" content="fhernanb/libro_mod_pred" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Árboles de regresión distribucionales | Modelos Predictivos" />
+  
+  <meta name="twitter:description" content="Libro de Modelos Predictivos" />
+  <meta name="twitter:image" content="/images/cover.png" />
+
+<meta name="author" content="Freddy Hernández" />
+
+
+<meta name="date" content="2023-05-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="arb-de-clasif.html"/>
+<link rel="next" href="knn-reg.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modelos Predictivos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Bienvenido</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#estructura-del-libro"><i class="fa fa-check"></i>Estructura del libro</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-decisión"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-regresión"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-árboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>tree</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-decisión-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-clasificación"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#videos-útiles"><i class="fa fa-check"></i>Videos útiles</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>4</b> knn</a></li>
+<li class="chapter" data-level="5" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para clasificación</a>
+<ul>
+<li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
+<ul>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>8</b> Gradient Boost</a>
+<ul>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rand_forests.html"><a href="rand_forests.html"><i class="fa fa-check"></i><b>9</b> Random Forest</a>
+<ul>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulación-para-comparar-ambos-métodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Predictivos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="arb-distri" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Árboles de regresión distribucionales<a href="arb-distri.html#arb-distri" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Los árboles de regresión distribucionales fueron propuestos por <span class="citation">Schlosser (<a href="#ref-LisaSchlosser2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Abajo una comparación entre un árbol de regresión y un árbol de regresión distribucional.</p>
+<p align="center">
+<img src="images/arbol_vs_arboldistri.png" width="1000">
+</p>
+<div id="videos-útiles" class="section level2 unnumbered hasAnchor">
+<h2>Videos útiles<a href="arb-distri.html#videos-útiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tzR9U-0j3s0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+</p>
+</div>
+<div id="paquete-disttree" class="section level2 unnumbered hasAnchor">
+<h2>Paquete disttree<a href="arb-distri.html#paquete-disttree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>distree</strong> <span class="citation">(<a href="#ref-R-disttree" role="doc-biblioref">Schlosser et al. 2021</a>)</span> es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="arb-distri.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;disttree&quot;</span>, <span class="at">repos=</span><span class="st">&quot;http://R-Forge.R-project.org&quot;</span>)</span></code></pre></div>
+<p>Para crear un árbol de regresión distribucional se usa la función <code>disttree</code> que tiene la siguiente estructura.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="arb-distri.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">disttree</span>(formula, data, subset, <span class="at">na.action =</span> na.pass, weights, offset,</span>
+<span id="cb2-2"><a href="arb-distri.html#cb2-2" aria-hidden="true" tabindex="-1"></a>           cluster, <span class="at">family =</span> <span class="fu">NO</span>(), <span class="at">control =</span> <span class="fu">disttree_control</span>(...), </span>
+<span id="cb2-3"><a href="arb-distri.html#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">converged =</span> <span class="cn">NULL</span>, <span class="at">scores =</span> <span class="cn">NULL</span>, <span class="at">doFit =</span> <span class="cn">TRUE</span>, ...)</span></code></pre></div>
+<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución del paquete <strong>gamlss</strong> <span class="citation">(<a href="#ref-R-gamlss" role="doc-biblioref">Stasinopoulos and Rigby 2022</a>)</span> o cualquier distribución del paquete <strong>RelDists</strong> <span class="citation">(<a href="#ref-R-RelDists" role="doc-biblioref">Hernandez et al. 2022</a>)</span>.</p>
+<p>Una pregunta frecuente es ¿cómo selecciono la distribución que mejor explica el patrón de mi variable respuesta <span class="math inline">\(Y\)</span>?</p>
+
+<div class="rmdnote">
+Para encontrar las distribuciones que mejor explican a <span class="math inline">\(Y\)</span> se puede utilizar el procedimiento mostrado <a href="https://fhernanb.github.io/Manual-de-R/select_dist.html">en este documento</a>.
+</div>
+</div>
+<div id="ejemplo-1" class="section level2 unnumbered hasAnchor">
+<h2>Ejemplo<a href="arb-distri.html#ejemplo-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este ejemplo está basado en la figura 1.2 de la disertación de <span class="citation">Schlosser (<a href="#ref-LisaSchlosser2020" role="doc-biblioref">2020</a>)</span>. Aquí vamos a tener una variable respuesta <span class="math inline">\(Y\)</span> con distribución normal pero que depende de la variable auxiliar <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[\begin{equation*}
+  Y = \begin{cases}
+        N(\mu=5, \sigma=1)   \, \text{si $x &lt; 0.4$,} \\
+        N(\mu=12, \sigma=2)  \, \text{si $0.4 \leq x \leq 0.8$,} \\
+        N(\mu=0, \sigma=0.5) \, \text{si $x &gt; 0.8$}.
+      \end{cases}
+\end{equation*}\]</span></p>
+<p>El siguiente código sirve para simular los datos.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="arb-distri.html#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb3-2"><a href="arb-distri.html#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
+<span id="cb3-3"><a href="arb-distri.html#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb3-4"><a href="arb-distri.html#cb3-4" aria-hidden="true" tabindex="-1"></a>y[x <span class="sc">&lt;</span> <span class="fl">0.4</span>]            <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&lt;</span> <span class="fl">0.4</span>), <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="arb-distri.html#cb3-5" aria-hidden="true" tabindex="-1"></a>y[x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">12</span>, <span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="arb-distri.html#cb3-6" aria-hidden="true" tabindex="-1"></a>y[x <span class="sc">&gt;=</span> <span class="fl">0.8</span>]           <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-7"><a href="arb-distri.html#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="arb-distri.html#cb3-8" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>y, <span class="at">x=</span>x)</span>
+<span id="cb3-9"><a href="arb-distri.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">20</span>))</span></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Vamos ahora a crear el árbol distribucional con <code>family=NO</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="arb-distri.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
+<span id="cb4-2"><a href="arb-distri.html#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
+<span id="cb4-3"><a href="arb-distri.html#cb4-3" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<pre><code>## Distributional regression tree (Normal Distribution)
+## 
+## Model formula:
+## y ~ x
+## 
+## Fitted party:
+## [1] root
+## |   [2] x &lt;= 0.79701
+## |   |   [3] x &lt;= 0.39739: n = 200
+## |   |             mu    sigma 
+## |   |       4.892360 1.012478 
+## |   |   [4] x &gt; 0.39739
+## |   |   |   [5] x &lt;= 0.64507: n = 129
+## |   |   |              mu     sigma 
+## |   |   |       11.681977  1.843235 
+## |   |   |   [6] x &gt; 0.64507: n = 76
+## |   |   |              mu     sigma 
+## |   |   |       12.508719  1.633353 
+## |   [7] x &gt; 0.79701: n = 95
+## |                 mu        sigma 
+## |       -0.002812749  0.502259542 
+## 
+## Number of inner nodes:    3
+## Number of terminal nodes: 4
+## Number of parameters per node: 2
+## Objective function (negative log-likelihood): 762.7034</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="arb-distri.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>¿Cuál será el valor estimado de <span class="math inline">\(Y\)</span> para tres nuevos objetos que tiene valor de <span class="math inline">\(x=0.35\)</span>, <span class="math inline">\(x=0.47\)</span> y <span class="math inline">\(x=0.89\)</span> respectivamente?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="arb-distri.html#cb7-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.47</span>, <span class="fl">0.89</span>))</span>
+<span id="cb7-2"><a href="arb-distri.html#cb7-2" aria-hidden="true" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata=</span>new_data)</span>
+<span id="cb7-3"><a href="arb-distri.html#cb7-3" aria-hidden="true" tabindex="-1"></a>predicciones</span></code></pre></div>
+<pre><code>##             mu     sigma
+## 1  4.892359909 1.0124781
+## 2 11.681976598 1.8432350
+## 3 -0.002812749 0.5022595</code></pre>
+</div>
+<div id="ejemplo-2" class="section level2 unnumbered hasAnchor">
+<h2>Ejemplo<a href="arb-distri.html#ejemplo-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este ejemplo está basado en un ejemplo de <a href="https://www.zeileis.org/papers/Psychoco-2018.pdf">esta presentación</a> de Achim Zeileis. El modelo estadístico para simular los datos es el siguiente:</p>
+<p align="center">
+<img src="images/ecua_ejemplo_disttree.png" width="350">
+</p>
+<p>El siguiente código sirve para simular los datos.</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-RelDists" class="csl-entry">
+Hernandez, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2022. <em>RelDists: Estimation for Some Reliability Distributions with GAMLSS</em>. <a href="https://ousuga.github.io/RelDists/">https://ousuga.github.io/RelDists/</a>.
+</div>
+<div id="ref-LisaSchlosser2020" class="csl-entry">
+Schlosser, Lisa. 2020. <span>“Distributional Trees and Forests.”</span> PhD thesis, University of Innsbruck.
+</div>
+<div id="ref-R-disttree" class="csl-entry">
+Schlosser, Lisa, Moritz N. Lang, Torsten Hothorn, and Achim Zeileis. 2021. <em>Disttree: Trees and Forests for Distributional Regression</em>. <a href="https://R-Forge.R-project.org/projects/partykit/">https://R-Forge.R-project.org/projects/partykit/</a>.
+</div>
+<div id="ref-R-gamlss" class="csl-entry">
+Stasinopoulos, Mikis, and Bob Rigby. 2022. <em>Gamlss: Generalised Additive Models for Location Scale and Shape</em>. <a href="https://www.gamlss.com/">https://www.gamlss.com/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="arb-de-clasif.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="knn-reg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/1c-arb-distri.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["libro_mod_pred.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

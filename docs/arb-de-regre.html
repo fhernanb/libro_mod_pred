@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Árboles de regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
-  
-  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:image" content="/images/cover.png" />
   <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
@@ -19,12 +18,12 @@
   <meta name="twitter:title" content="1 Árboles de regresión | Modelos Predictivos" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
-  <meta name="twitter:image" content="images/cover.png" />
+  <meta name="twitter:image" content="/images/cover.png" />
 
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2021-03-18" />
+<meta name="date" content="2023-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="arb-de-clasif.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,9 +49,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -118,6 +117,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -149,10 +171,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-regresión"><i class="fa fa-check"></i>Árbol de regresión</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-árboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
-<li><a href="arb-de-regre.html#paquete-rpart">Paquete <strong>rpart</strong></a></li>
-<li><a href="arb-de-regre.html#paquete-tree">Paquete <strong>tree</strong></a></li>
-<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart">Ejemplo con el paquete <strong>rpart</strong></a></li>
-<li><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree">Ejemplo con el paquete <strong>tree</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
 <ul>
@@ -161,25 +183,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-clasificación"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
-<li><a href="arb-de-clasif.html#ejemplo-con-rpart">Ejemplo con <strong>rpart</strong></a></li>
-<li><a href="arb-de-clasif.html#ejemplo-con-tree">Ejemplo con <strong>tree</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>3</b> knn</a>
+<li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
 <ul>
-<li class="chapter" data-level="" data-path="knn-reg.html"><a href="knn-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+<li class="chapter" data-level="3.1" data-path="arb-distri.html"><a href="arb-distri.html#videos-útiles"><i class="fa fa-check"></i><b>3.1</b> Videos útiles</a></li>
+<li class="chapter" data-level="3.2" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i><b>3.2</b> Paquete disttree</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a>
+<li class="chapter" data-level="4" data-path="knn-reg.html"><a href="knn-reg.html"><i class="fa fa-check"></i><b>4</b> knn</a></li>
+<li class="chapter" data-level="5" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+<li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para clasificación</a>
+<li class="chapter" data-level="6" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para clasificación</a>
 <ul>
-<li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-2"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
+<li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>6</b> AdaBoost</a>
+<li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
 <ul>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
@@ -188,20 +212,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>7</b> Gradient Boost</a>
+<li class="chapter" data-level="8" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>8</b> Gradient Boost</a>
 <ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>8</b> Random Forest</a>
+<li class="chapter" data-level="9" data-path="rand_forests.html"><a href="rand_forests.html"><i class="fa fa-check"></i><b>9</b> Random Forest</a>
 <ul>
-<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
-<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>9</b> Regresión lineal versus árboles de regresión</a>
+<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
 <ul>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
@@ -230,11 +254,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="arb-de-regre" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Árboles de regresión</h1>
-<p>Los árboles de regresión/clasificación fueron propuestos por <a href="https://en.wikipedia.org/wiki/Leo_Breiman">Leo Breiman</a> en el libro <span class="citation">(<a href="references.html#ref-Breiman1984" role="doc-biblioref">Breiman et al. 1984</a>)</span> y son árboles de decisión que tienen como objetivo predecir la variable respuesta <span class="math inline">\(Y\)</span> en función de covariables.</p>
-<div id="árboles" class="section level2 unnumbered">
-<h2>Árboles</h2>
+<div id="arb-de-regre" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Árboles de regresión<a href="arb-de-regre.html#arb-de-regre" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Los árboles de regresión/clasificación fueron propuestos por <a href="https://en.wikipedia.org/wiki/Leo_Breiman">Leo Breiman</a> en el libro <span class="citation">(<a href="#ref-Breiman1984" role="doc-biblioref">Breiman et al. 1984</a>)</span> y son árboles de decisión que tienen como objetivo predecir la variable respuesta <span class="math inline">\(Y\)</span> en función de covariables.</p>
+<div id="árboles" class="section level2 unnumbered hasAnchor">
+<h2>Árboles<a href="arb-de-regre.html#árboles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A continuación la imagen de un árbol común.</p>
 <p align="center">
 <img src="images/arbol.jpg" width="300">
@@ -245,15 +269,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 <p>Esta forma invertida es la forma de los árboles de regresión y clasificación.</p>
 </div>
-<div id="árbol-de-decisión" class="section level2 unnumbered">
-<h2>Árbol de decisión</h2>
+<div id="árbol-de-decisión" class="section level2 unnumbered hasAnchor">
+<h2>Árbol de decisión<a href="arb-de-regre.html#árbol-de-decisión" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Conjunto de reglas sucesivas que ayudan a tomar una decisión.</p>
 <p align="center">
 <img src="images/fit_unfit.png" width="500">
 </p>
 </div>
-<div id="tipos-de-árboles" class="section level2 unnumbered">
-<h2>Tipos de árboles</h2>
+<div id="tipos-de-árboles" class="section level2 unnumbered hasAnchor">
+<h2>Tipos de árboles<a href="arb-de-regre.html#tipos-de-árboles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los árboles se pueden clasificar en dos tipos que son:</p>
 <ol style="list-style-type: decimal">
 <li>Árboles de regresión en los cuales la variable respuesta <span class="math inline">\(y\)</span> es cuantitativa.</li>
@@ -264,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 <p>El presente capítulo está destinado a árboles de clasificación, los árboles de regresión se explican en el capítulo <a href="arb-de-clasif.html#arb-de-clasif">2</a>.</p>
 </div>
-<div id="árbol-de-regresión" class="section level2 unnumbered">
-<h2>Árbol de regresión</h2>
+<div id="árbol-de-regresión" class="section level2 unnumbered hasAnchor">
+<h2>Árbol de regresión<a href="arb-de-regre.html#árbol-de-regresión" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Un árbol de regresión consiste en hacer preguntas de tipo ¿<span class="math inline">\(x_k \leq c\)</span>? para cada una de las covariables, de esta forma el espacio de las covariables es divido en hiper-rectángulos y todas las observaciones que queden dentro de un hiper-rectángulo tendrán el mismo valor estimado <span class="math inline">\(\hat{y}\)</span>.</p>
 <p>En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte <span class="math inline">\(c\)</span> de tal manera que se minimice la función de costos <span class="math inline">\(\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2\)</span>.</p>
 <p align="center">
@@ -284,10 +308,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Las covariables pueden ser cualitativas o cuantitativas.</li>
 <li>No exige supuestos distribucionales.</li>
 </ul>
-<p>Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de <span class="citation">(<a href="references.html#ref-james2013" role="doc-biblioref">James et al. 2013</a>)</span>. Se recomienda también ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a> con una explicación sencilla sobre árboles.</p>
+<p>Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de <span class="citation">(<a href="#ref-james2013" role="doc-biblioref">James et al. 2013</a>)</span>. Se recomienda también ver <a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">este video</a> con una explicación sencilla sobre árboles.</p>
 </div>
-<div id="paquetes-de-r-para-árboles" class="section level2 unnumbered">
-<h2>Paquetes de R para árboles</h2>
+<div id="paquetes-de-r-para-árboles" class="section level2 unnumbered hasAnchor">
+<h2>Paquetes de R para árboles<a href="arb-de-regre.html#paquetes-de-r-para-árboles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los paquetes más conocidos para construir árboles son:</p>
 <ul>
 <li><a href="https://cran.r-project.org/web/packages/tree/index.html">tree</a>.</li>
@@ -296,16 +320,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Existen otros paquetes que el lector puede consultar en la sección <em>Recursive Partitioning</em> de <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN Task View: Machine Learning &amp; Statistical Learning</a>.</p>
 </div>
-<div id="paquete-rpart" class="section level2 unnumbered">
-<h2>Paquete <strong>rpart</strong></h2>
+<div id="paquete-rpart" class="section level2 unnumbered hasAnchor">
+<h2>Paquete <strong>rpart</strong><a href="arb-de-regre.html#paquete-rpart" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En esta sección se mencionan algunos de los paquetes más comunes para implementar árboles de regresión.</p>
-<p>El paquete <strong>rpart</strong> <span class="citation">(<a href="references.html#ref-R-rpart" role="doc-biblioref">Therneau and Atkinson 2019</a>)</span> es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es <code>rpart</code>, a continuación la estructura de la función.</p>
+<p>El paquete <strong>rpart</strong> <span class="citation">(<a href="#ref-R-rpart" role="doc-biblioref">Therneau and Atkinson 2022</a>)</span> es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es <code>rpart</code>, a continuación la estructura de la función.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="arb-de-regre.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart</span>(formula, data, weights, subset, <span class="at">na.action =</span> na.rpart, method,</span>
 <span id="cb5-2"><a href="arb-de-regre.html#cb5-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">model =</span> <span class="cn">FALSE</span>, <span class="at">x =</span> <span class="cn">FALSE</span>, <span class="at">y =</span> <span class="cn">TRUE</span>, parms, control, cost, ...)</span></code></pre></div>
 </div>
-<div id="paquete-tree" class="section level2 unnumbered">
-<h2>Paquete <strong>tree</strong></h2>
-<p>Otro paquete útil para árboles de regresión es <strong>tree</strong> <span class="citation">(<a href="references.html#ref-R-tree" role="doc-biblioref">Ripley 2019</a>)</span>. La función para crear un árbol de regresión es <code>tree</code>, a continuación la estructura de la función.</p>
+<div id="paquete-tree" class="section level2 unnumbered hasAnchor">
+<h2>Paquete <strong>tree</strong><a href="arb-de-regre.html#paquete-tree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Otro paquete útil para árboles de regresión es <strong>tree</strong> <span class="citation">(<a href="#ref-R-tree" role="doc-biblioref">Ripley 2023</a>)</span>. La función para crear un árbol de regresión es <code>tree</code>, a continuación la estructura de la función.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="arb-de-regre.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tree</span>(formula, data, weights, subset,</span>
 <span id="cb6-2"><a href="arb-de-regre.html#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">na.action =</span> na.pass, <span class="at">control =</span> <span class="fu">tree.control</span>(nobs, ...),</span>
 <span id="cb6-3"><a href="arb-de-regre.html#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">method =</span> <span class="st">&quot;recursive.partition&quot;</span>,</span>
@@ -316,9 +340,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Se recomienda al lector que consulte la ayuda de las funciones anteriores para que pueda entender las posibilidades que se tienen con cada una de ellas.
 </div>
 </div>
-<div id="ejemplo-con-el-paquete-rpart" class="section level2 unnumbered">
-<h2>Ejemplo con el paquete <strong>rpart</strong></h2>
-<p>En este ejemplo se busca encontrar un modelo de regresion lineal que explique la variable respuesta <span class="math inline">\(y\)</span> en función de las covariables <span class="math inline">\(x_1\)</span> a <span class="math inline">\(x_{11}\)</span>, los datos provienen del ejercicio 9.5 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. El paquete <strong>MPV</strong> <span class="citation">(<a href="references.html#ref-R-MPV" role="doc-biblioref">Braun 2019</a>)</span> contiene todos los datos que acompañan al libro.</p>
+<div id="ejemplo-con-el-paquete-rpart" class="section level2 unnumbered hasAnchor">
+<h2>Ejemplo con el paquete <strong>rpart</strong><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En este ejemplo se busca encontrar un modelo de regresion lineal que explique la variable respuesta <span class="math inline">\(y\)</span> en función de las covariables <span class="math inline">\(x_1\)</span> a <span class="math inline">\(x_{11}\)</span>, los datos provienen del ejercicio 9.5 del libro de <a href="https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278">Montgomery, Peck and Vining (2003)</a>. El paquete <strong>MPV</strong> <span class="citation">(<a href="#ref-R-MPV" role="doc-biblioref">Braun and MacQueen 2022</a>)</span> contiene todos los datos que acompañan al libro.</p>
 <p>A continuación se muestra el encabezado de la base de datos y la definición de las variables.</p>
 <p align="center">
 <img src="images/tableb3.PNG" width="500">
@@ -338,7 +362,7 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="arb-de-regre.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
 <span id="cb10-2"><a href="arb-de-regre.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="arb-de-regre.html#cb11-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> ., <span class="at">data=</span>datos)</span></code></pre></div>
-<p>Dibjuemos el árbol con <code>prp</code> que es una función del paquete <strong>rpart.plot</strong> <span class="citation">(<a href="references.html#ref-R-rpart.plot" role="doc-biblioref">Milborrow 2020</a>)</span>.</p>
+<p>Dibjuemos el árbol con <code>prp</code> que es una función del paquete <strong>rpart.plot</strong> <span class="citation">(<a href="#ref-R-rpart.plot" role="doc-biblioref">Milborrow 2022</a>)</span>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="arb-de-regre.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(mod1)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/arbol01-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Construyamos nuevamente el árbol pero explorando todas las opciones de la función <code>prp</code>.</p>
@@ -389,8 +413,8 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 <span id="cb21-2"><a href="arb-de-regre.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/arbol04-1.png" width="384" style="display: block; margin: auto;" /></p>
 </div>
-<div id="ejemplo-con-el-paquete-tree" class="section level2 unnumbered">
-<h2>Ejemplo con el paquete <strong>tree</strong></h2>
+<div id="ejemplo-con-el-paquete-tree" class="section level2 unnumbered hasAnchor">
+<h2>Ejemplo con el paquete <strong>tree</strong><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Aquí vamos a repetir el ejemplo anterior con otro paquete.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="arb-de-regre.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tree)</span>
 <span id="cb22-2"><a href="arb-de-regre.html#cb22-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">tree</span>(y <span class="sc">~</span> ., <span class="at">data=</span>datos)</span></code></pre></div>
@@ -405,6 +429,27 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 
 </div>
 </div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-MPV" class="csl-entry">
+Braun, W. J., and S. MacQueen. 2022. <em>MPV: Data Sets from Montgomery, Peck and Vining</em>. <a href="https://CRAN.R-project.org/package=MPV">https://CRAN.R-project.org/package=MPV</a>.
+</div>
+<div id="ref-Breiman1984" class="csl-entry">
+Breiman, L., J. H. Friedman, R. A. Olshen, and C. J. Stone. 1984. <em>Classification and Regression Trees</em>. 1nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418">https://www.crcpress.com/Classification-and-Regression-Trees/Breiman-Friedman-Stone-Olshen/p/book/9780412048418</a>.
+</div>
+<div id="ref-james2013" class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning – with Applications in r</em>. Vol. 103. Springer Texts in Statistics. New York: Springer. <a href="https://doi.org/10.1007/DOI">https://doi.org/10.1007/DOI</a>.
+</div>
+<div id="ref-R-rpart.plot" class="csl-entry">
+Milborrow, Stephen. 2022. <em>Rpart.plot: Plot Rpart Models: An Enhanced Version of Plot.rpart</em>. <a href="http://www.milbo.org/rpart-plot/index.html">http://www.milbo.org/rpart-plot/index.html</a>.
+</div>
+<div id="ref-R-tree" class="csl-entry">
+———. 2023. <em>Tree: Classification and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=tree">https://CRAN.R-project.org/package=tree</a>.
+</div>
+<div id="ref-R-rpart" class="csl-entry">
+Therneau, Terry, and Beth Atkinson. 2022. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.
+</div>
+</div>
             </section>
 
           </div>
@@ -415,7 +460,6 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -434,6 +478,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -453,7 +498,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["libro_mod_pred.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
@@ -467,7 +516,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

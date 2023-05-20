@@ -1,31 +1,31 @@
 # Support Vector Machines para clasificación {#svm-clas}
 @Cortes1995 en el artículo titulado "Support-Vector Networks" propusieron las máquinas de soporte vectorial (svm) para el problema de clasificación.
 
-Suponga que deseamos tenemos dos grupos de objetos, unos de color rojo y otros de color amarillo como se muestran en la siguiente figura.
+Suponga que tenemos dos grupos de objetos, unos de color rojo y otros de color amarillo como se muestran en la siguiente figura.
 
 <p align="center">
-  <img src="images/svm_1.png" width="300">
+  <img src="images/svm_1.png" width="500">
 </p>
 
 El objetivo es dibujar una línea recta que separe los dos grupos, sin embargo, muchas líneas se podrían dibujar, a continuación se muestran tres posibles líneas con las cuales se consigue el objetivo.
 
 <p align="center">
-  <img src="images/svm_2.png" width="300">
+  <img src="images/svm_2.png" width="500">
 </p>
 
 Imaginemos que cada línea es como una carretera que se puede ampliar a ambos lados hasta que toque el punto más cercano, ya se amarillo o rojo. Al hacer esto vamos a obtener las tres carreteras que se muestran a continuación.
 
 <p align="center">
-  <img src="images/svm_3.png" width="300">
+  <img src="images/svm_3.png" width="500">
 </p>
 
 De todas las carreteras nos interesa aquella que tenga el mayor ancho o margen, con esa carretera es que se pueden clasificar nuevas observaciones en el grupo rojo o grupo amarillo. A continuación se muestra la figura sólo con la línea de separación que tiene el mayor ancho.
 
 <p align="center">
-  <img src="images/svm_4.png" width="300">
+  <img src="images/svm_4.png" width="500">
 </p>
 
-En la siguiente figura se muestra de manera más formal el objetivo de svm para clasificación en dos grupos.
+En la siguiente figura se muestra de manera formal el objetivo de svm para clasificación en dos grupos.
 
 <p align="center">
   <img src="images/soft_svm.png" width="500">
