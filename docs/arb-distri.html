@@ -258,7 +258,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="arb-distri" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Árboles de regresión distribucionales<a href="arb-distri.html#arb-distri" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Los árboles de regresión distribucionales fueron propuestos por <span class="citation">Schlosser (<a href="#ref-LisaSchlosser2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Los árboles de regresión distribucionales fueron propuestos por Lisa <span class="citation">Schlosser (<a href="#ref-LisaSchlosser2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p>Abajo una comparación entre un árbol de regresión y un árbol de regresión distribucional.</p>
 <p align="center">
 <img src="images/arbol_vs_arboldistri.png" width="1000">
@@ -309,43 +309,16 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 <p>Vamos ahora a crear el árbol distribucional con <code>family=NO</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="arb-distri.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
 <span id="cb4-2"><a href="arb-distri.html#cb4-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
-<span id="cb4-3"><a href="arb-distri.html#cb4-3" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
-<pre><code>## Distributional regression tree (Normal Distribution)
-## 
-## Model formula:
-## y ~ x
-## 
-## Fitted party:
-## [1] root
-## |   [2] x &lt;= 0.79701
-## |   |   [3] x &lt;= 0.39739: n = 200
-## |   |             mu    sigma 
-## |   |       4.892360 1.012478 
-## |   |   [4] x &gt; 0.39739
-## |   |   |   [5] x &lt;= 0.64507: n = 129
-## |   |   |              mu     sigma 
-## |   |   |       11.681977  1.843235 
-## |   |   |   [6] x &gt; 0.64507: n = 76
-## |   |   |              mu     sigma 
-## |   |   |       12.508719  1.633353 
-## |   [7] x &gt; 0.79701: n = 95
-## |                 mu        sigma 
-## |       -0.002812749  0.502259542 
-## 
-## Number of inner nodes:    3
-## Number of terminal nodes: 4
-## Number of parameters per node: 2
-## Objective function (negative log-likelihood): 762.7034</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="arb-distri.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<span id="cb4-3"><a href="arb-distri.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>¿Cuál será el valor estimado de <span class="math inline">\(Y\)</span> para tres nuevos objetos que tiene valor de <span class="math inline">\(x=0.35\)</span>, <span class="math inline">\(x=0.47\)</span> y <span class="math inline">\(x=0.89\)</span> respectivamente?</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="arb-distri.html#cb7-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.47</span>, <span class="fl">0.89</span>))</span>
-<span id="cb7-2"><a href="arb-distri.html#cb7-2" aria-hidden="true" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata=</span>new_data)</span>
-<span id="cb7-3"><a href="arb-distri.html#cb7-3" aria-hidden="true" tabindex="-1"></a>predicciones</span></code></pre></div>
-<pre><code>##             mu     sigma
-## 1  4.892359909 1.0124781
-## 2 11.681976598 1.8432350
-## 3 -0.002812749 0.5022595</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="arb-distri.html#cb5-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.47</span>, <span class="fl">0.89</span>))</span>
+<span id="cb5-2"><a href="arb-distri.html#cb5-2" aria-hidden="true" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata=</span>new_data)</span>
+<span id="cb5-3"><a href="arb-distri.html#cb5-3" aria-hidden="true" tabindex="-1"></a>predicciones</span></code></pre></div>
+<pre><code>##            mu     sigma
+## 1  4.95364869 0.9901405
+## 2 12.04722142 1.9994955
+## 3  0.00288584 0.4717285</code></pre>
 </div>
 <div id="ejemplo-2" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="arb-distri.html#ejemplo-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -354,6 +327,17 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 <img src="images/ecua_ejemplo_disttree.png" width="350">
 </p>
 <p>El siguiente código sirve para simular los datos.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="arb-distri.html#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb7-2"><a href="arb-distri.html#cb7-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb7-3"><a href="arb-distri.html#cb7-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n, <span class="at">min=</span><span class="sc">-</span><span class="fl">0.4</span>, <span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="arb-distri.html#cb7-4" aria-hidden="true" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="dv">4</span><span class="sc">*</span>x<span class="dv">-2</span>)<span class="sc">^</span>(<span class="dv">2</span><span class="sc">*</span>k))</span>
+<span id="cb7-5"><a href="arb-distri.html#cb7-5" aria-hidden="true" tabindex="-1"></a>desvi <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">abs</span>(x)</span>
+<span id="cb7-6"><a href="arb-distri.html#cb7-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span>n, <span class="at">mean=</span>media, <span class="at">sd=</span>desvi)</span>
+<span id="cb7-7"><a href="arb-distri.html#cb7-7" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="arb-distri.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
+<span id="cb8-2"><a href="arb-distri.html#cb8-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
+<span id="cb8-3"><a href="arb-distri.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 
 </div>
 </div>

@@ -1,5 +1,5 @@
 # Árboles de regresión distribucionales {#arb-distri}
-Los árboles de regresión distribucionales fueron propuestos por @LisaSchlosser2020.
+Los árboles de regresión distribucionales fueron propuestos por Lisa @LisaSchlosser2020.
 
 Abajo una comparación entre un árbol de regresión y un árbol de regresión distribucional.
 
@@ -68,7 +68,6 @@ Vamos ahora a crear el árbol distribucional con `family=NO`.
 ```{r message=FALSE}
 library(disttree)
 mod <- disttree(y ~ x, data=datos, family=NO)
-mod
 plot(mod)
 ```
 
@@ -90,4 +89,19 @@ Este ejemplo está basado en un ejemplo de [esta presentación](https://www.zeil
 
 El siguiente código sirve para simular los datos.
 
+```{r}
+n <- 300
+k <- 2
+x <- runif(n=n, min=-0.4, max=1)
+media <- 10 * exp(-(4*x-2)^(2*k))
+desvi <- 0.5 + 2 * abs(x)
+y <- rnorm(n=n, mean=media, sd=desvi)
+datos <- data.frame(y, x)
+```
+
+```{r}
+library(disttree)
+mod <- disttree(y ~ x, data=datos, family=NO)
+plot(mod)
+```
 
