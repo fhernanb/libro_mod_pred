@@ -1,5 +1,5 @@
 # Árboles de regresión distribucionales {#arb-distri}
-Los árboles de regresión distribucionales fueron propuestos por Lisa @LisaSchlosser2020.
+Los árboles de regresión distribucionales fueron propuestos en @Lisa2019 y @LisaSchlosser2020.
 
 Abajo una comparación entre un árbol de regresión y un árbol de regresión distribucional.
 
