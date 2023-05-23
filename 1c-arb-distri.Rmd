@@ -32,7 +32,7 @@ disttree(formula, data, subset, na.action = na.pass, weights, offset,
            converged = NULL, scores = NULL, doFit = TRUE, ...)
 ```
 
-El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución del paquete **gamlss** [@R-gamlss] o cualquier distribución del paquete **RelDists** [@R-RelDists].
+El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** y **DiscreteDists**.
 
 Una pregunta frecuente es ¿cómo selecciono la distribución que mejor explica el patrón de mi variable respuesta $Y$?
 
