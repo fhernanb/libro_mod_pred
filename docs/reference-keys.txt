@@ -5,8 +5,6 @@ fig:iris
 arb-de-regre
 arb-de-clasif
 arb-distri
-videos-útiles
-paquete-disttree
 knn-reg
 svm-reg
 svm-clas

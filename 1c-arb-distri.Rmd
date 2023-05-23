@@ -1,5 +1,8 @@
 # Árboles de regresión distribucionales {#arb-distri}
-Los árboles de regresión distribucionales fueron propuestos en @Lisa2019 y @LisaSchlosser2020.
+Los árboles de regresión distribucionales fueron propuestos en @Lisa2019 y @LisaSchlosser2020. Esta nueva propuesta unifica dos aproximaciones de modelación:
+
+- Data modeling.
+- Algorithmic modeling.
 
 Abajo una comparación entre un árbol de regresión y un árbol de regresión distribucional.
 
@@ -104,4 +107,52 @@ library(disttree)
 mod <- disttree(y ~ x, data=datos, family=NO)
 plot(mod)
 ```
+
+## Ejemplo {-}
+Este ejemplo se parece el ejemplo inicial, sólo que aquí la variable respuesta $Y$ va a tener distribución FWE (Flexible Weibull Extension) y vamos a construir tres árboles distribucionales con familia NO, FWE y WEI. El objetivo es saber si disttree logra indicarnos cuál árbol distribucional es el más apropiado.
+
+El modelo del cuál vamos a generar los datos es el siguiente:
+
+ \begin{equation*}
+  Y = \begin{cases}
+        FWE(\mu=0.7, \sigma=1)   \, \text{si $x < 0.4$,} \\
+        FWE(\mu=0.4, \sigma=2)  \, \text{si $0.4 \leq x \leq 0.8$,} \\
+        FWE(\mu=0.5, \sigma=0.5) \, \text{si $x > 0.8$}.
+      \end{cases}
+ \end{equation*}
+
+El código para simular los datos es el siguiente:
+
+```{r message=FALSE}
+library(RelDists) # Para usar la distribucion FWE
+
+n <- 500
+x <- runif(n=n)
+y <- numeric(n)
+y[x < 0.4]            <- rFWE(n=sum(x < 0.4), mu=0.7, sigma=1)
+y[x >+ 0.4 & x < 0.8] <- rFWE(n=sum(x > 0.4 & x < 0.8), mu=0.4, sigma=2)
+y[x >= 0.8]           <- rFWE(n=sum(x >= 0.8), mu=0.5, sigma=0.5)
+
+datos <- data.frame(y=y, x=x)
+
+plot(x=x, y=y)
+```
+
+Ahora vamos a entrenar los tres modelos.
+
+```{r}
+library(disttree)
+
+mod1 <- disttree(y ~ x, data=datos, family=NO)
+mod1
+
+mod2 <- disttree(y ~ x, data=datos, family=FWE)
+mod2
+
+mod3 <- disttree(y ~ x, data=datos, family=WEI)
+mod3
+```
+
+En el resumen de cada modelo podemos ver al final el valor de $-logLik$, el modelo más apropiado es aquel que tenga el menor valor. Al comparar los indicadores vemos que el modelo `mod2` que asume FWE como distribución para $Y$ es el que tiene el mejor indicador.
+
 
