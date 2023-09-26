@@ -40,6 +40,53 @@ Un árbol de regresión consiste en hacer preguntas del tipo ¿$x_k \leq c$? par
 
 En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte $c$ de tal manera que se minimice la función de costos $\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2$.
 
+```{r "nueva", echo=FALSE}
+library(rpart)
+mod <- rpart(Species ~ Petal.Length + Petal.Width, 
+             data=iris, method='class')
+
+library(rpart.plot)
+rpart.plot(mod, type=3, extra=0)
+
+# Para crear los subconjuntos de datos
+library(dplyr)
+
+dt_seto <- iris %>% 
+  filter(Species == "setosa") %>% 
+  select(Petal.Length, Petal.Width)
+
+dt_versi <- iris %>% 
+  filter(Species == "versicolor") %>% 
+  select(Petal.Length, Petal.Width)
+
+dt_virgi <- iris %>% 
+  filter(Species == "virginica") %>% 
+  select(Petal.Length, Petal.Width)
+
+#pdf('arbol_iris.pdf', width=9, height=5)
+par(mfrow=c(1, 2))
+
+# Figura izq
+rpart.plot(mod, type=3, extra=0)
+
+# Figura der
+plot(x=iris$Petal.Length, y=iris$Petal.Width,
+     pch=NA, las=1,
+     xlab="Petal length", ylab="Petal width")
+
+points(dt_seto, pch="S", col="tomato")
+points(dt_versi, pch="C", col="gray44")
+points(dt_virgi, pch="V", col="seagreen")
+
+abline(v=2.5)
+segments(x0=2.5, y0=1.8, x1=7.5, y1=1.8)
+
+text(x=1.5, y=1.3, "Setosa", col="tomato")
+text(x=4.8, y=0.5, "Versicolor", col="gray44")
+text(x=3.5, y=2.2, "Virginica", col="seagreen")
+```
+
+
 <p align="center">
   <img src="images/ilustracion_arb_clasi.png" width="800">
 </p>
