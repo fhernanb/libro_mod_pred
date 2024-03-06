@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Árboles de regresión distribucionales | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Árboles de regresión distribucionales | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2023-09-25" />
+<meta name="date" content="2024-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -276,13 +280,13 @@ div.csl-indent {
 </div>
 <div id="paquete-disttree" class="section level2 unnumbered hasAnchor">
 <h2>Paquete disttree<a href="arb-distri.html#paquete-disttree" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>distree</strong> <span class="citation">(<a href="#ref-R-disttree">Schlosser et al. 2021</a>)</span> es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="arb-distri.html#cb63-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;disttree&quot;</span>, <span class="at">repos=</span><span class="st">&quot;http://R-Forge.R-project.org&quot;</span>)</span></code></pre></div>
+<p><strong>distree</strong> <span class="citation">(<a href="#ref-R-disttree"><strong>R-disttree?</strong></a>)</span> es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="arb-distri.html#cb70-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;disttree&quot;</span>, <span class="at">repos=</span><span class="st">&quot;http://R-Forge.R-project.org&quot;</span>)</span></code></pre></div>
 <p>Para crear un árbol de regresión distribucional se usa la función <code>disttree</code> que tiene la siguiente estructura.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="arb-distri.html#cb64-1" tabindex="-1"></a><span class="fu">disttree</span>(formula, data, subset, <span class="at">na.action =</span> na.pass, weights, offset,</span>
-<span id="cb64-2"><a href="arb-distri.html#cb64-2" tabindex="-1"></a>           cluster, <span class="at">family =</span> <span class="fu">NO</span>(), <span class="at">control =</span> <span class="fu">disttree_control</span>(...), </span>
-<span id="cb64-3"><a href="arb-distri.html#cb64-3" tabindex="-1"></a>           <span class="at">converged =</span> <span class="cn">NULL</span>, <span class="at">scores =</span> <span class="cn">NULL</span>, <span class="at">doFit =</span> <span class="cn">TRUE</span>, ...)</span></code></pre></div>
-<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> <span class="citation">(<a href="#ref-R-gamlss">Stasinopoulos and Rigby 2022</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> <span class="citation">(<a href="#ref-R-RelDists">Hernandez et al. 2022</a>)</span> <strong>RealDists</strong> y <strong>DiscreteDists</strong>.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="arb-distri.html#cb71-1" tabindex="-1"></a><span class="fu">disttree</span>(formula, data, subset, <span class="at">na.action =</span> na.pass, weights, offset,</span>
+<span id="cb71-2"><a href="arb-distri.html#cb71-2" tabindex="-1"></a>           cluster, <span class="at">family =</span> <span class="fu">NO</span>(), <span class="at">control =</span> <span class="fu">disttree_control</span>(...), </span>
+<span id="cb71-3"><a href="arb-distri.html#cb71-3" tabindex="-1"></a>           <span class="at">converged =</span> <span class="cn">NULL</span>, <span class="at">scores =</span> <span class="cn">NULL</span>, <span class="at">doFit =</span> <span class="cn">TRUE</span>, ...)</span></code></pre></div>
+<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> <span class="citation">(<a href="#ref-R-gamlss">Stasinopoulos and Rigby 2023</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> <span class="citation">(<a href="#ref-R-RelDists">Hernandez et al. 2022</a>)</span> <strong>RealDists</strong> y <strong>DiscreteDists</strong>.</p>
 <p>Una pregunta frecuente es ¿cómo selecciono la distribución que mejor explica el patrón de mi variable respuesta <span class="math inline">\(Y\)</span>?</p>
 
 <div class="rmdnote">
@@ -300,29 +304,29 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
       \end{cases}
 \end{equation*}\]</span></p>
 <p>El siguiente código sirve para simular los datos.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="arb-distri.html#cb65-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb65-2"><a href="arb-distri.html#cb65-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
-<span id="cb65-3"><a href="arb-distri.html#cb65-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb65-4"><a href="arb-distri.html#cb65-4" tabindex="-1"></a>y[x <span class="sc">&lt;</span> <span class="fl">0.4</span>]            <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&lt;</span> <span class="fl">0.4</span>), <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb65-5"><a href="arb-distri.html#cb65-5" tabindex="-1"></a>y[x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">12</span>, <span class="at">sd=</span><span class="dv">2</span>)</span>
-<span id="cb65-6"><a href="arb-distri.html#cb65-6" tabindex="-1"></a>y[x <span class="sc">&gt;=</span> <span class="fl">0.8</span>]           <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="fl">0.5</span>)</span>
-<span id="cb65-7"><a href="arb-distri.html#cb65-7" tabindex="-1"></a></span>
-<span id="cb65-8"><a href="arb-distri.html#cb65-8" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>y, <span class="at">x=</span>x)</span>
-<span id="cb65-9"><a href="arb-distri.html#cb65-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">20</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="arb-distri.html#cb72-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb72-2"><a href="arb-distri.html#cb72-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
+<span id="cb72-3"><a href="arb-distri.html#cb72-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb72-4"><a href="arb-distri.html#cb72-4" tabindex="-1"></a>y[x <span class="sc">&lt;</span> <span class="fl">0.4</span>]            <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&lt;</span> <span class="fl">0.4</span>), <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb72-5"><a href="arb-distri.html#cb72-5" tabindex="-1"></a>y[x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">12</span>, <span class="at">sd=</span><span class="dv">2</span>)</span>
+<span id="cb72-6"><a href="arb-distri.html#cb72-6" tabindex="-1"></a>y[x <span class="sc">&gt;=</span> <span class="fl">0.8</span>]           <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">0.8</span>), <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="fl">0.5</span>)</span>
+<span id="cb72-7"><a href="arb-distri.html#cb72-7" tabindex="-1"></a></span>
+<span id="cb72-8"><a href="arb-distri.html#cb72-8" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>y, <span class="at">x=</span>x)</span>
+<span id="cb72-9"><a href="arb-distri.html#cb72-9" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">20</span>))</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Vamos ahora a crear el árbol distribucional con <code>family=NO</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="arb-distri.html#cb66-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
-<span id="cb66-2"><a href="arb-distri.html#cb66-2" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
-<span id="cb66-3"><a href="arb-distri.html#cb66-3" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="arb-distri.html#cb73-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
+<span id="cb73-2"><a href="arb-distri.html#cb73-2" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
+<span id="cb73-3"><a href="arb-distri.html#cb73-3" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>¿Cuál será el valor estimado de <span class="math inline">\(Y\)</span> para tres nuevos objetos que tiene valor de <span class="math inline">\(x=0.35\)</span>, <span class="math inline">\(x=0.47\)</span> y <span class="math inline">\(x=0.89\)</span> respectivamente?</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="arb-distri.html#cb67-1" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.47</span>, <span class="fl">0.89</span>))</span>
-<span id="cb67-2"><a href="arb-distri.html#cb67-2" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata=</span>new_data)</span>
-<span id="cb67-3"><a href="arb-distri.html#cb67-3" tabindex="-1"></a>predicciones</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="arb-distri.html#cb74-1" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.47</span>, <span class="fl">0.89</span>))</span>
+<span id="cb74-2"><a href="arb-distri.html#cb74-2" tabindex="-1"></a>predicciones <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata=</span>new_data)</span>
+<span id="cb74-3"><a href="arb-distri.html#cb74-3" tabindex="-1"></a>predicciones</span></code></pre></div>
 <pre><code>##            mu     sigma
-## 1  5.01043665 0.8909277
-## 2 12.12411612 1.9177262
-## 3  0.07229038 0.5099273</code></pre>
+## 1  4.98596378 1.0917854
+## 2 12.00069194 2.0427021
+## 3  0.04605966 0.4491033</code></pre>
 </div>
 <div id="ejemplo-2" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="arb-distri.html#ejemplo-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -331,16 +335,16 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 <img src="images/ecua_ejemplo_disttree.png" width="350">
 </p>
 <p>El siguiente código sirve para simular los datos.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="arb-distri.html#cb69-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb69-2"><a href="arb-distri.html#cb69-2" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb69-3"><a href="arb-distri.html#cb69-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n, <span class="at">min=</span><span class="sc">-</span><span class="fl">0.4</span>, <span class="at">max=</span><span class="dv">1</span>)</span>
-<span id="cb69-4"><a href="arb-distri.html#cb69-4" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="dv">4</span><span class="sc">*</span>x<span class="dv">-2</span>)<span class="sc">^</span>(<span class="dv">2</span><span class="sc">*</span>k))</span>
-<span id="cb69-5"><a href="arb-distri.html#cb69-5" tabindex="-1"></a>desvi <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">abs</span>(x)</span>
-<span id="cb69-6"><a href="arb-distri.html#cb69-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span>n, <span class="at">mean=</span>media, <span class="at">sd=</span>desvi)</span>
-<span id="cb69-7"><a href="arb-distri.html#cb69-7" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="arb-distri.html#cb70-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
-<span id="cb70-2"><a href="arb-distri.html#cb70-2" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
-<span id="cb70-3"><a href="arb-distri.html#cb70-3" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="arb-distri.html#cb76-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb76-2"><a href="arb-distri.html#cb76-2" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb76-3"><a href="arb-distri.html#cb76-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n, <span class="at">min=</span><span class="sc">-</span><span class="fl">0.4</span>, <span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb76-4"><a href="arb-distri.html#cb76-4" tabindex="-1"></a>media <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>(<span class="dv">4</span><span class="sc">*</span>x<span class="dv">-2</span>)<span class="sc">^</span>(<span class="dv">2</span><span class="sc">*</span>k))</span>
+<span id="cb76-5"><a href="arb-distri.html#cb76-5" tabindex="-1"></a>desvi <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">abs</span>(x)</span>
+<span id="cb76-6"><a href="arb-distri.html#cb76-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span>n, <span class="at">mean=</span>media, <span class="at">sd=</span>desvi)</span>
+<span id="cb76-7"><a href="arb-distri.html#cb76-7" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, x)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="arb-distri.html#cb77-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
+<span id="cb77-2"><a href="arb-distri.html#cb77-2" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
+<span id="cb77-3"><a href="arb-distri.html#cb77-3" tabindex="-1"></a><span class="fu">plot</span>(mod)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 </div>
 <div id="ejemplo-3" class="section level2 unnumbered hasAnchor">
@@ -355,24 +359,24 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
       \end{cases}
 \end{equation*}\]</span></p>
 <p>El código para simular los datos es el siguiente:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="arb-distri.html#cb71-1" tabindex="-1"></a><span class="fu">library</span>(RelDists) <span class="co"># Para usar la distribucion FWE</span></span>
-<span id="cb71-2"><a href="arb-distri.html#cb71-2" tabindex="-1"></a></span>
-<span id="cb71-3"><a href="arb-distri.html#cb71-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb71-4"><a href="arb-distri.html#cb71-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
-<span id="cb71-5"><a href="arb-distri.html#cb71-5" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
-<span id="cb71-6"><a href="arb-distri.html#cb71-6" tabindex="-1"></a>y[x <span class="sc">&lt;</span> <span class="fl">0.4</span>]            <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&lt;</span> <span class="fl">0.4</span>), <span class="at">mu=</span><span class="fl">0.7</span>, <span class="at">sigma=</span><span class="dv">1</span>)</span>
-<span id="cb71-7"><a href="arb-distri.html#cb71-7" tabindex="-1"></a>y[x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>] <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>), <span class="at">mu=</span><span class="fl">0.4</span>, <span class="at">sigma=</span><span class="dv">2</span>)</span>
-<span id="cb71-8"><a href="arb-distri.html#cb71-8" tabindex="-1"></a>y[x <span class="sc">&gt;=</span> <span class="fl">0.8</span>]           <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">0.8</span>), <span class="at">mu=</span><span class="fl">0.5</span>, <span class="at">sigma=</span><span class="fl">0.5</span>)</span>
-<span id="cb71-9"><a href="arb-distri.html#cb71-9" tabindex="-1"></a></span>
-<span id="cb71-10"><a href="arb-distri.html#cb71-10" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>y, <span class="at">x=</span>x)</span>
-<span id="cb71-11"><a href="arb-distri.html#cb71-11" tabindex="-1"></a></span>
-<span id="cb71-12"><a href="arb-distri.html#cb71-12" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="arb-distri.html#cb78-1" tabindex="-1"></a><span class="fu">library</span>(RelDists) <span class="co"># Para usar la distribucion FWE</span></span>
+<span id="cb78-2"><a href="arb-distri.html#cb78-2" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="arb-distri.html#cb78-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb78-4"><a href="arb-distri.html#cb78-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
+<span id="cb78-5"><a href="arb-distri.html#cb78-5" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb78-6"><a href="arb-distri.html#cb78-6" tabindex="-1"></a>y[x <span class="sc">&lt;</span> <span class="fl">0.4</span>]            <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&lt;</span> <span class="fl">0.4</span>), <span class="at">mu=</span><span class="fl">0.7</span>, <span class="at">sigma=</span><span class="dv">1</span>)</span>
+<span id="cb78-7"><a href="arb-distri.html#cb78-7" tabindex="-1"></a>y[x <span class="sc">&gt;+</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>] <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fl">0.8</span>), <span class="at">mu=</span><span class="fl">0.4</span>, <span class="at">sigma=</span><span class="dv">2</span>)</span>
+<span id="cb78-8"><a href="arb-distri.html#cb78-8" tabindex="-1"></a>y[x <span class="sc">&gt;=</span> <span class="fl">0.8</span>]           <span class="ot">&lt;-</span> <span class="fu">rFWE</span>(<span class="at">n=</span><span class="fu">sum</span>(x <span class="sc">&gt;=</span> <span class="fl">0.8</span>), <span class="at">mu=</span><span class="fl">0.5</span>, <span class="at">sigma=</span><span class="fl">0.5</span>)</span>
+<span id="cb78-9"><a href="arb-distri.html#cb78-9" tabindex="-1"></a></span>
+<span id="cb78-10"><a href="arb-distri.html#cb78-10" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>y, <span class="at">x=</span>x)</span>
+<span id="cb78-11"><a href="arb-distri.html#cb78-11" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="arb-distri.html#cb78-12" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Ahora vamos a entrenar los tres modelos.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="arb-distri.html#cb72-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
-<span id="cb72-2"><a href="arb-distri.html#cb72-2" tabindex="-1"></a></span>
-<span id="cb72-3"><a href="arb-distri.html#cb72-3" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
-<span id="cb72-4"><a href="arb-distri.html#cb72-4" tabindex="-1"></a>mod1</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="arb-distri.html#cb79-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
+<span id="cb79-2"><a href="arb-distri.html#cb79-2" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="arb-distri.html#cb79-3" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>NO)</span>
+<span id="cb79-4"><a href="arb-distri.html#cb79-4" tabindex="-1"></a>mod1</span></code></pre></div>
 <pre><code>## Distributional regression tree (Normal Distribution)
 ## 
 ## Model formula:
@@ -380,23 +384,23 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 ## 
 ## Fitted party:
 ## [1] root
-## |   [2] x &lt;= 0.39434: n = 195
-## |              mu     sigma 
-## |       1.0532916 0.5895158 
-## |   [3] x &gt; 0.39434
-## |   |   [4] x &lt;= 0.819: n = 199
+## |   [2] x &lt;= 0.39928: n = 221
+## |             mu    sigma 
+## |       1.047438 0.590712 
+## |   [3] x &gt; 0.39928
+## |   |   [4] x &lt;= 0.79916: n = 178
+## |   |             mu    sigma 
+## |   |       2.096793 1.074580 
+## |   |   [5] x &gt; 0.79916: n = 101
 ## |   |              mu     sigma 
-## |   |       2.1246441 0.9864802 
-## |   |   [5] x &gt; 0.819: n = 106
-## |   |              mu     sigma 
-## |   |       0.9637114 0.8437413 
+## |   |       0.9792686 0.8210795 
 ## 
 ## Number of inner nodes:    2
 ## Number of terminal nodes: 3
 ## Number of parameters per node: 2
-## Objective function (negative log-likelihood): 585.7016</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="arb-distri.html#cb74-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>FWE)</span>
-<span id="cb74-2"><a href="arb-distri.html#cb74-2" tabindex="-1"></a>mod2</span></code></pre></div>
+## Objective function (negative log-likelihood): 586.0186</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="arb-distri.html#cb81-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>FWE)</span>
+<span id="cb81-2"><a href="arb-distri.html#cb81-2" tabindex="-1"></a>mod2</span></code></pre></div>
 <pre><code>## Distributional regression tree (Flexible Weibull Extension Distribution)
 ## 
 ## Model formula:
@@ -404,27 +408,27 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 ## 
 ## Fitted party:
 ## [1] root
-## |   [2] x &lt;= 0.82395
-## |   |   [3] x &lt;= 0.39434: n = 195
+## |   [2] x &lt;= 0.86279
+## |   |   [3] x &lt;= 0.39928: n = 221
 ## |   |              mu     sigma 
-## |   |       0.7047888 0.9912643 
-## |   |   [4] x &gt; 0.39434
-## |   |   |   [5] x &lt;= 0.79266: n = 186
+## |   |       0.7135389 0.9722274 
+## |   |   [4] x &gt; 0.39928
+## |   |   |   [5] x &lt;= 0.79916: n = 178
 ## |   |   |              mu     sigma 
-## |   |   |       0.4318301 2.5262936 
-## |   |   |   [6] x &gt; 0.79266: n = 20
+## |   |   |       0.3924826 2.0643320 
+## |   |   |   [6] x &gt; 0.79916: n = 27
 ## |   |   |              mu     sigma 
-## |   |   |       0.3987646 1.0960392 
-## |   [7] x &gt; 0.82395: n = 99
+## |   |   |       0.5018044 0.6986374 
+## |   [7] x &gt; 0.86279: n = 74
 ## |              mu     sigma 
-## |       0.4526858 0.4523592 
+## |       0.4710168 0.4425277 
 ## 
 ## Number of inner nodes:    3
 ## Number of terminal nodes: 4
 ## Number of parameters per node: 2
-## Objective function (negative log-likelihood): 508.9787</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="arb-distri.html#cb76-1" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>WEI)</span>
-<span id="cb76-2"><a href="arb-distri.html#cb76-2" tabindex="-1"></a>mod3</span></code></pre></div>
+## Objective function (negative log-likelihood): 506.1881</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="arb-distri.html#cb83-1" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">disttree</span>(y <span class="sc">~</span> x, <span class="at">data=</span>datos, <span class="at">family=</span>WEI)</span>
+<span id="cb83-2"><a href="arb-distri.html#cb83-2" tabindex="-1"></a>mod3</span></code></pre></div>
 <pre><code>## Distributional regression tree (Weibull Distribution)
 ## 
 ## Model formula:
@@ -432,29 +436,21 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 ## 
 ## Fitted party:
 ## [1] root
-## |   [2] x &lt;= 0.82395
-## |   |   [3] x &lt;= 0.39434: n = 195
-## |   |             mu    sigma 
-## |   |       1.192363 1.901755 
-## |   |   [4] x &gt; 0.39434
-## |   |   |   [5] x &lt;= 0.68419: n = 134
-## |   |   |             mu    sigma 
-## |   |   |       2.353427 2.697428 
-## |   |   |   [6] x &gt; 0.68419
-## |   |   |   |   [7] x &lt;= 0.79266: n = 52
-## |   |   |   |             mu    sigma 
-## |   |   |   |       2.606736 2.005653 
-## |   |   |   |   [8] x &gt; 0.79266: n = 20
-## |   |   |   |             mu    sigma 
-## |   |   |   |       1.777756 1.634440 
-## |   [9] x &gt; 0.82395: n = 99
+## |   [2] x &lt;= 0.39928: n = 221
 ## |             mu    sigma 
-## |       1.007584 1.187368 
+## |       1.185869 1.887023 
+## |   [3] x &gt; 0.39928
+## |   |   [4] x &lt;= 0.79916: n = 178
+## |   |             mu    sigma 
+## |   |       2.372615 2.068988 
+## |   |   [5] x &gt; 0.79916: n = 101
+## |   |             mu    sigma 
+## |   |       1.057080 1.253301 
 ## 
-## Number of inner nodes:    4
-## Number of terminal nodes: 5
+## Number of inner nodes:    2
+## Number of terminal nodes: 3
 ## Number of parameters per node: 2
-## Objective function (negative log-likelihood): 516.8696</code></pre>
+## Objective function (negative log-likelihood): 525.6786</code></pre>
 <p>En el resumen de cada modelo podemos ver al final el valor de <span class="math inline">\(-logLik\)</span>, el modelo más apropiado es aquel que tenga el menor valor. Al comparar los indicadores vemos que el modelo <code>mod2</code> que asume FWE como distribución para <span class="math inline">\(Y\)</span> es el que tiene el mejor indicador.</p>
 
 </div>
@@ -462,7 +458,7 @@ Para encontrar las distribuciones que mejor explican a <span class="math inline"
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R-RelDists" class="csl-entry">
-Hernandez, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2022. <em>RelDists: Estimation for Some Reliability Distributions with GAMLSS</em>. <a href="https://ousuga.github.io/RelDists/">https://ousuga.github.io/RelDists/</a>.
+Hernandez, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2022. <em>RelDists: Estimation for Some Reliability Distributions</em>. <a href="https://ousuga.github.io/RelDists/">https://ousuga.github.io/RelDists/</a>.
 </div>
 <div id="ref-LisaSchlosser2020" class="csl-entry">
 Schlosser, Lisa. 2020. <span>“Distributional Trees and Forests.”</span> PhD thesis, University of Innsbruck.
@@ -470,11 +466,8 @@ Schlosser, Lisa. 2020. <span>“Distributional Trees and Forests.”</span> PhD 
 <div id="ref-Lisa2019" class="csl-entry">
 Schlosser, Lisa, Torsten Hothorn, Reto Stauffer, and Achim Zeileis. 2019. <span>“<span class="nocase">Distributional regression forests for probabilistic precipitation forecasting in complex terrain</span>.”</span> <em>The Annals of Applied Statistics</em> 13 (3): 1564–89. <a href="https://doi.org/10.1214/19-AOAS1247">https://doi.org/10.1214/19-AOAS1247</a>.
 </div>
-<div id="ref-R-disttree" class="csl-entry">
-Schlosser, Lisa, Moritz N. Lang, Torsten Hothorn, and Achim Zeileis. 2021. <em>Disttree: Trees and Forests for Distributional Regression</em>. <a href="https://R-Forge.R-project.org/projects/partykit/">https://R-Forge.R-project.org/projects/partykit/</a>.
-</div>
 <div id="ref-R-gamlss" class="csl-entry">
-Stasinopoulos, Mikis, and Bob Rigby. 2022. <em>Gamlss: Generalised Additive Models for Location Scale and Shape</em>. <a href="https://www.gamlss.com/">https://www.gamlss.com/</a>.
+Stasinopoulos, Mikis, and Robert Rigby. 2023. <em>Gamlss: Generalised Additive Models for Location Scale and Shape</em>. <a href="https://www.gamlss.com/">https://www.gamlss.com/</a>.
 </div>
 </div>
             </section>

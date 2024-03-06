@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Random Forest | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Random Forest | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2023-09-25" />
+<meta name="date" content="2024-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -310,28 +314,28 @@ else : 0 (false).</li>
 <li>Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.</li>
 </ol>
 <p>La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="rand_forests.html#cb152-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb152-2"><a href="rand_forests.html#cb152-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></span>
-<span id="cb152-3"><a href="rand_forests.html#cb152-3" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="rand_forests.html#cb164-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb164-2"><a href="rand_forests.html#cb164-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">&#39;https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv&#39;</span></span>
+<span id="cb164-3"><a href="rand_forests.html#cb164-3" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Como la base de datos viene sin los nombres se deben colocar manualmente así:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="rand_forests.html#cb153-1" tabindex="-1"></a><span class="fu">colnames</span>(datos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</span>
-<span id="cb153-2"><a href="rand_forests.html#cb153-2" tabindex="-1"></a>                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </span>
-<span id="cb153-3"><a href="rand_forests.html#cb153-3" tabindex="-1"></a>                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="rand_forests.html#cb165-1" tabindex="-1"></a><span class="fu">colnames</span>(datos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;age&#39;</span>, <span class="st">&#39;sex&#39;</span>, <span class="st">&#39;cp&#39;</span>, <span class="st">&#39;trestbps&#39;</span>, <span class="st">&#39;chol&#39;</span>,</span>
+<span id="cb165-2"><a href="rand_forests.html#cb165-2" tabindex="-1"></a>                     <span class="st">&#39;fbs&#39;</span>, <span class="st">&#39;restecg&#39;</span>, <span class="st">&#39;thalach&#39;</span>, <span class="st">&#39;exang&#39;</span>, </span>
+<span id="cb165-3"><a href="rand_forests.html#cb165-3" tabindex="-1"></a>                     <span class="st">&#39;oldpeak&#39;</span>, <span class="st">&#39;slope&#39;</span>, <span class="st">&#39;ca&#39;</span>, <span class="st">&#39;thal&#39;</span>, <span class="st">&#39;target&#39;</span>)</span></code></pre></div>
 <p>La variable respuesta es <code>target</code> que tiene cuatro números así: 0 = absence, 1, 2, 3, 4 = present. Por esa razón vamos a crear la nueva variable <code>y</code> que agregaremos a la base de datos usando el siguiente código.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="rand_forests.html#cb154-1" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(datos<span class="sc">$</span>target <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&#39;absence&#39;</span>, <span class="st">&#39;presence&#39;</span>)</span>
-<span id="cb154-2"><a href="rand_forests.html#cb154-2" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(datos<span class="sc">$</span>y)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="rand_forests.html#cb166-1" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(datos<span class="sc">$</span>target <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&#39;absence&#39;</span>, <span class="st">&#39;presence&#39;</span>)</span>
+<span id="cb166-2"><a href="rand_forests.html#cb166-2" tabindex="-1"></a>datos<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(datos<span class="sc">$</span>y)</span></code></pre></div>
 <p>Nota: en orden lexicográfico la etiqueta <code>absence</code> está primero que <code>presence</code> porque inicia con la letra <code>a</code>. Eso significa que el árbol va a tomar la etiqueta <code>absence</code> como 0 mientras que <code>presence</code> la va a tomar como 1.</p>
 <p>Nota: se pudo haber creado la variable <code>y</code> usando <code>ifelse(datos$target == 0, 0, 1)</code> pero decidimos usar los nombres <code>absence</code> y <code>presence</code> en lugar del 0 y 1 para facilitar su interpretación.</p>
 <p>Para crear el modelo random forest se debe cargar la librería <em>randomForest</em> así:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="rand_forests.html#cb155-1" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="rand_forests.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code></pre></div>
 <p>Vamos a crear un random forest con <span class="math inline">\(B=400\)</span> árboles y <span class="math inline">\(k=1\)</span> variables en cada partición, para esto podemos usar la siguiente instrucción:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="rand_forests.html#cb156-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb156-2"><a href="rand_forests.html#cb156-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(y <span class="sc">~</span> age <span class="sc">+</span> chol, <span class="at">data=</span>datos, </span>
-<span id="cb156-3"><a href="rand_forests.html#cb156-3" tabindex="-1"></a>                      <span class="at">ntree=</span><span class="dv">400</span>, <span class="at">mtry=</span><span class="dv">1</span>,</span>
-<span id="cb156-4"><a href="rand_forests.html#cb156-4" tabindex="-1"></a>                      <span class="at">proximity=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="rand_forests.html#cb168-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb168-2"><a href="rand_forests.html#cb168-2" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(y <span class="sc">~</span> age <span class="sc">+</span> chol, <span class="at">data=</span>datos, </span>
+<span id="cb168-3"><a href="rand_forests.html#cb168-3" tabindex="-1"></a>                      <span class="at">ntree=</span><span class="dv">400</span>, <span class="at">mtry=</span><span class="dv">1</span>,</span>
+<span id="cb168-4"><a href="rand_forests.html#cb168-4" tabindex="-1"></a>                      <span class="at">proximity=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <p>En el código anterior se fijó la semilla en el valor 12345 para que usted pueda replicar el ejemplo y obtener los mismos resultados.</p>
 <p>Para explorar el modelo ajustado podemos hacer lo siguiente:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="rand_forests.html#cb157-1" tabindex="-1"></a>model</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="rand_forests.html#cb169-1" tabindex="-1"></a>model</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = y ~ age + chol, data = datos, ntree = 400,      mtry = 1, proximity = TRUE) 
@@ -358,10 +362,10 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 \]</span></li>
 </ul>
 <p>Supongamos que nos llegaron 3 pacientes, el primero un hombre de 45 años con nivel de colesterol 300, el segundo una mujer de 60 años con nivel de colesterol de 450 y el tercero otro hombre de 65 años con nivel de colesterol de 200. ¿A qué grupo se debe asignar cada paciente?</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="rand_forests.html#cb159-1" tabindex="-1"></a>nuevo_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">65</span>),</span>
-<span id="cb159-2"><a href="rand_forests.html#cb159-2" tabindex="-1"></a>                       <span class="at">chol=</span><span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">450</span>, <span class="dv">200</span>))</span>
-<span id="cb159-3"><a href="rand_forests.html#cb159-3" tabindex="-1"></a></span>
-<span id="cb159-4"><a href="rand_forests.html#cb159-4" tabindex="-1"></a><span class="fu">predict</span>(model, <span class="at">newdata=</span>nuevo_df, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="rand_forests.html#cb171-1" tabindex="-1"></a>nuevo_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">65</span>),</span>
+<span id="cb171-2"><a href="rand_forests.html#cb171-2" tabindex="-1"></a>                       <span class="at">chol=</span><span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">450</span>, <span class="dv">200</span>))</span>
+<span id="cb171-3"><a href="rand_forests.html#cb171-3" tabindex="-1"></a></span>
+<span id="cb171-4"><a href="rand_forests.html#cb171-4" tabindex="-1"></a><span class="fu">predict</span>(model, <span class="at">newdata=</span>nuevo_df, <span class="at">type=</span><span class="st">&#39;response&#39;</span>)</span></code></pre></div>
 <pre><code>##       1       2       3 
 ## absence absence absence 
 ## Levels: absence presence</code></pre>
