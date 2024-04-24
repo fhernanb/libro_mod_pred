@@ -57,7 +57,9 @@ Algunas de las ventajas de los árboles de regresión son:
 - Las covariables pueden ser cualitativas o cuantitativas.
 - No exige supuestos distribucionales.
 
-Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013]. Se recomienda también ver [este video](https://www.youtube.com/watch?v=7VeUPuFGJHk) con una explicación sencilla sobre árboles.
+Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013] y se recomienda también ver el siguiente video con una explicación sencilla sobre árboles.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk?si=CRKUi79Dd679mz8u" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Paquetes de R para árboles {-}
 Los paquetes más conocidos para construir árboles son:
