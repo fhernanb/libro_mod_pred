@@ -32,7 +32,7 @@ disttree(formula, data, subset, na.action = na.pass, weights, offset,
            converged = NULL, scores = NULL, doFit = TRUE, ...)
 ```
 
-El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** y **DiscreteDists**.
+El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** [@R-RealDists] y **DiscreteDists** [@R-DiscreteDists].
 
 Una pregunta frecuente es ¿cómo selecciono la distribución que mejor explica el patrón de mi variable respuesta $Y$?
 
@@ -56,11 +56,14 @@ El siguiente código sirve para simular los datos.
 
 ```{r}
 n <- 500
-x <- runif(n=n)
-y <- numeric(n)
-y[x < 0.4]            <- rnorm(n=sum(x < 0.4), mean=5, sd=1)
-y[x >+ 0.4 & x < 0.8] <- rnorm(n=sum(x >+ 0.4 & x < 0.8), mean=12, sd=2)
-y[x >= 0.8]           <- rnorm(n=sum(x >= 0.8), mean=0, sd=0.5)
+set.seed(12345) 
+{
+  x <- runif(n=n)
+  y <- numeric(n)
+  y[x < 0.4]            <- rnorm(n=sum(x < 0.4),            mean=5, sd=1)
+  y[x >+ 0.4 & x < 0.8] <- rnorm(n=sum(x >+ 0.4 & x < 0.8), mean=12, sd=2)
+  y[x >= 0.8]           <- rnorm(n=sum(x >= 0.8),           mean=0, sd=0.5)
+}
 
 datos <- data.frame(y=y, x=x)
 plot(x=x, y=y, ylim=c(-5, 20))
@@ -83,40 +86,14 @@ predicciones
 ```
 
 ## Ejemplo {-}
-
-Este ejemplo está basado en un ejemplo de [esta presentación](https://www.zeileis.org/papers/Psychoco-2018.pdf) de Achim Zeileis. El modelo estadístico para simular los datos es el siguiente:
-
-<p align="center">
-  <img src="images/ecua_ejemplo_disttree.png" width="350">
-</p>
-
-El siguiente código sirve para simular los datos.
-
-```{r}
-n <- 300
-k <- 2
-x <- runif(n=n, min=-0.4, max=1)
-media <- 10 * exp(-(4*x-2)^(2*k))
-desvi <- 0.5 + 2 * abs(x)
-y <- rnorm(n=n, mean=media, sd=desvi)
-datos <- data.frame(y, x)
-```
-
-```{r}
-library(disttree)
-mod <- disttree(y ~ x, data=datos, family=NO)
-plot(mod)
-```
-
-## Ejemplo {-}
-Este ejemplo se parece el ejemplo inicial, sólo que aquí la variable respuesta $Y$ va a tener distribución FWE (Flexible Weibull Extension) y vamos a construir tres árboles distribucionales con familia NO, FWE y WEI. El objetivo es saber si disttree logra indicarnos cuál árbol distribucional es el más apropiado.
+Este ejemplo se parece el ejemplo inicial, sólo que aquí la variable respuesta $Y$ va a tener distribución FWE (Flexible Weibull Extension) y vamos a construir tres árboles distribucionales con familia NO, FWE y WEI. El objetivo es saber si `disttree` logra indicarnos cuál árbol distribucional es el más apropiado.
 
 El modelo del cuál vamos a generar los datos es el siguiente:
 
  \begin{equation*}
   Y = \begin{cases}
         FWE(\mu=0.7, \sigma=1)   \, \text{si $x < 0.4$,} \\
-        FWE(\mu=0.4, \sigma=2)  \, \text{si $0.4 \leq x \leq 0.8$,} \\
+        FWE(\mu=0.4, \sigma=2)   \, \text{si $0.4 \leq x \leq 0.8$,} \\
         FWE(\mu=0.5, \sigma=0.5) \, \text{si $x > 0.8$}.
       \end{cases}
  \end{equation*}
@@ -126,12 +103,15 @@ El código para simular los datos es el siguiente:
 ```{r message=FALSE}
 library(RelDists) # Para usar la distribucion FWE
 
-n <- 500
-x <- runif(n=n)
-y <- numeric(n)
-y[x < 0.4]            <- rFWE(n=sum(x < 0.4), mu=0.7, sigma=1)
-y[x >+ 0.4 & x < 0.8] <- rFWE(n=sum(x > 0.4 & x < 0.8), mu=0.4, sigma=2)
-y[x >= 0.8]           <- rFWE(n=sum(x >= 0.8), mu=0.5, sigma=0.5)
+n <- 1500
+set.seed(12378)
+{
+  x <- runif(n=n)
+  y <- numeric(n)
+  y[x < 0.4]            <- rFWE(n=sum(x < 0.4),           mu=0.7, sigma=1)
+  y[x >+ 0.4 & x < 0.8] <- rFWE(n=sum(x > 0.4 & x < 0.8), mu=0.4, sigma=2)
+  y[x >= 0.8]           <- rFWE(n=sum(x >= 0.8),          mu=0.5, sigma=0.5)
+}
 
 datos <- data.frame(y=y, x=x)
 
@@ -155,4 +135,16 @@ mod3
 
 En el resumen de cada modelo podemos ver al final el valor de $-logLik$, el modelo más apropiado es aquel que tenga el menor valor. Al comparar los indicadores vemos que el modelo `mod2` que asume FWE como distribución para $Y$ es el que tiene el mejor indicador.
 
+```{r message=FALSE}
+plot(mod2)
+```
 
+Los resultados del árbol anterior coinciden con el modelo para los datos simulados.
+
+ \begin{equation*}
+  Y = \begin{cases}
+        FWE(\mu=0.7, \sigma=1)   \, \text{si $x < 0.4$,} \\
+        FWE(\mu=0.4, \sigma=2)   \, \text{si $0.4 \leq x \leq 0.8$,} \\
+        FWE(\mu=0.5, \sigma=0.5) \, \text{si $x > 0.8$}.
+      \end{cases}
+ \end{equation*}

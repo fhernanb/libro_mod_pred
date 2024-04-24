@@ -17,8 +17,11 @@ description: "Libro de Modelos Predictivos"
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), "bookdown", "knitr", "rmarkdown", "rpart", "rpart.plot", "MPV", "tree", "adabag", "gbm", "MASS", "disttree", "RelDists", "gamlss"), "packages.bib")
+knitr::write_bib(c(.packages(), "bookdown", "knitr", "rmarkdown", 
+                   "rpart", "rpart.plot", "MPV", "tree", "adabag", 
+                   "gbm", "MASS", "disttree", "RelDists", "gamlss",
+                   "RealDists", "DiscreteDists"), 
+                 "packages.bib")
 ```
 
 ```{r echo=FALSE, message=FALSE}

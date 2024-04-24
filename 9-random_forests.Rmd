@@ -139,3 +139,90 @@ Mire el video y replique el ejemplo en su computador.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6EXPYzbfLCE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## Random Forests distribucionales {.unnumbered}
+
+**distree** [@R-disttree] es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.
+
+```{r eval=FALSE}
+install.packages("disttree", repos="http://R-Forge.R-project.org")
+```
+
+Para crear un random forest (bosque aleatorio) distribucional se usa la función `distforest` que tiene la siguiente estructura.
+
+```{r eval=FALSE}
+distforest(formula, data, subset, na.action = na.pass, weights,
+           offset, cluster, family = NO(), strata, 
+           minsplit = 20, minbucket = 7, splittry = 2
+           control = disttree_control(teststat = "quad", testtype = "Univ", ...)
+```
+
+El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** [@R-RealDists] y **DiscreteDists** [@R-DiscreteDists].
+
+
+## Ejemplo {-}
+
+Este ejemplo está basado en un ejemplo de [esta presentación](https://www.zeileis.org/papers/Psychoco-2018.pdf) de Achim Zeileis. El modelo estadístico para simular los datos es el siguiente:
+
+<p align="center">
+  <img src="images/ecua_ejemplo_disttree.png" width="350">
+</p>
+
+El siguiente código sirve para simular los datos.
+
+```{r}
+n <- 100
+k <- 2
+set.seed(12345) 
+{
+  x <- runif(n=n, min=-0.4, max=1)
+  media <- 10 * exp(-(4*x-2)^(2*k))
+  desvi <- 0.5 + 2 * abs(x)
+  y <- rnorm(n=n, mean=media, sd=desvi)
+}
+
+datos <- data.frame(y, x)
+head(datos)
+```
+
+Ahora vamos a explorar los datos simulados.
+
+```{r}
+plot(x=x, y=y, pch=19)
+```
+
+El objetivo de este ejemplo es entrenar un árbol y un bosque distribucional para compararlos.
+
+```{r message=FALSE}
+library(disttree)
+
+mod1 <- disttree(y ~ x, data=datos, family=NO)
+
+mod2 <- distforest(y ~ x, data=datos, family=NO)
+```
+
+Ahora vamos a crear un secuencia de datos para estimar $Y$ usando los dos modelos.
+
+```{r}
+newdata <- data.frame(x=seq(from=-0.4, to=1, length.out=100))
+```
+
+Calculamos las estimaciones usando `predict`.
+
+```{r}
+y_hat_1 <- predict(mod1, newdata=newdata)$mu # El resultado es mu y sigma
+y_hat_2 <- predict(mod2, newdata=newdata)$mu # elegimos solo mu
+```
+
+Mostramos los resultados gráficamente.
+
+```{r}
+plot(x=x, y=y, pch=19)
+lines(x=newdata$x, y=y_hat_1, col="tomato", lwd=3)
+lines(x=newdata$x, y=y_hat_2, col="chartreuse3", lwd=3)
+legend("topleft", legend=c("Arbol", "Bosque"),
+       lwd=3, col=c("tomato", "chartreuse3"))
+```
+
+De la figura anterior podemos ver que la curva de estimación con bosques aleatorios es más flexible mientras que la del árbol no es nada flexible.
+
+

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Regresión lineal versus árboles de regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Regresión lineal versus árboles de regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-03-06" />
+<meta name="date" content="2024-04-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,7 +197,6 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>4</b> Support Vector Machines para regresión</a>
 <ul>
@@ -213,22 +212,24 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>7</b> Gradient Boost</a>
 <ul>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="rand_forests.html"><a href="rand_forests.html"><i class="fa fa-check"></i><b>8</b> Random Forest</a>
 <ul>
 <li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#random-forests-distribucionales"><i class="fa fa-check"></i>Random Forests distribucionales</a></li>
 <li class="chapter" data-level="" data-path="rand_forests.html"><a href="rand_forests.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>9</b> Regresión lineal versus árboles de regresión</a>
@@ -330,8 +331,8 @@ y_i &amp;\sim N(\mu_i, \sigma^2), \\
 ##   n= 20 
 ## 
 ##          CP nsplit rel error   xerror      xstd
-## 1 0.7480619      0 1.0000000 1.046977 0.2268375
-## 2 0.0100000      1 0.2519381 1.046977 0.2268375
+## 1 0.7480619      0 1.0000000 1.065065 0.2255675
+## 2 0.0100000      1 0.2519381 1.065065 0.2255675
 ## 
 ## Variable importance
 ## Edad 
@@ -416,13 +417,13 @@ x &amp;\sim U(2, 25)
 <span id="cb197-5"><a href="reg-versus-arb.html#cb197-5" tabindex="-1"></a>pred_rls <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>rls, <span class="at">newdata=</span>datos_test)</span>
 <span id="cb197-6"><a href="reg-versus-arb.html#cb197-6" tabindex="-1"></a>pred_arb <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>arb, <span class="at">newdata=</span>datos_test)</span>
 <span id="cb197-7"><a href="reg-versus-arb.html#cb197-7" tabindex="-1"></a><span class="fu">cor</span>(datos_test<span class="sc">$</span>y, pred_rls)</span></code></pre></div>
-<pre><code>## [1] 0.9455845</code></pre>
+<pre><code>## [1] 0.9483206</code></pre>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="reg-versus-arb.html#cb199-1" tabindex="-1"></a><span class="fu">cor</span>(datos_test<span class="sc">$</span>y, pred_arb)</span></code></pre></div>
-<pre><code>## [1] 0.7932216</code></pre>
+<pre><code>## [1] 0.7645123</code></pre>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="reg-versus-arb.html#cb201-1" tabindex="-1"></a><span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_rls)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 7545.366</code></pre>
+<pre><code>## [1] 10904.96</code></pre>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="reg-versus-arb.html#cb203-1" tabindex="-1"></a><span class="fu">mean</span>((datos_test<span class="sc">$</span>y <span class="sc">-</span> pred_arb)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 22376</code></pre>
+<pre><code>## [1] 44252.04</code></pre>
 
 <div class="rmdwarning">
 Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
@@ -447,22 +448,22 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <span id="cb205-17"><a href="reg-versus-arb.html#cb205-17" tabindex="-1"></a><span class="fu">colnames</span>(result) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;n&quot;</span>, <span class="st">&quot;ecm_lrs&quot;</span>, <span class="st">&quot;ecm_arb&quot;</span>)</span>
 <span id="cb205-18"><a href="reg-versus-arb.html#cb205-18" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(result)</span>
 <span id="cb205-19"><a href="reg-versus-arb.html#cb205-19" tabindex="-1"></a>result</span></code></pre></div>
-<pre><code>##     n   ecm_lrs  ecm_arb
-## 1  10  4635.406 34371.31
-## 2  10  9447.104 58068.68
-## 3  10  7607.883 54697.96
-## 4  10  7459.546 68398.70
-## 5  10 14472.528 70102.64
-## 6  20  9800.251 30655.52
-## 7  20 14369.682 31023.90
-## 8  20 14584.506 47430.43
-## 9  20  9199.218 19176.55
-## 10 20  7214.653 18850.07
-## 11 40 11481.891 16546.73
-## 12 40  5542.358 16131.44
-## 13 40 14211.091 25754.11
-## 14 40  7271.396 12046.13
-## 15 40  5129.326 10192.78</code></pre>
+<pre><code>##     n   ecm_lrs   ecm_arb
+## 1  10  4844.075 109805.16
+## 2  10 27512.137 108501.93
+## 3  10 12630.973 110184.87
+## 4  10 16813.465 117323.31
+## 5  10 17588.415  60253.15
+## 6  20  4607.668  20326.26
+## 7  20 12052.753  35922.11
+## 8  20  9112.597  33189.49
+## 9  20  5281.823  16940.42
+## 10 20  5502.615  27215.57
+## 11 40  9574.693  21177.56
+## 12 40  6637.124  16790.35
+## 13 40  6648.363  20058.19
+## 14 40  7321.555  18828.03
+## 15 40  4561.215  16059.28</code></pre>
 <p>El objeto <code>result</code> tiene los resultados de la simulación, vamos a calcular el <span class="math inline">\(ECM\)</span> promedio para rls y árboles diferenciando por <span class="math inline">\(n\)</span>.</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="reg-versus-arb.html#cb207-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb207-2"><a href="reg-versus-arb.html#cb207-2" tabindex="-1"></a>result <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(n) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">ecm_medio_lrs=</span><span class="fu">mean</span>(ecm_lrs),</span>
@@ -470,9 +471,9 @@ Al observar los resultados anteriores vemos que el modelo de regresión lineal s
 <pre><code>## # A tibble: 3 × 3
 ##       n ecm_medio_lrs ecm_medio_arb
 ##   &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    10         8724.        57128.
-## 2    20        11034.        29427.
-## 3    40         8727.        16134.</code></pre>
+## 1    10        15878.       101214.
+## 2    20         7311.        26719.
+## 3    40         6949.        18583.</code></pre>
 </div>
 <div id="retos" class="section level2 unnumbered hasAnchor">
 <h2>Retos<a href="reg-versus-arb.html#retos" class="anchor-section" aria-label="Anchor link to header"></a></h2>

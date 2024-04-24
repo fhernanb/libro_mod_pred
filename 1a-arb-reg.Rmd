@@ -94,12 +94,12 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 ```
 
 ## Ejemplo con el paquete **rpart** {-}
-En este ejemplo se busca encontrar un modelo de regresion lineal que explique la variable respuesta $y$ en función de las covariables $x_1$ a $x_{11}$, los datos provienen del ejercicio 9.5 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). El paquete **MPV** [@R-MPV] contiene todos los datos que acompañan al libro.
+En este ejemplo se busca crear árbol que explique la variable respuesta $y$ en función de las covariables $x_1$ a $x_{11}$, los datos provienen del ejercicio 9.5 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). El paquete **MPV** [@R-MPV] contiene todos los datos que acompañan al libro.
 
 A continuación se muestra el encabezado de la base de datos y la definición de las variables.
 
 <p align="center">
-  <img src="images/tableb3.png" width="500">
+  <img src="images/tableb3.png" width="800">
 </p>
 
 __Nota__: Type of transmission (1=automatic, 0=manual).
@@ -107,7 +107,7 @@ __Nota__: Type of transmission (1=automatic, 0=manual).
 Antes de iniciar es necesario revisar si hay `NA's` y eliminarlos.
 
 ```{r, message=F}
-library(MPV)  # Aqui estan los datos
+library(MPV)      # This package contains the dataset
 table.b3[22:26, ] # Can you see the missing values?
 datos <- table.b3[-c(23, 25), ]
 ```
@@ -123,7 +123,7 @@ library(rpart.plot)
 mod1 <- rpart(y ~ ., data=datos)
 ```
 
-Dibjuemos el árbol con `prp` que es una función del paquete **rpart.plot** [@R-rpart.plot].
+Dibujuemos el árbol con `prp` que es una función del paquete **rpart.plot** [@R-rpart.plot].
 
 ```{r arbol01, fig.align='center', fig.height=3, fig.width=6}
 prp(mod1)
@@ -150,8 +150,8 @@ prp(mod1, main="",
 
 Usando la información del árbol anterior es posible predecir el valor de $y$. Por ejemplo:
 
-1. Si una nueva observación tiene $x_9=70$ y $x_2=100$, entonces $\hat{y}=20$.
-2. Si otra observación tiene $x_9=60$ y $x_2=150$, entonces $\hat{y}=28$.
+1. Si un nuevo auto tiene $x_9=70$ y $x_2=100$, entonces $\hat{y}=20$.
+2. Si un nuevo auto tiene $x_9=60$ y $x_2=150$, entonces $\hat{y}=28$.
 
 Como en el árbol anterior solo aparecen las variables $x_2$ y $x_9$ se recomienda volver a construir el árbol sólo con ellas.
 
@@ -165,15 +165,16 @@ Este árbol por tener solo dos covariables se puede representar de la siguiente 
 with(datos, plot(x=x2, y=x9))
 abline(h=66, lty='dashed', col='blue')
 segments(x0=144, y0=66, x1=144, y1=82, lty='dashed', col='blue')
-text(x=120, y=63, labels='y=28', col=4)
-text(x=90, y=73, labels='y=20', col=4)
-text(x=190, y=73, labels='y=16', col=4)
+text(x=120, y=63, labels='y^=28', col=4)
+text(x=90, y=73, labels='y^=20', col=4)
+text(x=190, y=73, labels='y^=16', col=4)
 ```
 
 Para predecir los valores de $y$ se puede usar la función `predict`. A continuación el código para predecir la respuesta en los dos casos anteriores.
 
 ```{r}
-nuevos_datos <- data.frame(x2=c(100, 150), x9=c(70, 60))
+nuevos_datos <- data.frame(x2=c(100, 150), 
+                           x9=c(70, 60))
 predict(object=mod1, newdata=nuevos_datos)
 ```
 
