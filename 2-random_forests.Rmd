@@ -1,6 +1,6 @@
-# Random Forest {#rand_forests}
+# Random Forests {#rand-forests}
 
-Random Forest o Bosques Aleatorios fue propuesto por [@Ho1995] y consiste en crear muchos árboles para luego usarlos en la predicción de la variable de interés. A continuación se muestra una ilustración de la técnica.
+Random Forest o Bosques Aleatorios fue propuesto por @Ho1995 y consiste en crear muchos árboles para luego usarlos en la predicción de la variable de interés. A continuación se muestra una ilustración de la técnica.
 
 [![Figura tomada de https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8](images/rand_forest_illustration.png "Ilustración de Random Forests")](https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8)
 
@@ -54,7 +54,7 @@ else : 0 (false).
 10. ST depression induced by exercise relative to rest: displays the value which is an integer or float.
 11. Peak exercise ST segment: 1 = upsloping, 2 = flat, 3 = downsloping. 
 12. Number of major vessels (0–3) colored by flourosopy : displays the value as integer or float.
-13. Thal: displays the thalassemia: 3 = normal, 6 = fixed defect, 7 = reversible defect.
+13. Thal: displays the thalium scintigraphy: 3 = normal, 6 = fixed defect, 7 = reversible defect.
 14. Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.
 
 La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.
@@ -141,7 +141,7 @@ Mire el video y replique el ejemplo en su computador.
 
 ## Random Forests distribucionales {.unnumbered}
 
-**distree** [@R-disttree] es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.
+**distree** es un paquete de R propuesto por @R-disttree para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.
 
 ```{r eval=FALSE}
 install.packages("disttree", repos="http://R-Forge.R-project.org")
@@ -156,7 +156,7 @@ distforest(formula, data, subset, na.action = na.pass, weights,
            control = disttree_control(teststat = "quad", testtype = "Univ", ...)
 ```
 
-El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** [@R-RealDists] y **DiscreteDists** [@R-DiscreteDists].
+El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** de @R-gamlss o cualquier distribución de los paquetes **RelDists** de @R-RelDists, **RealDists** de @R-RealDists y **DiscreteDists** de @R-DiscreteDists.
 
 
 ## Ejemplo {-}

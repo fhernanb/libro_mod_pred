@@ -1,5 +1,5 @@
 # Árboles de regresión {#arb-de-regre}
-Los árboles de regresión/clasificación fueron propuestos por [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo predecir la variable respuesta $Y$ en función de covariables.
+Los árboles de regresión/clasificación fueron propuestos por [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro de @Breiman1984 y son árboles de decisión que tienen como objetivo predecir la variable respuesta $Y$ en función de covariables.
 
 ## Árboles {-}
 A continuación la imagen de un árbol común.
@@ -57,7 +57,7 @@ Algunas de las ventajas de los árboles de regresión son:
 - Las covariables pueden ser cualitativas o cuantitativas.
 - No exige supuestos distribucionales.
 
-Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de [@james2013] y se recomienda también ver el siguiente video con una explicación sencilla sobre árboles.
+Para explicaciones más detalladas sobre las técnicas basadas en árboles recomendamos consultar el capítulo 8 de @james2013 y se recomienda también ver el siguiente video con una explicación sencilla sobre árboles.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7VeUPuFGJHk?si=CRKUi79Dd679mz8u" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -73,7 +73,7 @@ Existen otros paquetes que el lector puede consultar en la sección *Recursive P
 ## Paquete **rpart** {-}
 En esta sección se mencionan algunos de los paquetes más comunes para implementar árboles de regresión.
 
-El paquete **rpart** [@R-rpart] es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es `rpart`, a continuación la estructura de la función.
+El paquete **rpart** de @R-rpart es uno de los paquetes que se pueden usar para crear árboles de regresión. La función para crear un árbol de regresión es `rpart`, a continuación la estructura de la función.
 
 ```{r, eval=FALSE}
 rpart(formula, data, weights, subset, na.action = na.rpart, method,
@@ -81,7 +81,7 @@ rpart(formula, data, weights, subset, na.action = na.rpart, method,
 ```
 
 ## Paquete **tree** {-}
-Otro paquete útil para árboles de regresión es **tree** [@R-tree]. La función para crear un árbol de regresión es `tree`, a continuación la estructura de la función.
+Otro paquete útil para árboles de regresión es **tree** de @R-tree. La función para crear un árbol de regresión es `tree`, a continuación la estructura de la función.
 
 ```{r, eval=FALSE}
 tree(formula, data, weights, subset,
@@ -96,7 +96,7 @@ Se recomienda al lector que consulte la ayuda de las funciones anteriores para q
 ```
 
 ## Ejemplo con el paquete **rpart** {-}
-En este ejemplo se busca crear árbol que explique la variable respuesta $y$ en función de las covariables $x_1$ a $x_{11}$, los datos provienen del ejercicio 9.5 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). El paquete **MPV** [@R-MPV] contiene todos los datos que acompañan al libro.
+En este ejemplo se busca crear árbol que explique la variable respuesta $y$ en función de las covariables $x_1$ a $x_{11}$, los datos provienen del ejercicio 9.5 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). El paquete **MPV** de @R-MPV contiene todos los datos que acompañan al libro.
 
 A continuación se muestra el encabezado de la base de datos y la definición de las variables.
 
@@ -125,7 +125,7 @@ library(rpart.plot)
 mod1 <- rpart(y ~ ., data=datos)
 ```
 
-Dibujuemos el árbol con `prp` que es una función del paquete **rpart.plot** [@R-rpart.plot].
+Dibujuemos el árbol con `prp` que es una función del paquete **rpart.plot** de @R-rpart.plot.
 
 ```{r arbol01, fig.align='center', fig.height=3, fig.width=6}
 prp(mod1)

@@ -18,7 +18,7 @@ Abajo una comparación entre un árbol de regresión y un árbol de regresión d
 
 ## Paquete disttree  {-}
 
-**distree** [@R-disttree] es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.
+**distree** propuesto por @R-disttree es un paquete de R para ajustar árboles y bosques de regresión distribucionales basado en la estimación de máxima verosimilitud de parámetros para familias de distribución específicas. Para instalar el paquete puedes usar el siguiente código.
 
 ```{r eval=FALSE}
 install.packages("disttree", repos="http://R-Forge.R-project.org")
@@ -32,7 +32,7 @@ disttree(formula, data, subset, na.action = na.pass, weights, offset,
            converged = NULL, scores = NULL, doFit = TRUE, ...)
 ```
 
-El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** [@R-gamlss] o cualquier distribución de los paquetes **RelDists** [@R-RelDists] **RealDists** [@R-RealDists] y **DiscreteDists** [@R-DiscreteDists].
+El argumento `family` se utiliza para indicar la distribución estadística que se asume para la variable respuesta $Y$. Se puede elegir cualquier distribución de **gamlss** de @R-gamlss o cualquier distribución de los paquetes **RelDists** de @R-RelDists, **RealDists** de @R-RealDists y **DiscreteDists** de @R-DiscreteDists.
 
 Una pregunta frecuente es ¿cómo selecciono la distribución que mejor explica el patrón de mi variable respuesta $Y$?
 

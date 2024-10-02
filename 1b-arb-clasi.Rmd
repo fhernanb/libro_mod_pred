@@ -1,5 +1,5 @@
 # Árboles de clasificación {#arb-de-clasif}
-Los árboles de regresión/clasificación fueron propuestos por [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro [@Breiman1984] y son árboles de decisión que tienen como objetivo predecir la variable respuesta $Y$ en función de covariables.
+Los árboles de regresión/clasificación fueron propuestos por [Leo Breiman](https://en.wikipedia.org/wiki/Leo_Breiman) en el libro @Breiman1984 y son árboles de decisión que tienen como objetivo predecir la variable respuesta $Y$ en función de covariables.
 
 ## Árboles {-}
 A continuación la imagen de un árbol común.
@@ -133,7 +133,7 @@ else : 0 (false).
 10. ST depression induced by exercise relative to rest: displays the value which is an integer or float.
 11. Peak exercise ST segment: 1 = upsloping, 2 = flat, 3 = downsloping. 
 12. Number of major vessels (0–3) colored by flourosopy : displays the value as integer or float.
-13. Thal: displays the thalassemia: 3 = normal, 6 = fixed defect, 7 = reversible defect.
+13. Thal: displays the thalium scintigraphy: 3 = normal, 6 = fixed defect, 7 = reversible defect.
 14. Target: Diagnosis of heart disease. Displays whether the individual is suffering from heart disease or not: 0 = absence, 1, 2, 3, 4 = present.
 
 La base de datos está en un repositorio en la web y se puede leer usando el siguiente código.

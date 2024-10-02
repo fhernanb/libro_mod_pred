@@ -5,9 +5,9 @@ fig:iris
 arb-de-regre
 arb-de-clasif
 arb-distri
+rand-forests
 svm-reg
 svm-clas
 adaboost
 gradboost
-rand_forests
 reg-versus-arb

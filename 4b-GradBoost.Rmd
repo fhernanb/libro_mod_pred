@@ -1,6 +1,6 @@
 # Gradient Boost {#gradboost}
 
-Gradient Boost fue propuesto por [@Friedman1999a] y [@Friedman1999b] y consiste en crear varios predictores en secuencia. El primer predictor usa la media de la variable $Y$ para predecir, luego el segundo predictor explica los errores del primer predictor, el tercer predictor explicar los erroes del segundo predictor y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es Gradient Boost.
+Gradient Boost fue propuesto por @Friedman1999a y @Friedman1999b y consiste en crear varios predictores en secuencia. El primer predictor usa la media de la variable $Y$ para predecir, luego el segundo predictor explica los errores del primer predictor, el tercer predictor explicar los erroes del segundo predictor y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es Gradient Boost.
 
 <p align="center">
   <img src="images/gradboost_illustration.png" width="700">
@@ -60,7 +60,7 @@ mean(weigth) + a * predict(mod2, new_data) + a * predict(mod3, new_data)
 ```
 
 ## Ejemplo {-}
-En este ejemplo se van a usar los datos `Boston` del paquete [@R-MASS] para predecir la variable `medv` en función de las otras covariables.
+En este ejemplo se van a usar los datos `Boston` del paquete **MASS** de @R-MASS para predecir la variable `medv` en función de las otras covariables.
 
 Para explorar la base de datos usamos el siguiente código.
 
@@ -101,7 +101,7 @@ plot(x=train$medv, y=y_hat, xlab='Valor observado', ylab='Predicción')
 abline(a=0, b=1, lty='dashed')
 ```
 
-Ahora vamos a usar la función `gbm` del paquete [@R-gbm] para aplicar el algoritmo Gradient Boost con $\alpha=0.01$, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).
+Ahora vamos a usar la función `gbm` del paquete de @R-gbm para aplicar el algoritmo Gradient Boost con $\alpha=0.01$, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).
 
 ```{r message=FALSE}
 library(gbm)
