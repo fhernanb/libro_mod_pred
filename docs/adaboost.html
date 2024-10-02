@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-04-24" />
+<meta name="date" content="2024-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -128,6 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -263,7 +264,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="adaboost" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> AdaBoost<a href="adaboost.html#adaboost" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>AdaBoost (adaptive boosting) fue propuesto por <span class="citation">(<a href="#ref-freund_1995">Freund and Schapire 1995</a>)</span> y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste un poco mejor lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.</p>
+<p>AdaBoost (adaptive boosting) fue propuesto por <span class="citation">Freund and Schapire (<a href="#ref-freund_1995">1995</a>)</span> y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.</p>
 <p align="center">
 <img src="images/adaboost_illustration.png" width="700">
 </p>
@@ -333,9 +334,9 @@ Figure 6.3: Obtención clasificador final.
 </div>
 <div id="ejemplo-5" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="adaboost.html#ejemplo-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En este ejemplo vamos a usar la base de datos <code>kyphosis</code> del paquete <strong>rpart</strong> <span class="citation">(<a href="#ref-R-rpart">Therneau and Atkinson 2023</a>)</span>. A continuación las primeras líneas de la base de datos.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="adaboost.html#cb81-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb81-2"><a href="adaboost.html#cb81-2" tabindex="-1"></a><span class="fu">head</span>(kyphosis)</span></code></pre></div>
+<p>En este ejemplo vamos a usar la base de datos <code>kyphosis</code> del paquete <strong>rpart</strong> de <span class="citation">Therneau and Atkinson (<a href="#ref-R-rpart">2023</a>)</span>. A continuación las primeras líneas de la base de datos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="adaboost.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb1-2"><a href="adaboost.html#cb1-2" tabindex="-1"></a><span class="fu">head</span>(kyphosis)</span></code></pre></div>
 <pre><code>##   Kyphosis Age Number Start
 ## 1   absent  71      3     5
 ## 2   absent 158      3    14
@@ -343,103 +344,123 @@ Figure 6.3: Obtención clasificador final.
 ## 4   absent   2      5     1
 ## 5   absent   1      4    15
 ## 6   absent   1      2    16</code></pre>
-<p>El objetivo es crear un clasificador que use la información de Age, Number y Start para predecir el tipo de deformación kyphosis (absent or present). Como vamos a aplicar el AdaBoost manual debemos crear la variable respuesta en -1 y 1 así:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="adaboost.html#cb83-1" tabindex="-1"></a>kyphosis<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(kyphosis<span class="sc">$</span>Kyphosis <span class="sc">==</span> <span class="st">&#39;absent&#39;</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>El objetivo es crear un clasificador que use la información de Age, Number y Start para predecir el tipo de deformación kyphosis (absent or present). Como vamos a aplicar el AdaBoost manualmente debemos crear la variable respuesta con valores de -1 y 1 así:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="adaboost.html#cb3-1" tabindex="-1"></a>kyphosis<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(kyphosis<span class="sc">$</span>Kyphosis <span class="sc">==</span> <span class="st">&quot;absent&quot;</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p>Vamos a crear primero un modelo de referencia <code>mod0</code> que será un árbol tradicional.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="adaboost.html#cb84-1" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start, <span class="at">data=</span>kyphosis, <span class="at">method=</span><span class="st">&#39;class&#39;</span>)</span>
-<span id="cb84-2"><a href="adaboost.html#cb84-2" tabindex="-1"></a>y0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod0, <span class="at">type=</span><span class="st">&#39;class&#39;</span>)</span>
-<span id="cb84-3"><a href="adaboost.html#cb84-3" tabindex="-1"></a>tabla0 <span class="ot">&lt;-</span> <span class="fu">table</span>(y0, kyphosis<span class="sc">$</span>y)</span>
-<span id="cb84-4"><a href="adaboost.html#cb84-4" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla0)) <span class="sc">/</span> <span class="fu">sum</span>(tabla0)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="adaboost.html#cb4-1" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start, <span class="at">data=</span>kyphosis, <span class="at">method=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb4-2"><a href="adaboost.html#cb4-2" tabindex="-1"></a>y0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod0, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb4-3"><a href="adaboost.html#cb4-3" tabindex="-1"></a>tabla0 <span class="ot">&lt;-</span> <span class="fu">table</span>(y0, kyphosis<span class="sc">$</span>y)</span>
+<span id="cb4-4"><a href="adaboost.html#cb4-4" tabindex="-1"></a>accu_mod0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(tabla0)) <span class="sc">/</span> <span class="fu">sum</span>(tabla0)</span>
+<span id="cb4-5"><a href="adaboost.html#cb4-5" tabindex="-1"></a>accu_mod0 <span class="co"># Tasa de clasificacion correcta</span></span></code></pre></div>
 <pre><code>## [1] 0.8395062</code></pre>
-<p>En el siguiente código se usarán 20 iteraciones del AdaBoost en forma manual para crear 20 tocones (stumps) que unidos nos permitirán clasificar.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="adaboost.html#cb86-1" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># numero de iteraciones</span></span>
-<span id="cb86-2"><a href="adaboost.html#cb86-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kyphosis)</span>
-<span id="cb86-3"><a href="adaboost.html#cb86-3" tabindex="-1"></a>Dt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>m, m) <span class="co"># D1</span></span>
-<span id="cb86-4"><a href="adaboost.html#cb86-4" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">numeric</span>(T) <span class="co"># Para almacenar alpha</span></span>
-<span id="cb86-5"><a href="adaboost.html#cb86-5" tabindex="-1"></a>y_hats <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span>T, <span class="at">nrow=</span>m) <span class="co"># Para almacenar la predicciones</span></span>
-<span id="cb86-6"><a href="adaboost.html#cb86-6" tabindex="-1"></a></span>
-<span id="cb86-7"><a href="adaboost.html#cb86-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>T) {</span>
-<span id="cb86-8"><a href="adaboost.html#cb86-8" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start, <span class="at">weights=</span>Dt, <span class="at">data=</span>kyphosis, </span>
-<span id="cb86-9"><a href="adaboost.html#cb86-9" tabindex="-1"></a>               <span class="at">method=</span><span class="st">&#39;class&#39;</span>, <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">maxdepth =</span> <span class="dv">1</span>))</span>
-<span id="cb86-10"><a href="adaboost.html#cb86-10" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">type=</span><span class="st">&#39;class&#39;</span>)</span>
-<span id="cb86-11"><a href="adaboost.html#cb86-11" tabindex="-1"></a>  error <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> kyphosis<span class="sc">$</span>y, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># 1=error, 0=ok</span></span>
-<span id="cb86-12"><a href="adaboost.html#cb86-12" tabindex="-1"></a>  epsilon_t <span class="ot">&lt;-</span> <span class="fu">sum</span>(error <span class="sc">*</span> Dt)</span>
-<span id="cb86-13"><a href="adaboost.html#cb86-13" tabindex="-1"></a>  alpha_t <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">log</span>((<span class="dv">1</span><span class="sc">-</span>epsilon_t)<span class="sc">/</span>epsilon_t)</span>
-<span id="cb86-14"><a href="adaboost.html#cb86-14" tabindex="-1"></a>  Fi <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> kyphosis<span class="sc">$</span>y, <span class="fu">exp</span>(<span class="sc">-</span>alpha_t), <span class="fu">exp</span>(alpha_t))</span>
-<span id="cb86-15"><a href="adaboost.html#cb86-15" tabindex="-1"></a>  Dt <span class="ot">&lt;-</span> Dt <span class="sc">*</span> Fi</span>
-<span id="cb86-16"><a href="adaboost.html#cb86-16" tabindex="-1"></a>  Dt <span class="ot">&lt;-</span> Dt <span class="sc">/</span> <span class="fu">sum</span>(Dt)</span>
-<span id="cb86-17"><a href="adaboost.html#cb86-17" tabindex="-1"></a>  alphas[i] <span class="ot">&lt;-</span> alpha_t</span>
-<span id="cb86-18"><a href="adaboost.html#cb86-18" tabindex="-1"></a>  y_hats[, i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> <span class="st">&#39;-1&#39;</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb86-19"><a href="adaboost.html#cb86-19" tabindex="-1"></a>}</span></code></pre></div>
+<p>De la salida anterior podemos ver que el modelo <code>mod0</code> logró clasificar correctamente 0.8395062.</p>
+<p>En el siguiente código está la implementación manual de AdaBoost, en este código se usan 20 iteraciones para crear 20 tocones (stumps) que unidos nos permitirán crear el segundo clasificador.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="adaboost.html#cb6-1" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># numero de iteraciones</span></span>
+<span id="cb6-2"><a href="adaboost.html#cb6-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(kyphosis)</span>
+<span id="cb6-3"><a href="adaboost.html#cb6-3" tabindex="-1"></a>Dt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span>m, m) <span class="co"># D1</span></span>
+<span id="cb6-4"><a href="adaboost.html#cb6-4" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">numeric</span>(T) <span class="co"># Para almacenar alpha</span></span>
+<span id="cb6-5"><a href="adaboost.html#cb6-5" tabindex="-1"></a>y_hats <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span>T, <span class="at">nrow=</span>m) <span class="co"># Para almacenar la predicciones</span></span>
+<span id="cb6-6"><a href="adaboost.html#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="adaboost.html#cb6-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>T) {</span>
+<span id="cb6-8"><a href="adaboost.html#cb6-8" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">rpart</span>(y <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start, <span class="at">weights=</span>Dt, <span class="at">data=</span>kyphosis, </span>
+<span id="cb6-9"><a href="adaboost.html#cb6-9" tabindex="-1"></a>               <span class="at">method=</span><span class="st">&quot;class&quot;</span>, <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">maxdepth =</span> <span class="dv">1</span>))</span>
+<span id="cb6-10"><a href="adaboost.html#cb6-10" tabindex="-1"></a>  y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span>
+<span id="cb6-11"><a href="adaboost.html#cb6-11" tabindex="-1"></a>  error <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> kyphosis<span class="sc">$</span>y, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># 1=error, 0=ok</span></span>
+<span id="cb6-12"><a href="adaboost.html#cb6-12" tabindex="-1"></a>  epsilon_t <span class="ot">&lt;-</span> <span class="fu">sum</span>(error <span class="sc">*</span> Dt)</span>
+<span id="cb6-13"><a href="adaboost.html#cb6-13" tabindex="-1"></a>  alpha_t <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">log</span>((<span class="dv">1</span><span class="sc">-</span>epsilon_t)<span class="sc">/</span>epsilon_t)</span>
+<span id="cb6-14"><a href="adaboost.html#cb6-14" tabindex="-1"></a>  Fi <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> kyphosis<span class="sc">$</span>y, <span class="fu">exp</span>(<span class="sc">-</span>alpha_t), <span class="fu">exp</span>(alpha_t))</span>
+<span id="cb6-15"><a href="adaboost.html#cb6-15" tabindex="-1"></a>  Dt <span class="ot">&lt;-</span> Dt <span class="sc">*</span> Fi</span>
+<span id="cb6-16"><a href="adaboost.html#cb6-16" tabindex="-1"></a>  Dt <span class="ot">&lt;-</span> Dt <span class="sc">/</span> <span class="fu">sum</span>(Dt)</span>
+<span id="cb6-17"><a href="adaboost.html#cb6-17" tabindex="-1"></a>  alphas[i] <span class="ot">&lt;-</span> alpha_t</span>
+<span id="cb6-18"><a href="adaboost.html#cb6-18" tabindex="-1"></a>  y_hats[, i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(y_hat <span class="sc">==</span> <span class="st">&quot;-1&quot;</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb6-19"><a href="adaboost.html#cb6-19" tabindex="-1"></a>}</span></code></pre></div>
 <p>Para obtener las estimaciones con los 20 tocones se usa el siguiente código.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="adaboost.html#cb87-1" tabindex="-1"></a>y_final <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sign</span>(y_hats <span class="sc">%*%</span> <span class="fu">matrix</span>(alphas, <span class="at">ncol=</span><span class="dv">1</span>)))</span>
-<span id="cb87-2"><a href="adaboost.html#cb87-2" tabindex="-1"></a>tabla_final <span class="ot">&lt;-</span> <span class="fu">table</span>(y_final, kyphosis<span class="sc">$</span>y)</span>
-<span id="cb87-3"><a href="adaboost.html#cb87-3" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla_final)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_final)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="adaboost.html#cb7-1" tabindex="-1"></a>y_final <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sign</span>(y_hats <span class="sc">%*%</span> <span class="fu">matrix</span>(alphas, <span class="at">ncol=</span><span class="dv">1</span>)))</span>
+<span id="cb7-2"><a href="adaboost.html#cb7-2" tabindex="-1"></a>tabla_final <span class="ot">&lt;-</span> <span class="fu">table</span>(y_final, kyphosis<span class="sc">$</span>y)</span>
+<span id="cb7-3"><a href="adaboost.html#cb7-3" tabindex="-1"></a>accu_boost_manual <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(tabla_final)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_final)</span>
+<span id="cb7-4"><a href="adaboost.html#cb7-4" tabindex="-1"></a>accu_boost_manual  <span class="co"># Tasa de clasificacion correcta</span></span></code></pre></div>
 <pre><code>## [1] 0.8888889</code></pre>
-<p>Por último vamos a usar la función <code>boosting</code> del paquete <strong>adabag</strong> <span class="citation">(<a href="#ref-R-adabag">Alfaro et al. 2023</a>)</span> para aplicar AdaBoost de forma automática.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="adaboost.html#cb89-1" tabindex="-1"></a><span class="fu">library</span>(adabag)</span>
-<span id="cb89-2"><a href="adaboost.html#cb89-2" tabindex="-1"></a>adaboost <span class="ot">&lt;-</span> <span class="fu">bagging</span>(Kyphosis <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start,</span>
-<span id="cb89-3"><a href="adaboost.html#cb89-3" tabindex="-1"></a>                    <span class="at">coeflearn=</span><span class="st">&#39;Freund&#39;</span>,</span>
-<span id="cb89-4"><a href="adaboost.html#cb89-4" tabindex="-1"></a>                    <span class="at">data=</span>kyphosis, <span class="at">mfinal=</span><span class="dv">20</span>)</span>
-<span id="cb89-5"><a href="adaboost.html#cb89-5" tabindex="-1"></a>yhat_adaboost <span class="ot">&lt;-</span> <span class="fu">predict</span>(adaboost, <span class="at">newdata=</span>kyphosis)<span class="sc">$</span>class</span>
-<span id="cb89-6"><a href="adaboost.html#cb89-6" tabindex="-1"></a>tabla_adaboost <span class="ot">&lt;-</span> <span class="fu">table</span>(yhat_adaboost, kyphosis<span class="sc">$</span>Kyphosis)</span>
-<span id="cb89-7"><a href="adaboost.html#cb89-7" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla_adaboost)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_adaboost)</span></code></pre></div>
-<pre><code>## [1] 0.8641975</code></pre>
+<p>Por último vamos a usar la función <code>boosting</code> del paquete <strong>adabag</strong> propuesto por <span class="citation">Alfaro et al. (<a href="#ref-R-adabag">2023</a>)</span> para aplicar AdaBoost de forma automática.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="adaboost.html#cb9-1" tabindex="-1"></a><span class="fu">library</span>(adabag)</span>
+<span id="cb9-2"><a href="adaboost.html#cb9-2" tabindex="-1"></a>adaboost <span class="ot">&lt;-</span> <span class="fu">boosting</span>(Kyphosis <span class="sc">~</span> Age <span class="sc">+</span> Number <span class="sc">+</span> Start,</span>
+<span id="cb9-3"><a href="adaboost.html#cb9-3" tabindex="-1"></a>                     <span class="at">coeflearn=</span><span class="st">&quot;Freund&quot;</span>,</span>
+<span id="cb9-4"><a href="adaboost.html#cb9-4" tabindex="-1"></a>                     <span class="at">data=</span>kyphosis, <span class="at">mfinal=</span><span class="dv">20</span>)</span>
+<span id="cb9-5"><a href="adaboost.html#cb9-5" tabindex="-1"></a>yhat_adaboost <span class="ot">&lt;-</span> <span class="fu">predict</span>(adaboost, <span class="at">newdata=</span>kyphosis)<span class="sc">$</span>class</span>
+<span id="cb9-6"><a href="adaboost.html#cb9-6" tabindex="-1"></a>tabla_adaboost <span class="ot">&lt;-</span> <span class="fu">table</span>(yhat_adaboost, kyphosis<span class="sc">$</span>Kyphosis)</span>
+<span id="cb9-7"><a href="adaboost.html#cb9-7" tabindex="-1"></a>accu_boost_autom <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">diag</span>(tabla_adaboost)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_adaboost)</span>
+<span id="cb9-8"><a href="adaboost.html#cb9-8" tabindex="-1"></a>accu_boost_autom  <span class="co"># Tasa de clasificacion correcta</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
 <p>Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="adaboost.html#cb91-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla0)) <span class="sc">/</span> <span class="fu">sum</span>(tabla0)</span></code></pre></div>
-<pre><code>## [1] 0.8395062</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="adaboost.html#cb93-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla_final)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_final)</span></code></pre></div>
-<pre><code>## [1] 0.8888889</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="adaboost.html#cb95-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(tabla_adaboost)) <span class="sc">/</span> <span class="fu">sum</span>(tabla_adaboost)</span></code></pre></div>
-<pre><code>## [1] 0.8641975</code></pre>
-<p>De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Tasa de clasificación correcta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Árbol tradicional (<code>mod0</code>)</td>
+<td>0.8395062</td>
+</tr>
+<tr class="even">
+<td>AdaBoost manual</td>
+<td>0.8888889</td>
+</tr>
+<tr class="odd">
+<td>AdaBoost automático</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>De la salida anterior se observa que el árbol tradicional (<code>mod0</code>) tiene la menor tasa de clasificación correcta mientras que el modelo entrenado con <code>boosting</code> tiene la tasa de clasificación correcta mayor.</p>
 </div>
 <div id="ejemplo-6" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="adaboost.html#ejemplo-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En este ejemplo vamos a mostrar como usar el paquete <strong>adabag</strong> <span class="citation">(<a href="#ref-R-adabag">Alfaro et al. 2023</a>)</span> para aplicar AdaBoost.</p>
-<p>Como ejemplo vamos a usar la base de datos <code>iris</code> en la cual se tienen 4 variables que ayudarán a clasificar nuevas flores en una de tres especies. En la figura de abajo se muestran las tres especies y las cuatro variables.</p>
+<p>En este ejemplo vamos a mostrar como usar el paquete <strong>adabag</strong> de <span class="citation">Alfaro et al. (<a href="#ref-R-adabag">2023</a>)</span> para aplicar AdaBoost.</p>
+<p>Como ejemplo vamos a usar la base de datos <code>iris</code> en la cual se tienen 4 variables que caracterizan las flores de tres especies. En la figura de abajo se muestran las tres especies y las cuatro variables.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:iris"></span>
-<img src="images/iris.png" alt="Tipos de especies y variables en la base de datos iris." width="437" />
+<img src="images/iris.png" alt="Tipos de especies y variables en la base de datos iris." width="394" />
 <p class="caption">
 Figure 6.4: Tipos de especies y variables en la base de datos iris.
 </p>
 </div>
-<p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> <span class="citation">(<a href="#ref-R-rpart">Therneau and Atkinson 2023</a>)</span>, este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
-.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="adaboost.html#cb97-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb97-2"><a href="adaboost.html#cb97-2" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Species <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, <span class="at">data=</span>iris)</span>
-<span id="cb97-3"><a href="adaboost.html#cb97-3" tabindex="-1"></a>yhat1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1, <span class="at">type=</span><span class="st">&#39;class&#39;</span>)</span></code></pre></div>
+<p>El objetivo de este ejemplo es crear un modelo para predecir la especie de una flor en función de las variables Sepal.Length y Sepal.Width.</p>
+<p>Primero vamos a crear un árbol de clasificación usando el paquete <strong>rpart</strong> de <span class="citation">Therneau and Atkinson (<a href="#ref-R-rpart">2023</a>)</span>, este modelo servirá como modelo de referencia.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="adaboost.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb11-2"><a href="adaboost.html#cb11-2" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Species <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, <span class="at">data=</span>iris)</span>
+<span id="cb11-3"><a href="adaboost.html#cb11-3" tabindex="-1"></a>yhat1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1, <span class="at">type=</span><span class="st">&quot;class&quot;</span>)</span></code></pre></div>
 <p>Ahora vamos a aplicar AdaBoost.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="adaboost.html#cb98-1" tabindex="-1"></a><span class="fu">library</span>(adabag)</span>
-<span id="cb98-2"><a href="adaboost.html#cb98-2" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">bagging</span>(Species <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, </span>
-<span id="cb98-3"><a href="adaboost.html#cb98-3" tabindex="-1"></a>                <span class="at">data=</span>iris, <span class="at">mfinal=</span><span class="dv">10</span>)</span>
-<span id="cb98-4"><a href="adaboost.html#cb98-4" tabindex="-1"></a>yhat2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata=</span>iris)<span class="sc">$</span>class</span></code></pre></div>
-<p>En los objetos <code>yhat1</code> y <code>yhat2</code> están las predicciones y con ellas vamos a formar las tablas de confusión para cada modelo.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="adaboost.html#cb99-1" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">real=</span>iris<span class="sc">$</span>Species, <span class="at">prediccion=</span>yhat1)</span>
-<span id="cb99-2"><a href="adaboost.html#cb99-2" tabindex="-1"></a>t1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="adaboost.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(adabag)</span>
+<span id="cb12-2"><a href="adaboost.html#cb12-2" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">boosting</span>(Species <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, </span>
+<span id="cb12-3"><a href="adaboost.html#cb12-3" tabindex="-1"></a>                 <span class="at">data=</span>iris, <span class="at">mfinal=</span><span class="dv">10</span>)</span>
+<span id="cb12-4"><a href="adaboost.html#cb12-4" tabindex="-1"></a>yhat2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata=</span>iris)<span class="sc">$</span>class</span></code></pre></div>
+<p>En los objetos <code>yhat1</code> y <code>yhat2</code> están las predicciones y con ellas vamos a formar las matrices de confusión para cada modelo.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="adaboost.html#cb13-1" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">real=</span>iris<span class="sc">$</span>Species, <span class="at">prediccion=</span>yhat1)</span>
+<span id="cb13-2"><a href="adaboost.html#cb13-2" tabindex="-1"></a>t1</span></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
 ##   setosa         49          1         0
 ##   versicolor      3         31        16
 ##   virginica       0         11        39</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="adaboost.html#cb101-1" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">real=</span>iris<span class="sc">$</span>Species, <span class="at">prediccion=</span>yhat2)</span>
-<span id="cb101-2"><a href="adaboost.html#cb101-2" tabindex="-1"></a>t2</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="adaboost.html#cb15-1" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="at">real=</span>iris<span class="sc">$</span>Species, <span class="at">prediccion=</span>yhat2)</span>
+<span id="cb15-2"><a href="adaboost.html#cb15-2" tabindex="-1"></a>t2</span></code></pre></div>
 <pre><code>##             prediccion
 ## real         setosa versicolor virginica
-##   setosa         49          1         0
-##   versicolor      2         34        14
-##   virginica       1         12        37</code></pre>
-<p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="adaboost.html#cb103-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t1)) <span class="sc">/</span> <span class="fu">sum</span>(t1)</span></code></pre></div>
+##   setosa         50          0         0
+##   versicolor      1         38        11
+##   virginica       0         11        39</code></pre>
+<p>Ahora vamos a calcular la tasa de clasificación correcta para cada una de las matrices anteriores.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="adaboost.html#cb17-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t1)) <span class="sc">/</span> <span class="fu">sum</span>(t1)</span></code></pre></div>
 <pre><code>## [1] 0.7933333</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="adaboost.html#cb105-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t2)) <span class="sc">/</span> <span class="fu">sum</span>(t2)</span></code></pre></div>
-<pre><code>## [1] 0.8</code></pre>
-<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.3333333% mientras que con AdaBoost es 80%.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="adaboost.html#cb19-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t2)) <span class="sc">/</span> <span class="fu">sum</span>(t2)</span></code></pre></div>
+<pre><code>## [1] 0.8466667</code></pre>
+<p>De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es 79.33% mientras que con AdaBoost es 84.67%.</p>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-R-adabag" class="csl-entry">
 Alfaro, Esteban; Gamez, Matias, Garcia, Noelia; with contributions from L. Guo, A. Albano, M. Sciandra, and A. Plaia. 2023. <em>Adabag: Applies Multiclass AdaBoost.M1, SAMME and Bagging</em>. <a href="https://CRAN.R-project.org/package=adabag">https://CRAN.R-project.org/package=adabag</a>.
 </div>

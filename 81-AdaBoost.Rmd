@@ -1,6 +1,6 @@
 # AdaBoost {#adaboost}
 
-AdaBoost (adaptive boosting) fue propuesto por [@freund_1995] y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste un poco mejor lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.
+AdaBoost (adaptive boosting) fue propuesto por @freund_1995 y consiste en crear varios predictores sencillos en secuencia, de tal manera que el segundo ajuste bien lo que el primero no ajustó, que el tercero ajuste lo que el segundo no pudo ajustar y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es AdaBoost.
 
 <p align="center">
   <img src="images/adaboost_illustration.png" width="700">
@@ -37,48 +37,51 @@ Abajo se presenta un video con una explicación detallada de lo que es AdaBoost.
 ## Ejemplo {-}
 En este ejemplo se ilustra la forma de aplicar AdaBoost a un conjunto de datos bivariados para clasificar en dos clases: -1 y +1.
 
-```{r adaboost01, echo=F, fig.cap='Datos originales.', dpi=60, fig.align='center'}
+```{r adaboost01, echo=F, fig.cap="Datos originales.", dpi=60, fig.align="center"}
 knitr::include_graphics("images/adaboost01.png")
 ```
 
 En la siguiente figura se muestran 3 clasificadores ($h_1$, $h_2$ y $h_3$) sencillos o árboles de profundidad uno (tocones), que fueron creados de forma secuencial. Al observar $h1$, se nota que él clasificó mal los + encerrados en círculos. Por esa razón, en la siguiente iteración esas observaciones mal clasificadas tuvieron un mayor peso o importancia en el nuevo clasificador $h_2$, por eso es que esos símbolos + aparecen más grandes en la segunda figura. Al mirar el clasificador $h_2$ se observa que logró clasificar bien esos + grandes, sin embargo, él clasificó mal los - que están encerrados en círculos. Por esa razón, en la siguiente iteración esas observaciones mal clasificadas tuvieron un mayor peso o importancia en el nuevo clasificador $h_3$, por eso es que esos símbolos - aparecen más grandes en la tercera figura. El clasificador $h_3$ logra clasificar mejor esos -.
 
-```{r adaboost02, echo=F, fig.cap='Clasificadores.', dpi=40, fig.align='center'}
+```{r adaboost02, echo=F, fig.cap="Clasificadores.", dpi=40, fig.align="center"}
 knitr::include_graphics("images/adaboost02.png")
 ```
 
 El clasificador final ($h_{final}$) se construye como una ponderación de los clasificadores sencillos ($h_1$, $h_2$ y $h_3$) como se muestra a continuación.
 
-```{r adaboost03, echo=F, fig.cap='Obtención clasificador final.', dpi=40, fig.align='center'}
+```{r adaboost03, echo=F, fig.cap="Obtención clasificador final.", dpi=40, fig.align="center"}
 knitr::include_graphics("images/adaboost03.png")
 ```
 
 Los valores de $\alpha_t$ son las ponderaciones que aparecen en la explicación detallada del método.
 
 ## Ejemplo {-}
-En este ejemplo vamos a usar la base de datos `kyphosis` del paquete **rpart** [@R-rpart]. A continuación las primeras líneas de la base de datos.
+En este ejemplo vamos a usar la base de datos `kyphosis` del paquete **rpart** de @R-rpart. A continuación las primeras líneas de la base de datos.
 
 ```{r}
 library(rpart)
 head(kyphosis)
 ```
 
-El objetivo es crear un clasificador que use la información de Age, Number y Start para predecir el tipo de deformación kyphosis (absent or present). Como vamos a aplicar el AdaBoost manual debemos crear la variable respuesta en -1 y 1 así:
+El objetivo es crear un clasificador que use la información de Age, Number y Start para predecir el tipo de deformación kyphosis (absent or present). Como vamos a aplicar el AdaBoost manualmente debemos crear la variable respuesta con valores de -1 y 1 así:
 
 ```{r}
-kyphosis$y <- ifelse(kyphosis$Kyphosis == 'absent', -1, 1)
+kyphosis$y <- ifelse(kyphosis$Kyphosis == "absent", -1, 1)
 ```
 
 Vamos a crear primero un modelo de referencia `mod0` que será un árbol tradicional.
 
 ```{r}
-mod0 <- rpart(y ~ Age + Number + Start, data=kyphosis, method='class')
-y0 <- predict(mod0, type='class')
+mod0 <- rpart(y ~ Age + Number + Start, data=kyphosis, method="class")
+y0 <- predict(mod0, type="class")
 tabla0 <- table(y0, kyphosis$y)
-sum(diag(tabla0)) / sum(tabla0)
+accu_mod0 <- sum(diag(tabla0)) / sum(tabla0)
+accu_mod0 # Tasa de clasificacion correcta
 ```
 
-En el siguiente código se usarán 20 iteraciones del AdaBoost en forma manual para crear 20 tocones (stumps) que unidos nos permitirán clasificar.
+De la salida anterior podemos ver que el modelo `mod0` logró clasificar correctamente `r accu_mod0`.
+
+En el siguiente código está la implementación manual de AdaBoost, en este código se usan 20 iteraciones para crear 20 tocones (stumps) que unidos nos permitirán crear el segundo clasificador.
 
 ```{r}
 T <- 20 # numero de iteraciones
@@ -89,8 +92,8 @@ y_hats <- matrix(NA, ncol=T, nrow=m) # Para almacenar la predicciones
 
 for (i in 1:T) {
   mod <- rpart(y ~ Age + Number + Start, weights=Dt, data=kyphosis, 
-               method='class', control=rpart.control(maxdepth = 1))
-  y_hat <- predict(mod, type='class')
+               method="class", control=rpart.control(maxdepth = 1))
+  y_hat <- predict(mod, type="class")
   error <- ifelse(y_hat == kyphosis$y, 0, 1) # 1=error, 0=ok
   epsilon_t <- sum(error * Dt)
   alpha_t <- 0.5 * log((1-epsilon_t)/epsilon_t)
@@ -98,7 +101,7 @@ for (i in 1:T) {
   Dt <- Dt * Fi
   Dt <- Dt / sum(Dt)
   alphas[i] <- alpha_t
-  y_hats[, i] <- ifelse(y_hat == '-1', -1, 1)
+  y_hats[, i] <- ifelse(y_hat == "-1", -1, 1)
 }
 ```
 
@@ -107,58 +110,62 @@ Para obtener las estimaciones con los 20 tocones se usa el siguiente código.
 ```{r}
 y_final <- c(sign(y_hats %*% matrix(alphas, ncol=1)))
 tabla_final <- table(y_final, kyphosis$y)
-sum(diag(tabla_final)) / sum(tabla_final)
+accu_boost_manual <- sum(diag(tabla_final)) / sum(tabla_final)
+accu_boost_manual  # Tasa de clasificacion correcta
 ```
 
-Por último vamos a usar la función `boosting` del paquete **adabag** [@R-adabag] para aplicar AdaBoost de forma automática.
+Por último vamos a usar la función `boosting` del paquete **adabag** propuesto por @R-adabag para aplicar AdaBoost de forma automática.
 
 ```{r message=FALSE}
 library(adabag)
-adaboost <- bagging(Kyphosis ~ Age + Number + Start,
-                    coeflearn='Freund',
-                    data=kyphosis, mfinal=20)
+adaboost <- boosting(Kyphosis ~ Age + Number + Start,
+                     coeflearn="Freund",
+                     data=kyphosis, mfinal=20)
 yhat_adaboost <- predict(adaboost, newdata=kyphosis)$class
 tabla_adaboost <- table(yhat_adaboost, kyphosis$Kyphosis)
-sum(diag(tabla_adaboost)) / sum(tabla_adaboost)
+accu_boost_autom <- sum(diag(tabla_adaboost)) / sum(tabla_adaboost)
+accu_boost_autom  # Tasa de clasificacion correcta
 ```
 
 Abajo se muestra nuevamente el código para calcular las tres tasas de clasificación correcta para el modelo de referencia, el AdaBoost manual y el AdaBoost automático.
 
-```{r}
-sum(diag(tabla0)) / sum(tabla0)
-sum(diag(tabla_final)) / sum(tabla_final)
-sum(diag(tabla_adaboost)) / sum(tabla_adaboost)
-```
+Modelo                      | Tasa de clasificación correcta
+--------------------------- | -------------
+Árbol tradicional (`mod0`)  | `r accu_mod0`
+AdaBoost manual             | `r accu_boost_manual`
+AdaBoost automático         | `r accu_boost_autom`
 
-De la salida anterior se observa que el árbol tradicional tiene tasa de clasificación correcta menor que las dos versiones de AdaBoost.
+De la salida anterior se observa que el árbol tradicional (`mod0`) tiene la menor tasa de clasificación correcta mientras que el modelo entrenado con `boosting` tiene la tasa de clasificación correcta mayor.
 
 ## Ejemplo {-}
-En este ejemplo vamos a mostrar como usar el paquete **adabag** [@R-adabag] para aplicar AdaBoost.
+En este ejemplo vamos a mostrar como usar el paquete **adabag** de @R-adabag para aplicar AdaBoost.
 
-Como ejemplo vamos a usar la base de datos `iris` en la cual se tienen 4 variables que ayudarán a clasificar nuevas flores en una de tres especies. En la figura de abajo se muestran las tres especies y las cuatro variables.
+Como ejemplo vamos a usar la base de datos `iris` en la cual se tienen 4 variables que caracterizan las flores de tres especies. En la figura de abajo se muestran las tres especies y las cuatro variables.
 
-```{r iris, echo=F, fig.cap='Tipos de especies y variables en la base de datos iris.', dpi=90, fig.align='center'}
+```{r iris, echo=F, fig.cap="Tipos de especies y variables en la base de datos iris.", dpi=100, fig.align="center"}
 knitr::include_graphics("images/iris.png")
 ```
 
-Primero vamos a crear un árbol de clasificación usando el paquete **rpart** [@R-rpart], este modelo servirá como modelo de referencia. Para ajustar este modelo sólo vamos a usar las variables Sepal.Length y Sepal.Width
-.
+El objetivo de este ejemplo es crear un modelo para predecir la especie de una flor en función de las variables  Sepal.Length y Sepal.Width.
+
+Primero vamos a crear un árbol de clasificación usando el paquete **rpart** de @R-rpart, este modelo servirá como modelo de referencia.
+
 ```{r}
 library(rpart)
 mod1 <- rpart(Species ~ Sepal.Length + Sepal.Width, data=iris)
-yhat1 <- predict(mod1, type='class')
+yhat1 <- predict(mod1, type="class")
 ```
 
 Ahora vamos a aplicar AdaBoost.
 
 ```{r message=FALSE}
 library(adabag)
-mod2 <- bagging(Species ~ Sepal.Length + Sepal.Width, 
-                data=iris, mfinal=10)
+mod2 <- boosting(Species ~ Sepal.Length + Sepal.Width, 
+                 data=iris, mfinal=10)
 yhat2 <- predict(mod2, newdata=iris)$class
 ```
 
-En los objetos `yhat1` y `yhat2` están las predicciones y con ellas vamos a formar las tablas de confusión para cada modelo.
+En los objetos `yhat1` y `yhat2` están las predicciones y con ellas vamos a formar las matrices de confusión para cada modelo.
 
 ```{r}
 t1 <- table(real=iris$Species, prediccion=yhat1)
@@ -167,11 +174,11 @@ t2 <- table(real=iris$Species, prediccion=yhat2)
 t2
 ```
 
-Ahora vamos a calcular la tasa de clasificación correcta para cada una de las tablas anteriores.
+Ahora vamos a calcular la tasa de clasificación correcta para cada una de las matrices anteriores.
 
 ```{r}
 sum(diag(t1)) / sum(t1)
 sum(diag(t2)) / sum(t2)
 ```
 
-De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es `r sum(diag(t1)) / sum(t1) * 100`% mientras que con AdaBoost es `r sum(diag(t2)) / sum(t2) * 100`%.
+De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es `r round(sum(diag(t1)) / sum(t1) * 100, digits=2)`% mientras que con AdaBoost es `r round(sum(diag(t2)) / sum(t2) * 100, digits=2)`%.

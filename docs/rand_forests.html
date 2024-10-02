@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-04-24" />
+<meta name="date" content="2024-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -128,6 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -388,7 +389,7 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 <span id="cb165-2"><a href="rand_forests.html#cb165-2" tabindex="-1"></a>           offset, cluster, <span class="at">family =</span> <span class="fu">NO</span>(), strata, </span>
 <span id="cb165-3"><a href="rand_forests.html#cb165-3" tabindex="-1"></a>           <span class="at">minsplit =</span> <span class="dv">20</span>, <span class="at">minbucket =</span> <span class="dv">7</span>, <span class="at">splittry =</span> <span class="dv">2</span></span>
 <span id="cb165-4"><a href="rand_forests.html#cb165-4" tabindex="-1"></a>           <span class="at">control =</span> <span class="fu">disttree_control</span>(<span class="at">teststat =</span> <span class="st">&quot;quad&quot;</span>, <span class="at">testtype =</span> <span class="st">&quot;Univ&quot;</span>, ...)</span></code></pre></div>
-<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> <span class="citation">(<a href="#ref-R-gamlss">Stasinopoulos and Rigby 2024</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> <span class="citation">(<a href="#ref-R-RelDists">Hernandez et al. 2022</a>)</span> <strong>RealDists</strong> <span class="citation">(<a href="#ref-R-RealDists">Hernandez-Barajas and Marmolejo-Ramos 2024</a>)</span> y <strong>DiscreteDists</strong> <span class="citation">(<a href="#ref-R-DiscreteDists">Hernandez-Barajas et al. 2024</a>)</span>.</p>
+<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> <span class="citation">(<a href="#ref-R-gamlss">Stasinopoulos and Rigby 2024</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> <span class="citation">(<a href="#ref-R-RelDists">Hernandez et al. 2024</a>)</span> <strong>RealDists</strong> <span class="citation">(<a href="#ref-R-RealDists">Hernandez-Barajas and Marmolejo-Ramos 2024</a>)</span> y <strong>DiscreteDists</strong> <span class="citation">(<a href="#ref-R-DiscreteDists">Hernandez-Barajas et al. 2024</a>)</span>.</p>
 </div>
 <div id="ejemplo-13" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="rand_forests.html#ejemplo-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -442,15 +443,15 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-R-RelDists" class="csl-entry">
-Hernandez, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2022. <em>RelDists: Estimation for Some Reliability Distributions</em>. <a href="https://ousuga.github.io/RelDists/">https://ousuga.github.io/RelDists/</a>.
+Hernandez, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2024. <em>RelDists: Estimation for Some Reliability Distributions</em>. <a href="https://ousuga.github.io/RelDists/">https://ousuga.github.io/RelDists/</a>.
 </div>
 <div id="ref-R-RealDists" class="csl-entry">
 Hernandez-Barajas, Freddy, and Fernando Marmolejo-Ramos. 2024. <em>RealDists: Real Statistical Distributions</em>. <a href="https://github.com/fhernanb/RealDists">https://github.com/fhernanb/RealDists</a>.
 </div>
 <div id="ref-R-DiscreteDists" class="csl-entry">
-Hernandez-Barajas, Freddy, Fernando Marmolejo-Ramos, Jamiu Olumoh, and Osho Ajayi. 2024. <em>DiscreteDists: Discrete Statistical Distributions</em>.
+Hernandez-Barajas, Freddy, Fernando Marmolejo-Ramos, Jamiu Olumoh, Osho Ajayi, and Olga Usuga-Manco. 2024. <em>DiscreteDists: Discrete Statistical Distributions</em>. <a href="https://github.com/fhernanb/DiscreteDists">https://github.com/fhernanb/DiscreteDists</a>.
 </div>
 <div id="ref-Ho1995" class="csl-entry">
 Ho, Tin Kam. 1995. <span>“<span class="nocase">Random decision forests</span>.”</span> In <em>Proceedings of the International Conference on Document Analysis and Recognition, ICDAR</em>. Vol. 1. <a href="https://doi.org/10.1109/ICDAR.1995.598994">https://doi.org/10.1109/ICDAR.1995.598994</a>.
