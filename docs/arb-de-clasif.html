@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Árboles de clasificación | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Árboles de clasificación | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-10-02" />
+<meta name="date" content="2024-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -302,7 +302,7 @@ div.csl-indent {
 <p>En la siguiente figura se ilustra el árbol en el lado izquierdo y la partición del espacio en el lado derecho. La partición del espacio se hace de manera repetitiva para encontrar las variables y los valores de corte <span class="math inline">\(c\)</span> de tal manera que se minimice la función de costos <span class="math inline">\(\sum_{i=1}^{i=n} (y_i - \hat{y}_i)^2\)</span>.</p>
 <p><img src="libro_mod_pred_files/figure-html/nueva-1.png" width="672" /></p>
 <pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
+## Adjuntando el paquete: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:randomForest&#39;:
 ## 
 ##     combine</code></pre>
@@ -383,7 +383,7 @@ else : 0 (false).</li>
 <p>Ahora vamos a crear un diagrama de dispersión de <code>chol</code> versus <code>age</code> diferenciando por <code>y</code> para observar si hay algún patrón claro a nuestros ojos.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="arb-de-clasif.html#cb37-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <pre><code>## 
-## Attaching package: &#39;ggplot2&#39;</code></pre>
+## Adjuntando el paquete: &#39;ggplot2&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:randomForest&#39;:
 ## 
 ##     margin</code></pre>
@@ -489,7 +489,7 @@ else : 0 (false).</li>
 <pre><code>##           y_tree
 ##            absence presence
 ##   absence      115       49
-##   presence      44       95</code></pre>
+##   presence      47       92</code></pre>
 
 </div>
 </div>

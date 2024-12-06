@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Gradient Boost | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Gradient Boost | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-10-02" />
+<meta name="date" content="2024-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -315,7 +315,7 @@ div.csl-indent {
 </div>
 <div id="ejemplo-13" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="gradboost.html#ejemplo-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En este ejemplo se van a usar los datos <code>Boston</code> del paquete <strong>MASS</strong> de <span class="citation">Ripley (<a href="#ref-R-MASS">2024</a>)</span> para predecir la variable <code>medv</code> en función de las otras covariables.</p>
+<p>En este ejemplo se van a usar los datos <code>Boston</code> del paquete <strong>MASS</strong> de <span class="citation">Ripley and Venables (<a href="#ref-R-MASS">2024</a>)</span> para predecir la variable <code>medv</code> en función de las otras covariables.</p>
 <p>Para explorar la base de datos usamos el siguiente código.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="gradboost.html#cb126-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb126-2"><a href="gradboost.html#cb126-2" tabindex="-1"></a><span class="fu">str</span>(Boston)</span></code></pre></div>
@@ -353,7 +353,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="gradboost.html#cb134-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
 <span id="cb134-2"><a href="gradboost.html#cb134-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost1-1.png" width="672" /></p>
-<p>Ahora vamos a usar la función <code>gbm</code> del paquete de <span class="citation">Greg and Developers (<a href="#ref-R-gbm">2024</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
+<p>Ahora vamos a usar la función <code>gbm</code> del paquete de <span class="citation">Ridgeway and Developers (<a href="#ref-R-gbm">2024</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="gradboost.html#cb135-1" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
 <span id="cb135-2"><a href="gradboost.html#cb135-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
 <span id="cb135-3"><a href="gradboost.html#cb135-3" tabindex="-1"></a>model_gbm1 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
@@ -527,10 +527,10 @@ Friedman, J. H. 1999a. <span>“Greedy Function Approximation: A Gradient Boosti
 ———. 1999b. <span>“Stochastic Gradient Boosting.”</span> Stanford University.
 </div>
 <div id="ref-R-gbm" class="csl-entry">
-Greg, Ridgeway, and GBM Developers. 2024. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://github.com/gbm-developers/gbm">https://github.com/gbm-developers/gbm</a>.
+Ridgeway, Greg, and GBM Developers. 2024. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://github.com/gbm-developers/gbm">https://github.com/gbm-developers/gbm</a>.
 </div>
 <div id="ref-R-MASS" class="csl-entry">
-———. 2024. <em>MASS: Support Functions and Datasets for Venables and Ripley’s MASS</em>. <a href="http://www.stats.ox.ac.uk/pub/MASS4/">http://www.stats.ox.ac.uk/pub/MASS4/</a>.
+Ripley, Brian, and Bill Venables. 2024. <em>MASS: Support Functions and Datasets for Venables and Ripley’s MASS</em>. <a href="http://www.stats.ox.ac.uk/pub/MASS4/">http://www.stats.ox.ac.uk/pub/MASS4/</a>.
 </div>
 </div>
             </section>

@@ -10,7 +10,7 @@ En la siguiente figura (tomada de [link](https://www.saedsayad.com/support_vecto
 El objetivo es construir un margen de tolerancia ($\varepsilon$) con el cual se tendrán observaciones dentro de los márgenes y fuera de los márgenes. Usando sólo las observaciones fuera de los márgenes, se calculan los errores $\xi$ o $\xi^\star$ y con ellos se construye la función de objetivo (FO) a minimizar
 
 $$
-\text{FO} = \frac{1}{2} \| \boldsymbol{w} \|^2 + C \sum_{i=1}^{m} (\xi_i + \xi^\star),
+\text{FO} = \frac{1}{2} \| \boldsymbol{w} \|^2 + C \sum_{i=1}^{m} (\xi_i + \xi^\star_i),
 $$
 
 donde $\boldsymbol{w}$ es el vector con las pendientes asociadas a cada una de las variables (sin incluir intercepto), $C$ es un valor de penalización para los errores y $m$ el número de observaciones que están fuera de los márgenes del total de $n$ observaciones.

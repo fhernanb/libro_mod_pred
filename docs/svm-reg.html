@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Support Vector Machines para regresión | Modelos Predictivos</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Support Vector Machines para regresión | Modelos Predictivos" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-10-02" />
+<meta name="date" content="2024-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -271,7 +271,7 @@ div.csl-indent {
 </p>
 <p>El objetivo es construir un margen de tolerancia (<span class="math inline">\(\varepsilon\)</span>) con el cual se tendrán observaciones dentro de los márgenes y fuera de los márgenes. Usando sólo las observaciones fuera de los márgenes, se calculan los errores <span class="math inline">\(\xi\)</span> o <span class="math inline">\(\xi^\star\)</span> y con ellos se construye la función de objetivo (FO) a minimizar</p>
 <p><span class="math display">\[
-\text{FO} = \frac{1}{2} \| \boldsymbol{w} \|^2 + C \sum_{i=1}^{m} (\xi_i + \xi^\star),
+\text{FO} = \frac{1}{2} \| \boldsymbol{w} \|^2 + C \sum_{i=1}^{m} (\xi_i + \xi^\star_i),
 \]</span></p>
 <p>donde <span class="math inline">\(\boldsymbol{w}\)</span> es el vector con las pendientes asociadas a cada una de las variables (sin incluir intercepto), <span class="math inline">\(C\)</span> es un valor de penalización para los errores y <span class="math inline">\(m\)</span> el número de observaciones que están fuera de los márgenes del total de <span class="math inline">\(n\)</span> observaciones.</p>
 <div id="paquetes-de-r-para-svm" class="section level2 unnumbered hasAnchor">

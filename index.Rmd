@@ -27,7 +27,7 @@ knitr::write_bib(c(.packages(), "bookdown", "knitr", "rmarkdown",
 ```{r echo=FALSE, message=FALSE}
 # lista de paquetes necesarios para compilar el libro
 list.of.packages <- c("rpart", "rpart.plot", "tree", "adabag",
-                      "gbm", "disttree")
+                      "gbm", "disttree", "MPV")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) 
   install.packages(new.packages,
