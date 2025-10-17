@@ -3,7 +3,7 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Modelos Predictivos</a></li>
+        <li><a href="./">Introducción a Machine Learning</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/fhernanb/libro_mod_pred/edit/master/%s
