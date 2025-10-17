@@ -137,6 +137,14 @@ AdaBoost automático         | `r accu_boost_autom`
 
 De la salida anterior se observa que el árbol tradicional (`mod0`) tiene la menor tasa de clasificación correcta mientras que el modelo entrenado con `boosting` tiene la tasa de clasificación correcta mayor.
 
+## Paquetes {-}
+Los paquetes más conocidos para AdaBoost son:
+
+- [adabag](https://cran.r-project.org/web/packages/adabag/index.html).
+- [ada](https://cran.r-project.org/web/packages/ada/index.html), solo para dos grupos.
+
+Existen otros paquetes que el lector puede consultar en la sección *Support Vector Machines and Kernel Methods* [CRAN Task View: Machine Learning & Statistical Learning](https://cran.r-project.org/web/views/MachineLearning.html).
+
 ## Ejemplo {-}
 En este ejemplo vamos a mostrar como usar el paquete **adabag** de @R-adabag para aplicar AdaBoost.
 
@@ -182,3 +190,48 @@ sum(diag(t2)) / sum(t2)
 ```
 
 De la anterior salida se observa que la tasa de clasificación correcta con un árbol tradicional es `r round(sum(diag(t1)) / sum(t1) * 100, digits=2)`% mientras que con AdaBoost es `r round(sum(diag(t2)) / sum(t2) * 100, digits=2)`%.
+
+## Ejemplo {-}
+En este ejemplo vamos a comparar `ada::ada` (que solo permite 2 clases) con `adabag::boosting` (varias clases) con las primeras variables del conjunto de datos `ada::soldat`.
+
+```{r message=FALSE}
+library(ada)
+data(soldat)
+
+i <- sample(1:nrow(soldat), size=100)
+train_data <- soldat[i, c("x1", "x2", "x3", "x4", "x5", "y")]
+
+mod1 <- ada(y ~ x1 + x2 + x3 + x4 + x5, data=train_data)
+yhat1 <- predict(mod1, newdata=train_data)
+```
+
+
+```{r message=FALSE}
+library(adabag)
+
+train_data$y <- as.factor(train_data$y)
+
+mod2 <- boosting(y ~ x1 + x2 + x3 + x4 + x5, data=train_data)
+yhat2 <- predict(mod2, newdata=train_data)$class
+```
+
+Ahora comparamos las tasas de clasificación correctas así:
+
+```{r}
+t1 <- table(train_data$y, yhat1)
+t1
+t2 <- table(train_data$y, yhat2)
+t2
+```
+
+Ahora vamos a calcular la tasa de clasificación correcta para cada una de las matrices anteriores.
+
+```{r}
+sum(diag(t1)) / sum(t1)
+sum(diag(t2)) / sum(t2)
+```
+
+
+
+
+

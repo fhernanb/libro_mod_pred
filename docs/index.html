@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Modelos Predictivos</title>
+  <title>Introducción a Machine Learning</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Modelos Predictivos" />
+  <meta property="og:title" content="Introducción a Machine Learning" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="/images/cover.png" />
+  <meta property="og:image" content="/images/cover2.png" />
   <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Modelos Predictivos" />
+  <meta name="twitter:title" content="Introducción a Machine Learning" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
-  <meta name="twitter:image" content="/images/cover.png" />
+  <meta name="twitter:image" content="/images/cover2.png" />
 
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2024-12-06" />
+<meta name="date" content="2025-10-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +55,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -171,11 +172,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árboles"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-decisión"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-árboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#árbol-de-regresión"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-árboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
@@ -183,25 +184,25 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
 <ul>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árboles-1"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-decisión-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-árboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#árbol-de-clasificación"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-árboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
 <ul>
-<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#videos-útiles"><i class="fa fa-check"></i>Videos útiles</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>4</b> Random Forests</a>
 <ul>
-<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicación-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -220,25 +221,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
 <ul>
-<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
-<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicación-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#paquetes"><i class="fa fa-check"></i>Paquetes</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>8</b> Gradient Boost</a>
+<li class="chapter" data-level="8" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a></li>
+<li class="chapter" data-level="9" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>9</b> Gradient Boost</a>
 <ul>
-<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>9</b> Regresión lineal versus árboles de regresión</a>
+<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresión-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresión"><i class="fa fa-check"></i>Arboles de regresión</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulación-para-comparar-ambos-métodos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -254,7 +258,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Predictivos</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a Machine Learning</a>
           </h1>
         </div>
 
@@ -263,22 +267,22 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Modelos Predictivos</h1>
+<h1 class="title">Introducción a Machine Learning</h1>
 <p class="author"><em>Freddy Hernández</em></p>
-<p class="date"><em>2024-12-06</em></p>
+<p class="date"><em>2025-10-16</em></p>
 </div>
 <div id="bienvenido" class="section level1 unnumbered hasAnchor">
 <h1>Bienvenido<a href="index.html#bienvenido" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="images/cover.jpg" width="50%" style="display: block; margin: auto;" /></p>
-<p>En este libro se presentan explicaciones sencillas de algunos modelos de predicción y la forma de aplicarlos por medio del lenguaje de programación R.</p>
+<p><img src="images/cover2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>En este libro se presentan explicaciones sencillas de algunos modelos de machine learning y la forma de aplicarlos por medio del lenguaje de programación R.</p>
 <p><a href="https://fhernanb.github.io/">Freddy Hernández</a></p>
 <div id="estructura-del-libro" class="section level2 unnumbered hasAnchor">
 <h2>Estructura del libro<a href="index.html#estructura-del-libro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En los capítulos <a href="arb-de-regre.html#arb-de-regre">1</a> y <a href="arb-de-clasif.html#arb-de-clasif">2</a> se presentann los árboles de regresión y de clasificación. En el capítulo <a href="arb-distri.html#arb-distri">3</a> se muestra una generalización de los árboles de regresión incluyendo distribuciones de probabilidad para la variable respuesta. Luego en el capítulo <a href="rand-forests.html#rand-forests">4</a> se muestra cómo integrar los árboles para formar bosques aleatorios para el problema de regresión y clasificación. En los capítulos <a href="svm-reg.html#svm-reg">5</a> y <a href="svm-clas.html#svm-clas">6</a> se introducen las máquinas de soporte vectorial para regresión y clasificación. En los capítulos <a href="adaboost.html#adaboost">7</a> y <a href="gradboost.html#gradboost">8</a> se presentan los algoritmos AdaBoost y Gradient Boost.</p>
+<p>En los capítulos <a href="arb-de-regre.html#arb-de-regre">1</a> y <a href="arb-de-clasif.html#arb-de-clasif">2</a> se presentann los árboles de regresión y de clasificación. En el capítulo <a href="arb-distri.html#arb-distri">3</a> se muestra una generalización de los árboles de regresión incluyendo distribuciones de probabilidad para la variable respuesta. Luego en el capítulo <a href="rand-forests.html#rand-forests">4</a> se muestra cómo integrar los árboles para formar bosques aleatorios para el problema de regresión y clasificación. En los capítulos <a href="svm-reg.html#svm-reg">5</a> y <a href="svm-clas.html#svm-clas">6</a> se introducen las máquinas de soporte vectorial para regresión y clasificación. En los capítulos <a href="adaboost.html#adaboost">7</a> y <a href="gradboost.html#gradboost">9</a> se presentan los algoritmos AdaBoost y Gradient Boost.</p>
 </div>
 <div id="software-y-convenciones" class="section level2 unnumbered hasAnchor">
 <h2>Software y convenciones<a href="index.html#software-y-convenciones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Para realizar este libro usamos los paquetes <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015">Xie 2015</a>)</span> y <strong>bookdown</strong> <span class="citation">(<a href="#ref-R-bookdown">Xie 2024</a>)</span> que permiten unir la ventajas de LaTeX y R en un mismo archivo.</p>
+<p>Para realizar este libro usamos los paquetes <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015">Xie 2015</a>)</span> y <strong>bookdown</strong> <span class="citation">(<a href="#ref-R-bookdown">Xie 2025</a>)</span> que permiten unir la ventajas de LaTeX y R en un mismo archivo.</p>
 <p>En todo el libro se presentarán códigos que el lector puede copiar y pegar en su consola de R para obtener los mismos resultados aquí del libro. Los códigos se destacan en una caja de color similar a la mostrada a continuación.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="dv">4</span> <span class="sc">+</span> <span class="dv">6</span></span>
 <span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
@@ -313,7 +317,7 @@ Advertencia.
 Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
 </div>
 <div id="ref-R-bookdown" class="csl-entry">
-———. 2024. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
+———. 2025. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
 </div>
 </div>
             </section>
@@ -336,42 +340,42 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/fhernanb/libro_mod_pred/edit/master/index.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["libro_mod_pred.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/fhernanb/libro_mod_pred/edit/master/index.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["libro_mod_pred.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

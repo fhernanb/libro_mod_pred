@@ -9,5 +9,6 @@ rand-forests
 svm-reg
 svm-clas
 adaboost
+adaboost_reg
 gradboost
 reg-versus-arb

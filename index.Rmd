@@ -1,5 +1,5 @@
 --- 
-title: "Modelos Predictivos"
+title: "Introducción a Machine Learning"
 author: ["Freddy Hernández"]
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -8,7 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-cover-image: images/cover.png
+cover-image: images/cover2.png
 github-repo: fhernanb/libro_mod_pred
 description: "Libro de Modelos Predictivos"
 ---
@@ -17,17 +17,27 @@ description: "Libro de Modelos Predictivos"
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(.packages(), "bookdown", "knitr", "rmarkdown", 
-                   "rpart", "rpart.plot", "MPV", "tree", "adabag", 
-                   "gbm", "MASS", "disttree", "RelDists", "gamlss",
+knitr::write_bib(c(.packages(), 
+                   "bookdown", 
+                   "knitr", 
+                   "rmarkdown", 
+                   "rpart", 
+                   "rpart.plot", 
+                   "MPV", "tree", 
+                   "adabag", 
+                   "gbm", "MASS", 
+                   "disttree", "RelDists", "gamlss",
                    "RealDists", "DiscreteDists"), 
                  "packages.bib")
 ```
 
 ```{r echo=FALSE, message=FALSE}
 # lista de paquetes necesarios para compilar el libro
-list.of.packages <- c("rpart", "rpart.plot", "tree", "adabag",
-                      "gbm", "disttree", "MPV")
+list.of.packages <- c("rpart", 
+                      "rpart.plot", 
+                      "tree", "adabag",
+                      "gbm", "disttree", 
+                      "MPV", "randomForest")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) 
   install.packages(new.packages,
@@ -35,10 +45,10 @@ if(length(new.packages))
 ```
 
 ```{r echo=FALSE, out.width="50%", fig.align="center"}
-knitr::include_graphics("images/cover.jpg")
+knitr::include_graphics("images/cover2.png")
 ```
 
-En este libro se presentan explicaciones sencillas de algunos modelos de predicción y la forma de aplicarlos por medio del lenguaje de programación R.
+En este libro se presentan explicaciones sencillas de algunos modelos de machine learning y la forma de aplicarlos por medio del lenguaje de programación R.
 
 [Freddy Hernández](https://fhernanb.github.io/)  
 
