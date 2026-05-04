@@ -1,0 +1,19 @@
+# k-NN para regresión {#knn-regre}
+El algoritmo k-Nearest Neighbors (k-NN) para regresión es una técnica no paramétrica que predice un valor numérico continuo. El algoritmo funciona bajo la siguiente lógica: Identifica las $k$ observaciones más cercanas al punto que queremos predecir (usualmente mediante la distancia euclidiana). Calcula la predicción final como el promedio de los valores de la variable objetivo de esos $k$ vecinos. En versiones más avanzadas, se puede dar más peso a los vecinos que están más cerca, de modo que influyan más en el resultado final que los que están relativamente lejos. Es un método intuitivo porque se basa en la premisa de que "casos similares tienden a tener resultados similares".
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z3140gOhuVI?si=FpLtHiyk5pwLPd2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+## Paquetes de R {-}
+
+Para implementar **k-NN para regresión** en R, existen diversas opciones que van desde funciones básicas hasta ecosistemas completos de aprendizaje automático. 
+
+- `FNN` (Fast Nearest Neighbors): es uno de los paquetes más eficientes para esta tarea específica. A diferencia de otros que se centran solo en clasificación, `FNN` tiene una función dedicada exclusivamente a la regresión, `knn.reg()`. Es extremadamente rápido porque utiliza algoritmos de búsqueda optimizados (como cover trees).
+
+- El ecosistema moderno `tidymodels` (vía `parsnip`): si se desea un flujo de trabajo organizado y profesional, `tidymodels` es la opción recomendada. Permite cambiar de algoritmo fácilmente sin cambiar toda la estructura del código. Se suele usar el motor `"kknn"` dentro de la especificación del modelo. Facilita enormemente el proceso de **tuning** (encontrar el valor óptimo de $k$) y la validación cruzada.
+
+- Tradicional `caret`: durante años fue el estándar para Machine Learning en R. Aunque está siendo desplazado por `tidymodels`, sigue siendo muy robusto. Para entrenar se usa `train(..., method = "knn")`. Automatiza el preprocesamiento de los datos (como el escalado, que es crítico en k-NN) mediante el argumento `preProcess = c("center", "scale")`.
+
+Dado que k-NN calcula distancias (generalmente euclidianas), **siempre se debe normalizar o estandarizar** las variables predictoras antes de entrenar el modelo en R. Si una variable tiene una escala mucho mayor que otra (por ejemplo, ingresos vs. edad), dominará por completo el cálculo de la distancia y el modelo perderá precisión.
+
+

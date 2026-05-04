@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Support Vector Machines para regresión | Introducción a Machine Learning</title>
+  <title>6 Support Vector Machines para regresión | Introducción a Machine Learning</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Support Vector Machines para regresión | Introducción a Machine Learning" />
+  <meta property="og:title" content="6 Support Vector Machines para regresión | Introducción a Machine Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/cover2.png" />
   <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Support Vector Machines para regresión | Introducción a Machine Learning" />
+  <meta name="twitter:title" content="6 Support Vector Machines para regresión | Introducción a Machine Learning" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="/images/cover2.png" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2025-10-16" />
+<meta name="date" content="2026-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -129,7 +129,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -170,59 +169,63 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
+<li class="chapter" data-level="1" data-path="knn-regre.html"><a href="knn-regre.html"><i class="fa fa-check"></i><b>1</b> k-NN para regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquetes-de-r"><i class="fa fa-check"></i>Paquetes de R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>2</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
+<li class="chapter" data-level="3" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>3</b> Árboles de clasificación</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
+<li class="chapter" data-level="4" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>4</b> Árboles de regresión distribucionales</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>4</b> Random Forests</a>
+<li class="chapter" data-level="5" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>5</b> Random Forests</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#random-forests-distribucionales"><i class="fa fa-check"></i>Random Forests distribucionales</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para regresión</a>
+<li class="chapter" data-level="6" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para regresión</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para clasificación</a>
+<li class="chapter" data-level="7" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>7</b> Support Vector Machines para clasificación</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
+<li class="chapter" data-level="8" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -230,19 +233,19 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a></li>
-<li class="chapter" data-level="9" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>9</b> Gradient Boost</a>
+<li class="chapter" data-level="9" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>9</b> AdaBoost</a></li>
+<li class="chapter" data-level="10" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>10</b> Gradient Boost</a>
 <ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
+<li class="chapter" data-level="11" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>11</b> Regresión lineal versus árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -266,8 +269,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="svm-reg" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Support Vector Machines para regresión<a href="svm-reg.html#svm-reg" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="svm-reg" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Support Vector Machines para regresión<a href="svm-reg.html#svm-reg" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><span class="citation">Drucker et al. (<a href="#ref-Drucker97">1997</a>)</span> en el artículo titulado “Support Vector Regression Machines” propusieron las máquinas de soporte vectorial (svm) para el problema de regresión.</p>
 <p>En la siguiente figura (tomada de <a href="https://www.saedsayad.com/support_vector_machine_reg.htm">link</a>) se ilustra la idea intuitiva para el caso de predecir <span class="math inline">\(y\)</span> usando una sola variable <span class="math inline">\(x\)</span>.</p>
 <p align="center">
@@ -290,7 +293,7 @@ div.csl-indent {
 </div>
 <div id="ventajas" class="section level2 unnumbered hasAnchor">
 <h2>Ventajas<a href="svm-reg.html#ventajas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Algunas de las ventajas de SVM según <span class="citation">Shivaswamy, Chu, and Jansche (<a href="#ref-shivaswamy2007">2007</a>)</span> son:</p>
+<p>Algunas de las ventajas de SVM según <span class="citation">Shivaswamy et al. (<a href="#ref-shivaswamy2007">2007</a>)</span> son:</p>
 <ul>
 <li>superior generalization capacity,</li>
 <li>globally optimal solution from a convex optimization problem,</li>
@@ -309,12 +312,12 @@ div.csl-indent {
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Drucker97" class="csl-entry">
-Drucker, Harris, Chris J. C. Burges, Linda Kaufman, Alex Smola, and Vladimir Vapnik. 1997. <span>“Support Vector Regression Machines.”</span> In <em>ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 9</em>, 155–61. MIT Press.
+Drucker, Harris, Chris J. C. Burges, Linda Kaufman, Alex Smola, and Vladimir Vapnik. 1997. <span>“Support Vector Regression Machines.”</span> <em>ADVANCES IN NEURAL INFORMATION PROCESSING SYSTEMS 9</em>, 155–61.
 </div>
 <div id="ref-shivaswamy2007" class="csl-entry">
-Shivaswamy, Pannagadatta K, Wei Chu, and Martin Jansche. 2007. <span>“A Support Vector Approach to Censored Targets.”</span> In <em>Seventh IEEE International Conference on Data Mining (ICDM 2007)</em>, 655–60. IEEE.
+Shivaswamy, Pannagadatta K, Wei Chu, and Martin Jansche. 2007. <span>“A Support Vector Approach to Censored Targets.”</span> <em>Seventh IEEE International Conference on Data Mining (ICDM 2007)</em>, 655–60.
 </div>
 </div>
             </section>

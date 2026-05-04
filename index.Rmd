@@ -34,7 +34,7 @@ knitr::write_bib(c(.packages(),
 ```{r echo=FALSE, message=FALSE}
 # lista de paquetes necesarios para compilar el libro
 list.of.packages <- c("rpart", 
-                      "rpart.plot", 
+                      "rpart.plot", "ada",
                       "tree", "adabag",
                       "gbm", "disttree", 
                       "MPV", "randomForest")

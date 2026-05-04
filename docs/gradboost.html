@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Gradient Boost | Introducción a Machine Learning</title>
+  <title>10 Gradient Boost | Introducción a Machine Learning</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Gradient Boost | Introducción a Machine Learning" />
+  <meta property="og:title" content="10 Gradient Boost | Introducción a Machine Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/cover2.png" />
   <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Gradient Boost | Introducción a Machine Learning" />
+  <meta name="twitter:title" content="10 Gradient Boost | Introducción a Machine Learning" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="/images/cover2.png" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2025-10-16" />
+<meta name="date" content="2026-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -129,7 +129,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -170,59 +169,63 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
+<li class="chapter" data-level="1" data-path="knn-regre.html"><a href="knn-regre.html"><i class="fa fa-check"></i><b>1</b> k-NN para regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquetes-de-r"><i class="fa fa-check"></i>Paquetes de R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>2</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
+<li class="chapter" data-level="3" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>3</b> Árboles de clasificación</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
+<li class="chapter" data-level="4" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>4</b> Árboles de regresión distribucionales</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>4</b> Random Forests</a>
+<li class="chapter" data-level="5" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>5</b> Random Forests</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#random-forests-distribucionales"><i class="fa fa-check"></i>Random Forests distribucionales</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para regresión</a>
+<li class="chapter" data-level="6" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para regresión</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para clasificación</a>
+<li class="chapter" data-level="7" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>7</b> Support Vector Machines para clasificación</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
+<li class="chapter" data-level="8" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -230,19 +233,19 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a></li>
-<li class="chapter" data-level="9" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>9</b> Gradient Boost</a>
+<li class="chapter" data-level="9" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>9</b> AdaBoost</a></li>
+<li class="chapter" data-level="10" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>10</b> Gradient Boost</a>
 <ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
+<li class="chapter" data-level="11" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>11</b> Regresión lineal versus árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -266,8 +269,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gradboost" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">9</span> Gradient Boost<a href="gradboost.html#gradboost" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="gradboost" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Gradient Boost<a href="gradboost.html#gradboost" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Gradient Boost fue propuesto por <span class="citation">Friedman (<a href="#ref-Friedman1999a">1999a</a>)</span> y <span class="citation">Friedman (<a href="#ref-Friedman1999b">1999b</a>)</span> y consiste en crear varios predictores en secuencia. El primer predictor usa la media de la variable <span class="math inline">\(Y\)</span> para predecir, luego el segundo predictor explica los errores del primer predictor, el tercer predictor explicar los erroes del segundo predictor y así sucesivamente. En la siguiente figura se muestra una ilustración de lo que es Gradient Boost.</p>
 <p align="center">
 <img src="images/gradboost_illustration.png" width="700">
@@ -356,8 +359,8 @@ div.csl-indent {
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="gradboost.html#cb140-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
 <span id="cb140-2"><a href="gradboost.html#cb140-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost1-1.png" width="672" /></p>
-<p>Ahora vamos a usar la función <code>gbm</code> del paquete de <span class="citation">Ridgeway and Developers (<a href="#ref-R-gbm">2024</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost1-1.png" alt="" width="672" /></p>
+<p>Ahora vamos a usar la función <code>gbm</code> del paquete de <span class="citation">Ridgeway and Developers (<a href="#ref-R-gbm">2026</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="gradboost.html#cb141-1" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
 <span id="cb141-2"><a href="gradboost.html#cb141-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
 <span id="cb141-3"><a href="gradboost.html#cb141-3" tabindex="-1"></a>model_gbm1 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
@@ -374,19 +377,19 @@ div.csl-indent {
 ## There were 13 predictors of which 13 had non-zero influence.</code></pre>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="gradboost.html#cb143-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm1<span class="sc">$</span>cv.error))</span></code></pre></div>
-<pre><code>## [1] 3.636371</code></pre>
+<pre><code>## [1] 3.636974</code></pre>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="gradboost.html#cb145-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm1)</span></code></pre></div>
 <pre><code>## Using 4404 trees...</code></pre>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="gradboost.html#cb147-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
-<pre><code>## [1] 0.9542746</code></pre>
+<pre><code>## [1] 0.9542676</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="gradboost.html#cb149-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
 <span id="cb149-2"><a href="gradboost.html#cb149-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost2-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost2-1.png" alt="" width="672" /></p>
 <p>Al comparar la correlación y los diagramas de dispersión se observa una mejora considerable con el modelo Gradient Boost.</p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="gradboost.html#cb150-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm1, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost3-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost3-1.png" alt="" width="672" /></p>
 <pre><code>## [1] 4404</code></pre>
 <p>De la figura anterior se observa que en la iteración 4404 (linea azul a trazos) fue donde se obtuvo el menor <span class="math inline">\(RMSE\)</span>.</p>
 <p>Vamos a crear otro modelo de predicción pero cambiando algunos de los hiper-parámetros, <span class="math inline">\(\alpha=0.15\)</span> y una profundidad de 3 en cada árbol.</p>
@@ -397,7 +400,7 @@ div.csl-indent {
 <span id="cb152-5"><a href="gradboost.html#cb152-5" tabindex="-1"></a>                  <span class="at">n.trees=</span><span class="dv">5000</span>, <span class="at">interaction.depth=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="gradboost.html#cb153-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm2<span class="sc">$</span>cv.error))</span></code></pre></div>
-<pre><code>## [1] 3.370139</code></pre>
+<pre><code>## [1] 3.376981</code></pre>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="gradboost.html#cb155-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm2)</span></code></pre></div>
 <pre><code>## Using 241 trees...</code></pre>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="gradboost.html#cb157-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
@@ -405,10 +408,10 @@ div.csl-indent {
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="gradboost.html#cb159-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
 <span id="cb159-2"><a href="gradboost.html#cb159-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost4-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost4-1.png" alt="" width="672" /></p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="gradboost.html#cb160-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm2, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost5-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost5-1.png" alt="" width="672" /></p>
 <pre><code>## [1] 241</code></pre>
 <p>En lugar de buscar esos hiper-parámetros a manualmente, podemos hacer una búsqueda automática creando un conjunto de posibles valores de los hiper-parámetros así.</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="gradboost.html#cb162-1" tabindex="-1"></a><span class="co"># create hyperparameter grid</span></span>
@@ -496,7 +499,7 @@ div.csl-indent {
 <span id="cb167-17"><a href="gradboost.html#cb167-17" tabindex="-1"></a>  ) </span></code></pre></div>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="gradboost.html#cb168-1" tabindex="-1"></a><span class="fu">summary</span>(gbm.fit.final, <span class="at">cBars =</span> <span class="dv">10</span>,</span>
 <span id="cb168-2"><a href="gradboost.html#cb168-2" tabindex="-1"></a>        <span class="at">method =</span> relative.influence, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost6-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost6-1.png" alt="" width="672" /></p>
 <pre><code>##             var     rel.inf
 ## rm           rm 40.70059606
 ## lstat     lstat 36.67225822
@@ -505,9 +508,9 @@ div.csl-indent {
 ## nox         nox  3.99034366
 ## ptratio ptratio  2.13830279
 ## age         age  1.34811594
+## tax         tax  1.23826872
 ## black     black  1.16184689
-## tax         tax  1.14437416
-## indus     indus  0.37045656
+## indus     indus  0.27656200
 ## rad         rad  0.21608957
 ## zn           zn  0.07111692
 ## chas       chas  0.04200211</code></pre>
@@ -518,20 +521,20 @@ div.csl-indent {
 <pre><code>## [1] 0.934735</code></pre>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="gradboost.html#cb172-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>test<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
 <span id="cb172-2"><a href="gradboost.html#cb172-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/gradboost7-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/gradboost7-1.png" alt="" width="672" /></p>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Friedman1999a" class="csl-entry">
-Friedman, J. H. 1999a. <span>“Greedy Function Approximation: A Gradient Boosting Machine.”</span> Stanford University.
+Friedman, J. H. 1999a. <em>Greedy Function Approximation: A Gradient Boosting Machine</em>. Stanford University.
 </div>
 <div id="ref-Friedman1999b" class="csl-entry">
-———. 1999b. <span>“Stochastic Gradient Boosting.”</span> Stanford University.
+Friedman, J. H. 1999b. <em>Stochastic Gradient Boosting</em>. Stanford University.
 </div>
 <div id="ref-R-gbm" class="csl-entry">
-Ridgeway, Greg, and GBM Developers. 2024. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://github.com/gbm-developers/gbm">https://github.com/gbm-developers/gbm</a>.
+Ridgeway, Greg, and GBM Developers. 2026. <em>Gbm: Generalized Boosted Regression Models</em>. <a href="https://github.com/gbm-developers/gbm">https://github.com/gbm-developers/gbm</a>.
 </div>
 <div id="ref-R-MASS" class="csl-entry">
 Ripley, Brian, and Bill Venables. 2025. <em>MASS: Support Functions and Datasets for Venables and Ripley’s MASS</em>. <a href="http://www.stats.ox.ac.uk/pub/MASS4/">http://www.stats.ox.ac.uk/pub/MASS4/</a>.

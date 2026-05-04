@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Random Forests | Introducción a Machine Learning</title>
+  <title>5 Random Forests | Introducción a Machine Learning</title>
   <meta name="description" content="Libro de Modelos Predictivos" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Random Forests | Introducción a Machine Learning" />
+  <meta property="og:title" content="5 Random Forests | Introducción a Machine Learning" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/cover2.png" />
   <meta property="og:description" content="Libro de Modelos Predictivos" />
   <meta name="github-repo" content="fhernanb/libro_mod_pred" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Random Forests | Introducción a Machine Learning" />
+  <meta name="twitter:title" content="5 Random Forests | Introducción a Machine Learning" />
   
   <meta name="twitter:description" content="Libro de Modelos Predictivos" />
   <meta name="twitter:image" content="/images/cover2.png" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2025-10-16" />
+<meta name="date" content="2026-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -129,7 +129,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -170,59 +169,63 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#software-y-convenciones"><i class="fa fa-check"></i>Software y convenciones</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#bloques-informativos"><i class="fa fa-check"></i>Bloques informativos</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>1</b> Árboles de regresión</a>
+<li class="chapter" data-level="1" data-path="knn-regre.html"><a href="knn-regre.html"><i class="fa fa-check"></i><b>1</b> k-NN para regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquetes-de-r"><i class="fa fa-check"></i>Paquetes de R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>2</b> Árboles de regresión</a>
+<ul>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rboles"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-decisi%C3%B3n"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#tipos-de-%C3%A1rboles"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#%C3%A1rbol-de-regresi%C3%B3n"><i class="fa fa-check"></i>Árbol de regresión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquetes-de-r-para-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-rpart"><i class="fa fa-check"></i>Paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#paquete-tree"><i class="fa fa-check"></i>Paquete <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-rpart"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-regre.html"><a href="arb-de-regre.html#ejemplo-con-el-paquete-tree"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>tree</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>2</b> Árboles de clasificación</a>
+<li class="chapter" data-level="3" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html"><i class="fa fa-check"></i><b>3</b> Árboles de clasificación</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rboles-1"><i class="fa fa-check"></i>Árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-decisi%C3%B3n-1"><i class="fa fa-check"></i>Árbol de decisión</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#tipos-de-%C3%A1rboles-1"><i class="fa fa-check"></i>Tipos de árboles</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#%C3%A1rbol-de-clasificaci%C3%B3n"><i class="fa fa-check"></i>Árbol de clasificación</a></li>
+<li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#paquetes-de-r-para-construir-%C3%A1rboles"><i class="fa fa-check"></i>Paquetes de R para construir árboles</a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-rpart"><i class="fa fa-check"></i>Ejemplo con <strong>rpart</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo-con-tree"><i class="fa fa-check"></i>Ejemplo con <strong>tree</strong></a></li>
 <li class="chapter" data-level="" data-path="arb-de-clasif.html"><a href="arb-de-clasif.html#ejemplo"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión distribucionales</a>
+<li class="chapter" data-level="4" data-path="arb-distri.html"><a href="arb-distri.html"><i class="fa fa-check"></i><b>4</b> Árboles de regresión distribucionales</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
+<li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#videos-%C3%BAtiles"><i class="fa fa-check"></i>Videos útiles</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#paquete-disttree"><i class="fa fa-check"></i>Paquete disttree</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-1"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="arb-distri.html"><a href="arb-distri.html#ejemplo-2"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>4</b> Random Forests</a>
+<li class="chapter" data-level="5" data-path="rand-forests.html"><a href="rand-forests.html"><i class="fa fa-check"></i><b>5</b> Random Forests</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
+<li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#explicaci%C3%B3n-sencilla-de-random-forests"><i class="fa fa-check"></i>Explicación sencilla de Random Forests</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-3"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-4"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-5"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#random-forests-distribucionales"><i class="fa fa-check"></i>Random Forests distribucionales</a></li>
 <li class="chapter" data-level="" data-path="rand-forests.html"><a href="rand-forests.html#ejemplo-6"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines para regresión</a>
+<li class="chapter" data-level="6" data-path="svm-reg.html"><a href="svm-reg.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para regresión</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#paquetes-de-r-para-svm"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ventajas"><i class="fa fa-check"></i>Ventajas</a></li>
 <li class="chapter" data-level="" data-path="svm-reg.html"><a href="svm-reg.html#ejemplos"><i class="fa fa-check"></i>Ejemplos</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>6</b> Support Vector Machines para clasificación</a>
+<li class="chapter" data-level="7" data-path="svm-clas.html"><a href="svm-clas.html"><i class="fa fa-check"></i><b>7</b> Support Vector Machines para clasificación</a>
 <ul>
 <li class="chapter" data-level="" data-path="svm-clas.html"><a href="svm-clas.html#paquetes-de-r-para-svm-1"><i class="fa fa-check"></i>Paquetes de R para svm</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>7</b> AdaBoost</a>
+<li class="chapter" data-level="8" data-path="adaboost.html"><a href="adaboost.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-sencilla-de-adaboost"><i class="fa fa-check"></i>Explicación sencilla de AdaBoost</a></li>
+<li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#explicaci%C3%B3n-detallada-de-adaboost"><i class="fa fa-check"></i>Explicación detallada de AdaBoost</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-7"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-8"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-9"><i class="fa fa-check"></i>Ejemplo</a></li>
@@ -230,19 +233,19 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-10"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="adaboost.html"><a href="adaboost.html#ejemplo-11"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>8</b> AdaBoost</a></li>
-<li class="chapter" data-level="9" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>9</b> Gradient Boost</a>
+<li class="chapter" data-level="9" data-path="adaboost_reg.html"><a href="adaboost_reg.html"><i class="fa fa-check"></i><b>9</b> AdaBoost</a></li>
+<li class="chapter" data-level="10" data-path="gradboost.html"><a href="gradboost.html"><i class="fa fa-check"></i><b>10</b> Gradient Boost</a>
 <ul>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-12"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-13"><i class="fa fa-check"></i>Ejemplo</a></li>
 <li class="chapter" data-level="" data-path="gradboost.html"><a href="gradboost.html#ejemplo-14"><i class="fa fa-check"></i>Ejemplo</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>10</b> Regresión lineal versus árboles de regresión</a>
+<li class="chapter" data-level="11" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html"><i class="fa fa-check"></i><b>11</b> Regresión lineal versus árboles de regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path=""><a href="#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#regresi%C3%B3n-lineal"><i class="fa fa-check"></i>Regresión lineal</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#arboles-de-regresi%C3%B3n"><i class="fa fa-check"></i>Arboles de regresión</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#ejemplo-15"><i class="fa fa-check"></i>Ejemplo</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
+<li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#estudio-de-simulaci%C3%B3n-para-comparar-ambos-m%C3%A9todos"><i class="fa fa-check"></i>Estudio de simulación para comparar ambos métodos</a></li>
 <li class="chapter" data-level="" data-path="reg-versus-arb.html"><a href="reg-versus-arb.html#retos"><i class="fa fa-check"></i>Retos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -266,12 +269,12 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rand-forests" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Random Forests<a href="rand-forests.html#rand-forests" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rand-forests" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Random Forests<a href="rand-forests.html#rand-forests" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Random Forest o Bosques Aleatorios fue propuesto por <span class="citation">Ho (<a href="#ref-Ho1995">1995</a>)</span> y consiste en crear muchos árboles para luego usarlos en la predicción de la variable de interés. A continuación se muestra una ilustración de la técnica.</p>
 <p><a href="https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8"><img src="images/rand_forest_illustration.png" title="Ilustración de Random Forests" alt="Figura tomada de https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8" /></a></p>
 <div id="explicación-sencilla-de-random-forests" class="section level2 unnumbered hasAnchor">
-<h2>Explicación sencilla de Random Forests<a href="#explicaci%C3%B3n-sencilla-de-random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>Explicación sencilla de Random Forests<a href="rand-forests.html#explicaci%C3%B3n-sencilla-de-random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se inicia con un conjunto de entrenamiento que tiene <span class="math inline">\(n\)</span> observaciones, la variable interés <span class="math inline">\(Y\)</span> y las variables predictoras <span class="math inline">\(X_1, X_2, \ldots, X_p\)</span>. Luego se aplican los siguientes pasos.</p>
 <ol style="list-style-type: decimal">
 <li>Se construye un nuevo conjunto de entrenamiento del mismo tamaño del original usando la técnica Bootstrap. Esto se hace generando un muestreo con reemplazo y de esta forma es posible que algunas observaciones aparezcan varias veces y mientras que otras observaciones no aparezcan.</li>
@@ -393,7 +396,7 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 <span id="cb87-2"><a href="rand-forests.html#cb87-2" tabindex="-1"></a>           offset, cluster, <span class="at">family =</span> <span class="fu">NO</span>(), strata, </span>
 <span id="cb87-3"><a href="rand-forests.html#cb87-3" tabindex="-1"></a>           <span class="at">minsplit =</span> <span class="dv">20</span>, <span class="at">minbucket =</span> <span class="dv">7</span>, <span class="at">splittry =</span> <span class="dv">2</span></span>
 <span id="cb87-4"><a href="rand-forests.html#cb87-4" tabindex="-1"></a>           <span class="at">control =</span> <span class="fu">disttree_control</span>(<span class="at">teststat =</span> <span class="st">&quot;quad&quot;</span>, <span class="at">testtype =</span> <span class="st">&quot;Univ&quot;</span>, ...)</span></code></pre></div>
-<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> de <span class="citation">Stasinopoulos and Rigby (<a href="#ref-R-gamlss">2024</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> de <span class="citation">Hernandez-Barajas et al. (<a href="#ref-R-RelDists">2025</a>)</span>, <strong>RealDists</strong> de <span class="citation">Hernandez-Barajas and Marmolejo-Ramos (<a href="#ref-R-RealDists">2025</a>)</span> y <strong>DiscreteDists</strong> de <span class="citation">Hernandez-Barajas, Marmolejo-Ramos, and Usuga-Manco (<a href="#ref-R-DiscreteDists">2025</a>)</span>.</p>
+<p>El argumento <code>family</code> se utiliza para indicar la distribución estadística que se asume para la variable respuesta <span class="math inline">\(Y\)</span>. Se puede elegir cualquier distribución de <strong>gamlss</strong> de <span class="citation">Stasinopoulos and Rigby (<a href="#ref-R-gamlss">2025</a>)</span> o cualquier distribución de los paquetes <strong>RelDists</strong> de <span class="citation">Hernandez-Barajas, Usuga, et al. (<a href="#ref-R-RelDists">2026</a>)</span>, <strong>RealDists</strong> de <span class="citation">(<a href="#ref-R-RealDists"><strong>R-RealDists?</strong></a>)</span> y <strong>DiscreteDists</strong> de <span class="citation">Hernandez-Barajas, Marmolejo-Ramos, et al. (<a href="#ref-R-DiscreteDists">2026</a>)</span>.</p>
 </div>
 <div id="ejemplo-6" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="rand-forests.html#ejemplo-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -423,7 +426,7 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 ## 6 0.2318576 -0.1670795</code></pre>
 <p>Ahora vamos a explorar los datos simulados.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rand-forests.html#cb90-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">pch=</span><span class="dv">19</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-57-1.png" alt="" width="672" /></p>
 <p>El objetivo de este ejemplo es entrenar un árbol y un bosque distribucional para compararlos.</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="rand-forests.html#cb91-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
 <span id="cb91-2"><a href="rand-forests.html#cb91-2" tabindex="-1"></a></span>
@@ -441,30 +444,27 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 <span id="cb94-3"><a href="rand-forests.html#cb94-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newdata<span class="sc">$</span>x, <span class="at">y=</span>y_hat_2, <span class="at">col=</span><span class="st">&quot;chartreuse3&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>)</span>
 <span id="cb94-4"><a href="rand-forests.html#cb94-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Arbol&quot;</span>, <span class="st">&quot;Bosque&quot;</span>),</span>
 <span id="cb94-5"><a href="rand-forests.html#cb94-5" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;chartreuse3&quot;</span>))</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-61-1.png" alt="" width="672" /></p>
 <p>De la figura anterior podemos ver que la curva de estimación con bosques aleatorios es más flexible mientras que la del árbol no es nada flexible.</p>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div id="ref-R-RealDists" class="csl-entry">
-Hernandez-Barajas, Freddy, and Fernando Marmolejo-Ramos. 2025. <em>RealDists: Real Statistical Distributions</em>. <a href="https://github.com/fhernanb/RealDists">https://github.com/fhernanb/RealDists</a>.
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R-DiscreteDists" class="csl-entry">
-Hernandez-Barajas, Freddy, Fernando Marmolejo-Ramos, and Olga Usuga-Manco. 2025. <em>DiscreteDists: Discrete Statistical Distributions</em>. <a href="https://github.com/fhernanb/DiscreteDists">https://github.com/fhernanb/DiscreteDists</a>.
+Hernandez-Barajas, Freddy, Fernando Marmolejo-Ramos, Olga Usuga-Manco, Jamiu Olumoh, and Osho Ajayi. 2026. <em>DiscreteDists: Discrete Statistical Distributions</em>. <a href="https://github.com/fhernanb/DiscreteDists">https://github.com/fhernanb/DiscreteDists</a>.
 </div>
 <div id="ref-R-RelDists" class="csl-entry">
-Hernandez-Barajas, Freddy, Olga Usuga, Carmen Patino, Jaime Mosquera, and Amylkar Urrea. 2025. <em>RelDists: Estimation for Some Reliability Distributions</em>. <a href="http://ousuga.github.io/RelDists/">http://ousuga.github.io/RelDists/</a>.
+Hernandez-Barajas, Freddy, Olga Usuga, Carmen Patino, and Jaime Mosquera. 2026. <em>RelDists: Estimation for Some Reliability Distributions</em>. <a href="https://fhernanb.github.io/RelDists/">https://fhernanb.github.io/RelDists/</a>.
 </div>
 <div id="ref-Ho1995" class="csl-entry">
-Ho, Tin Kam. 1995. <span>“<span class="nocase">Random decision forests</span>.”</span> In <em>Proceedings of the International Conference on Document Analysis and Recognition, ICDAR</em>. Vol. 1. <a href="https://doi.org/10.1109/ICDAR.1995.598994">https://doi.org/10.1109/ICDAR.1995.598994</a>.
+Ho, Tin Kam. 1995. <span>“<span class="nocase">Random decision forests</span>.”</span> <em>Proceedings of the International Conference on Document Analysis and Recognition, ICDAR</em> 1. <a href="https://doi.org/10.1109/ICDAR.1995.598994">https://doi.org/10.1109/ICDAR.1995.598994</a>.
 </div>
 <div id="ref-R-disttree" class="csl-entry">
 Schlosser, Lisa, Moritz N. Lang, Torsten Hothorn, and Achim Zeileis. 2025. <em>Disttree: Trees and Forests for Distributional Regression</em>. <a href="https://R-Forge.R-project.org/projects/partykit/">https://R-Forge.R-project.org/projects/partykit/</a>.
 </div>
 <div id="ref-R-gamlss" class="csl-entry">
-Stasinopoulos, Mikis, and Robert Rigby. 2024. <em>Gamlss: Generalized Additive Models for Location Scale and Shape</em>. <a href="https://www.gamlss.com/">https://www.gamlss.com/</a>.
+Stasinopoulos, Mikis, and Robert Rigby. 2025. <em>Gamlss: Generalized Additive Models for Location Scale and Shape</em>. <a href="https://www.gamlss.com/">https://www.gamlss.com/</a>.
 </div>
 </div>
             </section>
