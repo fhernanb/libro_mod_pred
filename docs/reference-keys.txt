@@ -1,2 +1,3 @@
 knn-regre
 arb-de-regre
+arb-de-clasif
