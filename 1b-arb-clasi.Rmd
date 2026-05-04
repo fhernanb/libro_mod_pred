@@ -86,7 +86,6 @@ text(x=4.8, y=0.5, "Versicolor", col="gray44")
 text(x=3.5, y=2.2, "Virginica", col="seagreen")
 ```
 
-
 <p align="center">
   <img src="images/ilustracion_arb_clasi.png" width="800">
 </p>

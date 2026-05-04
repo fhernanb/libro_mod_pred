@@ -1,3 +1,15 @@
+fig:adaboost01
+fig:adaboost02
+fig:adaboost03
+fig:iris
 knn-regre
 arb-de-regre
 arb-de-clasif
+arb-distri
+rand-forests
+svm-reg
+svm-clas
+adaboost
+adaboost_reg
+gradboost
+reg-versus-arb

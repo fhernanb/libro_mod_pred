@@ -426,7 +426,7 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 ## 6 0.2318576 -0.1670795</code></pre>
 <p>Ahora vamos a explorar los datos simulados.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="rand-forests.html#cb90-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">pch=</span><span class="dv">19</span>)</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-57-1.png" alt="" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/rand-forest-1-1.png" alt="" width="672" /></p>
 <p>El objetivo de este ejemplo es entrenar un árbol y un bosque distribucional para compararlos.</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="rand-forests.html#cb91-1" tabindex="-1"></a><span class="fu">library</span>(disttree)</span>
 <span id="cb91-2"><a href="rand-forests.html#cb91-2" tabindex="-1"></a></span>
@@ -444,7 +444,7 @@ tcc = \frac{97+68}{97+67+71+68}=\frac{165}{303}=0.5445545 \approx 54\%
 <span id="cb94-3"><a href="rand-forests.html#cb94-3" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span>newdata<span class="sc">$</span>x, <span class="at">y=</span>y_hat_2, <span class="at">col=</span><span class="st">&quot;chartreuse3&quot;</span>, <span class="at">lwd=</span><span class="dv">3</span>)</span>
 <span id="cb94-4"><a href="rand-forests.html#cb94-4" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Arbol&quot;</span>, <span class="st">&quot;Bosque&quot;</span>),</span>
 <span id="cb94-5"><a href="rand-forests.html#cb94-5" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;chartreuse3&quot;</span>))</span></code></pre></div>
-<p><img src="libro_mod_pred_files/figure-html/unnamed-chunk-61-1.png" alt="" width="672" /></p>
+<p><img src="libro_mod_pred_files/figure-html/rand-forest-2-1.png" alt="" width="672" /></p>
 <p>De la figura anterior podemos ver que la curva de estimación con bosques aleatorios es más flexible mientras que la del árbol no es nada flexible.</p>
 
 </div>

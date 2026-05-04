@@ -1,0 +1,6 @@
+# AdaBoost {#adaboost_reg}
+
+```{r}
+
+```
+

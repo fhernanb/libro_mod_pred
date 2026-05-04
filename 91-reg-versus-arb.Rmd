@@ -1,0 +1,203 @@
+# Regresión lineal versus árboles de regresión {#reg-versus-arb}
+En este capítulo se muestra una comparación entre modelos de regresión y árboles de regresion.
+
+## Regresión lineal {-}
+El modelo de regresión lineal simple es uno de los más populares en modelación. Este modelo se puede resumir a continuación.
+
+\begin{align}
+y_i &\sim N(\mu_i, \sigma^2), \\ 
+\mu_i &= \beta_0 + \beta_1 x_i, \\
+\sigma^2 &= \text{constante}
+\end{align}
+
+## Arboles de regresión  {-}
+Una explicación de los árboles de regresión puede ser consultada en el capítulo \@ref(arb-de-regre).
+
+Las librerías en R para implementar árboles de regresión son:
+
+```{r, message=FALSE}
+library(rpart)
+library(rpart.plot)
+```
+
+## Ejemplo {-}
+Como ilustración vamos a usar los datos del ejemplo 2.1 del libro de [Montgomery, Peck and Vining (2003)](https://www.amazon.com/Introduccion-analisis-regresion-lineal-Spanish/dp/9702403278). En el ejemplo 2.1 los autores ajustaron un modelo de regresión lineal simple para explicar la Resistencia de una soldadura en función de la Edad de la misma. 
+
+A continuación el código para cargar los datos y una muestra de las 6 primeras observaciones de la base de datos, en total tenemos 20 observaciones.
+
+```{r}
+file <- "https://raw.githubusercontent.com/fhernanb/datos/master/propelente"
+datos <- read.table(file=file, header=TRUE)
+head(datos) # shows the first 6 rows
+```
+
+Para crear un diagrama de dispersión que nos muestre la relación entre las dos variables usamos las siguientes instrucciones.
+
+```{r soldadura1, fig.height=3, fig.width=5, fig.align='center', message=FALSE}
+library(ggplot2)
+ggplot(datos, aes(x=Edad, y=Resistencia)) + 
+  geom_point() + theme_light()
+```
+
+De la figura anterior se ve claramente que a medida que aumenta la edad de la soldadura, la resistencia que ella ofrece disminuye. Adicionalmente, se observa que la relación entre las variables es lineal con una dispersión que parece constante.
+
+¿Quién estima mejor? ¿un modelo de regresión lineal simple o un árbol?
+
+```{r}
+rls <- lm(Resistencia ~ Edad, data=datos)
+arb <- rpart(Resistencia ~ Edad, data=datos)
+```
+
+```{r}
+arb <- rpart(Resistencia ~ Edad, data=datos, method="anova")
+```
+
+¿Qué hay dentro de modelo de regresión lineal simple?
+```{r}
+summary(rls)
+```
+
+¿Qué hay dentro de modelo del arbol?
+```{r}
+summary(arb)
+```
+
+Construyamos nuevamente el árbol pero explorando todas las opciones de la función `prp`.
+```{r reg_arb01, fig.align='center', fig.height=3, fig.width=6}
+prp(arb, main = "",
+    nn = TRUE,             # display the node numbers
+    fallen.leaves = TRUE,  # put the leaves on the bottom of the page
+    shadow.col = "gray",   # shadows under the leaves
+    branch.lty = 3,        # draw branches using dotted lines
+    branch = .5,           # change angle of branch lines
+    faclen = 0,            # faclen = 0 to print full factor names
+    trace = 1,             # print the auto calculated cex, xlim, ylim
+    split.cex = 1.2,       # make the split text larger than the node text
+    split.prefix = "is ",  # put "is " before split text
+    split.suffix = "?",    # put "?" after split text
+    split.box.col = "lightblue",   # lightgray split boxes (default is white)
+    split.border.col = "darkgray", # darkgray border on split boxes
+    split.round = 0.5)             # round the split box corners a tad
+```
+
+A continuación las predicciones con ambos modelos.
+
+```{r}
+pred_rls <- predict(object=rls, newdata=datos)
+pred_arb <- predict(object=arb, newdata=datos)
+```
+
+Dibujemos $y_i$ versus $\hat{y}_i$.
+
+```{r reg_arb02, fig.align='center', fig.height=4, fig.width=7}
+par(mfrow=c(1, 2))
+plot(x=pred_rls, y=datos$Resistencia, main="RLS")
+abline(a=0, b=1, lty="dashed", col="blue")
+plot(x=pred_arb, y=datos$Resistencia, main="Arbol")
+abline(a=0, b=1, lty="dashed", col="blue")
+```
+
+Vamos a calcular $Cor(y_i, \hat{y}_i)$.
+
+```{r}
+cor(datos$Resistencia, pred_rls)
+cor(datos$Resistencia, pred_arb)
+```
+
+Calculemos ahora el Error Cuadrático Medio $ECM=\frac{1}{n}\sum(y_i-\hat{y}_i)^2$.
+
+```{r}
+mean((datos$Resistencia - pred_rls)^2)
+mean((datos$Resistencia - pred_arb)^2)
+```
+
+¿Cuál método prefiere usted?
+
+## Estudio de simulación para comparar ambos métodos  {-}
+El objetivo es comparar ambos modelos repetidas veces, para esto vamos a simular conjuntos de datos que tengan un comportamiento lineal y parecido a los datos del ejemplo. El modelo que vamos a considerar es el siguiente:
+
+\begin{align}
+y_i &\sim N(\mu_i, \sigma^2), \\ 
+\mu_i &= 2627 - 37 x_i, \\
+\sigma &= 96, \\
+x &\sim U(2, 25)
+\end{align}
+
+Vamos a crear una función generadora de datos.
+```{r}
+gen_dat <- function(n) {
+  x <- runif(n=n, min=2, max=25)
+  media <- 2627 - 37 * x
+  y <- rnorm(n=n, mean=media, sd=96)
+  data.frame(x=x, y=y)
+}
+```
+
+Generemos unos datos de prueba y graficamos los datos.
+```{r reg_arb03, fig.height=3, fig.width=5, fig.align='center', message=FALSE}
+datos_train <- gen_dat(n=20)
+ggplot(datos_train, aes(x=x, y=y)) + 
+  geom_point() + theme_light()
+```
+
+Usando los datos de prueba vamos a ajustar los modelos y luego calcularemos los indicadores.
+
+```{r}
+datos_train <- gen_dat(n=20)  # Para entrenar
+datos_test  <- gen_dat(n=20)  # Para validar
+rls <- lm(y ~ x, data=datos_train)
+arb <- rpart(y ~ x, data=datos_train)
+pred_rls <- predict(object=rls, newdata=datos_test)
+pred_arb <- predict(object=arb, newdata=datos_test)
+cor(datos_test$y, pred_rls)
+cor(datos_test$y, pred_arb)
+mean((datos_test$y - pred_rls)^2)
+mean((datos_test$y - pred_arb)^2)
+```
+
+```{block2, type='rmdwarning'}
+Al observar los resultados anteriores vemos que el modelo de regresión lineal se comporta mejor que el árbol de regresión, esto se debe a que los datos están siendo generados con un modelo de regresión lineal.
+```
+
+Ahora vamos a realizar el estudio de simulación para explorar el efecto de $n = 10, 20, 40$ sobre el $ECM$ usando 5 réplicas para cada $n$, este es un estudio de simulación "naive" pero ilustrativo.
+
+```{r}
+n <- c(10, 20, 40)
+nrep <- 5
+result <- numeric()
+for (i in n) {
+  for(k in 1:nrep) {
+    datos_train <- gen_dat(n=i)  # Para entrenar
+    datos_test  <- gen_dat(n=i)  # Para validar
+    rls <- lm(y ~ x, data=datos_train)
+    arb <- rpart(y ~ x, data=datos_train)
+    pred_rls <- predict(object=rls, newdata=datos_test)
+    pred_arb <- predict(object=arb, newdata=datos_test)
+    ecm1 <- mean((datos_test$y - pred_rls)^2)
+    ecm2 <- mean((datos_test$y - pred_arb)^2)
+    result <- rbind(result, c(i, ecm1, ecm2)) # No eficiente pero sirve
+  }
+}
+colnames(result) <- c("n", "ecm_lrs", "ecm_arb")
+result <- as.data.frame(result)
+result
+```
+
+El objeto `result` tiene los resultados de la simulación, vamos a calcular el $ECM$ promedio para rls y árboles diferenciando por $n$.
+
+```{r message=FALSE}
+library(dplyr)
+result %>% group_by(n) %>% summarise(ecm_medio_lrs=mean(ecm_lrs),
+                                     ecm_medio_arb=mean(ecm_arb))
+```
+
+## Retos {-}
+A continuación los retos que usted debe aceptar.
+
+1. Extienda el estudio de simulación para otros valores de $n$ y aumentando el número de repeticiones `nrep`, decida usted los valores.
+2. Con los resultados anteriores haga un gráfico de $ECM$ promedio versus $n$ para rls y árboles en la misma figura.
+3. ¿Se iguala $ECM$ promedio del árbol con el de regresión para algún valor de $n$?
+3. ¿Cuál técnica presenta el $ECM$ menor?
+3. ¿Es posible encontrar un $ECM=0$ para algún valor de $n$?
+4. ¿Para qué sirve el paquete `dplyr`?
+5. ¿Qué es un `tibble`?
