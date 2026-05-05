@@ -312,7 +312,10 @@ rmse(actual=y_test[, 1], predicted=fit2$pred)
 
 ## Ejemplo con el paquete **tidymodels** {-}
 
-Pronto un ejemplo.
+Para este ejemplo vamos a usar tidymodels
+
+https://parsnip.tidymodels.org/reference/nearest_neighbor.html
+
 
 Nota: algunos de los ejemplos aquí mostrados son adaptaciones de https://daviddalpiaz.github.io/r4sl/knn-reg.html
 
