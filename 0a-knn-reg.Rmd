@@ -25,9 +25,60 @@ knn.reg(train,
         algorithm=c("kd_tree", "cover_tree", "brute"))
 ```
 
-```{block2, type='rmdnote'}
-Se recomienda al lector que consulte la ayuda de las funciones anteriores para que pueda entender las posibilidades que se tienen con cada una de ellas.
-```
+La función `knn.reg` del paquete **FNN** en R permite seleccionar entre tres algoritmos para la búsqueda de vecinos más cercanos: `"brute"`, `"kd_tree"` y `"cover_tree"`. A continuación se describe cada uno de ellos.
+
+### Método `brute` (fuerza bruta) {-}
+
+Este método calcula directamente la distancia entre cada punto de consulta y todos los puntos del conjunto de datos.
+
+- **Idea:** comparar el punto de interés con todos los puntos disponibles.
+- **Procedimiento:** se calculan todas las distancias y luego se seleccionan los \(k\) vecinos más cercanos.
+- **Complejidad:** \(O(n)\) por consulta (más el costo de ordenar).
+- **Ventajas:**
+  - Implementación simple.
+  - Resultados exactos.
+  - No depende de estructuras adicionales.
+- **Desventajas:**
+  - Computacionalmente costoso para grandes volúmenes de datos.
+  - No escala eficientemente.
+
+### Método `kd_tree` (árbol k-dimensional) {-}
+
+El **kd-tree** es una estructura de datos que organiza los puntos en un árbol binario, particionando el espacio según las dimensiones.
+
+- **Idea:** dividir recursivamente el espacio en regiones más pequeñas.
+- **Procedimiento:** en cada nodo se selecciona una dimensión y se divide el conjunto de datos en dos subconjuntos.
+- **Complejidad:**
+  - Construcción: \(O(n \log n)\)
+  - Consulta: aproximadamente \(O(\log n)\) en baja dimensión.
+- **Ventajas:**
+  - Reduce significativamente el número de comparaciones.
+  - Eficiente en espacios de baja dimensión.
+- **Desventajas:**
+  - Su rendimiento disminuye en espacios de alta dimensión.
+  - Sensible a la "maldición de la dimensionalidad".
+
+### Método `cover_tree` {-}
+
+El **cover tree** es una estructura jerárquica diseñada para búsquedas eficientes de vecinos cercanos en espacios métricos.
+
+- **Idea:** organizar los datos en múltiples niveles de cobertura usando subconjuntos anidados.
+- **Procedimiento:** se construyen niveles donde cada uno representa una versión más "coarse" del conjunto de datos.
+- **Complejidad:**
+  - Construcción: \(O(n \log n)\)
+  - Consulta: depende de la dimensión intrínseca de los datos.
+- **Ventajas:**
+  - Más robusto que kd-tree en dimensiones moderadas o altas.
+  - Buen desempeño cuando los datos tienen estructura.
+- **Desventajas:**
+  - Implementación más compleja.
+  - Puede tener constantes de tiempo elevadas en la práctica.
+
+Recomendaciones prácticas
+
+- Para conjuntos de datos pequeños o de alta dimensión: utilizar `brute`.
+- Para conjuntos de datos grandes en baja dimensión: utilizar `kd_tree`.
+- Para conjuntos de datos grandes con estructura compleja o dimensión moderada/alta: considerar `cover_tree`.
 
 ## Paquete **tidymodels** {-}
 El ecosistema moderno `tidymodels` (vía `parsnip`): si se desea un flujo de trabajo organizado y profesional, `tidymodels` es la opción recomendada. Permite cambiar de algoritmo fácilmente sin cambiar toda la estructura del código. Se suele usar el motor `"kknn"` dentro de la especificación del modelo. Facilita enormemente el proceso de **tuning** (encontrar el valor óptimo de $k$) y la validación cruzada.
@@ -35,10 +86,15 @@ El ecosistema moderno `tidymodels` (vía `parsnip`): si se desea un flujo de tra
 ## Paquete **caret** {-}
 El paquete `caret`: durante años fue el estándar para Machine Learning en R. Aunque está siendo desplazado por `tidymodels`, sigue siendo muy robusto. Para entrenar se usa `train(..., method = "knn")`. Automatiza el preprocesamiento de los datos (como el escalado, que es crítico en k-NN) mediante el argumento `preProcess = c("center", "scale")`.
 
-## Ejemplo con el paquete **FNN** {-}
-En este ejemplo se busca aplicar k-NN para explicar la variable respuesta `medv` (median value of owner-occupied homes in 1000\$) en función de la covariable `lstat` (lower status of the population), usando la base de datos Boston del paquete **MASS** de @R-MASS.
+## Ejemplo 1 con el paquete **FNN** {-}
+
+En este ejemplo se busca aplicar k-NN para explicar la variable respuesta `medv` (valor medio de las viviendas ocupadas por sus propietarios 1000\$) en función de la covariable `lstat` (porcentaje de la población clasificada como de “bajo estatus socioeconómico” en cada barrio), usando la base de datos Boston del paquete **MASS** de @R-MASS.
 
 El objetivo de este ejercicio es explorar el efecto de hiper-parámetro $k$ en los resultados.
+
+<p align="center">
+  <img src="images/Boston.jpeg" width="500">
+</p>
 
 ```{r, message=F}
 library(MASS)      # This package contains the dataset
@@ -46,11 +102,11 @@ head(Boston)
 dim(Boston)
 ```
 
-Vamos a crear los datos de entrenamiento y de prueba usando la mitad de los datos. Para esto vamos a crear un vector con índices para identificar los elementos de entrenamiento `train_index`.
+Vamos a crear los datos de entrenamiento y de prueba usando la mitad de los datos, ya que tenemos en total 506 observaciones o registros. Para esto vamos a crear un vector con índices para identificar los elementos de entrenamiento `train_index`.
 
 ```{r}
 set.seed(123)
-train_index <- sample(1:nrow(Boston), size = 250)
+train_index <- sample(1:nrow(Boston), size = 253)
 train_data  <- Boston[train_index, ]
 test_data   <- Boston[-train_index, ]
 ```
@@ -64,7 +120,7 @@ y_train <- Boston["medv"]
 y_test  <- Boston["medv"]
 ```
 
-Como en este ejemplo tenemos una sola covariable X, vamos a crear un objeto `x_grid` como una secuencia de valores de X para dibujar las predicciones $\hat{Y}$ para muchos valores de X que están en `x_grid`.
+Como en este ejemplo tenemos una sola covariable $X$, vamos a crear un objeto `x_grid` como una secuencia de valores de $X$ para dibujar las predicciones $\hat{Y}$ para cada uno de los valores de $X$ que están en `x_grid`.
 
 ```{r}
 X_train_min <- min(X_train)
@@ -86,7 +142,7 @@ pred_100 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 100)
 pred_250 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 250)
 ```
 
-Ahora vamos a dibujar un diagrama de dispersión entre la variable respuesta y la covariable para cada valor de $k$. Adicionalmente, vamos a agregar en color naranja un línea que representa el valor de $\hat{Y}$ para cada uno de los valores de `x_grid`.
+Ahora vamos a dibujar el diagrama de dispersión entre la variable respuesta y la covariable usando la información del conjunto de entrenamiento, diferenciando por cada valor de $k$. Adicionalmente, vamos a agregar en color naranja un línea que representa el valor de $\hat{Y}$ para cada uno de los valores de `x_grid`.
 
 ```{r, "knn-01",  fig.height = 8, fig.width = 6, echo = FALSE}
 par(mfrow = c(3, 2))
@@ -112,26 +168,24 @@ lines(x_grid$lstat, pred_250$pred, col = "darkorange", lwd = 2)
 
 De la figura anterior podemos ver que `k = 1` claramente presenta un sobreajuste (**overfitting**), ya que `k = 1` es un modelo muy complejo y de alta variabilidad. Por el contrario, `k = 250` claramente está subajustando (**underfitting**) los datos, puesto que `k = 250` es un modelo muy simple y de baja varianza. De hecho, en este caso, está prediciendo un simple promedio de todos los datos en cada punto.
 
-Choosing $k$
+¿Cómo elegir el valor de $k$ más apropiado?
 
-- low `k` = very complex model. very wiggly. specifically jagged
-- high `k` = very inflexible model. very smooth.
+De la figura anterior vimos que:
 
-- want: something in the middle which predicts well on unseen data
-- that is, want $\hat{f}_k$ to minimize
+- para `k` bajo: el modelo final es complejo y muy quebradizo. 
+- para `k` alto, el modelo final es poco flexible y muy suavizado
 
-$$
-\text{EPE}\left(Y, \hat{f}_k(X)\right) = 
-\mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}_k(X))^2 \right]
-$$
+Lo que deseamos es un valor de $K$ que genere un modelo que prediga bien pero sin que presente "overfitting".
 
-- TODO: Test MSE is an estimate of this. So finding best test RMSE will be our strategy. (Best test RMSE is same as best MSE, but with more understandable units.)
+Se pueden usar varias medidas de desempeño en regresión pero en este ejemplo vamos a usar el RMSE y para eso vamos a crear nuestra propia función `rmse`:
 
 ```{r}
 rmse = function(actual, predicted) {
   sqrt(mean((actual - predicted) ^ 2))
 }
 ```
+
+Ahora vamos a crear una función que le ingrese un valor de $K$, el conjunto de datos de entrenamiento y un conjunto de datos de prueba. La función va a retornar el RMSE para esa elección.
 
 ```{r}
 # define helper function for getting knn.reg predictions
@@ -145,10 +199,14 @@ make_knn_pred = function(k = 1, training, predicting) {
 }
 ```
 
+Definamos un vector con los posibles valores de $k$:
+
 ```{r}
 # define values of k to evaluate
 k = c(1, 5, 10, 25, 50, 250)
 ```
+
+Ahora aplicamos las funciones anteriores para los diferentes valores de $k$.
 
 ```{r}
 # get requested train RMSEs
@@ -167,6 +225,8 @@ best_k = k[which.min(knn_tst_rmse)]
 fit_status = ifelse(k < best_k, "Over", ifelse(k == best_k, "Best", "Under"))
 ```
 
+Los resultados los podemos resumir en la siguiente tabla:
+
 ```{r}
 # summarize results
 knn_results = data.frame(
@@ -181,5 +241,78 @@ colnames(knn_results) = c("k", "Train RMSE", "Test RMSE", "Fit?")
 knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
 ```
 
-https://daviddalpiaz.github.io/r4sl/knn-reg.html
+¿Cuál es el valor de $k$ apropiado para minimizar el RSME?
+
+## Ejemplo 2 con el paquete **FNN** {-}
+
+En este ejemplo vamos a usar los mismos datos de las casas en Boston para predecir la variable `medv` en función de las variables `lstat` (porcentaje de la población de bajo estatus socioeconómico en el área), `rm` (número promedio de habitaciones por vivienda), `dis` (distancia ponderada a cinco centros de empleo en Boston), `tax` (tasa de impuesto a la propiedad por cada $10,000 del valor) y `ptratio` (elación alumno-profesor en cada localidad).
+
+El objetivo de este ejemplo es mostrar que se deben scalar las covariables antes de entrenar el modelo.
+
+```{r}
+library(MASS)
+
+set.seed(123)
+train_index <- sample(1:nrow(Boston), size = 250)
+train_data  <- Boston[train_index, ]
+test_data   <- Boston[-train_index, ]
+
+X_train <- Boston[, c("lstat", "rm", "dis", "tax", "ptratio")]
+X_test  <- Boston[, c("lstat", "rm", "dis", "tax", "ptratio")]
+y_train <- Boston["medv"]
+y_test  <- Boston["medv"]
+
+head(X_train)
+```
+
+Entrenamos el modelo y obtenemos las predicciones para `X_train`
+```{r}
+fit1 <- knn.reg(train = X_train, test = X_test, y = y_train, k = 25)
+```
+
+Ahora vamos a mostrar los resultados gráficos, la correlación lineal de Pearson entre $Y$ y $\hat{Y}$ y el RSME.
+
+```{r "knn-02"}
+plot(x=y_test[, 1], y=fit1$pred)
+abline(a=0, b=1, col="tomato", lty="dashed", lwd=2)
+
+cor(x=y_test[, 1], y=fit1$pred)
+
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+
+rmse(actual=y_test[, 1], predicted=fit1$pred)
+```
+
+Ahora vamos a volver a entrenar el modelo pero usando la función scale sobre las matrices que contienen las covariables.
+
+```{r "knn-03"}
+X_train <- scale(X_train)
+X_test  <- scale(X_test)
+
+head(X_train)
+
+fit2 <- knn.reg(train = X_train, test = X_test, y = y_train, k = 5)
+
+plot(x=y_test[, 1], y=fit2$pred)
+abline(a=0, b=1, col="blue3", lty="dashed", lwd=2)
+
+cor(x=y_test[, 1], y=fit2$pred)
+
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+
+rmse(actual=y_test[, 1], predicted=fit2$pred)
+```
+
+¿Qué se puede concluir en este ejemplo?
+
+
+## Ejemplo con el paquete **tidymodels** {-}
+
+Pronto un ejemplo.
+
+Nota: algunos de los ejemplos aquí mostrados son adaptaciones de https://daviddalpiaz.github.io/r4sl/knn-reg.html
 
