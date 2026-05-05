@@ -18,6 +18,7 @@ description: "Libro de Modelos Predictivos"
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(.packages(), 
+                   "FNN",
                    "bookdown", 
                    "knitr", 
                    "rmarkdown", 

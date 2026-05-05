@@ -171,7 +171,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="1" data-path="knn-regre.html"><a href="knn-regre.html"><i class="fa fa-check"></i><b>1</b> k-NN para regresión</a>
 <ul>
-<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquetes-de-r"><i class="fa fa-check"></i>Paquetes de R</a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquetes-de-r-para-k-nn"><i class="fa fa-check"></i>Paquetes de R para k-NN</a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquete-fnn"><i class="fa fa-check"></i>Paquete <strong>FNN</strong></a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquete-tidymodels"><i class="fa fa-check"></i>Paquete <strong>tidymodels</strong></a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#paquete-caret"><i class="fa fa-check"></i>Paquete <strong>caret</strong></a></li>
+<li class="chapter" data-level="" data-path="knn-regre.html"><a href="knn-regre.html#ejemplo-con-el-paquete-fnn"><i class="fa fa-check"></i>Ejemplo con el paquete <strong>FNN</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>2</b> Árboles de regresión</a>
 <ul>
@@ -284,29 +288,29 @@ div.csl-indent {
 <div id="ejemplo-13" class="section level2 unnumbered hasAnchor">
 <h2>Ejemplo<a href="gradboost.html#ejemplo-13" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En este ejemplo se muestra como aplicar Gradient Boost de forma manual usando los datos del video anterior.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="gradboost.html#cb125-1" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="fl">1.6</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">1.4</span>)</span>
-<span id="cb125-2"><a href="gradboost.html#cb125-2" tabindex="-1"></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb125-3"><a href="gradboost.html#cb125-3" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb125-4"><a href="gradboost.html#cb125-4" tabindex="-1"></a>weigth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">76</span>, <span class="dv">56</span>, <span class="dv">73</span>, <span class="dv">77</span>, <span class="dv">57</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="gradboost.html#cb143-1" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="fl">1.6</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">1.4</span>)</span>
+<span id="cb143-2"><a href="gradboost.html#cb143-2" tabindex="-1"></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb143-3"><a href="gradboost.html#cb143-3" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb143-4"><a href="gradboost.html#cb143-4" tabindex="-1"></a>weigth <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">76</span>, <span class="dv">56</span>, <span class="dv">73</span>, <span class="dv">77</span>, <span class="dv">57</span>)</span></code></pre></div>
 <p>La librería para crear los árboles será <strong>rpart</strong>.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="gradboost.html#cb126-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="gradboost.html#cb144-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span></code></pre></div>
 <p>El valor learning rate en el ejemplo será <span class="math inline">\(\alpha=0.10\)</span>. A continuación el código para crear el modelo inicial y los modelos siguientes del video anterior.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="gradboost.html#cb127-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="co"># Learning rate</span></span>
-<span id="cb127-2"><a href="gradboost.html#cb127-2" tabindex="-1"></a></span>
-<span id="cb127-3"><a href="gradboost.html#cb127-3" tabindex="-1"></a><span class="co"># Modelo inicial</span></span>
-<span id="cb127-4"><a href="gradboost.html#cb127-4" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> <span class="fu">mean</span>(weigth)</span>
-<span id="cb127-5"><a href="gradboost.html#cb127-5" tabindex="-1"></a></span>
-<span id="cb127-6"><a href="gradboost.html#cb127-6" tabindex="-1"></a><span class="co"># Modelo 2</span></span>
-<span id="cb127-7"><a href="gradboost.html#cb127-7" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(res1 <span class="sc">~</span> height <span class="sc">+</span> color <span class="sc">+</span> gender,</span>
-<span id="cb127-8"><a href="gradboost.html#cb127-8" tabindex="-1"></a>              <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">3</span>))</span>
-<span id="cb127-9"><a href="gradboost.html#cb127-9" tabindex="-1"></a>res2 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> (<span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2))</span>
-<span id="cb127-10"><a href="gradboost.html#cb127-10" tabindex="-1"></a></span>
-<span id="cb127-11"><a href="gradboost.html#cb127-11" tabindex="-1"></a><span class="co"># Modelo 3</span></span>
-<span id="cb127-12"><a href="gradboost.html#cb127-12" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(res2 <span class="sc">~</span> height <span class="sc">+</span> color <span class="sc">+</span> gender,</span>
-<span id="cb127-13"><a href="gradboost.html#cb127-13" tabindex="-1"></a>              <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">3</span>))</span>
-<span id="cb127-14"><a href="gradboost.html#cb127-14" tabindex="-1"></a>res3 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> (<span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod3))</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="gradboost.html#cb145-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="co"># Learning rate</span></span>
+<span id="cb145-2"><a href="gradboost.html#cb145-2" tabindex="-1"></a></span>
+<span id="cb145-3"><a href="gradboost.html#cb145-3" tabindex="-1"></a><span class="co"># Modelo inicial</span></span>
+<span id="cb145-4"><a href="gradboost.html#cb145-4" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> <span class="fu">mean</span>(weigth)</span>
+<span id="cb145-5"><a href="gradboost.html#cb145-5" tabindex="-1"></a></span>
+<span id="cb145-6"><a href="gradboost.html#cb145-6" tabindex="-1"></a><span class="co"># Modelo 2</span></span>
+<span id="cb145-7"><a href="gradboost.html#cb145-7" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(res1 <span class="sc">~</span> height <span class="sc">+</span> color <span class="sc">+</span> gender,</span>
+<span id="cb145-8"><a href="gradboost.html#cb145-8" tabindex="-1"></a>              <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">3</span>))</span>
+<span id="cb145-9"><a href="gradboost.html#cb145-9" tabindex="-1"></a>res2 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> (<span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2))</span>
+<span id="cb145-10"><a href="gradboost.html#cb145-10" tabindex="-1"></a></span>
+<span id="cb145-11"><a href="gradboost.html#cb145-11" tabindex="-1"></a><span class="co"># Modelo 3</span></span>
+<span id="cb145-12"><a href="gradboost.html#cb145-12" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(res2 <span class="sc">~</span> height <span class="sc">+</span> color <span class="sc">+</span> gender,</span>
+<span id="cb145-13"><a href="gradboost.html#cb145-13" tabindex="-1"></a>              <span class="at">control=</span><span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">3</span>))</span>
+<span id="cb145-14"><a href="gradboost.html#cb145-14" tabindex="-1"></a>res3 <span class="ot">&lt;-</span> weigth <span class="sc">-</span> (<span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod3))</span></code></pre></div>
 <p>A continuación una tabla con los residuales de los modelos.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="gradboost.html#cb128-1" tabindex="-1"></a><span class="fu">cbind</span>(res1, res2, res3)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="gradboost.html#cb146-1" tabindex="-1"></a><span class="fu">cbind</span>(res1, res2, res3)</span></code></pre></div>
 <pre><code>##         res1   res2    res3
 ## 1  16.833333  15.15  13.635
 ## 2   4.833333   4.35   3.915
@@ -315,8 +319,8 @@ div.csl-indent {
 ## 5   5.833333   5.45   5.105
 ## 6 -14.166667 -12.70 -11.380</code></pre>
 <p>Para predecir el valor de weigth cuando height=1.7, color=“green” y gender=“male” se usa el siguiente código.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="gradboost.html#cb130-1" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">height=</span><span class="fl">1.7</span>, <span class="at">color=</span><span class="st">&quot;green&quot;</span>, <span class="at">gender=</span><span class="st">&quot;female&quot;</span>)</span>
-<span id="cb130-2"><a href="gradboost.html#cb130-2" tabindex="-1"></a><span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2, new_data) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod3, new_data)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="gradboost.html#cb148-1" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">height=</span><span class="fl">1.7</span>, <span class="at">color=</span><span class="st">&quot;green&quot;</span>, <span class="at">gender=</span><span class="st">&quot;female&quot;</span>)</span>
+<span id="cb148-2"><a href="gradboost.html#cb148-2" tabindex="-1"></a><span class="fu">mean</span>(weigth) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod2, new_data) <span class="sc">+</span> a <span class="sc">*</span> <span class="fu">predict</span>(mod3, new_data)</span></code></pre></div>
 <pre><code>##      1 
 ## 72.085</code></pre>
 </div>
@@ -324,8 +328,8 @@ div.csl-indent {
 <h2>Ejemplo<a href="gradboost.html#ejemplo-14" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En este ejemplo se van a usar los datos <code>Boston</code> del paquete <strong>MASS</strong> de <span class="citation">Ripley and Venables (<a href="#ref-R-MASS">2025</a>)</span> para predecir la variable <code>medv</code> en función de las otras covariables.</p>
 <p>Para explorar la base de datos usamos el siguiente código.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="gradboost.html#cb132-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb132-2"><a href="gradboost.html#cb132-2" tabindex="-1"></a><span class="fu">str</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="gradboost.html#cb150-1" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb150-2"><a href="gradboost.html#cb150-2" tabindex="-1"></a><span class="fu">str</span>(Boston)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    506 obs. of  14 variables:
 ##  $ crim   : num  0.00632 0.02731 0.02729 0.03237 0.06905 ...
 ##  $ zn     : num  18 0 0 0 0 0 12.5 12.5 12.5 12.5 ...
@@ -342,32 +346,32 @@ div.csl-indent {
 ##  $ lstat  : num  4.98 9.14 4.03 2.94 5.33 ...
 ##  $ medv   : num  24 21.6 34.7 33.4 36.2 28.7 22.9 27.1 16.5 18.9 ...</code></pre>
 <p>Vamos a crear dos conjuntos de datos, uno de entrenamiento y otro de validación de la siguiente manera.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="gradboost.html#cb134-1" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb134-2"><a href="gradboost.html#cb134-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb134-3"><a href="gradboost.html#cb134-3" tabindex="-1"></a>indexes <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Boston<span class="sc">$</span>medv, <span class="at">p =</span> .<span class="dv">90</span>, <span class="at">list =</span> F)</span>
-<span id="cb134-4"><a href="gradboost.html#cb134-4" tabindex="-1"></a>train <span class="ot">&lt;-</span> Boston[indexes, ]</span>
-<span id="cb134-5"><a href="gradboost.html#cb134-5" tabindex="-1"></a>test <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>indexes, ]</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="gradboost.html#cb152-1" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb152-2"><a href="gradboost.html#cb152-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb152-3"><a href="gradboost.html#cb152-3" tabindex="-1"></a>indexes <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(Boston<span class="sc">$</span>medv, <span class="at">p =</span> .<span class="dv">90</span>, <span class="at">list =</span> F)</span>
+<span id="cb152-4"><a href="gradboost.html#cb152-4" tabindex="-1"></a>train <span class="ot">&lt;-</span> Boston[indexes, ]</span>
+<span id="cb152-5"><a href="gradboost.html#cb152-5" tabindex="-1"></a>test <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>indexes, ]</span></code></pre></div>
 <p>El primer modelo predictivo será un árbol sencillo que nos servirá como elemento de comparación.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="gradboost.html#cb135-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb135-2"><a href="gradboost.html#cb135-2" tabindex="-1"></a>model_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(medv <span class="sc">~</span> ., <span class="at">data=</span>train)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="gradboost.html#cb153-1" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb153-2"><a href="gradboost.html#cb153-2" tabindex="-1"></a>model_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(medv <span class="sc">~</span> ., <span class="at">data=</span>train)</span></code></pre></div>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="gradboost.html#cb136-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_tree)</span>
-<span id="cb136-2"><a href="gradboost.html#cb136-2" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((train<span class="sc">$</span>medv <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="gradboost.html#cb154-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_tree)</span>
+<span id="cb154-2"><a href="gradboost.html#cb154-2" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((train<span class="sc">$</span>medv <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 83.63843</code></pre>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="gradboost.html#cb138-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="gradboost.html#cb156-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9070587</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="gradboost.html#cb140-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
-<span id="cb140-2"><a href="gradboost.html#cb140-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="gradboost.html#cb158-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
+<span id="cb158-2"><a href="gradboost.html#cb158-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost1-1.png" alt="" width="672" /></p>
 <p>Ahora vamos a usar la función <code>gbm</code> del paquete de <span class="citation">Ridgeway and Developers (<a href="#ref-R-gbm">2026</a>)</span> para aplicar el algoritmo Gradient Boost con <span class="math inline">\(\alpha=0.01\)</span>, 5000 árboles (iteraciones) y una profundidad de 1 en cada árbol (stump).</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="gradboost.html#cb141-1" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb141-2"><a href="gradboost.html#cb141-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb141-3"><a href="gradboost.html#cb141-3" tabindex="-1"></a>model_gbm1 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
-<span id="cb141-4"><a href="gradboost.html#cb141-4" tabindex="-1"></a>                  <span class="at">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="at">cv.folds=</span><span class="dv">5</span>, </span>
-<span id="cb141-5"><a href="gradboost.html#cb141-5" tabindex="-1"></a>                  <span class="at">shrinkage=</span><span class="fl">0.01</span>, <span class="at">n.minobsinnode=</span><span class="dv">10</span>,</span>
-<span id="cb141-6"><a href="gradboost.html#cb141-6" tabindex="-1"></a>                  <span class="at">n.trees=</span><span class="dv">5000</span>, <span class="at">interaction.depth=</span><span class="dv">1</span>)</span>
-<span id="cb141-7"><a href="gradboost.html#cb141-7" tabindex="-1"></a><span class="fu">print</span>(model_gbm1)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="gradboost.html#cb159-1" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb159-2"><a href="gradboost.html#cb159-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb159-3"><a href="gradboost.html#cb159-3" tabindex="-1"></a>model_gbm1 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
+<span id="cb159-4"><a href="gradboost.html#cb159-4" tabindex="-1"></a>                  <span class="at">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="at">cv.folds=</span><span class="dv">5</span>, </span>
+<span id="cb159-5"><a href="gradboost.html#cb159-5" tabindex="-1"></a>                  <span class="at">shrinkage=</span><span class="fl">0.01</span>, <span class="at">n.minobsinnode=</span><span class="dv">10</span>,</span>
+<span id="cb159-6"><a href="gradboost.html#cb159-6" tabindex="-1"></a>                  <span class="at">n.trees=</span><span class="dv">5000</span>, <span class="at">interaction.depth=</span><span class="dv">1</span>)</span>
+<span id="cb159-7"><a href="gradboost.html#cb159-7" tabindex="-1"></a><span class="fu">print</span>(model_gbm1)</span></code></pre></div>
 <pre><code>## gbm(formula = medv ~ ., distribution = &quot;gaussian&quot;, data = train, 
 ##     n.trees = 5000, interaction.depth = 1, n.minobsinnode = 10, 
 ##     shrinkage = 0.01, cv.folds = 5)
@@ -376,88 +380,88 @@ div.csl-indent {
 ## The best cross-validation iteration was 4404.
 ## There were 13 predictors of which 13 had non-zero influence.</code></pre>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="gradboost.html#cb143-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm1<span class="sc">$</span>cv.error))</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="gradboost.html#cb161-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm1<span class="sc">$</span>cv.error))</span></code></pre></div>
 <pre><code>## [1] 3.636974</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="gradboost.html#cb145-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm1)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="gradboost.html#cb163-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm1)</span></code></pre></div>
 <pre><code>## Using 4404 trees...</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="gradboost.html#cb147-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="gradboost.html#cb165-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9542676</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="gradboost.html#cb149-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
-<span id="cb149-2"><a href="gradboost.html#cb149-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="gradboost.html#cb167-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
+<span id="cb167-2"><a href="gradboost.html#cb167-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost2-1.png" alt="" width="672" /></p>
 <p>Al comparar la correlación y los diagramas de dispersión se observa una mejora considerable con el modelo Gradient Boost.</p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="gradboost.html#cb150-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm1, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="gradboost.html#cb168-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm1, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost3-1.png" alt="" width="672" /></p>
 <pre><code>## [1] 4404</code></pre>
 <p>De la figura anterior se observa que en la iteración 4404 (linea azul a trazos) fue donde se obtuvo el menor <span class="math inline">\(RMSE\)</span>.</p>
 <p>Vamos a crear otro modelo de predicción pero cambiando algunos de los hiper-parámetros, <span class="math inline">\(\alpha=0.15\)</span> y una profundidad de 3 en cada árbol.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="gradboost.html#cb152-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb152-2"><a href="gradboost.html#cb152-2" tabindex="-1"></a>model_gbm2 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
-<span id="cb152-3"><a href="gradboost.html#cb152-3" tabindex="-1"></a>                  <span class="at">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="at">cv.folds=</span><span class="dv">5</span>, </span>
-<span id="cb152-4"><a href="gradboost.html#cb152-4" tabindex="-1"></a>                  <span class="at">shrinkage=</span><span class="fl">0.15</span>, <span class="at">n.minobsinnode=</span><span class="dv">10</span>,</span>
-<span id="cb152-5"><a href="gradboost.html#cb152-5" tabindex="-1"></a>                  <span class="at">n.trees=</span><span class="dv">5000</span>, <span class="at">interaction.depth=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="gradboost.html#cb170-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb170-2"><a href="gradboost.html#cb170-2" tabindex="-1"></a>model_gbm2 <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span>., <span class="at">data =</span> train,</span>
+<span id="cb170-3"><a href="gradboost.html#cb170-3" tabindex="-1"></a>                  <span class="at">distribution=</span><span class="st">&quot;gaussian&quot;</span>, <span class="at">cv.folds=</span><span class="dv">5</span>, </span>
+<span id="cb170-4"><a href="gradboost.html#cb170-4" tabindex="-1"></a>                  <span class="at">shrinkage=</span><span class="fl">0.15</span>, <span class="at">n.minobsinnode=</span><span class="dv">10</span>,</span>
+<span id="cb170-5"><a href="gradboost.html#cb170-5" tabindex="-1"></a>                  <span class="at">n.trees=</span><span class="dv">5000</span>, <span class="at">interaction.depth=</span><span class="dv">3</span>)</span></code></pre></div>
 <p>Ahora vamos a calcular el <span class="math inline">\(RMSE\)</span> (root mean square error) y la correlación entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="gradboost.html#cb153-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm2<span class="sc">$</span>cv.error))</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="gradboost.html#cb171-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">min</span>(model_gbm2<span class="sc">$</span>cv.error))</span></code></pre></div>
 <pre><code>## [1] 3.376981</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="gradboost.html#cb155-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm2)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="gradboost.html#cb173-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_gbm2)</span></code></pre></div>
 <pre><code>## Using 241 trees...</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="gradboost.html#cb157-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="gradboost.html#cb175-1" tabindex="-1"></a><span class="fu">cor</span>(train<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.9852213</code></pre>
 <p>Para comparar los resultados del modelo vamos a crear un diagrama de dispersión entre <span class="math inline">\(y\)</span> y <span class="math inline">\(\hat{y}\)</span>.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="gradboost.html#cb159-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
-<span id="cb159-2"><a href="gradboost.html#cb159-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="gradboost.html#cb177-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>train<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
+<span id="cb177-2"><a href="gradboost.html#cb177-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost4-1.png" alt="" width="672" /></p>
 <p>Podemos construir una figura para observar la evolución del <span class="math inline">\(RMSE\)</span> en función del número de árboles (iteraciones).</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="gradboost.html#cb160-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm2, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="gradboost.html#cb178-1" tabindex="-1"></a><span class="fu">gbm.perf</span>(model_gbm2, <span class="at">method =</span> <span class="st">&quot;cv&quot;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost5-1.png" alt="" width="672" /></p>
 <pre><code>## [1] 241</code></pre>
 <p>En lugar de buscar esos hiper-parámetros a manualmente, podemos hacer una búsqueda automática creando un conjunto de posibles valores de los hiper-parámetros así.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="gradboost.html#cb162-1" tabindex="-1"></a><span class="co"># create hyperparameter grid</span></span>
-<span id="cb162-2"><a href="gradboost.html#cb162-2" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb162-3"><a href="gradboost.html#cb162-3" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</span>
-<span id="cb162-4"><a href="gradboost.html#cb162-4" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>),</span>
-<span id="cb162-5"><a href="gradboost.html#cb162-5" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>),</span>
-<span id="cb162-6"><a href="gradboost.html#cb162-6" tabindex="-1"></a>  <span class="at">bag.fraction =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">0.8</span>, <span class="dv">1</span>), </span>
-<span id="cb162-7"><a href="gradboost.html#cb162-7" tabindex="-1"></a>  <span class="at">optimal_trees =</span> <span class="dv">0</span>,               <span class="co"># a place to dump results</span></span>
-<span id="cb162-8"><a href="gradboost.html#cb162-8" tabindex="-1"></a>  <span class="at">min_RMSE =</span> <span class="dv">0</span>,                    <span class="co"># a place to dump results</span></span>
-<span id="cb162-9"><a href="gradboost.html#cb162-9" tabindex="-1"></a>  <span class="at">min_cor =</span> <span class="dv">0</span></span>
-<span id="cb162-10"><a href="gradboost.html#cb162-10" tabindex="-1"></a>)</span>
-<span id="cb162-11"><a href="gradboost.html#cb162-11" tabindex="-1"></a></span>
-<span id="cb162-12"><a href="gradboost.html#cb162-12" tabindex="-1"></a><span class="fu">nrow</span>(hyper_grid) <span class="co"># total number of combinations</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="gradboost.html#cb180-1" tabindex="-1"></a><span class="co"># create hyperparameter grid</span></span>
+<span id="cb180-2"><a href="gradboost.html#cb180-2" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb180-3"><a href="gradboost.html#cb180-3" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>),</span>
+<span id="cb180-4"><a href="gradboost.html#cb180-4" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>),</span>
+<span id="cb180-5"><a href="gradboost.html#cb180-5" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>),</span>
+<span id="cb180-6"><a href="gradboost.html#cb180-6" tabindex="-1"></a>  <span class="at">bag.fraction =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">0.8</span>, <span class="dv">1</span>), </span>
+<span id="cb180-7"><a href="gradboost.html#cb180-7" tabindex="-1"></a>  <span class="at">optimal_trees =</span> <span class="dv">0</span>,               <span class="co"># a place to dump results</span></span>
+<span id="cb180-8"><a href="gradboost.html#cb180-8" tabindex="-1"></a>  <span class="at">min_RMSE =</span> <span class="dv">0</span>,                    <span class="co"># a place to dump results</span></span>
+<span id="cb180-9"><a href="gradboost.html#cb180-9" tabindex="-1"></a>  <span class="at">min_cor =</span> <span class="dv">0</span></span>
+<span id="cb180-10"><a href="gradboost.html#cb180-10" tabindex="-1"></a>)</span>
+<span id="cb180-11"><a href="gradboost.html#cb180-11" tabindex="-1"></a></span>
+<span id="cb180-12"><a href="gradboost.html#cb180-12" tabindex="-1"></a><span class="fu">nrow</span>(hyper_grid) <span class="co"># total number of combinations</span></span></code></pre></div>
 <pre><code>## [1] 81</code></pre>
 <p>Para hacer la búsqueda usamos el siguiente código.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="gradboost.html#cb164-1" tabindex="-1"></a><span class="co"># randomize data</span></span>
-<span id="cb164-2"><a href="gradboost.html#cb164-2" tabindex="-1"></a>random_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(train), <span class="fu">nrow</span>(train))</span>
-<span id="cb164-3"><a href="gradboost.html#cb164-3" tabindex="-1"></a>random_train <span class="ot">&lt;-</span> train[random_index, ]</span>
-<span id="cb164-4"><a href="gradboost.html#cb164-4" tabindex="-1"></a></span>
-<span id="cb164-5"><a href="gradboost.html#cb164-5" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(hyper_grid)) {</span>
-<span id="cb164-6"><a href="gradboost.html#cb164-6" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb164-7"><a href="gradboost.html#cb164-7" tabindex="-1"></a>  gbm.tune <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
-<span id="cb164-8"><a href="gradboost.html#cb164-8" tabindex="-1"></a>    <span class="at">formula =</span> medv <span class="sc">~</span> .,</span>
-<span id="cb164-9"><a href="gradboost.html#cb164-9" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb164-10"><a href="gradboost.html#cb164-10" tabindex="-1"></a>    <span class="at">data =</span> random_train,</span>
-<span id="cb164-11"><a href="gradboost.html#cb164-11" tabindex="-1"></a>    <span class="at">n.trees =</span> <span class="dv">5000</span>,</span>
-<span id="cb164-12"><a href="gradboost.html#cb164-12" tabindex="-1"></a>    <span class="at">interaction.depth =</span> hyper_grid<span class="sc">$</span>interaction.depth[i],</span>
-<span id="cb164-13"><a href="gradboost.html#cb164-13" tabindex="-1"></a>    <span class="at">shrinkage =</span> hyper_grid<span class="sc">$</span>shrinkage[i],</span>
-<span id="cb164-14"><a href="gradboost.html#cb164-14" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> hyper_grid<span class="sc">$</span>n.minobsinnode[i],</span>
-<span id="cb164-15"><a href="gradboost.html#cb164-15" tabindex="-1"></a>    <span class="at">bag.fraction =</span> hyper_grid<span class="sc">$</span>bag.fraction[i],</span>
-<span id="cb164-16"><a href="gradboost.html#cb164-16" tabindex="-1"></a>    <span class="at">train.fraction =</span> <span class="fl">0.75</span>,</span>
-<span id="cb164-17"><a href="gradboost.html#cb164-17" tabindex="-1"></a>    <span class="at">n.cores =</span> <span class="cn">NULL</span>, <span class="co"># will use all cores by default</span></span>
-<span id="cb164-18"><a href="gradboost.html#cb164-18" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb164-19"><a href="gradboost.html#cb164-19" tabindex="-1"></a>  )</span>
-<span id="cb164-20"><a href="gradboost.html#cb164-20" tabindex="-1"></a>  </span>
-<span id="cb164-21"><a href="gradboost.html#cb164-21" tabindex="-1"></a>  <span class="co"># agregando la inf que nos interesa</span></span>
-<span id="cb164-22"><a href="gradboost.html#cb164-22" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>optimal_trees[i] <span class="ot">&lt;-</span> <span class="fu">which.min</span>(gbm.tune<span class="sc">$</span>valid.error)</span>
-<span id="cb164-23"><a href="gradboost.html#cb164-23" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>min_RMSE[i] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">min</span>(gbm.tune<span class="sc">$</span>valid.error))</span>
-<span id="cb164-24"><a href="gradboost.html#cb164-24" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>min_cor[i] <span class="ot">&lt;-</span> <span class="fu">cor</span>(random_train<span class="sc">$</span>medv, <span class="fu">predict</span>(gbm.tune))</span>
-<span id="cb164-25"><a href="gradboost.html#cb164-25" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="gradboost.html#cb182-1" tabindex="-1"></a><span class="co"># randomize data</span></span>
+<span id="cb182-2"><a href="gradboost.html#cb182-2" tabindex="-1"></a>random_index <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(train), <span class="fu">nrow</span>(train))</span>
+<span id="cb182-3"><a href="gradboost.html#cb182-3" tabindex="-1"></a>random_train <span class="ot">&lt;-</span> train[random_index, ]</span>
+<span id="cb182-4"><a href="gradboost.html#cb182-4" tabindex="-1"></a></span>
+<span id="cb182-5"><a href="gradboost.html#cb182-5" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(hyper_grid)) {</span>
+<span id="cb182-6"><a href="gradboost.html#cb182-6" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb182-7"><a href="gradboost.html#cb182-7" tabindex="-1"></a>  gbm.tune <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb182-8"><a href="gradboost.html#cb182-8" tabindex="-1"></a>    <span class="at">formula =</span> medv <span class="sc">~</span> .,</span>
+<span id="cb182-9"><a href="gradboost.html#cb182-9" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb182-10"><a href="gradboost.html#cb182-10" tabindex="-1"></a>    <span class="at">data =</span> random_train,</span>
+<span id="cb182-11"><a href="gradboost.html#cb182-11" tabindex="-1"></a>    <span class="at">n.trees =</span> <span class="dv">5000</span>,</span>
+<span id="cb182-12"><a href="gradboost.html#cb182-12" tabindex="-1"></a>    <span class="at">interaction.depth =</span> hyper_grid<span class="sc">$</span>interaction.depth[i],</span>
+<span id="cb182-13"><a href="gradboost.html#cb182-13" tabindex="-1"></a>    <span class="at">shrinkage =</span> hyper_grid<span class="sc">$</span>shrinkage[i],</span>
+<span id="cb182-14"><a href="gradboost.html#cb182-14" tabindex="-1"></a>    <span class="at">n.minobsinnode =</span> hyper_grid<span class="sc">$</span>n.minobsinnode[i],</span>
+<span id="cb182-15"><a href="gradboost.html#cb182-15" tabindex="-1"></a>    <span class="at">bag.fraction =</span> hyper_grid<span class="sc">$</span>bag.fraction[i],</span>
+<span id="cb182-16"><a href="gradboost.html#cb182-16" tabindex="-1"></a>    <span class="at">train.fraction =</span> <span class="fl">0.75</span>,</span>
+<span id="cb182-17"><a href="gradboost.html#cb182-17" tabindex="-1"></a>    <span class="at">n.cores =</span> <span class="cn">NULL</span>, <span class="co"># will use all cores by default</span></span>
+<span id="cb182-18"><a href="gradboost.html#cb182-18" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb182-19"><a href="gradboost.html#cb182-19" tabindex="-1"></a>  )</span>
+<span id="cb182-20"><a href="gradboost.html#cb182-20" tabindex="-1"></a>  </span>
+<span id="cb182-21"><a href="gradboost.html#cb182-21" tabindex="-1"></a>  <span class="co"># agregando la inf que nos interesa</span></span>
+<span id="cb182-22"><a href="gradboost.html#cb182-22" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>optimal_trees[i] <span class="ot">&lt;-</span> <span class="fu">which.min</span>(gbm.tune<span class="sc">$</span>valid.error)</span>
+<span id="cb182-23"><a href="gradboost.html#cb182-23" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>min_RMSE[i] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">min</span>(gbm.tune<span class="sc">$</span>valid.error))</span>
+<span id="cb182-24"><a href="gradboost.html#cb182-24" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>min_cor[i] <span class="ot">&lt;-</span> <span class="fu">cor</span>(random_train<span class="sc">$</span>medv, <span class="fu">predict</span>(gbm.tune))</span>
+<span id="cb182-25"><a href="gradboost.html#cb182-25" tabindex="-1"></a>}</span></code></pre></div>
 <p>Organizamos los resultados en relación al menor <span class="math inline">\(RMSE\)</span>.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="gradboost.html#cb165-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb165-2"><a href="gradboost.html#cb165-2" tabindex="-1"></a>hyper_grid <span class="sc">%&gt;%</span> </span>
-<span id="cb165-3"><a href="gradboost.html#cb165-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(min_RMSE) <span class="sc">%&gt;%</span></span>
-<span id="cb165-4"><a href="gradboost.html#cb165-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="gradboost.html#cb183-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb183-2"><a href="gradboost.html#cb183-2" tabindex="-1"></a>hyper_grid <span class="sc">%&gt;%</span> </span>
+<span id="cb183-3"><a href="gradboost.html#cb183-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(min_RMSE) <span class="sc">%&gt;%</span></span>
+<span id="cb183-4"><a href="gradboost.html#cb183-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    shrinkage interaction.depth n.minobsinnode bag.fraction optimal_trees
 ## 1       0.30                 5              5         0.80            88
 ## 2       0.30                 5              5         0.65           127
@@ -480,25 +484,25 @@ div.csl-indent {
 ## 8  2.837520 0.9855254
 ## 9  2.860405 0.9838807
 ## 10 2.870885 0.9860587</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="gradboost.html#cb167-1" tabindex="-1"></a><span class="co"># for reproducibility</span></span>
-<span id="cb167-2"><a href="gradboost.html#cb167-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb167-3"><a href="gradboost.html#cb167-3" tabindex="-1"></a></span>
-<span id="cb167-4"><a href="gradboost.html#cb167-4" tabindex="-1"></a><span class="co"># train GBM model</span></span>
-<span id="cb167-5"><a href="gradboost.html#cb167-5" tabindex="-1"></a>gbm.fit.final <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
-<span id="cb167-6"><a href="gradboost.html#cb167-6" tabindex="-1"></a>  <span class="at">formula =</span> medv <span class="sc">~</span> .,</span>
-<span id="cb167-7"><a href="gradboost.html#cb167-7" tabindex="-1"></a>  <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
-<span id="cb167-8"><a href="gradboost.html#cb167-8" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
-<span id="cb167-9"><a href="gradboost.html#cb167-9" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">88</span>,</span>
-<span id="cb167-10"><a href="gradboost.html#cb167-10" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">5</span>,</span>
-<span id="cb167-11"><a href="gradboost.html#cb167-11" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.3</span>,</span>
-<span id="cb167-12"><a href="gradboost.html#cb167-12" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">5</span>,</span>
-<span id="cb167-13"><a href="gradboost.html#cb167-13" tabindex="-1"></a>  <span class="at">bag.fraction =</span> <span class="fl">0.80</span>, </span>
-<span id="cb167-14"><a href="gradboost.html#cb167-14" tabindex="-1"></a>  <span class="at">train.fraction =</span> <span class="dv">1</span>,</span>
-<span id="cb167-15"><a href="gradboost.html#cb167-15" tabindex="-1"></a>  <span class="at">n.cores =</span> <span class="cn">NULL</span>, <span class="co"># will use all cores by default</span></span>
-<span id="cb167-16"><a href="gradboost.html#cb167-16" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
-<span id="cb167-17"><a href="gradboost.html#cb167-17" tabindex="-1"></a>  ) </span></code></pre></div>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="gradboost.html#cb168-1" tabindex="-1"></a><span class="fu">summary</span>(gbm.fit.final, <span class="at">cBars =</span> <span class="dv">10</span>,</span>
-<span id="cb168-2"><a href="gradboost.html#cb168-2" tabindex="-1"></a>        <span class="at">method =</span> relative.influence, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="gradboost.html#cb185-1" tabindex="-1"></a><span class="co"># for reproducibility</span></span>
+<span id="cb185-2"><a href="gradboost.html#cb185-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb185-3"><a href="gradboost.html#cb185-3" tabindex="-1"></a></span>
+<span id="cb185-4"><a href="gradboost.html#cb185-4" tabindex="-1"></a><span class="co"># train GBM model</span></span>
+<span id="cb185-5"><a href="gradboost.html#cb185-5" tabindex="-1"></a>gbm.fit.final <span class="ot">&lt;-</span> <span class="fu">gbm</span>(</span>
+<span id="cb185-6"><a href="gradboost.html#cb185-6" tabindex="-1"></a>  <span class="at">formula =</span> medv <span class="sc">~</span> .,</span>
+<span id="cb185-7"><a href="gradboost.html#cb185-7" tabindex="-1"></a>  <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>,</span>
+<span id="cb185-8"><a href="gradboost.html#cb185-8" tabindex="-1"></a>  <span class="at">data =</span> train,</span>
+<span id="cb185-9"><a href="gradboost.html#cb185-9" tabindex="-1"></a>  <span class="at">n.trees =</span> <span class="dv">88</span>,</span>
+<span id="cb185-10"><a href="gradboost.html#cb185-10" tabindex="-1"></a>  <span class="at">interaction.depth =</span> <span class="dv">5</span>,</span>
+<span id="cb185-11"><a href="gradboost.html#cb185-11" tabindex="-1"></a>  <span class="at">shrinkage =</span> <span class="fl">0.3</span>,</span>
+<span id="cb185-12"><a href="gradboost.html#cb185-12" tabindex="-1"></a>  <span class="at">n.minobsinnode =</span> <span class="dv">5</span>,</span>
+<span id="cb185-13"><a href="gradboost.html#cb185-13" tabindex="-1"></a>  <span class="at">bag.fraction =</span> <span class="fl">0.80</span>, </span>
+<span id="cb185-14"><a href="gradboost.html#cb185-14" tabindex="-1"></a>  <span class="at">train.fraction =</span> <span class="dv">1</span>,</span>
+<span id="cb185-15"><a href="gradboost.html#cb185-15" tabindex="-1"></a>  <span class="at">n.cores =</span> <span class="cn">NULL</span>, <span class="co"># will use all cores by default</span></span>
+<span id="cb185-16"><a href="gradboost.html#cb185-16" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb185-17"><a href="gradboost.html#cb185-17" tabindex="-1"></a>  ) </span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="gradboost.html#cb186-1" tabindex="-1"></a><span class="fu">summary</span>(gbm.fit.final, <span class="at">cBars =</span> <span class="dv">10</span>,</span>
+<span id="cb186-2"><a href="gradboost.html#cb186-2" tabindex="-1"></a>        <span class="at">method =</span> relative.influence, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost6-1.png" alt="" width="672" /></p>
 <pre><code>##             var     rel.inf
 ## rm           rm 40.70059606
@@ -515,12 +519,12 @@ div.csl-indent {
 ## zn           zn  0.07111692
 ## chas       chas  0.04200211</code></pre>
 <p><a href="http://uc-r.github.io/gbm_regression" class="uri">http://uc-r.github.io/gbm_regression</a></p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="gradboost.html#cb170-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>gbm.fit.final, </span>
-<span id="cb170-2"><a href="gradboost.html#cb170-2" tabindex="-1"></a>                 <span class="at">newdata=</span>test, <span class="at">n.trees =</span> <span class="dv">88</span>)</span>
-<span id="cb170-3"><a href="gradboost.html#cb170-3" tabindex="-1"></a><span class="fu">cor</span>(test<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="gradboost.html#cb188-1" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>gbm.fit.final, </span>
+<span id="cb188-2"><a href="gradboost.html#cb188-2" tabindex="-1"></a>                 <span class="at">newdata=</span>test, <span class="at">n.trees =</span> <span class="dv">88</span>)</span>
+<span id="cb188-3"><a href="gradboost.html#cb188-3" tabindex="-1"></a><span class="fu">cor</span>(test<span class="sc">$</span>medv, y_hat)</span></code></pre></div>
 <pre><code>## [1] 0.934735</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="gradboost.html#cb172-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>test<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
-<span id="cb172-2"><a href="gradboost.html#cb172-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="gradboost.html#cb190-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>test<span class="sc">$</span>medv, <span class="at">y=</span>y_hat, <span class="at">xlab=</span><span class="st">&#39;Valor observado&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Predicción&#39;</span>)</span>
+<span id="cb190-2"><a href="gradboost.html#cb190-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">lty=</span><span class="st">&#39;dashed&#39;</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/gradboost7-1.png" alt="" width="672" /></p>
 
 </div>

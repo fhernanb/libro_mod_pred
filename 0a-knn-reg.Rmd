@@ -3,17 +3,183 @@ El algoritmo k-Nearest Neighbors (k-NN) para regresión es una técnica no param
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/z3140gOhuVI?si=FpLtHiyk5pwLPd2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-
-## Paquetes de R {-}
-
-Para implementar **k-NN para regresión** en R, existen diversas opciones que van desde funciones básicas hasta ecosistemas completos de aprendizaje automático. 
-
-- `FNN` (Fast Nearest Neighbors): es uno de los paquetes más eficientes para esta tarea específica. A diferencia de otros que se centran solo en clasificación, `FNN` tiene una función dedicada exclusivamente a la regresión, `knn.reg()`. Es extremadamente rápido porque utiliza algoritmos de búsqueda optimizados (como cover trees).
-
-- El ecosistema moderno `tidymodels` (vía `parsnip`): si se desea un flujo de trabajo organizado y profesional, `tidymodels` es la opción recomendada. Permite cambiar de algoritmo fácilmente sin cambiar toda la estructura del código. Se suele usar el motor `"kknn"` dentro de la especificación del modelo. Facilita enormemente el proceso de **tuning** (encontrar el valor óptimo de $k$) y la validación cruzada.
-
-- Tradicional `caret`: durante años fue el estándar para Machine Learning en R. Aunque está siendo desplazado por `tidymodels`, sigue siendo muy robusto. Para entrenar se usa `train(..., method = "knn")`. Automatiza el preprocesamiento de los datos (como el escalado, que es crítico en k-NN) mediante el argumento `preProcess = c("center", "scale")`.
-
 Dado que k-NN calcula distancias (generalmente euclidianas), **siempre se debe normalizar o estandarizar** las variables predictoras antes de entrenar el modelo en R. Si una variable tiene una escala mucho mayor que otra (por ejemplo, ingresos vs. edad), dominará por completo el cálculo de la distancia y el modelo perderá precisión.
 
+## Paquetes de R para k-NN {-}
+Los paquetes más conocidos para aplicar k-NN son:
+
+- [FNN](https://cran.r-project.org/web/packages/FNN/index.html).
+- [tidymodels](https://cran.r-project.org/web/packages/tidymodels/index.html).
+- [caret](https://cran.r-project.org/web/packages/caret/index.html).
+
+## Paquete **FNN** {-}
+El paquete `FNN` (Fast Nearest Neighbors) de @R-FNN es uno de los paquetes más eficientes para esta tarea específica. A diferencia de otros que se centran solo en clasificación, `FNN` tiene una función dedicada exclusivamente a la regresión, `knn.reg()`. Es extremadamente rápido porque utiliza algoritmos de búsqueda optimizados (como cover trees).
+
+La función para aplicar k-NN para regresión se muestra a continuación.
+
+```{r, eval=FALSE}
+knn.reg(train, 
+        y,
+        test = NULL, 
+        k = 3, 
+        algorithm=c("kd_tree", "cover_tree", "brute"))
+```
+
+```{block2, type='rmdnote'}
+Se recomienda al lector que consulte la ayuda de las funciones anteriores para que pueda entender las posibilidades que se tienen con cada una de ellas.
+```
+
+## Paquete **tidymodels** {-}
+El ecosistema moderno `tidymodels` (vía `parsnip`): si se desea un flujo de trabajo organizado y profesional, `tidymodels` es la opción recomendada. Permite cambiar de algoritmo fácilmente sin cambiar toda la estructura del código. Se suele usar el motor `"kknn"` dentro de la especificación del modelo. Facilita enormemente el proceso de **tuning** (encontrar el valor óptimo de $k$) y la validación cruzada.
+
+## Paquete **caret** {-}
+El paquete `caret`: durante años fue el estándar para Machine Learning en R. Aunque está siendo desplazado por `tidymodels`, sigue siendo muy robusto. Para entrenar se usa `train(..., method = "knn")`. Automatiza el preprocesamiento de los datos (como el escalado, que es crítico en k-NN) mediante el argumento `preProcess = c("center", "scale")`.
+
+## Ejemplo con el paquete **FNN** {-}
+En este ejemplo se busca aplicar k-NN para explicar la variable respuesta `medv` (median value of owner-occupied homes in 1000\$) en función de la covariable `lstat` (lower status of the population), usando la base de datos Boston del paquete **MASS** de @R-MASS.
+
+El objetivo de este ejercicio es explorar el efecto de hiper-parámetro $k$ en los resultados.
+
+```{r, message=F}
+library(MASS)      # This package contains the dataset
+head(Boston)
+dim(Boston)
+```
+
+Vamos a crear los datos de entrenamiento y de prueba usando la mitad de los datos. Para esto vamos a crear un vector con índices para identificar los elementos de entrenamiento `train_index`.
+
+```{r}
+set.seed(123)
+train_index <- sample(1:nrow(Boston), size = 250)
+train_data  <- Boston[train_index, ]
+test_data   <- Boston[-train_index, ]
+```
+
+Ahora vamos a crear la matriz $\boldsymbol{X}$ y el vector $\boldsymbol{Y}$ así:
+
+```{r}
+X_train <- Boston["lstat"]
+X_test  <- Boston["lstat"]
+y_train <- Boston["medv"]
+y_test  <- Boston["medv"]
+```
+
+Como en este ejemplo tenemos una sola covariable X, vamos a crear un objeto `x_grid` como una secuencia de valores de X para dibujar las predicciones $\hat{Y}$ para muchos valores de X que están en `x_grid`.
+
+```{r}
+X_train_min <- min(X_train)
+X_train_max <- max(X_train)
+x_grid <- data.frame(lstat = seq(from=X_train_min, to=X_train_max, by = 0.01))
+head(x_grid)
+tail(x_grid)
+```
+
+A continuación vamos a aplicar la función `knn.reg` variando el valor de `k`. Adicionalmente, vamos a suministrar `test = x_grid` para obtener un vector con las predicciones para los valores almacenados en `x_grid`.
+
+```{r}
+library(FNN)
+pred_001 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 1)
+pred_005 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 5)
+pred_010 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 10)
+pred_050 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 50)
+pred_100 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 100)
+pred_250 <- knn.reg(train = X_train, test = x_grid, y = y_train, k = 250)
+```
+
+Ahora vamos a dibujar un diagrama de dispersión entre la variable respuesta y la covariable para cada valor de $k$. Adicionalmente, vamos a agregar en color naranja un línea que representa el valor de $\hat{Y}$ para cada uno de los valores de `x_grid`.
+
+```{r, "knn-01",  fig.height = 8, fig.width = 6, echo = FALSE}
+par(mfrow = c(3, 2))
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 1")
+lines(x_grid$lstat, pred_001$pred, col = "darkorange", lwd = 0.25)
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 5")
+lines(x_grid$lstat, pred_005$pred, col = "darkorange", lwd = 0.75)
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 10")
+lines(x_grid$lstat, pred_010$pred, col = "darkorange", lwd = 1)
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 25")
+lines(x_grid$lstat, pred_050$pred, col = "darkorange", lwd = 1.5)
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 50")
+lines(x_grid$lstat, pred_100$pred, col = "darkorange", lwd = 2)
+
+plot(medv ~ lstat, data = train_data, cex = .8, col = "dodgerblue", main = "k = 250")
+lines(x_grid$lstat, pred_250$pred, col = "darkorange", lwd = 2)
+```
+
+De la figura anterior podemos ver que `k = 1` claramente presenta un sobreajuste (**overfitting**), ya que `k = 1` es un modelo muy complejo y de alta variabilidad. Por el contrario, `k = 250` claramente está subajustando (**underfitting**) los datos, puesto que `k = 250` es un modelo muy simple y de baja varianza. De hecho, en este caso, está prediciendo un simple promedio de todos los datos en cada punto.
+
+Choosing $k$
+
+- low `k` = very complex model. very wiggly. specifically jagged
+- high `k` = very inflexible model. very smooth.
+
+- want: something in the middle which predicts well on unseen data
+- that is, want $\hat{f}_k$ to minimize
+
+$$
+\text{EPE}\left(Y, \hat{f}_k(X)\right) = 
+\mathbb{E}_{X, Y, \mathcal{D}} \left[  (Y - \hat{f}_k(X))^2 \right]
+$$
+
+- TODO: Test MSE is an estimate of this. So finding best test RMSE will be our strategy. (Best test RMSE is same as best MSE, but with more understandable units.)
+
+```{r}
+rmse = function(actual, predicted) {
+  sqrt(mean((actual - predicted) ^ 2))
+}
+```
+
+```{r}
+# define helper function for getting knn.reg predictions
+# note: this function is highly specific to this situation and dataset
+make_knn_pred = function(k = 1, training, predicting) {
+  pred = FNN::knn.reg(train = training["lstat"],
+                      test = predicting["lstat"],
+                      y = training$medv, k = k)$pred
+  act  = predicting$medv
+  rmse(predicted = pred, actual = act)
+}
+```
+
+```{r}
+# define values of k to evaluate
+k = c(1, 5, 10, 25, 50, 250)
+```
+
+```{r}
+# get requested train RMSEs
+knn_trn_rmse = sapply(k, make_knn_pred,
+                      training = train_data,
+                      predicting = train_data)
+# get requested test RMSEs
+knn_tst_rmse = sapply(k, make_knn_pred,
+                      training = train_data,
+                      predicting = test_data)
+
+# determine "best" k
+best_k = k[which.min(knn_tst_rmse)]
+
+# find overfitting, underfitting, and "best"" k
+fit_status = ifelse(k < best_k, "Over", ifelse(k == best_k, "Best", "Under"))
+```
+
+```{r}
+# summarize results
+knn_results = data.frame(
+  k,
+  round(knn_trn_rmse, 2),
+  round(knn_tst_rmse, 2),
+  fit_status
+)
+colnames(knn_results) = c("k", "Train RMSE", "Test RMSE", "Fit?")
+
+# display results
+knitr::kable(knn_results, escape = FALSE, booktabs = TRUE)
+```
+
+https://daviddalpiaz.github.io/r4sl/knn-reg.html
 
