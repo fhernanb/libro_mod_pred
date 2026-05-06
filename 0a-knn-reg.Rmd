@@ -114,10 +114,10 @@ test_data   <- Boston[-train_index, ]
 Ahora vamos a crear la matriz $\boldsymbol{X}$ y el vector $\boldsymbol{Y}$ así:
 
 ```{r}
-X_train <- Boston["lstat"]
-X_test  <- Boston["lstat"]
-y_train <- Boston["medv"]
-y_test  <- Boston["medv"]
+X_train <- train_data["lstat"]
+X_test  <- test_data["lstat"]
+y_train <- train_data["medv"]
+y_test  <- test_data["medv"]
 ```
 
 Como en este ejemplo tenemos una sola covariable $X$, vamos a crear un objeto `x_grid` como una secuencia de valores de $X$ para dibujar las predicciones $\hat{Y}$ para cada uno de los valores de $X$ que están en `x_grid`.
@@ -257,15 +257,16 @@ train_index <- sample(1:nrow(Boston), size = 250)
 train_data  <- Boston[train_index, ]
 test_data   <- Boston[-train_index, ]
 
-X_train <- Boston[, c("lstat", "rm", "dis", "tax", "ptratio")]
-X_test  <- Boston[, c("lstat", "rm", "dis", "tax", "ptratio")]
-y_train <- Boston["medv"]
-y_test  <- Boston["medv"]
+X_train <- train_data[, c("lstat", "rm", "dis", "tax", "ptratio")]
+X_test  <- test_data[, c("lstat", "rm", "dis", "tax", "ptratio")]
+y_train <- train_data["medv"]
+y_test  <- test_data["medv"]
 
 head(X_train)
 ```
 
-Entrenamos el modelo y obtenemos las predicciones para `X_train`
+Entrenamos el modelo con `X_train` y obtenemos las predicciones para `X_test`:
+
 ```{r}
 fit1 <- knn.reg(train = X_train, test = X_test, y = y_train, k = 25)
 ```

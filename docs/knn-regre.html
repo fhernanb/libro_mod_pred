@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2026-05-05" />
+<meta name="date" content="2026-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -417,30 +417,30 @@ div.csl-indent {
 <span id="cb6-3"><a href="knn-regre.html#cb6-3" tabindex="-1"></a>train_data  <span class="ot">&lt;-</span> Boston[train_index, ]</span>
 <span id="cb6-4"><a href="knn-regre.html#cb6-4" tabindex="-1"></a>test_data   <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>train_index, ]</span></code></pre></div>
 <p>Ahora vamos a crear la matriz <span class="math inline">\(\boldsymbol{X}\)</span> y el vector <span class="math inline">\(\boldsymbol{Y}\)</span> así:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="knn-regre.html#cb7-1" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> Boston[<span class="st">&quot;lstat&quot;</span>]</span>
-<span id="cb7-2"><a href="knn-regre.html#cb7-2" tabindex="-1"></a>X_test  <span class="ot">&lt;-</span> Boston[<span class="st">&quot;lstat&quot;</span>]</span>
-<span id="cb7-3"><a href="knn-regre.html#cb7-3" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> Boston[<span class="st">&quot;medv&quot;</span>]</span>
-<span id="cb7-4"><a href="knn-regre.html#cb7-4" tabindex="-1"></a>y_test  <span class="ot">&lt;-</span> Boston[<span class="st">&quot;medv&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="knn-regre.html#cb7-1" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> train_data[<span class="st">&quot;lstat&quot;</span>]</span>
+<span id="cb7-2"><a href="knn-regre.html#cb7-2" tabindex="-1"></a>X_test  <span class="ot">&lt;-</span> test_data[<span class="st">&quot;lstat&quot;</span>]</span>
+<span id="cb7-3"><a href="knn-regre.html#cb7-3" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> train_data[<span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb7-4"><a href="knn-regre.html#cb7-4" tabindex="-1"></a>y_test  <span class="ot">&lt;-</span> test_data[<span class="st">&quot;medv&quot;</span>]</span></code></pre></div>
 <p>Como en este ejemplo tenemos una sola covariable <span class="math inline">\(X\)</span>, vamos a crear un objeto <code>x_grid</code> como una secuencia de valores de <span class="math inline">\(X\)</span> para dibujar las predicciones <span class="math inline">\(\hat{Y}\)</span> para cada uno de los valores de <span class="math inline">\(X\)</span> que están en <code>x_grid</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="knn-regre.html#cb8-1" tabindex="-1"></a>X_train_min <span class="ot">&lt;-</span> <span class="fu">min</span>(X_train)</span>
 <span id="cb8-2"><a href="knn-regre.html#cb8-2" tabindex="-1"></a>X_train_max <span class="ot">&lt;-</span> <span class="fu">max</span>(X_train)</span>
 <span id="cb8-3"><a href="knn-regre.html#cb8-3" tabindex="-1"></a>x_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lstat =</span> <span class="fu">seq</span>(<span class="at">from=</span>X_train_min, <span class="at">to=</span>X_train_max, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
 <span id="cb8-4"><a href="knn-regre.html#cb8-4" tabindex="-1"></a><span class="fu">head</span>(x_grid)</span></code></pre></div>
 <pre><code>##   lstat
-## 1  1.73
-## 2  1.74
-## 3  1.75
-## 4  1.76
-## 5  1.77
-## 6  1.78</code></pre>
+## 1  1.92
+## 2  1.93
+## 3  1.94
+## 4  1.95
+## 5  1.96
+## 6  1.97</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="knn-regre.html#cb10-1" tabindex="-1"></a><span class="fu">tail</span>(x_grid)</span></code></pre></div>
 <pre><code>##      lstat
-## 3620 37.92
-## 3621 37.93
-## 3622 37.94
-## 3623 37.95
-## 3624 37.96
-## 3625 37.97</code></pre>
+## 3502 36.93
+## 3503 36.94
+## 3504 36.95
+## 3505 36.96
+## 3506 36.97
+## 3507 36.98</code></pre>
 <p>A continuación vamos a aplicar la función <code>knn.reg</code> variando el valor de <code>k</code>. Adicionalmente, vamos a suministrar <code>test = x_grid</code> para obtener un vector con las predicciones para los valores almacenados en <code>x_grid</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="knn-regre.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(FNN)</span>
 <span id="cb12-2"><a href="knn-regre.html#cb12-2" tabindex="-1"></a>pred_001 <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train =</span> X_train, <span class="at">test =</span> x_grid, <span class="at">y =</span> y_train, <span class="at">k =</span> <span class="dv">1</span>)</span>
@@ -564,58 +564,58 @@ div.csl-indent {
 <span id="cb18-5"><a href="knn-regre.html#cb18-5" tabindex="-1"></a>train_data  <span class="ot">&lt;-</span> Boston[train_index, ]</span>
 <span id="cb18-6"><a href="knn-regre.html#cb18-6" tabindex="-1"></a>test_data   <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>train_index, ]</span>
 <span id="cb18-7"><a href="knn-regre.html#cb18-7" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="knn-regre.html#cb18-8" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> Boston[, <span class="fu">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;rm&quot;</span>, <span class="st">&quot;dis&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)]</span>
-<span id="cb18-9"><a href="knn-regre.html#cb18-9" tabindex="-1"></a>X_test  <span class="ot">&lt;-</span> Boston[, <span class="fu">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;rm&quot;</span>, <span class="st">&quot;dis&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)]</span>
-<span id="cb18-10"><a href="knn-regre.html#cb18-10" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> Boston[<span class="st">&quot;medv&quot;</span>]</span>
-<span id="cb18-11"><a href="knn-regre.html#cb18-11" tabindex="-1"></a>y_test  <span class="ot">&lt;-</span> Boston[<span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb18-8"><a href="knn-regre.html#cb18-8" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> train_data[, <span class="fu">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;rm&quot;</span>, <span class="st">&quot;dis&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)]</span>
+<span id="cb18-9"><a href="knn-regre.html#cb18-9" tabindex="-1"></a>X_test  <span class="ot">&lt;-</span> test_data[, <span class="fu">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;rm&quot;</span>, <span class="st">&quot;dis&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)]</span>
+<span id="cb18-10"><a href="knn-regre.html#cb18-10" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> train_data[<span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb18-11"><a href="knn-regre.html#cb18-11" tabindex="-1"></a>y_test  <span class="ot">&lt;-</span> test_data[<span class="st">&quot;medv&quot;</span>]</span>
 <span id="cb18-12"><a href="knn-regre.html#cb18-12" tabindex="-1"></a></span>
 <span id="cb18-13"><a href="knn-regre.html#cb18-13" tabindex="-1"></a><span class="fu">head</span>(X_train)</span></code></pre></div>
-<pre><code>##   lstat    rm    dis tax ptratio
-## 1  4.98 6.575 4.0900 296    15.3
-## 2  9.14 6.421 4.9671 242    17.8
-## 3  4.03 7.185 4.9671 242    17.8
-## 4  2.94 6.998 6.0622 222    18.7
-## 5  5.33 7.147 6.0622 222    18.7
-## 6  5.21 6.430 6.0622 222    18.7</code></pre>
-<p>Entrenamos el modelo y obtenemos las predicciones para <code>X_train</code></p>
+<pre><code>##     lstat    rm    dis tax ptratio
+## 415 36.98 4.519 1.6582 666    20.2
+## 463 13.99 6.317 2.7344 666    20.2
+## 179  6.92 6.860 2.9153 296    16.6
+## 14   8.26 5.949 4.7075 307    21.0
+## 195  4.38 6.604 6.2196 265    15.6
+## 426 24.39 5.896 1.9096 666    20.2</code></pre>
+<p>Entrenamos el modelo con <code>X_train</code> y obtenemos las predicciones para <code>X_test</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="knn-regre.html#cb20-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train =</span> X_train, <span class="at">test =</span> X_test, <span class="at">y =</span> y_train, <span class="at">k =</span> <span class="dv">25</span>)</span></code></pre></div>
 <p>Ahora vamos a mostrar los resultados gráficos, la correlación lineal de Pearson entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(\hat{Y}\)</span> y el RSME.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="knn-regre.html#cb21-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>y_test[, <span class="dv">1</span>], <span class="at">y=</span>fit1<span class="sc">$</span>pred)</span>
 <span id="cb21-2"><a href="knn-regre.html#cb21-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">&quot;tomato&quot;</span>, <span class="at">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/knn-02-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="knn-regre.html#cb22-1" tabindex="-1"></a><span class="fu">cor</span>(<span class="at">x=</span>y_test[, <span class="dv">1</span>], <span class="at">y=</span>fit1<span class="sc">$</span>pred)</span></code></pre></div>
-<pre><code>## [1] 0.7775987</code></pre>
+<pre><code>## [1] 0.6496027</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="knn-regre.html#cb24-1" tabindex="-1"></a>rmse <span class="ot">=</span> <span class="cf">function</span>(actual, predicted) {</span>
 <span id="cb24-2"><a href="knn-regre.html#cb24-2" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((actual <span class="sc">-</span> predicted) <span class="sc">^</span> <span class="dv">2</span>))</span>
 <span id="cb24-3"><a href="knn-regre.html#cb24-3" tabindex="-1"></a>}</span>
 <span id="cb24-4"><a href="knn-regre.html#cb24-4" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="knn-regre.html#cb24-5" tabindex="-1"></a><span class="fu">rmse</span>(<span class="at">actual=</span>y_test[, <span class="dv">1</span>], <span class="at">predicted=</span>fit1<span class="sc">$</span>pred)</span></code></pre></div>
-<pre><code>## [1] 5.863416</code></pre>
+<pre><code>## [1] 7.12435</code></pre>
 <p>Ahora vamos a volver a entrenar el modelo pero usando la función scale sobre las matrices que contienen las covariables.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="knn-regre.html#cb26-1" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> <span class="fu">scale</span>(X_train)</span>
 <span id="cb26-2"><a href="knn-regre.html#cb26-2" tabindex="-1"></a>X_test  <span class="ot">&lt;-</span> <span class="fu">scale</span>(X_test)</span>
 <span id="cb26-3"><a href="knn-regre.html#cb26-3" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="knn-regre.html#cb26-4" tabindex="-1"></a><span class="fu">head</span>(X_train)</span></code></pre></div>
-<pre><code>##        lstat        rm      dis        tax    ptratio
-## 1 -1.0744990 0.4132629 0.140075 -0.6659492 -1.4575580
-## 2 -0.4919525 0.1940824 0.556609 -0.9863534 -0.3027945
-## 3 -1.2075324 1.2814456 0.556609 -0.9863534 -0.3027945
-## 4 -1.3601708 1.0152978 1.076671 -1.1050216  0.1129203
-## 5 -1.0254866 1.2273620 1.076671 -1.1050216  0.1129203
-## 6 -1.0422909 0.2068916 1.076671 -1.1050216  0.1129203</code></pre>
+<pre><code>##          lstat          rm        dis        tax    ptratio
+## 415  3.4283550 -2.49478620 -1.0141169  1.5689260  0.8258362
+## 463  0.2155631  0.07891737 -0.5346034  1.5689260  0.8258362
+## 179 -0.7724507  0.85618157 -0.4540012 -0.6610318 -0.8458970
+## 14  -0.5851893 -0.44784732  0.3445346 -0.5947358  1.1973324
+## 195 -1.1274090  0.48973657  1.0182685 -0.8478661 -1.3102673
+## 426  1.6689357 -0.52371289 -0.9021027  1.5689260  0.8258362</code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="knn-regre.html#cb28-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">knn.reg</span>(<span class="at">train =</span> X_train, <span class="at">test =</span> X_test, <span class="at">y =</span> y_train, <span class="at">k =</span> <span class="dv">5</span>)</span>
 <span id="cb28-2"><a href="knn-regre.html#cb28-2" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="knn-regre.html#cb28-3" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>y_test[, <span class="dv">1</span>], <span class="at">y=</span>fit2<span class="sc">$</span>pred)</span>
 <span id="cb28-4"><a href="knn-regre.html#cb28-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">&quot;blue3&quot;</span>, <span class="at">lty=</span><span class="st">&quot;dashed&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="libro_mod_pred_files/figure-html/knn-03-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="knn-regre.html#cb29-1" tabindex="-1"></a><span class="fu">cor</span>(<span class="at">x=</span>y_test[, <span class="dv">1</span>], <span class="at">y=</span>fit2<span class="sc">$</span>pred)</span></code></pre></div>
-<pre><code>## [1] 0.9439849</code></pre>
+<pre><code>## [1] 0.8928495</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="knn-regre.html#cb31-1" tabindex="-1"></a>rmse <span class="ot">=</span> <span class="cf">function</span>(actual, predicted) {</span>
 <span id="cb31-2"><a href="knn-regre.html#cb31-2" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">mean</span>((actual <span class="sc">-</span> predicted) <span class="sc">^</span> <span class="dv">2</span>))</span>
 <span id="cb31-3"><a href="knn-regre.html#cb31-3" tabindex="-1"></a>}</span>
 <span id="cb31-4"><a href="knn-regre.html#cb31-4" tabindex="-1"></a></span>
 <span id="cb31-5"><a href="knn-regre.html#cb31-5" tabindex="-1"></a><span class="fu">rmse</span>(<span class="at">actual=</span>y_test[, <span class="dv">1</span>], <span class="at">predicted=</span>fit2<span class="sc">$</span>pred)</span></code></pre></div>
-<pre><code>## [1] 3.085159</code></pre>
+<pre><code>## [1] 4.278764</code></pre>
 <p>¿Qué se puede concluir en este ejemplo?</p>
 </div>
 <div id="ejemplo-con-el-paquete-tidymodels" class="section level2 unnumbered hasAnchor">

@@ -1,0 +1,143 @@
+# Regularización {#regula}
+
+En esta sección se presentan las técnicas de regularización ampliamente utilizadas en regresión: **Ridge** y **Lasso**. Ambas buscan mejorar la capacidad predictiva del modelo penalizando la magnitud de los coeficientes.
+
+Se utilizará la base de datos `mtcars` de R, considerando como máximo 4 variables predictoras.
+
+## Regresión de mínimos cuadrados {-}
+
+El principio de mínimos cuadrados proporciona una forma de elegir los coeficientes de manera eficiente, minimizando la suma de los errores al cuadrado. Es decir, elegimos los valores de $\beta_{0}, \beta_{1},...\beta_{p}$ que minimizan
+
+$$
+\sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 
+$$
+
+## Regresión Ridge {-}
+
+La regresión Ridge es muy similar a la regresión por mínimos cuadrados, excepto que los coeficientes son estimados minimizando una cantidad ligeramente diferente. En particular, las estimaciones de los coeficientes de regresión Ridge, $\hat{\beta}^{R}$, son los valores que minimizan
+
+$$
+\sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p \beta_{j}^{2} = RSS + \lambda \sum_{j=1}^p \beta_{j}^{2}
+$$
+
+donde $\lambda \geq 0$ es un $\color{red}{\text {parámetro de ajuste}}$, el cual debe determinarse por separado, y $\lambda \sum_{j=1}^p \beta_{j}^{2}$ se denomina una $\color{red}{\text {penalización de contracción}}$ (shrinkage penalty).
+
+Note que en la ecuación, la penalización de contracción se aplica a $\beta_1,..., \beta_p$, pero no al intercepto $\beta_0$.
+
+Ventajas
+
+- Reduce la varianza del modelo.
+- Funciona bien cuando hay multicolinealidad.
+- Estabiliza estimaciones.
+
+Desventajas
+
+- No realiza selección de variables.
+- Todos los predictores permanecen en el modelo.
+
+### Ejemplo en R {-}
+
+```r
+library(glmnet)
+
+# Datos
+data(mtcars)
+X <- as.matrix(mtcars[, c("wt", "hp", "disp", "cyl")])
+y <- mtcars$mpg
+
+# Cross-validación para lambda
+set.seed(123)
+cv_ridge <- cv.glmnet(X, y, alpha = 0)
+
+lambda_opt <- cv_ridge$lambda.min
+lambda_opt
+
+# Modelo Ridge
+modelo_ridge <- glmnet(X, y, alpha = 0, lambda = lambda_opt)
+
+coef(modelo_ridge)
+```
+
+Predicción
+
+```r
+# Nuevas observaciones
+nuevos <- matrix(c(
+  3.0, 110, 200, 6,
+  2.5, 95, 160, 4,
+  3.2, 130, 220, 8
+), nrow = 3, byrow = TRUE)
+
+colnames(nuevos) <- c("wt", "hp", "disp", "cyl")
+
+predict(modelo_ridge, newx = nuevos)
+```
+
+**Pregunta:**  
+¿Cómo se obtienen las estimaciones de \(Y\) para las tres nuevas observaciones usando el modelo Ridge ajustado?
+
+
+
+## Regresión Lasso {-}
+
+La regresión Lasso utiliza una penalización basada en el valor absoluto de los coeficientes.
+
+
+Ventajas
+
+- Realiza **selección automática de variables**.
+- Puede llevar coeficientes exactamente a cero.
+- Genera modelos más interpretables.
+
+Desventajas
+
+- Puede ser inestable si hay alta correlación entre variables.
+- Selección puede variar con pequeños cambios en los datos.
+
+### Ejemplo en R {-}
+
+```r
+library(glmnet)
+
+# Datos (los mismos)
+data(mtcars)
+X <- as.matrix(mtcars[, c("wt", "hp", "disp", "cyl")])
+y <- mtcars$mpg
+
+# Cross-validación para lambda
+set.seed(123)
+cv_lasso <- cv.glmnet(X, y, alpha = 1)
+
+lambda_opt <- cv_lasso$lambda.min
+lambda_opt
+
+# Modelo Lasso
+modelo_lasso <- glmnet(X, y, alpha = 1, lambda = lambda_opt)
+
+coef(modelo_lasso)
+```
+
+Predicción
+
+```r
+# Nuevas observaciones (las mismas)
+nuevos <- matrix(c(
+  3.0, 110, 200, 6,
+  2.5, 95, 160, 4,
+  3.2, 130, 220, 8
+), nrow = 3, byrow = TRUE)
+
+colnames(nuevos) <- c("wt", "hp", "disp", "cyl")
+
+predict(modelo_lasso, newx = nuevos)
+```
+
+**Pregunta:**  
+¿Cómo cambian las estimaciones de \(Y\) respecto al modelo Ridge y qué variables fueron eliminadas por Lasso?
+
+
+### Conclusión {-}
+
+- Ridge es útil cuando todas las variables aportan algo.
+- Lasso es preferible cuando se desea simplicidad y selección de variables.
+- La elección depende del contexto… como casi todo en estadística, aunque a algunos les cueste aceptarlo.
