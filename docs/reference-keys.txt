@@ -3,6 +3,7 @@ fig:adaboost02
 fig:adaboost03
 fig:iris
 knn-regre
+regula
 arb-de-regre
 arb-de-clasif
 arb-distri
@@ -13,16 +14,4 @@ adaboost
 adaboost_reg
 gradboost
 reg-versus-arb
-regula
-regresión-ridge
-ventajas-1
-desventajas
-ejemplo-en-r
-predicción
-regresión-lasso
-ventajas-2
-desventajas-1
-ejemplo-en-r-1
-predicción-1
-conclusión
-regresión-de-mínimos-cuadrados
+elastic-net
