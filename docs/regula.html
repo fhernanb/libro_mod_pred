@@ -23,7 +23,7 @@
 <meta name="author" content="Freddy Hernández" />
 
 
-<meta name="date" content="2026-05-06" />
+<meta name="date" content="2026-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -199,6 +199,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="regula.html"><a href="regula.html#elastic-net"><i class="fa fa-check"></i>Elastic net</a>
 <ul>
 <li class="chapter" data-level="" data-path="regula.html"><a href="regula.html#ejemplo-de-elastic-net"><i class="fa fa-check"></i>Ejemplo de Elastic Net</a></li>
+<li class="chapter" data-level="2.0.1" data-path="regula.html"><a href="regula.html#ridge-lasso-y-elastic-net"><i class="fa fa-check"></i><b>2.0.1</b> Ridge, Lasso y Elastic Net</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="arb-de-regre.html"><a href="arb-de-regre.html"><i class="fa fa-check"></i><b>3</b> Árboles de regresión</a>
@@ -300,7 +301,6 @@ div.csl-indent {
 <div id="regula" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Regularización<a href="regula.html#regula" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>En esta sección se presentan las técnicas de regularización ampliamente utilizadas en regresión: <strong>Ridge</strong> y <strong>Lasso</strong>. Ambas buscan mejorar la capacidad predictiva del modelo penalizando la magnitud de los coeficientes.</p>
-<p>Se utilizará la base de datos <code>mtcars</code> de R, considerando como máximo 4 variables predictoras.</p>
 <div id="regresión-de-mínimos-cuadrados" class="section level2 unnumbered hasAnchor">
 <h2>Regresión de mínimos cuadrados<a href="regula.html#regresi%C3%B3n-de-m%C3%ADnimos-cuadrados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El principio de mínimos cuadrados proporciona una forma de elegir los coeficientes de manera eficiente, minimizando la suma de los errores al cuadrado. Es decir, elegimos los valores de <span class="math inline">\(\beta_{0}, \beta_{1},...\beta_{p}\)</span> que minimizan</p>
@@ -310,6 +310,9 @@ RSS =\sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2
 </div>
 <div id="regresión-ridge" class="section level2 unnumbered hasAnchor">
 <h2>Regresión Ridge<a href="regula.html#regresi%C3%B3n-ridge" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Q81RR3yKn30?si=nw34rwtcj-a-UoiB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+<p><br></p>
 <p>La regresión Ridge es muy similar a la regresión por mínimos cuadrados, excepto que los coeficientes son estimados minimizando una cantidad ligeramente diferente. En particular, las estimaciones de los coeficientes de regresión Ridge, <span class="math inline">\(\hat{\beta}^{R}\)</span>, son los valores que minimizan</p>
 <p><span class="math display">\[
 \sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p \beta_{j}^{2} = RSS + \lambda \sum_{j=1}^p \beta_{j}^{2}
@@ -412,6 +415,9 @@ RSS =\sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2
 </div>
 <div id="regresión-lasso" class="section level2 unnumbered hasAnchor">
 <h2>Regresión Lasso<a href="regula.html#regresi%C3%B3n-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NGf0voTMlcs?si=C-LDjjOCpxW6ihcs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+<p><br></p>
 <p>Lasso (least absolute shrinkage and selection operator) es una alternativa a la regresión Ridge que supera la desventaja de incluir los <span class="math inline">\(p\)</span> predictores en el modelo final. Los coeficientes lasso, <span class="math inline">\(\beta_{\lambda}^{L}\)</span>, minimizan la cantidad</p>
 <p><span class="math display">\[
 \sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^p |\beta_{j}| = RSS + \lambda \sum_{j=1}^p |\beta_{j}|
@@ -491,6 +497,9 @@ RSS =\sum_{i=1}^{n}\left( y_{i}-\beta_0 - \sum_{j=1}^p \beta_j x_{ij} \right)^2
 </div>
 <div id="elastic-net" class="section level2 unnumbered hasAnchor">
 <h2>Elastic net<a href="regula.html#elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1dKRdX9bfIo?si=zmS0NsnuDzsw8NjX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+<p><br></p>
 <p>A generalization of the lasso model is the elastic net (Zou and Hastie 2005). This model combines the two types of penalties:</p>
 <p><span class="math display">\[
 RSS + \lambda_1 \sum_{j=1}^p \beta_{j}^{2} + \lambda_2 \sum_{j=1}^p |\beta_{j}|
@@ -500,7 +509,7 @@ RSS + \lambda_1 \sum_{j=1}^p \beta_{j}^{2} + \lambda_2 \sum_{j=1}^p |\beta_{j}|
 <p align="center">
 <img src="images/elasticnet_authors.PNG" width="700">
 </p>
-<p>Tibshirani, R., Hastie, T., Narasimhan, B. and Chu, C. (2002) Diagnosis of multiple cancer types by shrunken centroids of gene expression. Proc. Natn. Acad. Sci. USA, 99, 6567–6572.</p>
+<p>Journal of the Royal Statistical Society Series B: Statistical Methodology, Volume 67, Issue 2, April 2005, Pages 301–320, <a href="https://doi.org/10.1111/j.1467-9868.2005.00503.x" class="uri">https://doi.org/10.1111/j.1467-9868.2005.00503.x</a></p>
 <div id="ejemplo-de-elastic-net" class="section level3 unnumbered hasAnchor">
 <h3>Ejemplo de Elastic Net<a href="regula.html#ejemplo-de-elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En este ejemplo vamos a usar los mismos datos del ejemplo anterior y el objetivos es ajustar un modelo para hacer predicción de nuevas observaciones.</p>
@@ -545,6 +554,14 @@ RSS + \lambda_1 \sum_{j=1}^p \beta_{j}^{2} + \lambda_2 \sum_{j=1}^p |\beta_{j}|
 ## [1,]     21.52138
 ## [2,]     25.11420
 ## [3,]     18.71900</code></pre>
+</div>
+<div id="ridge-lasso-y-elastic-net" class="section level3 hasAnchor" number="2.0.1">
+<h3><span class="header-section-number">2.0.1</span> Ridge, Lasso y Elastic Net<a href="regula.html#ridge-lasso-y-elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A continuación una tabla comparativa de las tres técnicas de regularización.</p>
+<p align="center">
+<img src="images/comparative_table_ridge_lasso.png" width="700">
+</p>
+<p>La tabla anterior fue tomada <a href="https://www.researchgate.net/figure/The-Comparison-of-Ridge-Regression-LASSO-and-Elastic-Net-in-Effect-and-Benefit-of_tbl1_389269364">de este enlace</a>.</p>
 
 </div>
 </div>
