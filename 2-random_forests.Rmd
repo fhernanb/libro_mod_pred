@@ -4,6 +4,10 @@ Random Forest o Bosques Aleatorios fue propuesto por @Ho1995 y consiste en crear
 
 [![Figura tomada de https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8](images/rand_forest_illustration.png "Ilustración de Random Forests")](https://towardsdatascience.com/quick-intro-to-random-forest-3cb5006868d8)
 
+Abajo se presenta un video con una explicación detallada de cómo aplicar random forest para un caso sencillo de clasificación con $n=4$ observaciones y $p=4$ variables predictoras.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Explicación sencilla de Random Forests {.unnumbered}
 
 Se inicia con un conjunto de entrenamiento que tiene $n$ observaciones, la variable interés $Y$ y las variables predictoras $X_1, X_2, \ldots, X_p$. Luego se aplican los siguientes pasos.
@@ -16,12 +20,102 @@ Si queremos predecir la variable $Y$ para un caso en el cual se tienen la inform
 
 [![Figura adaptada de https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f](images/rand_forest_clas_reg.png "Forma de unir las B predicciones")](https://medium.com/swlh/random-forest-and-its-implementation-71824ced454f)
 
-## Ejemplo {-}
-Abajo se presenta un video con una explicación detallada de cómo aplicar random forest para un caso sencillo de clasificación con $n=4$ observaciones y $p=4$ variables predictoras.
+## Ejemplo de regresión {-}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+En este ejemplo vamos a usar los mismos datos de las casas en Boston para predecir la variable medv en función de diferentes características socioeconómicas, ambientales y estructurales de las viviendas. La base de datos `Boston` del paquete `MASS` de R contiene las variables crim (tasa de criminalidad per cápita por localidad), zn (proporción de terrenos residenciales destinados a lotes mayores de 25,000 pies cuadrados), indus (proporción de acres de negocios no minoristas por localidad), chas (variable indicadora del río Charles, donde 1 indica que la vivienda limita con el río y 0 en caso contrario), nox (concentración de óxidos nítricos en partes por 10 millones), rm (número promedio de habitaciones por vivienda), age (proporción de viviendas ocupadas por sus propietarios construidas antes de 1940), dis (distancia ponderada a cinco centros de empleo en Boston), rad (índice de accesibilidad a carreteras radiales), tax (tasa de impuesto a la propiedad por cada $10,000 del valor), ptratio (relación alumno-profesor en cada localidad), black (índice calculado como 1000(Bk − 0.63)^2, donde Bk representa la proporción de población afrodescendiente), lstat (porcentaje de la población de bajo estatus socioeconómico) y medv (valor mediano de las viviendas ocupadas por sus propietarios en miles de dólares) usando la base de datos Boston del paquete **MASS** de @R-MASS.
 
-## Ejemplo {-}
+<p align="center">
+  <img src="images/Boston.jpeg" width="500">
+</p>
+
+```{r, message=F}
+library(MASS)      # This package contains the dataset
+head(Boston)
+dim(Boston)
+```
+
+Vamos a crear los datos de entrenamiento y de prueba usando la mitad de los datos, ya que tenemos en total 506 observaciones o registros. Para esto vamos a crear un vector con índices para identificar los elementos de entrenamiento `train_index`.
+
+```{r}
+set.seed(123)
+train_index <- sample(1:nrow(Boston), size = 253)
+train_data  <- Boston[train_index, ]
+test_data   <- Boston[-train_index, ]
+```
+
+Para crear el modelo random forest se debe cargar la librería *randomForest* así:
+
+```{r message=FALSE}
+library(randomForest)
+```
+
+Vamos a crear un random forest con $B=400$ árboles y $k=1$ variables en cada partición, para esto podemos usar la siguiente instrucción:
+
+```{r}
+set.seed(12345)
+model <- randomForest(medv ~ ., data=train_data, 
+                      ntree=400, mtry=3,
+                      proximity=TRUE)
+```
+
+En el código anterior se fijó la semilla en el valor 12345 para que usted pueda replicar el ejemplo y obtener los mismos resultados.
+
+Para explorar el modelo ajustado podemos hacer lo siguiente:
+
+```{r}
+model
+```
+
+A continuación vamos a obtener medidas de desempeño para el modelo entrenado usand la base de datos de validación y el paquete **yarrdstick** de @R-yardstick.
+
+```{r}
+library(yardstick)
+
+predictions_rf <- predict(model, newdata = test_data, type="response")
+
+# Para calcular el MSE
+mse_rf <- mse_vec(truth=test_data$medv, estimate=predictions_rf)
+mse_rf
+
+# Para calcular el MAE
+mae_rf <- mae_vec(truth=test_data$medv, estimate=predictions_rf)
+mae_rf
+```
+
+Para tener una idea de la grandeza de los valores de MSE y MAE anteriores, vamos a ajustar dos modelos alternativos, un modelo regresión lineal simple y un árbol de regresión (sencillo).
+
+```{r}
+# Ajustar modelo de regresión lineal simple
+model_lm <- lm(medv ~ ., data = train_data)
+
+# Ajustar árbol de regresión
+library(rpart)
+model_tree <- rpart(medv ~ ., data = train_data)
+
+# Predecir en el conjunto de prueba
+predictions_lm <- predict(model_lm, newdata = test_data)
+predictions_tree <- predict(model_tree, newdata = test_data)
+
+# Calcular métricas de evaluación
+mse_lm   <- mse_vec(truth=test_data$medv, estimate=predictions_lm)
+mse_tree <- mse_vec(truth=test_data$medv, estimate=predictions_tree)
+
+mae_lm   <- mae_vec(truth=test_data$medv, estimate=predictions_lm)
+mae_tree <- mae_vec(truth=test_data$medv, estimate=predictions_tree)
+
+# Mostrar resultados
+results <- data.frame(
+  Modelo = c("Regresión Lineal", "Árbol de Regresión", "Random Forests"),
+  MSE = c(mse_lm, mse_tree, mse_rf),
+  MAE = c(mae_lm, mae_tree, mae_rf)
+)
+print(results)
+```
+
+De la salida anterior podemos ver que el modelo de random forest tiene mejores medidas de desempeño que los otros dos modelos de machine learning.
+
+
+## Ejemplo de clasificación {-}
 
 <p align="center">
   <img src="images/heart_attack.gif" width="200">
@@ -61,22 +155,22 @@ La base de datos está en un repositorio en la web y se puede leer usando el sig
 
 ```{r message=FALSE}
 library(readr)
-url <- 'https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv'
+url <- "https://raw.githubusercontent.com/fhernanb/datos/master/cleveland.csv"
 datos <- read_csv(url, col_names = FALSE)
 ```
 
 Como la base de datos viene sin los nombres se deben colocar manualmente así:
 
 ```{r}
-colnames(datos) <- c('age', 'sex', 'cp', 'trestbps', 'chol',
-                     'fbs', 'restecg', 'thalach', 'exang', 
-                     'oldpeak', 'slope', 'ca', 'thal', 'target')
+colnames(datos) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang", 
+                     "oldpeak", "slope", "ca", "thal", "target")
 ```
 
 La variable respuesta es `target` que tiene cuatro números así: 0 = absence, 1, 2, 3, 4 = present. Por esa razón vamos a crear la nueva variable `y` que agregaremos a la base de datos usando el siguiente código.
 
 ```{r}
-datos$y <- ifelse(datos$target == 0, 'absence', 'presence')
+datos$y <- ifelse(datos$target == 0, "absence", "presence")
 datos$y <- as.factor(datos$y)
 ```
 
@@ -126,7 +220,7 @@ Supongamos que nos llegaron 3 pacientes, el primero un hombre de 45 años con ni
 nuevo_df <- data.frame(age=c(45, 60, 65),
                        chol=c(300, 450, 200))
 
-predict(model, newdata=nuevo_df, type='response')
+predict(model, newdata=nuevo_df, type="response")
 ```
 
 De la salida anterior tenemos que los tres pacientes son clasificados en el grupo __absence__.

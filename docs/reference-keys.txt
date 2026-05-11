@@ -4,6 +4,7 @@ fig:adaboost03
 fig:iris
 knn-regre
 regula
+ridge-lasso-y-elastic-net
 arb-de-regre
 arb-de-clasif
 arb-distri
@@ -14,5 +15,3 @@ adaboost
 adaboost_reg
 gradboost
 reg-versus-arb
-elastic-net
-ridge-lasso-y-elastic-net
